@@ -2,7 +2,11 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect,HttpResponseForbidden,HttpResponseBadRequest
 from django.template import loader
 from django.contrib.auth import authenticate,login,logout
-from .models import Templates
+from .models import Templates, UploadedFile
+import PyPDF2
+import re
+import json
+
 # Create your views here.
 
 
