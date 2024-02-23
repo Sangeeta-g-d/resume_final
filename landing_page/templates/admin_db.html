@@ -114,9 +114,16 @@
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="row mb-3">
-                          
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">
+                                 Template</label>
                             <div class="col-sm-10">
                                 <input type="file" name="template" class="form-control" id="inputEmail3">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3"  class="col-sm-2 col-form-label"> Plain Template</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="plain_template" class="form-control" id="inputEmail3">
                             </div>
                         </div>
                   

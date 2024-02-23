@@ -32,7 +32,8 @@ def admin_db(request):
     if request.method == 'POST':
         print("hiiiiiiiiiiii")
         template = request.FILES.get('template')
-        obj = Templates.objects.create(template=template)
+        plain_template = request.FILES.get('plain_template')
+        obj = Templates.objects.create(template=template,plain_template=plain_template)
         return redirect('/admin_db')
 
     return render(request,'admin_db.html')
