@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect,HttpResponseForbidden,HttpResponseBadRequest
 from django.template import loader
 from django.contrib.auth import authenticate,login,logout
+from .models import Templates
 # Create your views here.
 
 
@@ -28,4 +29,10 @@ def admin_login(request):
 
 
 def admin_db(request):
+    if request.method == 'POST':
+        print("hiiiiiiiiiiii")
+        template = request.FILES.get('template')
+        obj = Templates.objects.create(template=template)
+        return redirect('/admin_db')
+
     return render(request,'admin_db.html')
