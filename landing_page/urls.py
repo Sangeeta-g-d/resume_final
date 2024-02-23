@@ -10,5 +10,6 @@ urlpatterns = [
     path('admin_db', views.admin_db, name='admin_db'),
     path('admin_logout', views.admin_logout, name='admin_logout'),
     path('upload/', views.upload_file, name='upload_file'),
+    path('team', views.team, name='team')
 
 ]

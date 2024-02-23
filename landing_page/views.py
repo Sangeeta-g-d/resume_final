@@ -13,6 +13,11 @@ import json
 def index(request):
     return render(request,'index.html')
 
+def team(request):
+    data=Templates.objects.all()
+    context={'data':data}
+    return render(request,'team.html',context)
+
 def admin_login(request):
     if request.method == 'POST':
         print("hiiiiiiiiiiii")
