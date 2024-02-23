@@ -37,3 +37,8 @@ def admin_db(request):
         return redirect('/admin_db')
 
     return render(request,'admin_db.html')
+
+def admin_logout(request):
+    logout(request)
+    # Redirect to a specific page after logout (optional)
+    return redirect('/admin_login')
