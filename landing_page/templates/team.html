@@ -122,8 +122,9 @@
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item">
-                        <img class="img-fluid rounded" src="/static/assets/img/team-1.jpg" alt="">
+                    <div class="team-item">{% for x in data %}
+                        <img class="img-fluid rounded" height="120px" src="{{ x.template }}" alt="">
+                        {% endfor %}
                         <div class="team-text">
                             <h4 class="mb-0">Kate Winslet</h4>
                             <div class="team-social d-flex">
