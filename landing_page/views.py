@@ -98,7 +98,11 @@ def extract_emails_from_pdf(file_path):
     return emails
 
 def resume(request, id, u_id):
+
+    print("111111111111",id,u_id)
     data = get_object_or_404(Templates, id=id)
+    plain_temp = data.plain_template
+    print(plain_temp)
     details = get_object_or_404(UploadedFile, id=u_id)
 
     # Check if details already exist
@@ -106,7 +110,7 @@ def resume(request, id, u_id):
     if existing_details.exists():
         # If details already exist, retrieve them and return the template
         extracted_data = existing_details.first()
-        context = {'data': data, 'extracted_data': extracted_data}
+        context = {'data': data, 'extracted_data': extracted_data,'plain_temp':plain_temp}
         return render(request, 'resume.html', context)
     else:
         if details.file.name.endswith('.pdf'):
@@ -151,8 +155,10 @@ def resume(request, id, u_id):
                 langauges=languages
             )
 
-            context = {'data': data, 'extracted_data': extracted_data}
+            context = {'data': data, 'extracted_data': extracted_data,'plain_temp':plain_temp}
             return render(request, 'resume.html', context)
         else:
             error_message = "The file is not a PDF."
             return HttpResponse(error_message)
+
+    
