@@ -117,11 +117,14 @@ def resume(request, id, u_id):
         name_match = re.search(r'([A-Za-z]+) ([A-Za-z]+)', text)
         phone_match = re.search(r'\b\d{10}\b', text)
         email_match = re.search(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', text)
-        experience_match = re.search(r'EXPERIENCE.*?(?:INTERNSHIP|EDUCATION)', text, re.DOTALL)
-        education_match = re.search(r'EDUCATION.*?(?:LANGUAGES|DECLARATION)', text, re.DOTALL)
-        internships_match = re.search(r'INTERNSHIP.*?(?:EXPERIENCE|EDUCATION)', text, re.DOTALL)
-        projects_match = re.search(r'PROJECTS.*?(?:LANGUAGES|DECLARATION)', text, re.DOTALL)
-        languages_match = re.search(r'LANGUAGES.*?(?:DECLARATION)', text, re.DOTALL)
+        experience_match = re.search(r'EXPERIENCE(?=.*?EDUCATION)(.*?)(?=EDUCATION|$)', text, re.DOTALL)
+        education_match = re.search(r'EDUCATION(?=.*?LANGUAGES)(.*?)(?=LANGUAGES|$)', text, re.DOTALL)
+        internships_match = re.search(r'INTERNSHIP(?=.*?EXPERIENCE)(.*?)(?=EXPERIENCE|$)', text, re.DOTALL)
+        projects_match = re.search(r'PROJECTS(?=.*?LANGUAGES)(.*?)(?=LANGUAGES|$)', text, re.DOTALL)
+        languages_match = re.search(r'LANGUAGES(?=.*?DECLARATION)(.*?)(?=DECLARATION|$)', text, re.DOTALL)
+
+
+
 
         # Extracted information
         first_name = name_match.group(1) if name_match else ""
