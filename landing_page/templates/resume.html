@@ -17,69 +17,78 @@ https://templatemo.com/tm-536-dream-pulse
     <link rel="stylesheet" type="text/css" href="/static/dashboard_assets/slick/slick-theme.css"/>    
     <link rel="stylesheet" type="text/css" href="/static/dashboard_assets/css/magnific-popup.css">
     <link rel="stylesheet" type="text/css" href="/static/dashboard_assets/css/templatemo-dream-pulse.css" />
-    
+    <style>
+      .tm-brand-box form {
+    max-width: 600px; /* Adjust the max-width as needed */
+    margin: 0 auto; /* Center the form horizontally */
+}
+
+    </style>
   </head>
   <body>
     <main class="container-fluid">
-      <div class="row">        
-          <nav id="tmSidebar" class="tm-bg-black-transparent tm-sidebar">
-            <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
-              <i class="fas fa-bars"></i>
-            </button>
-            <div class="tm-sidebar-sticky">
-              <div class="tm-brand-box">
-                  <div class="tm-double-border-1">
-                      <div class="tm-double-border-2">
-                          <h1 class="tm-brand text-uppercase">Dream Pulse</h1>
-                      </div>
+        <div class="row">        
+            <nav id="tmSidebar" class="tm-bg-black-transparent tm-sidebar">
+                <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="tm-sidebar-sticky">
+                    <div class="tm-brand-box">
+                        <form>
+                 
+                  <form>
+                    <div>
+                        <label for="first_name">First Name:</label>
+                        <input type="text" id="first_name" name="first_name" value="{{ extracted_data.first_name }}" readonly>
+                    </div>
+                    <div>
+                        <label for="last_name">Last Name:</label>
+                        <input type="text" id="last_name" name="last_name" value="{{ extracted_data.last_name }}" readonly>
+                    </div>
+                    <div>
+                        <label for="phone_number">Phone Number:</label>
+                        <input type="text" id="phone_number" name="phone_number" value="{{ extracted_data.phone_number }}" readonly>
+                    </div>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="text" id="email" name="email" value="{{ extracted_data.email }}" readonly>
+                    </div>
+                    <div>
+                        <label for="experience">Experience:</label>
+                        <textarea id="experience" name="experience" readonly>{{ extracted_data.experience }}</textarea>
+                    </div>
+                    <div>
+                        <label for="education">Education:</label>
+                        <textarea id="education" name="education" readonly>{{ extracted_data.education }}</textarea>
+                    </div>
+                    <div>
+                        <label for="internships">Internships:</label>
+                        <textarea id="internships" name="internships" readonly>{{ extracted_data.internships }}</textarea>
+                    </div>
+                    <div>
+                        <label for="projects">Projects:</label>
+                        <textarea id="projects" name="projects" readonly>{{ extracted_data.projects }}</textarea>
+                    </div>
+                    <div>
+                        <label for="languages">Languages:</label>
+                        <textarea id="languages" name="languages" readonly>{{ extracted_data.langauges }}</textarea>
+                    </div>
+                    <div>
+                      <input type="submit" value="Submit">
                   </div>
+                </form>
               </div>
-          
-              <div>
-                  <!-- Displaying text data here -->
-                  {{ pdf_text|safe }}
-              </div>
+            </div>
+        </nav>
+        <main role="main" class="ml-sm-auto col-12">
+            <div class="parallax-window" data-parallax="scroll">
+                <div class="tm-section-wrap">
+                    <section id="intro" class="tm-section">
+                        <div class="tm-bg-white-transparent tm-intro">
+                            <iframe src="{{ pdf_text_file }}" width="100%" height="500px"></iframe>
+                        </div>              
+                    </section>    
               
-              <ul class="nav flex-row tm-social-links">
-                  <li class="nav-item">
-                      <a href="https://facebook.com" class="nav-link tm-social-link">
-                          <i class="fab fa-facebook-f"></i>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="https://twitter.com" class="nav-link tm-social-link">
-                          <i class="fab fa-twitter"></i>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="https://dribbble.com" class="nav-link tm-social-link">
-                          <i class="fab fa-dribbble"></i>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="https://linkedin.com" class="nav-link tm-social-link">
-                          <i class="fab fa-linkedin-in"></i>
-                      </a>
-                  </li>
-              </ul>
-              
-          </div>
-          
-          </nav>
-          
-          <main role="main" class="ml-sm-auto col-12">
-            <div
-              class="parallax-window"
-              data-parallax="scroll"
-              
-              <div class="tm-section-wrap">
-              
-                <section id="intro" class="tm-section">
-                  <div class="tm-bg-white-transparent tm-intro">
-                   
-                      <iframe src="{{ pdf_text_file }}" width="100%" height="500px"></iframe>
-                  </div>              
-              </section>
               
 
                

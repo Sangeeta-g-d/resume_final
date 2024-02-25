@@ -124,8 +124,6 @@ def resume(request, id, u_id):
         languages_match = re.search(r'LANGUAGES(?=.*?DECLARATION)(.*?)(?=DECLARATION|$)', text, re.DOTALL)
 
 
-
-
         # Extracted information
         first_name = name_match.group(1) if name_match else ""
         print("first_name",first_name)
