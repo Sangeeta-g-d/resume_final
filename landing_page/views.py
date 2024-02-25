@@ -97,6 +97,7 @@ def extract_emails_from_pdf(file_path):
             emails += re.findall(email_pattern, text)
     return emails
 
+
 def resume(request, id, u_id):
     data = get_object_or_404(Templates, id=id)
     details = get_object_or_404(UploadedFile, id=u_id)
