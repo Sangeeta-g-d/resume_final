@@ -2,10 +2,14 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect,HttpResponseForbidden,HttpResponseBadRequest
 from django.template import loader
 from django.contrib.auth import authenticate,login,logout
-from .models import Templates, UploadedFile
+import pdfplumber
+from .models import Ectracted_Resume_Details, Templates, UploadedFile
 import PyPDF2
 import re
 import json
+from django.urls import reverse
+import tempfile
+
 
 # Create your views here.
 
@@ -13,9 +17,9 @@ import json
 def index(request):
     return render(request,'index.html')
 
-def team(request):
+def team(request,id):
     data=Templates.objects.all()
-    context={'data':data}
+    context={'data':data,'u_id':id}
     return render(request,'team.html',context)
 
 def admin_login(request):
@@ -56,30 +60,25 @@ def admin_logout(request):
 def upload_file(request):
     if request.method == 'POST':
         uploaded_file = request.FILES['pdf_file']
-        
         # Save the uploaded file to the database
         uploaded_file_obj = UploadedFile.objects.create(file=uploaded_file)
-
         # Extract emails from the PDF file
         extracted_emails = extract_emails_from_pdf(uploaded_file_obj.file.path)
-
         # Serialize the uploaded file and extracted emails as JSON
-        data_to_save = {
-            
+        data_to_save = {     
             'emails': extracted_emails
         }
         print(data_to_save)
         extracted_email = data_to_save['emails'][0]
-        
         print(extracted_email)
-
         serialized_data = json.dumps(extracted_email)
-
         # Save the serialized data in the database
         uploaded_file_obj.email = serialized_data
         uploaded_file_obj.save()
-
-        return redirect('index')  # Redirect to a success page
+        id=uploaded_file_obj.id
+        print("iddddddddddddddddd",id)
+        return redirect(reverse('team', kwargs={'id': id}))
+  # Redirect to a success page
     #return render(request, 'upload.html')
 
 def extract_emails_from_pdf(file_path):
@@ -97,3 +96,78 @@ def extract_emails_from_pdf(file_path):
             email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
             emails += re.findall(email_pattern, text)
     return emails
+
+
+def resume(request, id, u_id):
+    data = Templates.objects.get(id=id)
+    try:
+        details = UploadedFile.objects.get(id=u_id)
+    except UploadedFile.DoesNotExist:
+        error_message = "UploadedFile with ID {} does not exist.".format(u_id)
+        return HttpResponse(error_message)
+
+    if details.file.name.endswith('.pdf'):
+        with details.file.open('rb') as pdf_file:
+            pdf = pdfplumber.open(pdf_file)
+            text = ""
+            for page in pdf.pages:
+                text += page.extract_text()
+
+        # Extracting information using regular expressions
+        name_match = re.search(r'([A-Za-z]+) ([A-Za-z]+)', text)
+        phone_match = re.search(r'\b\d{10}\b', text)
+        email_match = re.search(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', text)
+        experience_match = re.search(r'EXPERIENCE.*?(?:INTERNSHIP|EDUCATION)', text, re.DOTALL)
+        education_match = re.search(r'EDUCATION.*?(?:LANGUAGES|DECLARATION)', text, re.DOTALL)
+        internships_match = re.search(r'INTERNSHIP.*?(?:EXPERIENCE|EDUCATION)', text, re.DOTALL)
+        projects_match = re.search(r'PROJECTS.*?(?:LANGUAGES|DECLARATION)', text, re.DOTALL)
+        languages_match = re.search(r'LANGUAGES.*?(?:DECLARATION)', text, re.DOTALL)
+
+        # Extracted information
+        first_name = name_match.group(1) if name_match else ""
+        print("first_name",first_name)
+        print('\n')
+        last_name = name_match.group(2) if name_match else ""
+        print("last_name",last_name)
+        print('\n')
+        phone_number = phone_match.group() if phone_match else ""
+        print("phone_number",phone_number)
+        print('\n')
+        email = email_match.group() if email_match else ""
+        print("email",email)
+        print('\n')
+        experience = experience_match.group() if experience_match else ""
+        print("experience",experience)
+        print('\n')
+        education = education_match.group() if education_match else ""
+        print("education",education)
+        print('\n')
+        internships = internships_match.group() if internships_match else ""
+        print("internships",internships)
+        print('\n')
+        projects = projects_match.group() if projects_match else ""
+        print("projects",projects)
+        print('\n')
+        languages = languages_match.group() if languages_match else ""
+        print("languages",languages)
+        print('\n')
+
+        # Saving to the database
+        extracted_data = Ectracted_Resume_Details.objects.create(
+            UploadedFile_id=details,
+            first_name=first_name,
+            last_name=last_name,
+            phone_number=phone_number,
+            email=email,
+            experience=experience,
+            education=education,
+            internships=internships,
+            projects=projects,
+            langauges=languages
+        )
+
+        context = {'data': data, 'extracted_data': extracted_data}
+        return render(request, 'resume.html', context)
+    else:
+        error_message = "The file is not a PDF."
+        return HttpResponse(error_message)
