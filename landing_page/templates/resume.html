@@ -1,112 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two Part HTML Page</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+    .container {
+        display: flex;
+        height: 100vh;
+    }
+    .left-side {
+        flex: 1;
+        background-color: #f0f0f0;
+        padding: 20px;
+        overflow-y: auto; /* Enable vertical scrollbar */
+    }
+    .right-side {
+        flex: 2;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow-y: auto; 
+        margin-top: 30px;
+        margin-bottom: 30px;/* Enable vertical scrollbar */
+    }
+    .user-form {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .user-form label,
+    .user-form input,
+    .user-form textarea {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+    .user-form textarea {
+        resize: vertical; /* Allow vertical resizing of textarea */
+    }
+    img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+</style>
+</head>
+<body>
 
-    <title>Dream Pulse TemplateMo</title>
-<!--
-DREAM PULSE
-https://templatemo.com/tm-536-dream-pulse
--->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" />
-    <link rel="stylesheet" type="text/css" href="/static/dashboard_assets/css/all.min.css" />
-    <link rel="stylesheet" type="text/css" href="/static/dashboard_assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/static/dashboard_assets/slick/slick.css"/>    
-    <link rel="stylesheet" type="text/css" href="/static/dashboard_assets/slick/slick-theme.css"/>    
-    <link rel="stylesheet" type="text/css" href="/static/dashboard_assets/css/magnific-popup.css">
-    <link rel="stylesheet" type="text/css" href="/static/dashboard_assets/css/templatemo-dream-pulse.css" />
-    <style>
-      .tm-brand-box form {
-    max-width: 600px; /* Adjust the max-width as needed */
-    margin: 0 auto; /* Center the form horizontally */
-}
+<div class="container">
+    <div class="left-side">
+        <h2>User Details Form</h2>
+        <form method="post" action="{% url 'resume1' %}">
+            {% csrf_token %}
+            <label for="first_name">First Name:</label><br>
+            <input type="text" id="first_name" value="{{ extracted_data.first_name }}" name="first_name"><br><br>
+            <label for="last_name">Last Name:</label><br>
+            <input type="text" id="last_name" value="{{ extracted_data.last_name }}" name="last_name"><br><br>
 
-    </style>
-  </head>
-  <body>
-    <main class="container-fluid">
-        <div class="row">        
-            <nav id="tmSidebar" class="tm-bg-black-transparent tm-sidebar">
-                <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="tm-sidebar-sticky">
-                    <div class="tm-brand-box">
-                        <form>
-                 
-                  <form>
-                    <div>
-                        <label for="first_name">First Name:</label>
-                        <input type="text" id="first_name" name="first_name" value="{{ extracted_data.first_name }}" readonly>
-                    </div>
-                    <div>
-                        <label for="last_name">Last Name:</label>
-                        <input type="text" id="last_name" name="last_name" value="{{ extracted_data.last_name }}" readonly>
-                    </div>
-                    <div>
-                        <label for="phone_number">Phone Number:</label>
-                        <input type="text" id="phone_number" name="phone_number" value="{{ extracted_data.phone_number }}" readonly>
-                    </div>
-                    <div>
-                        <label for="email">Email:</label>
-                        <input type="text" id="email" name="email" value="{{ extracted_data.email }}" readonly>
-                    </div>
-                    <div>
-                        <label for="experience">Experience:</label>
-                        <textarea id="experience" name="experience" readonly>{{ extracted_data.experience }}</textarea>
-                    </div>
-                    <div>
-                        <label for="education">Education:</label>
-                        <textarea id="education" name="education" readonly>{{ extracted_data.education }}</textarea>
-                    </div>
-                    <div>
-                        <label for="internships">Internships:</label>
-                        <textarea id="internships" name="internships" readonly>{{ extracted_data.internships }}</textarea>
-                    </div>
-                    <div>
-                        <label for="projects">Projects:</label>
-                        <textarea id="projects" name="projects" readonly>{{ extracted_data.projects }}</textarea>
-                    </div>
-                    <div>
-                        <label for="languages">Languages:</label>
-                        <textarea id="languages" name="languages" readonly>{{ extracted_data.langauges }}</textarea>
-                    </div>
-                    <div>
-                      <input type="submit" value="Submit">
-                  </div>
-                </form>
-              </div>
-            </div>
-        </nav>
-        <main role="main" class="ml-sm-auto col-12">
-            <div class="parallax-window" data-parallax="scroll">
-                <div class="tm-section-wrap">
-                    <section id="intro" class="tm-section">
-                        <div style="margin-right: 130px;" class="tm-bg-white-transparent tm-intro">
-                           <img src="/{{plain_temp}}" height="600px" width="390px" alt="">
-                        </div>              
-                    </section>         
-            </div>            
-          </div>
-
-         
+            <label for="email">Email:</label><br>
+            <input type="email" value="{{ extracted_data.email }}" id="email" name="email"><br><br>
+            <label for="phone_number">Phone Number:</label><br>
+            <input type="number" id="phone_number" value="{{ extracted_data.phone_number }}" name="phone_number"><br><br>
+            <label for="experience">Experience:</label><br>
+            <textarea id="experience" name="experience" rows="10">{{ extracted_data.experience }}</textarea><br><br>
+            <label for="projects">Projects:</label><br>
+            <textarea id="projects" name="projects" rows="6">{{ extracted_data.projects }}</textarea><br><br>
+            <label for="education">Education:</label><br>
+            <textarea id="education" name="education" rows="6">{{ extracted_data.education }}</textarea><br><br>
+            <label for="internships">Internships:</label><br>
+            <textarea id="internships" name="internships" rows="8">{{ extracted_data.internships }}</textarea><br><br>
             
-          
+            <label for="languages">Languages:</label><br>
+            <textarea id="languages" name="languages" rows="4">{{ extracted_data.languages }}</textarea><br><br>
             
-         
-        
-        </main>  
-              
-      </div>
-      
+            <input type="submit" value="Submit">
+</form>
     </div>
-    <script type="text/javascript" src="/static/dashboard_assets/js/jquery.min.js"></script>
-<script type="text/javascript" src="/static/dashboard_assets/js/jquery.singlePageNav.min.js"></script>
-<script type="text/javascript" src="/static/dashboard_assets/js/parallax.min.js"></script>
-<script type="text/javascript" src="/static/dashboard_assets/slick/slick.min.js"></script>
-<script type="text/javascript" src="/static/dashboard_assets/js/jquery.magnific-popup.min.js"></script>
-<script type="text/javascript" src="/static/dashboard_assets/js/templatemo-scripts.js"></script>
-  </body>
+    <div class="right-side">
+        <img src="/static/assets/img/plain_theme1.png" alt="Placeholder Image">
+    </div>
+</div>
+
+</body>
 </html>

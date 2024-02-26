@@ -10,7 +10,10 @@ import json
 from django.urls import reverse
 import tempfile
 from django.shortcuts import get_object_or_404
-
+from google.cloud import language_v1
+from google.auth import credentials
+from google.cloud import language_v1
+from google.oauth2 import service_account
 # Create your views here.
 
 
@@ -97,11 +100,12 @@ def extract_emails_from_pdf(file_path):
             emails += re.findall(email_pattern, text)
     return emails
 
+
 def resume(request, id, u_id):
 
     print("111111111111",id,u_id)
     data = get_object_or_404(Templates, id=id)
-    plain_temp = data.plain_template
+    plain_temp = data.template
     print(plain_temp)
     details = get_object_or_404(UploadedFile, id=u_id)
 
@@ -154,6 +158,7 @@ def resume(request, id, u_id):
                 projects=projects,
                 langauges=languages
             )
+            
 
             context = {'data': data, 'extracted_data': extracted_data,'plain_temp':plain_temp}
             return render(request, 'resume.html', context)
@@ -161,4 +166,68 @@ def resume(request, id, u_id):
             error_message = "The file is not a PDF."
             return HttpResponse(error_message)
 
+def resume1(request):
+    print("hiiiiiii")
+    if request.method == 'POST':
+        # Extract form data
+        form_data = {
+            
+            'first_name': request.POST.get('first_name'),
+            'last_name': request.POST.get('last_name'),
+            'email': request.POST.get('email'),
+            'phone_number': request.POST.get('phone_number'),
+            'experience': request.POST.get('experience'),
+            'projects': request.POST.get('projects'),
+            'education': request.POST.get('education'),
+            'internships': request.POST.get('internships'),
+            'languages': request.POST.get('languages'),
+        }
+        print("hiiiiiiihhhhhhhhhhhhh")
+
+        # Generate resume content using the form data
+        resume_content = generate_resume_content(form_data)
+
+        # Save the generated content to the right-side image file (you need to implement this)
+        # For example, you can write the content to a text file and render it as an image in the template
+
+        # Update context with generated content
+        context = { 'resume_content': resume_content}
+        return HttpResponse("successfull")
+
+def generate_resume_content(data):
+    # Explicitly provide credentials
+    credentials = service_account.Credentials.from_service_account_file('/home/user/my_project/service-account-file.json')
+
+
+    # Initialize the Natural Language API client with the provided credentials
+    client = language_v1.LanguageServiceClient(credentials=credentials)
+
+    # Define the text to be analyzed (you can customize this based on your form data)
+    text = f"""
+    Name: {data['first_name']} {data['last_name']}
+    Email: {data['email']}
+    Phone Number: {data['phone_number']}
+    Experience: {data['experience']}
+    Projects: {data['projects']}
+    Education: {data['education']}
+    Internships: {data['internships']}
+    Languages: {data['languages']}
+    """
+
+    # Analyze the text using the Natural Language API
+    document = {"content": text, "type_": language_v1.Document.Type.PLAIN_TEXT}
+    response = client.analyze_entities(request={'document': document})
     
+    # Extract entities or perform other analysis as needed
+    # For simplicity, let's assume we just want to extract entities
+    entities = [entity.name for entity in response.entities]
+
+    # Generate resume content based on the analysis (you can customize this)
+    resume_content = f"""
+    Name: {data['first_name']} {data['last_name']}
+    Email: {data['email']}
+    Phone Number: {data['phone_number']}
+    Relevant Skills: {', '.join(entities)}
+    """
+
+    return resume_content
