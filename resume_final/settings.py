@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-5^91(c%fc&&vr2f55+zdu_z8d96tib_e$-tt2__t39xtkxpk!n
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-
+GEMINI_API_KEY="AIzaSyDlHT9qL_NP4AYL7W48sMYl6n3IWHTZhTI"
 
 # Application definition
 

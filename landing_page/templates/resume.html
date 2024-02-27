@@ -6,50 +6,80 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Two Part HTML Page</title>
 <style>
-    body, html {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-    }
-    .container {
-        display: flex;
-        height: 100vh;
-    }
-    .left-side {
-        flex: 1;
-        background-color: #fff;
-        padding: 20px;
-        overflow-y: auto; /* Enable vertical scrollbar */
-    }
-    .right-side {
-        flex: 2;
-        background-color: #93878796;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 30px;
-        margin-top: 30px;
-       
-    }
-    .user-form {
-        max-width: 400px;
-        margin: 0 auto;
-    }
-    .user-form label,
-    .user-form input,
-    .user-form textarea {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 8px;
-        margin-bottom: 10px;
-    }
-    .user-form textarea {
-        resize: vertical; /* Allow vertical resizing of textarea */
-    }
-    img {
-        max-width: 100%;
-        max-height: 100%;
-    }
+   body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.left-side, .right-side {
+  flex-basis: 45%;
+  margin-bottom: 20px;
+}
+
+.left-side {
+    
+  padding-right: 20px;
+}
+
+.right-side img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  transition: transform .3s;
+}
+
+.right-side img:hover {
+  transform: scale(1.05);
+}
+
+.user-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.user-form input, .user-form textarea {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #333;
+  transition: border-color .3s;
+}
+
+.user-form input:focus, .user-form textarea:focus {
+  outline: none;
+  border-color: #333;
+}
+
+.user-form input[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color .3s;
+}
+
+.user-form input[type="submit"]:hover {
+  background-color: #444;
+}
 </style>
 </head>
 <body>
