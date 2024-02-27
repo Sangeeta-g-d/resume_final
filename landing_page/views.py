@@ -355,7 +355,7 @@ def generate_content(request):
 
     else:
         # Handle GET requests (if needed)
-        return HttpResponse("Method Not Allowed", status=405)'''
+        return HttpResponse("Method Not Allowed", status=405)
     else:
         # Handle GET requests (if needed)
-        return HttpResponse("Method Not Allowed", status=405)
+        return HttpResponse("Method Not Allowed", status=405)'''
