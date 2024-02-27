@@ -165,7 +165,9 @@ def resume(request, id, u_id):
         else:
             error_message = "The file is not a PDF."
             return HttpResponse(error_message)
-
+        
+        
+'''
 def resume1(request):
     print("hiiiiiii")
     if request.method == 'POST':
@@ -196,7 +198,7 @@ def resume1(request):
 
 def generate_resume_content(data):
     # Explicitly provide credentials
-    credentials = service_account.Credentials.from_service_account_file('/home/user/my_project/service-account-file.json')
+    credentials = service_account.Credentials.from_service_account_file('C:\\Users\\Arun Wandakar\\Downloads\\resume-builder-1234-415110-626ef0a9cd3a.json')
 
 
     # Initialize the Natural Language API client with the provided credentials
@@ -230,4 +232,4 @@ def generate_resume_content(data):
     Relevant Skills: {', '.join(entities)}
     """
 
-    return resume_content
+    return resume_content'''

@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "resume-builder-1234-415110",
+  "private_key_id": "626ef0a9cd3a769e32c652c8f232c44769679d12",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDLFO/IQ03ab56x\nmNZkTxgtamOt9Qt1Az5o8DEAE2nFBHpvie32wyqNpphydvhPzs0sU1X4xLuFxT/Y\n+PsV1IO8HYNC7DhqE4efrwTBnRMO2piQ8RBerlxUJX7pPpFnRawtXswFFx5GFU8b\nm8UA4iYmoXK/d4T16gAi/A+zrm1YwEz1gd9125otE00tKSZn4KqErcrGALbWDGuh\n3Ay96lGXpLRrSx9UILof1/KbVROGXGKANrJBJIVVUwHLDZt0AYwAZG+a5MkMNqec\nIwHKaihY7HS8HY/iXMq7jSzLj8QmOmo3yxr0J3nNIFE9/fRsZi9Kigh8pKrs8mLm\nO923A6T5AgMBAAECggEAAzdrrNJUE1edPdbb3m7aRS3gMkslSU8p1+OmAwhLrpEp\nl0ap/DSPIfs3guibejgeS8tuGyiSh8XeAwO+hlP9WidlgtPW+OciSMcu3hosyRlx\nPSp0ReuhDrwhTHRvPSF/XqCXvqTlF9sSi69l6WOrkwUPmjS8aGCya9tuLDxhAvzR\ngjIhXYz/g9RKMpUZRiNPVaH5rWMTkAG0SRS1yzn6M5eZoTjgGEVw3T8opRzGlISp\naK23Jqq7w5LYoiSlZd4ZsK4fPkyWerG8eQjVL4aPbLqigACfRe1D/U6OOls59yFM\nbdg0LpWW7ywNxyEpb/lwah02C8ku5Ur0vEi3BzDN4QKBgQDkjfKImRsCsnv39gw8\nJ/HYgLWK72SUoWQ1ERG02neHbo4mtqnj0g88Mol72zEykvz+sOUUbjspSQGNPxWE\nPCh7kddyej1RjhcsnMP6NF50j7hR7LwwJKeZnW1Yla9WtfKZIRPezePtTptBQDbw\nuvR9t6LBgZ6tRh4Ar5S8700EJQKBgQDjd+0qjEMKsmCTJoQKf+mGUJg8DK6kpse1\noc8PZTsxW3L7/gAbKePVEFJvxzBJM67SdkFhjWQS+G/8cQSJCJ55y9KOiMXbTreb\n2wqg5oJXuOlZ5cscB5A34dAJQdlxS/YLgRpfeDNj2/6pmG2YYFV7bQPYvRAuXd1B\nWk2Gagk7RQKBgClW+311pAsS2ZV6LbBb0UTF0xB0SI8RuhxXIArEUUZv2spp08Tf\nY94RjgiXFwj8yUIQIP9XCOBo0h0IQg4PC4t+T6fnMFwmBU8Oc+w3uLYAoOhAl7Fl\nj+MbNIIHYRWgB2dnMj7kostzomVlBgr45ewvYQL7PQY+XoLlP1QFPLr5AoGAbRv9\ne0dEcUEW6f6zn4WzsmW+YC+FJh2J9injdHMObaJ8CTvROTZivrTRliRpmPNdjD6F\nJhH4StE4hlJ/5mtn+Ow3137ryUJ8+Bmdg4iORR3BcQm034ERQHzkmUwozRuurd4D\nlH/HxsKj6R3glBLBbi7ghXpK5LLJiquSPENoojECgYEA1qU/62uR0A/S5ooWEKUC\nx8WIqm43LnHx/0lmKVDdSVOIilEk4S0t0TMClE/SCccJhdWMX1gJeIVJOH69oxsM\nDPjTJQJul+z/LFi1oVq/FUuijVvFoORcPmiwy0+GGiepXavpmMa3rC5HwjXhs23d\nJz0NUr5ZRqSQtCG1TWsocCA=\n-----END PRIVATE KEY-----\n",
+  "client_email": "resume-builder-service-account@resume-builder-1234-415110.iam.gserviceaccount.com",
+  "client_id": "104515908996229704418",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/resume-builder-service-account%40resume-builder-1234-415110.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

@@ -12,7 +12,7 @@ urlpatterns = [
     path('upload/', views.upload_file, name='upload_file'),
     path('team/<int:id>', views.team, name='team'),
     path('resume/<int:id>/<int:u_id>', views.resume, name='resume'),
-    path('resume1', views.resume1, name='resume1'),
+   
 
 
 ]
