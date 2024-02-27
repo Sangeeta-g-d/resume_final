@@ -18,9 +18,11 @@
     }
     .left-side {
         flex: 1;
-        background-color: #fff;
+        background: linear-gradient(to right, hsl(30, 4%, 68%), #413e3e);
         padding: 20px;
+        border-radius: 5px;
         overflow-y: auto; /* Enable vertical scrollbar */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     }
     .right-side {
         flex: 2;
@@ -35,7 +37,14 @@
     .user-form {
         max-width: 400px;
         margin: 0 auto;
+        padding: 20px;
+    border-radius: 30px;
+    
     }
+
+    label {
+    font-weight: bold;
+}
     .user-form label,
     .user-form input,
     .user-form textarea {
@@ -51,6 +60,29 @@
         max-width: 100%;
         max-height: 100%;
     }
+    input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #363434;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+input[type="submit"] {
+    background-color: #343438;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #010e02;
+}
 </style>
 </head>
 <body>
