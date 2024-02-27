@@ -22,7 +22,17 @@
         overflow-y: auto; /* Enable vertical scrollbar */
     }
     .right-side {
-        flex: 2;
+    flex: 2;
+    background-color: #ece5e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    overflow-y: auto; /* Enable vertical scrollbar */
+}
+    .right-side1 {
+        flex: 1;
         background-color: #fff;
         display: flex;
         justify-content: center;
@@ -50,6 +60,31 @@
         max-width: 100%;
         max-height: 100%;
     }
+
+    .right-side {
+    position: relative;
+    overflow: hidden;
+}
+
+.right-side img {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease;
+}
+
+.right-side:hover img {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+}
+.zoomable {
+    transition: transform 0.5s ease;
+}
+
+.zoom-controls {
+    margin-top: 10px;
+}
+
+#zoomRange {
+    width: 100%;
+}
 </style>
 </head>
 <body>
@@ -84,9 +119,26 @@
 </form>
     </div>
     <div class="right-side">
-        <img src="/static/assets/img/plain_theme1.png" alt="Placeholder Image">
+        <img src="/{{plain_temp}}" alt="Placeholder Image" class="zoomable">
+        
+    </div>
+    <div class="right-side1">
+      
+        <div class="zoom-controls">
+            <label for="zoomRange">Zoom:</label>
+            <input type="range" id="zoomRange" min="50" max="200" value="100" step="1" oninput="updateZoom()">
+        </div>
     </div>
 </div>
+<script>
+   function updateZoom() {
+    const zoomValue = document.getElementById('zoomRange').value;
+    const zoomableImage = document.querySelector('.right-side .zoomable');
+    zoomableImage.style.transform = `scale(${zoomValue / 100})`;
+}
+
+
+</script>
 
 </body>
 </html>
