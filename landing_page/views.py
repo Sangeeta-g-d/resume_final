@@ -20,6 +20,7 @@ import openai
 # import generativeai
 #from generativeai import GenAIConfig, GenAI
 
+import openai
 # Create your views here.
 
 """def get_and_use_gemini_api(prompt):
@@ -142,7 +143,6 @@ def extract_emails_from_pdf(file_path):
 
 
 def resume(request, id, u_id):
-
     print("111111111111",id,u_id)
     data = get_object_or_404(Templates, id=id)
     plain_temp = data.template
@@ -205,24 +205,56 @@ def resume(request, id, u_id):
         else:
             error_message = "The file is not a PDF."
             return HttpResponse(error_message)
+        
+ 
 
-def resume1(request):
-    print("hiiiiiii")
+openai.api_key = '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'
+
+def generate_enhanced_content(form_data):
+    print('kkkkkkkkkkkkkkkkk')
+    # Format the input data for the OpenAI API request
+    input_text = f"First Name: {form_data['first_name']}\n"
+    input_text += f"Last Name: {form_data['last_name']}\n"
+    input_text += f"Email: {form_data['email']}\n"
+    input_text += f"Phone Number: {form_data['phone_number']}\n"
+    input_text += f"Experience: {form_data['experience']}\n"
+    input_text += f"Projects: {form_data['projects']}\n"
+    input_text += f"Education: {form_data['education']}\n"
+    input_text += f"Internships: {form_data['internships']}\n"
+    input_text += f"Languages: {form_data['languages']}\n"
+
+    # Call the OpenAI API to generate enhanced content
+    response = openai.Completion.create(
+    engine="gpt-3.5-turbo-instruct",  # Choose an appropriate engine
+    prompt=input_text,
+    max_tokens=150
+)
+
+    print('response',response)
+    # Extract and return the enhanced content from the API response
+    return response.choices[0].text.strip()
+
+def generate_content(request):
+    print("hiiiiiiiiiiiii")
     if request.method == 'POST':
-        # Extract form data
+        # Extract data from the submitted form
         form_data = {
-            
-            'first_name': request.POST.get('first_name'),
-            'last_name': request.POST.get('last_name'),
-            'email': request.POST.get('email'),
-            'phone_number': request.POST.get('phone_number'),
-            'experience': request.POST.get('experience'),
-            'projects': request.POST.get('projects'),
-            'education': request.POST.get('education'),
-            'internships': request.POST.get('internships'),
-            'languages': request.POST.get('languages'),
+            'first_name': request.POST.get('first_name', ''),
+            'last_name': request.POST.get('last_name', ''),
+            'email': request.POST.get('email', ''),
+            'phone_number': request.POST.get('phone_number', ''),
+            'experience': request.POST.get('experience', ''),
+            'projects': request.POST.get('projects', ''),
+            'education': request.POST.get('education', ''),
+            'internships': request.POST.get('internships', ''),
+            'languages': request.POST.get('languages', '')
         }
-        print("hiiiiiiihhhhhhhhhhhhh")
+        print("hloooo")
+        # Generate enhanced content using OpenAI API
+        enhanced_content = generate_enhanced_content(form_data)
+        print("enhanced_content",enhanced_content)
+        # Render a separate template to display the enhanced content
+        #return render(request, 'enhanced_content.html', {'enhanced_content': enhanced_content})
 
         # Generate resume content using the form data
         resume_content = generate_resume_content(form_data)
@@ -324,3 +356,6 @@ def generate_content(request):
     else:
         # Handle GET requests (if needed)
         return HttpResponse("Method Not Allowed", status=405)'''
+    else:
+        # Handle GET requests (if needed)
+        return HttpResponse("Method Not Allowed", status=405)

@@ -15,6 +15,8 @@ urlpatterns = [
     path('resume/<int:id>/<int:u_id>', views.resume, name='resume'),
     path('resume1', views.resume1, name='resume1'),
     #path('generate_content', views.generate_content, name='generate_content'),
+    path('generate_content', views.generate_content, name='generate_content'),
+   
 
 
 ]
