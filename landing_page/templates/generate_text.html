@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Text</title>
+</head>
+<body>
+    <h1>Generate Text</h1>
+    <form method="POST">
+        <label for="prompt">Enter a prompt:</label>
+        <br>
+        <textarea name="prompt" rows="5" cols="30"></textarea>
+        <br>
+        <button type="submit">Generate Text</button>
+    </form>
+    {% if generated_text %}
+        <p>Generated Text:</p>
+        <p>{{ generated_text }}</p>
+    {% endif %}
+</body>
+</html>

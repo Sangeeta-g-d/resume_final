@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-
+GEMINI_API_KEY="AIzaSyDlHT9qL_NP4AYL7W48sMYl6n3IWHTZhTI"
 # Application definition
 
 INSTALLED_APPS = [
