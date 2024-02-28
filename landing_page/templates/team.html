@@ -32,7 +32,18 @@
     <!-- Template Stylesheet -->
     <link href="/static/assets/css/style.css" rel="stylesheet">
 </head>
+<style>
+   .project-item {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Thicker shadow */
+    transition: transform 0.3s;
+}
 
+.project-item:hover {
+    transform: scale(1.05); /* Add a 3D effect on hover */
+}
+</style>
 <body>
     <!-- Spinner Start -->
     <div id="spinner"
@@ -104,16 +115,13 @@
             </div>
             <div class="owl-carousel project-carousel wow fadeInUp" data-wow-delay="0.3s">
                 {% for x in data %}
-                <div class="project-item pe-5 pb-5">
-                    <div class="project-img mb-3">
-                        <img class="img-fluid rounded" src="{{ x.template.url }}" alt="" style="max-height: 400px;">
-                        <a href="/resume/{{x.id}}"><i class="fa fa-link fa-3x text-primary"></i></a>
-                    </div>
-                    <div class="project-title">
-                        <h4 class="mb-0">Cash Investment</h4>
-                    </div>
-                </div>
-                {% endfor %}
+    <div class="project-item pe-5 pb-5">
+        <div class="project-img mb-3">
+            <img class="img-fluid rounded" src="{{ x.template.url }}" alt="" style="max-height: 400px;">
+            <a href="/resume/{{x.id}}"><i class="fa fa-link fa-3x text-primary"></i></a>
+        </div>
+    </div>
+{% endfor %}
                 
             </div>
             

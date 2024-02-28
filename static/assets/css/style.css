@@ -313,7 +313,7 @@ h6,
     border-radius: 8px;
     display: flex;
     align-items: flex-end;
-    padding: 18px;
+    padding: 10px;
     z-index: -1;
     transition: .5s;
 }

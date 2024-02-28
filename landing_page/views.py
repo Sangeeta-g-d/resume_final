@@ -101,7 +101,7 @@ def admin_logout(request):
     # Redirect to a specific page after logout (optional)
     return redirect('/admin_login')
 
-def resume(request, id, u_id):
+def resume(request, id):
     return render('resume.html')
 
 '''
