@@ -102,7 +102,10 @@ def admin_logout(request):
     return redirect('/admin_login')
 
 def resume(request, id):
-    return render('resume.html')
+    data=Templates.objects.get(id=id)
+    plain_temp=data.template
+    context={'plain_temp':plain_temp}
+    return render(request,'resume.html',context)
 
 '''
 def upload_file(request):
