@@ -57,8 +57,11 @@ def admin_logout(request):
     # Redirect to a specific page after logout (optional)
     return redirect('/admin_login')
 
-def resume(request, id, u_id):
-    return render('resume.html')
+def resume(request, id):
+    data=Templates.objects.get(id=id)
+    plain_temp=data.template
+    context={'plain_temp':plain_temp}
+    return render(request,'resume.html',context)
 
 '''
 def upload_file(request):
