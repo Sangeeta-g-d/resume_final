@@ -3,7 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect,HttpResponseForbidden,
 from django.template import loader
 from django.contrib.auth import authenticate,login,logout
 import pdfplumber
-from .models import Ectracted_Resume_Details, Templates, UploadedFile
+from .models import  Templates
 import PyPDF2
 import re
 import json
@@ -21,6 +21,7 @@ import openai
 #from generativeai import GenAIConfig, GenAI
 
 import openai
+
 # Create your views here.
 
 """def get_and_use_gemini_api(prompt):
@@ -61,7 +62,7 @@ def index(request):
     #print(generated_text)
     return render(request,'index.html')
 
-def team(request,id):
+def team(request):
     data=Templates.objects.all()
     context={'data':data,'u_id':id}
     return render(request,'team.html',context)
@@ -100,7 +101,10 @@ def admin_logout(request):
     # Redirect to a specific page after logout (optional)
     return redirect('/admin_login')
 
+def resume(request, id, u_id):
+    return render('resume.html')
 
+'''
 def upload_file(request):
     if request.method == 'POST':
         uploaded_file = request.FILES['pdf_file']
@@ -141,7 +145,6 @@ def extract_emails_from_pdf(file_path):
             emails += re.findall(email_pattern, text)
     return emails
 
-
 def resume(request, id, u_id):
     print("111111111111",id,u_id)
     data = get_object_or_404(Templates, id=id)
@@ -166,24 +169,32 @@ def resume(request, id, u_id):
 
             # Extracting information using regular expressions
             name_match = re.search(r'([A-Za-z]+) ([A-Za-z]+)', text)
+      
             phone_match = re.search(r'\b\d{10}\b', text)
             email_match = re.search(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', text)
-            experience_match = re.search(r'EXPERIENCE(?=.*?EDUCATION)(.*?)(?=EDUCATION|$)', text, re.DOTALL)
-            education_match = re.search(r'EDUCATION(?=.*?LANGUAGES)(.*?)(?=LANGUAGES|$)', text, re.DOTALL)
-            internships_match = re.search(r'INTERNSHIP(?=.*?EXPERIENCE)(.*?)(?=EXPERIENCE|$)', text, re.DOTALL)
-            projects_match = re.search(r'PROJECTS(?=.*?LANGUAGES)(.*?)(?=LANGUAGES|$)', text, re.DOTALL)
-            languages_match = re.search(r'LANGUAGES(?=.*?DECLARATION)(.*?)(?=DECLARATION|$)', text, re.DOTALL)
+            experience_match = re.search(r'(?i)EXPERIENCE(.*?)(?=EDUCATION|INTERNSHIP|PROJECTS|LANGUAGES|DECLARATION|$)', text, re.DOTALL)
+            education_match = re.search(r'(?i)EDUCATION(.*?)(?=EXPERIENCE|INTERNSHIP|PROJECTS|LANGUAGES|DECLARATION|$)', text, re.DOTALL)
+            internships_match = re.search(r'(?i)INTERNSHIP(.*?)(?=EXPERIENCE|EDUCATION|PROJECTS|LANGUAGES|DECLARATION|$)', text, re.DOTALL)
+            projects_match = re.search(r'(?i)PROJECTS(.*?)(?=EXPERIENCE|EDUCATION|INTERNSHIP|LANGUAGES|DECLARATION|$)', text, re.DOTALL)
+            languages_match = re.search(r'(?i)LANGUAGES(.*?)(?=EXPERIENCE|EDUCATION|INTERNSHIP|PROJECTS|DECLARATION|$)', text, re.DOTALL)
 
             # Extracted information
             first_name = name_match.group(1) if name_match else ""
             last_name = name_match.group(2) if name_match else ""
             phone_number = phone_match.group() if phone_match else ""
+            print("phone_match",phone_number)
             email = email_match.group() if email_match else ""
+            print("email_match",email)
             experience = experience_match.group() if experience_match else ""
+            print("experience_match",experience)
             education = education_match.group() if education_match else ""
+            print("education_match",education)
             internships = internships_match.group() if internships_match else ""
+            print("internships_match",internships)
             projects = projects_match.group() if projects_match else ""
+            print("projects_match",projects)
             languages = languages_match.group() if languages_match else ""
+            print("languages_match",languages)
 
             # Saving to the database
             extracted_data = Ectracted_Resume_Details.objects.create(
@@ -198,16 +209,13 @@ def resume(request, id, u_id):
                 projects=projects,
                 langauges=languages
             )
-            
-
             context = {'data': data, 'extracted_data': extracted_data,'plain_temp':plain_temp}
             return render(request, 'resume.html', context)
         else:
             error_message = "The file is not a PDF."
             return HttpResponse(error_message)
-        
+ '''       
  
-
 openai.api_key = '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'
 
 def generate_enhanced_content(form_data):

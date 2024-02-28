@@ -7,7 +7,7 @@ class Templates(models.Model):
     template = models.FileField(upload_to='shared_template_folder/',default="template")
     plain_template = models.FileField(upload_to='shared_template_folder/',default="plain template")
 
-
+'''
 # Create your models here.
 class UploadedFile(models.Model):
     file = models.FileField(upload_to='uploads/')
@@ -30,3 +30,4 @@ class Ectracted_Resume_Details(models.Model):
     projects=models.CharField(max_length=9000,default="project")
     phone_number=models.CharField(max_length=100,default="123")
     email= models.CharField(max_length=100,default="email")
+'''
