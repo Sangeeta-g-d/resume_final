@@ -142,7 +142,15 @@ input[type="submit"]:hover {
     }
 
     /* Adjust as needed for responsiveness */
-    
+    .container1  {
+    border: 1px solid #868788;
+    padding: 20px;
+    width: 350px;
+    height: 200px;
+    overflow: auto;
+    border-radius: 20px;
+    background-color: #9b9d9e;
+  }
 </style>
 </head>
 <body>
@@ -150,20 +158,29 @@ input[type="submit"]:hover {
 <div class="container">
     <div class="left-side">
         <h2>User Details Form</h2>
-       <button type="button" class="custom-button">
-    <i class="fas fa-chevron-down"></i>
-    <h2 style="margin-right: 70px;">Financial Consultancy</h2>
-</button>
+        <button type="button" class="custom-button" onclick="toggleContainer()">
+            <i class="fas fa-chevron-down"></i>
+            <h2 style="margin-right: 70px;">Financial Consultancy</h2>
+        </button>
+<div id="container1" class="container1" style="display:none;">
+    <p>This is the content you want to display or drag.</p>
+</div>
+
+<script>
+function toggleContainer() {
+    var container = document.getElementById("container1");
+    if (container.style.display === "none") {
+        container.style.display = "block";
+        // You can add your drag functionality here if needed
+    } else {
+        container.style.display = "none";
+    }
+}
+</script>
     </div>
     
 
-    <script>
-     function toggleDropdown(id) {
-    var dropdown = document.getElementById(id);
-    dropdown.classList.toggle('show');
-}
-
-    </script>
+   
     <div class="right-side">
         <img src="/{{plain_temp}}" alt="Placeholder Image" class="zoomable">
         
