@@ -231,11 +231,81 @@ input[type="submit"]:hover {
     transition: all 0.3s ease-in-out;
 }
 
-        .form-control:focus {
+.form-control:focus {
             outline: none;
             border-color: #4CAF50;
             color: #000; /* Text color when focused */
+            box-shadow: 0 0 15px rgba(71, 88, 71, 0.5); /* Adjust the shadow as needed */
         }
+
+
+        .custom-container1 {
+            display: flex;
+            justify-content: space-between;
+            transition: height 0.3s ease;
+            overflow: hidden;
+        }
+        .custom-container1 p {
+            margin: 0;
+            text-align: center;
+        }
+
+        .column {
+            width: 30%; 
+            height: 100%;/* Adjust the width as needed */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Adjust the width as needed */
+        }
+        .profile-image {
+            border-radius: 50%;
+            width: 100px; /* Adjust the size as needed */
+            height: 100px; /* Adjust the size as needed */
+            object-fit: cover;
+        }
+        .edit-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 16px;
+            background-color: #4e5050;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .edit-button:hover {
+            background-color: #9b9d9e;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                top: -100%;
+            }
+            to {
+                top: 0;
+            }
+        }
+        .columns-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow columns to wrap to the next row if needed */
+
+}
 </style>
 </head>
 <body>
@@ -243,15 +313,65 @@ input[type="submit"]:hover {
 <div class="container">
     <div class="left-side">
         <h2>User Details Form</h2>
-       <button type="button" class="custom-button"  onclick="toggleContainer()">
-    <i class="fas fa-chevron-down"></i>
-    <h2 style="margin-right: 70px;">Financial Consultancy</h2>
-</button>
+        <button type="button" class="custom-button"  onclick="toggleContainer()">
+            <i class="fas fa-chevron-down"></i>
+            <h2 style="margin-right: 70px;">Personal Information</h2>
+        </button>
 
-<div id="container" class="custom-container hidden">
-    <!-- Your container content goes here -->
-    <p>This is the hidden container content.</p>
-</div>
+        <div id="profile" class="custom-container custom-container1 hidden">
+            <div class="columns-wrapper">
+            <div class="column">
+                <!-- Column 1: Profile Image -->
+                <img src="/static/dashboard_assets/img/team-2.jpg" alt="Profile Image" class="profile-image"><br>
+                <button class="edit-button" onclick="openPopup()">
+                    <i class="fas fa-pencil-alt"></i>&nbsp;
+                    Edit
+                </button><br>
+                <div class="form-group">
+                    <label for="firstName">DOB</label>
+                    <input type="date" class="form-control" id="dob">
+                </div>
+        
+                <div id="imagePopup" class="popup">
+                    <!-- Popup content -->
+                    <label for="imageInput">Image:</label>
+                    <input type="file" id="imageInput" accept="image/*">
+                    <button onclick="closePopup()">Close</button>
+                </div>
+               
+            </div>
+          
+            <div class="column">
+                <!-- Column 2: User Information -->
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" class="form-control" id="firstName">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input type="text" class="form-control" id="phoneNumber">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Linked URL:</label>
+                    <input type="text" class="form-control" id="linkedin">
+                </div>
+            </div>
+            <div class="column">
+                <div class="form-group">
+                    <label for="firstName">Last Name:</label>
+                    <input type="text" class="form-control" id="firstName">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Email:</label>
+                    <input type="email" class="form-control" id="phoneNumber">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Address</label>
+                    <textarea name="address" id="address" cols="30" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            </div>  
+        </div>
 <br>
 <button type="button" class="custom-button" onclick="workexperience()">
     <i class="fas fa-chevron-down"></i>
@@ -271,7 +391,7 @@ input[type="submit"]:hover {
                 </div>
                 <div class="form-group">
                     <input type="text" id="jobtitle1" class="form-control" placeholder="Job Title" name="jobtitle1" style="height: 30px;">
-                    
+
                 </div>
                 <div class="form-group">
                     <input type="text" id="city1" class="form-control" placeholder="City" name="city1" style="height: 30px;">
@@ -359,15 +479,12 @@ input[type="submit"]:hover {
     }
 </script>
 
-    <script>
-        function toggleContainer() {
-            var container = document.getElementById('container');
-            container.classList.toggle('hidden');
-        }
-    </script>
-
-
-
+<script>
+    function toggleContainer() {
+        var container = document.getElementById('profile');
+        container.classList.toggle('hidden');
+    }
+</script>
 
 
 
@@ -395,6 +512,21 @@ input[type="submit"]:hover {
 
 
 </script>
+<script>
+    function openPopup() {
+        // Show the popup
+        document.getElementById('imagePopup').style.display = 'block';
+    }
 
+    function closePopup() {
+        // Close the popup
+        document.getElementById('imagePopup').style.display = 'none';
+    }
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
