@@ -120,27 +120,49 @@ input[type="submit"]:hover {
     background-color: #010e02;
 }
 .custom-button {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 400px; /* Adjust the width as needed */
-        background-color: #dbdfdf;
-        color: #171616;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 400px; /* Adjust the width as needed */
+            background-color: #dbdfdf;
+            color: #171616;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-    .custom-button i {
-        margin-left: 10px; /* Adjust the margin as needed */
-    }
+        .custom-button i {
+            margin-left: 10px; /* Adjust the margin as needed */
+        }
 
-    .custom-button:hover {
-        background-color: #9b9d9e;
-    }
+        .custom-button:hover {
+            background-color: #9b9d9e;
+        }
 
+        .custom-container {
+            width: 360px; /* Adjust the width as needed */
+            height: 200px; /* Adjust the height as needed */
+            background: linear-gradient(#dbdfdf, #9b9d9e);
+            color: #171616;
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 10px; /* Adjust the margin as needed */
+            transition: height 0.3s ease; /* Add transition for smooth height change */
+        }
+
+        .custom-container p {
+            margin: 0;
+        }
+
+        /* Hide the container by default */
+        .custom-container.hidden {
+            height: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
     /* Adjust as needed for responsiveness */
     
 </style>
@@ -150,19 +172,22 @@ input[type="submit"]:hover {
 <div class="container">
     <div class="left-side">
         <h2>User Details Form</h2>
-       <button type="button" class="custom-button">
+       <button type="button" class="custom-button"  onclick="toggleContainer()">
     <i class="fas fa-chevron-down"></i>
     <h2 style="margin-right: 70px;">Financial Consultancy</h2>
 </button>
+<div id="container" class="custom-container hidden">
+    <!-- Your container content goes here -->
+    <p>This is the hidden container content.</p>
+</div>
     </div>
     
 
     <script>
-     function toggleDropdown(id) {
-    var dropdown = document.getElementById(id);
-    dropdown.classList.toggle('show');
-}
-
+        function toggleContainer() {
+            var container = document.getElementById('container');
+            container.classList.toggle('hidden');
+        }
     </script>
     <div class="right-side">
         <img src="/{{plain_temp}}" alt="Placeholder Image" class="zoomable">
