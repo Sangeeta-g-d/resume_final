@@ -16,7 +16,7 @@
         height: 100vh;
     }
     .left-side {
-        flex: 1;
+        flex: 1.2;
         background: linear-gradient(to right, hsl(30, 4%, 68%), #413e3e);
         padding: 20px;
         border-radius: 5px;
@@ -24,7 +24,7 @@
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     }
     .right-side {
-    flex: 2;
+    flex: 1.5;
     background-color: #ece5e5;
     display: flex;
     justify-content: center;
@@ -118,41 +118,107 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #010e02;
 }
+.left-side {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Add gap between cards */
+}
+
+.card {
+    width: 380px;
+
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Display shadow */
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.dropdown {
+    display: none;
+    background-color: white; /* Set dropdown background color */
+    padding: 20px; /* Add padding to dropdown */
+    border-radius: 0 0 8px 8px; /* Add border radius to dropdown */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Display shadow */
+}
+
+.dropdown.show {
+    display: block;
+}
+
+.arrow {
+    font-size: 12px;
+}
+
 </style>
 </head>
 <body>
 
 <div class="container">
     <div class="left-side">
-        <h2>User Details Form</h2>
-        <form class="user-form">
-            <label for="name">First Name:</label><br>
-            <input type="text" id="name"  name="first_name"><br><br>
-            <label for="name">Last Name:</label><br>
-            <input type="text" id="name" name="last_name"><br><br>
-
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email"><br><br>
-            <label for="age">Phone Number:</label><br>
-            <input type="number" id="age"  name="phone_number"><br><br>
-            <label for="message">Experience:</label><br>
-            <textarea id="message" name="experience" rows="10"></textarea><br><br>
-            <label for="message">Projects:</label><br>
-            <textarea id="message" name="education" rows="6"></textarea><br><br>
-            <label for="message">Education:</label><br>
-            <textarea id="message" name="education" rows="6"></textarea><br><br>
-            <label for="message">Internships:</label><br>
-            <textarea id="message" name="education" rows="8"></textarea><br><br>
-            
-            <label for="message">Languages:</label><br>
-            <textarea id="message" name="education" rows="4"></textarea><br><br>
-            
-            <label for="languages">Languages:</label><br>
-            <textarea id="languages" name="languages" rows="4">{{ extracted_data.languages }}</textarea><br><br>
-            
-            <input type="submit" value="Submit">
-</form>
+        <div class="card">
+            <div class="card-header" onclick="toggleDropdown('card1')">
+                Card 1 - Personal Information
+                <span class="arrow">&#9660;</span>
+            </div>
+            <div class="dropdown" id="card1">
+                <form>
+                    <label for="name1">Name:</label><br>
+                    <input type="text" id="name1" name="name1"><br>
+                    <label for="email1">Email:</label><br>
+                    <input type="email" id="email1" name="email1"><br><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="card-header" onclick="toggleDropdown('card2')">
+                Card 2 - Personal Information
+                <span class="arrow">&#9660;</span>
+            </div>
+            <div class="dropdown" id="card2">
+                <form>
+                    <label for="name2">Name:</label><br>
+                    <input type="text" id="name2" name="name2"><br>
+                    <label for="email2">Email:</label><br>
+                    <input type="email" id="email2" name="email2"><br><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="card-header" onclick="toggleDropdown('card3')">
+                Card 3 - Personal Information
+                <span class="arrow">&#9660;</span>
+            </div>
+            <div class="dropdown" id="card3">
+                <form>
+                    <label for="name3">Name:</label><br>
+                    <input type="text" id="name3" name="name3"><br>
+                    <label for="email3">Email:</label><br>
+                    <input type="email" id="email3" name="email3"><br><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
     </div>
+    
+
+    <script>
+     function toggleDropdown(id) {
+    var dropdown = document.getElementById(id);
+    dropdown.classList.toggle('show');
+}
+
+    </script>
     <div class="right-side">
         <img src="/{{plain_temp}}" alt="Placeholder Image" class="zoomable">
         
