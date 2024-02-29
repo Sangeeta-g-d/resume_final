@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Two Part HTML Page</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 <style>
     body, html {
         margin: 0;
@@ -143,13 +145,32 @@ input[type="submit"]:hover {
 
         .custom-container {
             width: 360px; /* Adjust the width as needed */
-            height: 200px; /* Adjust the height as needed */
-            background: linear-gradient(#dbdfdf, #9b9d9e);
+            /* Adjust the height as needed */
+            background: linear-gradient(#ffffff, #9dd6f3);
             color: #171616;
             padding: 20px;
             border-radius: 20px;
             margin-top: 10px; /* Adjust the margin as needed */
             transition: height 0.3s ease; /* Add transition for smooth height change */
+        }
+        .custom-container1 {
+            display: flex;
+            justify-content: space-between;
+            transition: height 0.3s ease;
+            overflow: hidden;
+        }
+
+        .custom-container1 p {
+            margin: 0;
+            text-align: center;
+        }
+
+        .column {
+            width: 30%; 
+            height: 100%;/* Adjust the width as needed */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Adjust the width as needed */
         }
 
         .custom-container p {
@@ -162,30 +183,166 @@ input[type="submit"]:hover {
             padding: 0;
             overflow: hidden;
         }
-        
-    /* Adjust as needed for responsiveness */
-    
+        .profile-image {
+            border-radius: 50%;
+            width: 100px; /* Adjust the size as needed */
+            height: 100px; /* Adjust the size as needed */
+            object-fit: cover;
+        }
+       
+        .form-group {
+            margin-bottom: 15px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        label,textarea {
+            display: block;
+            font-weight:lighter;
+            margin-bottom: 5px;
+            font-size: 14px; /* Adjust the font size as needed */
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            opacity: 0.3; /* Adjust the transparency as needed */
+            color: #000; /* Text color when not focused */
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #4CAF50;
+            color: #000; /* Text color when focused */
+            box-shadow: 0 0 15px rgba(71, 88, 71, 0.5); /* Adjust the shadow as needed */
+        }
+        .edit-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 16px;
+            background-color: #4e5050;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .edit-button:hover {
+            background-color: #9b9d9e;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                top: -100%;
+            }
+            to {
+                top: 0;
+            }
+        }
+        .columns-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow columns to wrap to the next row if needed */
+
+}
+.custom-grid {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Adjust the width as needed */
+    margin-top: 20px; /* Adjust the margin as needed */
+}
+
+.custom-column {
+    width: 48%; /* Adjust the width as needed */
+    /* ... (add other styles as needed) ... */
+}
+
 </style>
 </head>
 <body>
 
 <div class="container">
     <div class="left-side">
-        <h2>User Details Form</h2>
+        <h2>Add User Details</h2>
        <button type="button" class="custom-button"  onclick="toggleContainer()">
     <i class="fas fa-chevron-down"></i>
-    <h2 style="margin-right: 70px;">Financial Consultancy</h2>
+    <h2 style="margin-right: 70px;">Personal Information</h2>
 </button>
-<div id="container" class="custom-container hidden">
-    <!-- Your container content goes here -->
-    <p>This is the hidden container content.</p>
+<div id="profile" class="custom-container custom-container1 hidden">
+    <div class="columns-wrapper">
+    <div class="column">
+        <!-- Column 1: Profile Image -->
+        <img src="/static/dashboard_assets/img/team-2.jpg" alt="Profile Image" class="profile-image"><br>
+        <button class="edit-button" onclick="openPopup()">
+            <i class="fas fa-pencil-alt"></i>&nbsp;
+            Edit
+        </button><br>
+        <div class="form-group">
+            <label for="firstName">DOB</label>
+            <input type="date" class="form-control" id="dob">
+        </div>
+
+        <div id="imagePopup" class="popup">
+            <!-- Popup content -->
+            <label for="imageInput">Image:</label>
+            <input type="file" id="imageInput" accept="image/*">
+            <button onclick="closePopup()">Close</button>
+        </div>
+       
+    </div>
+  
+    <div class="column">
+        <!-- Column 2: User Information -->
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" class="form-control" id="firstName">
+        </div>
+        <div class="form-group">
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" class="form-control" id="phoneNumber">
+        </div>
+        <div class="form-group">
+            <label for="phoneNumber">Linked URL:</label>
+            <input type="text" class="form-control" id="linkedin">
+        </div>
+    </div>
+    <div class="column">
+        <div class="form-group">
+            <label for="firstName">Last Name:</label>
+            <input type="text" class="form-control" id="firstName">
+        </div>
+        <div class="form-group">
+            <label for="phoneNumber">Email:</label>
+            <input type="email" class="form-control" id="phoneNumber">
+        </div>
+        <div class="form-group">
+            <label for="phoneNumber">Address</label>
+            <textarea name="address" id="address" cols="30" class="form-control" rows="3"></textarea>
+        </div>
+    </div>
+    </div>  
 </div>
     </div>
-    
-
     <script>
         function toggleContainer() {
-            var container = document.getElementById('container');
+            var container = document.getElementById('profile');
             container.classList.toggle('hidden');
         }
     </script>
@@ -207,9 +364,23 @@ input[type="submit"]:hover {
     const zoomableImage = document.querySelector('.right-side .zoomable');
     zoomableImage.style.transform = `scale(${zoomValue / 100})`;
 }
-
-
 </script>
+<script>
+    function openPopup() {
+        // Show the popup
+        document.getElementById('imagePopup').style.display = 'block';
+    }
+
+    function closePopup() {
+        // Close the popup
+        document.getElementById('imagePopup').style.display = 'none';
+    }
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>
