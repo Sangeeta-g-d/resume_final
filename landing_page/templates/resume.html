@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Two Part HTML Page</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
 <style>
     body, html {
         margin: 0;
@@ -28,7 +26,7 @@
     }
     .right-side {
     flex: 1.5;
-    background-color: #ece5e5;
+    background-color:#ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -126,7 +124,7 @@ input[type="submit"]:hover {
             align-items: center;
             justify-content: space-between;
             width: 400px; /* Adjust the width as needed */
-            background-color: #dbdfdf;
+            background: linear-gradient(#e1ecf2, #d5ebf7);
             color: #171616;
             padding: 10px 20px;
             border: none;
@@ -140,7 +138,7 @@ input[type="submit"]:hover {
         }
 
         .custom-button:hover {
-            background-color: #9b9d9e;
+            background: linear-gradient(#ffffff, #9dd6f3);
         }
 
         .custom-container {
@@ -151,26 +149,19 @@ input[type="submit"]:hover {
             padding: 20px;
             border-radius: 20px;
             margin-top: 10px; /* Adjust the margin as needed */
-            transition: height 0.3s ease; /* Add transition for smooth height change */
-        }
-        .custom-container1 {
-            display: flex;
-            justify-content: space-between;
             transition: height 0.3s ease;
-            overflow: hidden;
+             /* Add transition for smooth height change */
         }
-
-        .custom-container1 p {
-            margin: 0;
-            text-align: center;
-        }
-
-        .column {
-            width: 30%; 
-            height: 100%;/* Adjust the width as needed */
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Adjust the width as needed */
+        .custom-container2 {
+            width: 320px; /* Adjust the width as needed */
+            /* Adjust the height as needed */
+            background: linear-gradient(#ffffff, #9dd6f3);
+            color: #171616;
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 10px; /* Adjust the margin as needed */
+            transition: height 0.3s ease;
+             /* Add transition for smooth height change */
         }
 
         .custom-container p {
@@ -183,20 +174,38 @@ input[type="submit"]:hover {
             padding: 0;
             overflow: hidden;
         }
-        .profile-image {
-            border-radius: 50%;
-            width: 100px; /* Adjust the size as needed */
-            height: 100px; /* Adjust the size as needed */
-            object-fit: cover;
-        }
-       
-        .form-group {
+        
+    /* Adjust as needed for responsiveness */
+    .container1  {
+    border: 1px solid #868788;
+    padding: 20px;
+    width: 350px;
+    height: 200px;
+    overflow: auto;
+    border-radius: 20px;
+    background-color: #9b9d9e;
+  }
+
+
+
+    .custom-button i {
+        margin-right: 10px;
+    }
+
+   
+
+    .hidden {
+        display: none;
+    }
+
+    .form-group {
             margin-bottom: 15px;
             width: 100%;
             box-sizing: border-box;
+            position: relative;
         }
 
-        label,textarea {
+        label {
             display: block;
             font-weight:lighter;
             margin-bottom: 5px;
@@ -209,15 +218,50 @@ input[type="submit"]:hover {
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
-            opacity: 0.3; /* Adjust the transparency as needed */
-            color: #000; /* Text color when not focused */
+            opacity: 0.5; /* Adjust the transparency as needed */
+            color: #070606; /* Text color when not focused */
         }
 
-        .form-control:focus {
+        .placeholder-label {
+    position: absolute;
+    top: 10px; /* Adjust vertically as needed */
+    left: 10px; /* Adjust horizontally as needed */
+    pointer-events: none;
+    color: #070606; /* Color for the placeholder text */
+    transition: all 0.3s ease-in-out;
+}
+
+.form-control:focus {
             outline: none;
             border-color: #4CAF50;
             color: #000; /* Text color when focused */
             box-shadow: 0 0 15px rgba(71, 88, 71, 0.5); /* Adjust the shadow as needed */
+        }
+
+
+        .custom-container1 {
+            display: flex;
+            justify-content: space-between;
+            transition: height 0.3s ease;
+            overflow: hidden;
+        }
+        .custom-container1 p {
+            margin: 0;
+            text-align: center;
+        }
+
+        .column {
+            width: 30%; 
+            height: 100%;/* Adjust the width as needed */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Adjust the width as needed */
+        }
+        .profile-image {
+            border-radius: 50%;
+            width: 100px; /* Adjust the size as needed */
+            height: 100px; /* Adjust the size as needed */
+            object-fit: cover;
         }
         .edit-button {
             display: inline-flex;
@@ -262,90 +306,191 @@ input[type="submit"]:hover {
     flex-wrap: wrap; /* Allow columns to wrap to the next row if needed */
 
 }
-.custom-grid {
-    display: flex;
-    justify-content: space-between;
-    width: 100%; /* Adjust the width as needed */
-    margin-top: 20px; /* Adjust the margin as needed */
-}
-
-.custom-column {
-    width: 48%; /* Adjust the width as needed */
-    /* ... (add other styles as needed) ... */
-}
-
 </style>
 </head>
 <body>
 
 <div class="container">
     <div class="left-side">
-        <h2>Add User Details</h2>
-       <button type="button" class="custom-button"  onclick="toggleContainer()">
-    <i class="fas fa-chevron-down"></i>
-    <h2 style="margin-right: 70px;">Personal Information</h2>
-</button>
-<div id="profile" class="custom-container custom-container1 hidden">
-    <div class="columns-wrapper">
-    <div class="column">
-        <!-- Column 1: Profile Image -->
-        <img src="/static/dashboard_assets/img/team-2.jpg" alt="Profile Image" class="profile-image"><br>
-        <button class="edit-button" onclick="openPopup()">
-            <i class="fas fa-pencil-alt"></i>&nbsp;
-            Edit
-        </button><br>
-        <div class="form-group">
-            <label for="firstName">DOB</label>
-            <input type="date" class="form-control" id="dob">
-        </div>
+        <h2>User Details Form</h2>
+        <button type="button" class="custom-button"  onclick="toggleContainer()">
+            <i class="fas fa-chevron-down"></i>
+            <h2 style="margin-right: 70px;">Personal Information</h2>
+        </button>
 
-        <div id="imagePopup" class="popup">
-            <!-- Popup content -->
-            <label for="imageInput">Image:</label>
-            <input type="file" id="imageInput" accept="image/*">
-            <button onclick="closePopup()">Close</button>
+        <div id="profile" class="custom-container custom-container1 hidden">
+            <div class="columns-wrapper">
+            <div class="column">
+                <!-- Column 1: Profile Image -->
+                <img src="/static/dashboard_assets/img/team-2.jpg" alt="Profile Image" class="profile-image"><br>
+                <button class="edit-button" onclick="openPopup()">
+                    <i class="fas fa-pencil-alt"></i>&nbsp;
+                    Edit
+                </button><br>
+                <div class="form-group">
+                    <label for="firstName">DOB</label>
+                    <input type="date" class="form-control" id="dob">
+                </div>
+        
+                <div id="imagePopup" class="popup">
+                    <!-- Popup content -->
+                    <label for="imageInput">Image:</label>
+                    <input type="file" id="imageInput" accept="image/*">
+                    <button onclick="closePopup()">Close</button>
+                </div>
+               
+            </div>
+          
+            <div class="column">
+                <!-- Column 2: User Information -->
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" class="form-control" id="firstName">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input type="text" class="form-control" id="phoneNumber">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Linked URL:</label>
+                    <input type="text" class="form-control" id="linkedin">
+                </div>
+            </div>
+            <div class="column">
+                <div class="form-group">
+                    <label for="firstName">Last Name:</label>
+                    <input type="text" class="form-control" id="firstName">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Email:</label>
+                    <input type="email" class="form-control" id="phoneNumber">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Address</label>
+                    <textarea name="address" id="address" cols="30" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            </div>  
         </div>
-       
+<br>
+<button type="button" class="custom-button" onclick="workexperience()">
+    <i class="fas fa-chevron-down"></i>
+    <h2 style="margin-right: 100px;">Work Experience</h2>
+</button>
+
+<div id="container1" class="custom-container hidden">
+    <div class="experience-section">
+        <div class="experience-header" onclick="toggleExperience(this)">
+            <i class="fas fa-chevron-down"></i>
+            <p><b>Experience 1</b></p>
+        </div>
+        <div class="experience-content">
+            <form id="experience1">
+                <div class="form-group">
+                    <input type="text" id="company1" class="form-control" placeholder="Company Name" name="company1" style="height: 30px;">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="jobtitle1" class="form-control" placeholder="Job Title" name="jobtitle1" style="height: 30px;">
+
+                </div>
+                <div class="form-group">
+                    <input type="text" id="city1" class="form-control" placeholder="City" name="city1" style="height: 30px;">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="country1" class="form-control" placeholder="Country" name="country1" style="height: 30px;">
+                </div>
+                <div class="form-group">
+                    <label for="from1" style="margin-right: 10px;">From:</label>
+                    <input type="date" id="from1" name="from1" class="form-control" style="height: 35px;">
+                </div>
+                <div class="form-group">
+                    <label for="to1" style="margin-right: 10px;">To:</label>
+                    <input type="date" id="to1" class="form-control" name="to1" style="height: 35px;">
+                </div>
+                <div class="form-group">
+                    <label for="description1">Description:</label>
+                    <textarea id="description1" class="form-control" name="description1" rows="5"></textarea>
+                </div>
+            </form>
+        </div>
     </div>
-  
-    <div class="column">
-        <!-- Column 2: User Information -->
-        <div class="form-group">
-            <label for="firstName">First Name:</label>
-            <input type="text" class="form-control" id="firstName">
-        </div>
-        <div class="form-group">
-            <label for="phoneNumber">Phone Number:</label>
-            <input type="text" class="form-control" id="phoneNumber">
-        </div>
-        <div class="form-group">
-            <label for="phoneNumber">Linked URL:</label>
-            <input type="text" class="form-control" id="linkedin">
-        </div>
+
+    <div class="form-group">
+        <input type="submit" value="+ Add New Experience" onclick="addNewExperience()">
     </div>
-    <div class="column">
-        <div class="form-group">
-            <label for="firstName">Last Name:</label>
-            <input type="text" class="form-control" id="firstName">
-        </div>
-        <div class="form-group">
-            <label for="phoneNumber">Email:</label>
-            <input type="email" class="form-control" id="phoneNumber">
-        </div>
-        <div class="form-group">
-            <label for="phoneNumber">Address</label>
-            <textarea name="address" id="address" cols="30" class="form-control" rows="3"></textarea>
-        </div>
-    </div>
-    </div>  
 </div>
-    </div>
-    <script>
-        function toggleContainer() {
-            var container = document.getElementById('profile');
-            container.classList.toggle('hidden');
-        }
-    </script>
+</div>
+<script>
+    function workexperience() {
+        var container = document.getElementById('container1');
+        container.classList.toggle('hidden');
+    }
+
+    function addNewExperience() {
+        var container = document.getElementById('container1');
+        var experienceCount = container.getElementsByClassName('experience-section').length + 1;
+        var newExperience = document.createElement('div');
+        newExperience.classList.add('experience-section');
+
+        var header = document.createElement('div');
+        header.classList.add('experience-header');
+        header.onclick = function() { toggleExperience(this) };
+        header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Experience ' + experienceCount + '</b></p>';
+
+        var content = document.createElement('div');
+        content.classList.add('experience-content');
+        content.innerHTML = '<form id="experience' + experienceCount + '">' +
+            '<div class="form-group">' +
+            '<input type="text" id="company' + experienceCount + '" class="form-control" placeholder="Company Name" name="company' + experienceCount + '" style="height: 30px;">' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Job Title" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<input type="text" id="city' + experienceCount + '" class="form-control" placeholder="City" name="city' + experienceCount + '" style="height: 30px;">' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<input type="text" id="country' + experienceCount + '" class="form-control" placeholder="Country" name="country' + experienceCount + '" style="height: 30px;">' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label for="from' + experienceCount + '" style="margin-right: 10px;">From:</label>' +
+            '<input type="date" id="from' + experienceCount + '" name="from' + experienceCount + '" class="form-control" style="height: 35px;">' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label for="to' + experienceCount + '" style="margin-right: 10px;">To:</label>' +
+            '<input type="date" id="to' + experienceCount + '" class="form-control" name="to' + experienceCount + '" style="height: 35px;">' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label for="description' + experienceCount + '">Description:</label>' +
+            '<textarea id="description' + experienceCount + '" class="form-control" name="description' + experienceCount + '" rows="5"></textarea>' +
+            '</div>' +
+            '</form>';
+
+        newExperience.appendChild(header);
+        newExperience.appendChild(content);
+        container.insertBefore(newExperience, container.lastElementChild);
+    }
+
+    function toggleExperience(header) {
+        var content = header.nextElementSibling;
+        header.querySelector('i').classList.toggle('fa-chevron-down');
+        header.querySelector('i').classList.toggle('fa-chevron-up');
+        content.classList.toggle('hidden');
+    }
+</script>
+
+<script>
+    function toggleContainer() {
+        var container = document.getElementById('profile');
+        container.classList.toggle('hidden');
+    }
+</script>
+
+
+
+
+
+
     <div class="right-side">
         <img src="/{{plain_temp}}" alt="Placeholder Image" class="zoomable">
         
@@ -362,8 +507,10 @@ input[type="submit"]:hover {
    function updateZoom() {
     const zoomValue = document.getElementById('zoomRange').value;
     const zoomableImage = document.querySelector('.right-side .zoomable');
-    zoomableImage.style.transform = `scale(${zoomValue / 100})`;
+    zoomableImage.style.transform = scale(${zoomValue / 100});
 }
+
+
 </script>
 <script>
     function openPopup() {
@@ -381,6 +528,5 @@ input[type="submit"]:hover {
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
 </body>
 </html>

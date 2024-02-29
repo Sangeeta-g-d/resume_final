@@ -103,7 +103,7 @@ def admin_logout(request):
 
 def resume(request, id):
     data=Templates.objects.get(id=id)
-    plain_temp=data.template
+    plain_temp=data.plain_template
     context={'plain_temp':plain_temp}
     return render(request,'resume.html',context)
 
