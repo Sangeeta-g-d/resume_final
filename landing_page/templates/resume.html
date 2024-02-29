@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Two Part HTML Page</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
     body, html {
         margin: 0;
@@ -17,7 +18,7 @@
     }
     .left-side {
         flex: 1.2;
-        background: linear-gradient(to right, hsl(30, 4%, 68%), #413e3e);
+        background: linear-gradient(to right, hsl(30, 100%, 100%), #f8f7f7);
         padding: 20px;
         border-radius: 5px;
         overflow-y: auto; /* Enable vertical scrollbar */
@@ -118,97 +119,41 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #010e02;
 }
-.left-side {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Add gap between cards */
-}
+.custom-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 400px; /* Adjust the width as needed */
+        background-color: #dbdfdf;
+        color: #171616;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
-.card {
-    width: 380px;
+    .custom-button i {
+        margin-left: 10px; /* Adjust the margin as needed */
+    }
 
-    border-radius: 8px;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Display shadow */
-}
+    .custom-button:hover {
+        background-color: #9b9d9e;
+    }
 
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    cursor: pointer;
-}
-
-.dropdown {
-    display: none;
-    background-color: white; /* Set dropdown background color */
-    padding: 20px; /* Add padding to dropdown */
-    border-radius: 0 0 8px 8px; /* Add border radius to dropdown */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Display shadow */
-}
-
-.dropdown.show {
-    display: block;
-}
-
-.arrow {
-    font-size: 12px;
-}
-
+    /* Adjust as needed for responsiveness */
+    
 </style>
 </head>
 <body>
 
 <div class="container">
     <div class="left-side">
-        <div class="card">
-            <div class="card-header" onclick="toggleDropdown('card1')">
-                Card 1 - Personal Information
-                <span class="arrow">&#9660;</span>
-            </div>
-            <div class="dropdown" id="card1">
-                <form>
-                    <label for="name1">Name:</label><br>
-                    <input type="text" id="name1" name="name1"><br>
-                    <label for="email1">Email:</label><br>
-                    <input type="email" id="email1" name="email1"><br><br>
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
-        </div>
-    
-        <div class="card">
-            <div class="card-header" onclick="toggleDropdown('card2')">
-                Card 2 - Personal Information
-                <span class="arrow">&#9660;</span>
-            </div>
-            <div class="dropdown" id="card2">
-                <form>
-                    <label for="name2">Name:</label><br>
-                    <input type="text" id="name2" name="name2"><br>
-                    <label for="email2">Email:</label><br>
-                    <input type="email" id="email2" name="email2"><br><br>
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
-        </div>
-    
-        <div class="card">
-            <div class="card-header" onclick="toggleDropdown('card3')">
-                Card 3 - Personal Information
-                <span class="arrow">&#9660;</span>
-            </div>
-            <div class="dropdown" id="card3">
-                <form>
-                    <label for="name3">Name:</label><br>
-                    <input type="text" id="name3" name="name3"><br>
-                    <label for="email3">Email:</label><br>
-                    <input type="email" id="email3" name="email3"><br><br>
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
-        </div>
+        <h2>User Details Form</h2>
+       <button type="button" class="custom-button">
+    <i class="fas fa-chevron-down"></i>
+    <h2 style="margin-right: 70px;">Financial Consultancy</h2>
+</button>
     </div>
     
 
