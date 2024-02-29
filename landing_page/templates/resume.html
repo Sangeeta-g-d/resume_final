@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Two Part HTML Page</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
     body, html {
         margin: 0;
@@ -16,7 +17,7 @@
         height: 100vh;
     }
     .left-side {
-        flex: 1;
+        flex: 1.2;
         background: linear-gradient(to right, hsl(30, 4%, 68%), #413e3e);
         padding: 20px;
         border-radius: 5px;
@@ -24,7 +25,7 @@
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     }
     .right-side {
-    flex: 2;
+    flex: 1.5;
     background-color: #ece5e5;
     display: flex;
     justify-content: center;
@@ -118,6 +119,30 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #010e02;
 }
+.custom-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 400px; /* Adjust the width as needed */
+        background-color: #ffffff;
+        color: #676262;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .custom-button i {
+        margin-left: 10px; /* Adjust the margin as needed */
+    }
+
+    .custom-button:hover {
+        background-color: #edeff1;
+    }
+
+    /* Adjust as needed for responsiveness */
+    
 </style>
 </head>
 <body>
@@ -125,33 +150,10 @@ input[type="submit"]:hover {
 <div class="container">
     <div class="left-side">
         <h2>User Details Form</h2>
-        <form class="user-form">
-            <label for="name">First Name:</label><br>
-            <input type="text" id="name"  name="first_name"><br><br>
-            <label for="name">Last Name:</label><br>
-            <input type="text" id="name" name="last_name"><br><br>
-
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email"><br><br>
-            <label for="age">Phone Number:</label><br>
-            <input type="number" id="age"  name="phone_number"><br><br>
-            <label for="message">Experience:</label><br>
-            <textarea id="message" name="experience" rows="10"></textarea><br><br>
-            <label for="message">Projects:</label><br>
-            <textarea id="message" name="education" rows="6"></textarea><br><br>
-            <label for="message">Education:</label><br>
-            <textarea id="message" name="education" rows="6"></textarea><br><br>
-            <label for="message">Internships:</label><br>
-            <textarea id="message" name="education" rows="8"></textarea><br><br>
-            
-            <label for="message">Languages:</label><br>
-            <textarea id="message" name="education" rows="4"></textarea><br><br>
-            
-            <label for="languages">Languages:</label><br>
-            <textarea id="languages" name="languages" rows="4">{{ extracted_data.languages }}</textarea><br><br>
-            
-            <input type="submit" value="Submit">
-</form>
+       <button type="button" class="custom-button">
+    <i class="fas fa-chevron-down"></i>
+    <h2 style="margin-right: 70px;">Financial Consultancy</h2>
+</button>
     </div>
     <div class="right-side">
         <img src="/{{plain_temp}}" alt="Placeholder Image" class="zoomable">
