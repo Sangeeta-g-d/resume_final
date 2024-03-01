@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     #path("generate-text/", views.generate_text, name="generate_text"),
     path('admin_login', views.admin_login, name='admin_login'),
+    path('update_image/<int:id>/', views.update_image, name='update_image'),
     path('admin_db', views.admin_db, name='admin_db'),
     path('admin_logout', views.admin_logout, name='admin_logout'),
     #path('upload/', views.upload_file, name='upload_file'),
