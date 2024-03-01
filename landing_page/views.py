@@ -16,6 +16,8 @@ from google.cloud import language_v1
 from google.oauth2 import service_account
 import os
 import openai
+import cv2
+import pytesseract
 #
 # import generativeai
 #from generativeai import GenAIConfig, GenAI
@@ -102,10 +104,42 @@ def admin_logout(request):
     return redirect('/admin_login')
 
 def resume(request, id):
-    data=Templates.objects.get(id=id)
-    plain_temp=data.plain_template
-    context={'plain_temp':plain_temp}
-    return render(request,'resume.html',context)
+    # Retrieve the image from the database
+    data = Templates.objects.get(id=id)
+    plain_temp1 = data.plain_template
+    image_path = str(data.plain_template)
+
+    # Load the image using OpenCV
+    image = cv2.imread(image_path)
+
+    # Convert the image to grayscale
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    # Use pytesseract to do OCR on the grayscale image
+    text = pytesseract.image_to_string(gray_image)
+
+    # Search for the name within the extracted text
+    name = "Name"
+    name_location = text.find(name)
+    print('name_location',name_location)
+
+    if name_location != -1:
+        # Use some logic to determine the x, y coordinates of the name
+        # For example, you could count the number of characters before the name
+        # and assume that the name starts after those characters
+        x = text[:name_location].count('\n')  # Counting newlines for y-coordinate
+        y = text[:name_location].rfind('\n')  # Finding the last occurrence of newline for x-coordinate
+
+        # Output the coordinates
+        print("Name found at coordinates (x={}, y={})".format(x, y))
+    else:
+        print("Name not found in the text extracted from the image.")
+
+    # Pass the extracted coordinates or any other relevant data to the template
+    context = {'name_x': x, 'name_y': y,'plain_temp1':plain_temp1}  # Modify this context as per your requirements
+
+    # Render the template with the context
+    return render(request, 'resume.html', context)
 
 '''
 def upload_file(request):
@@ -222,7 +256,7 @@ def resume(request, id, u_id):
 openai.api_key = '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'
 
 def generate_enhanced_content(form_data):
-    print('kkkkkkkkkkkkkkkkk')
+    print('kkkkkkkkkkkkk')
     # Format the input data for the OpenAI API request
     input_text = f"First Name: {form_data['first_name']}\n"
     input_text += f"Last Name: {form_data['last_name']}\n"

@@ -345,7 +345,7 @@ input[type="submit"]:hover {
                 <!-- Column 2: User Information -->
                 <div class="form-group">
                     <label for="firstName">First Name:</label>
-                    <input type="text" class="form-control" id="firstName">
+                    <input type="text" class="form-control" id="firstName" onkeyup="updateTextPosition()">
                 </div>
                 <div class="form-group">
                     <label for="phoneNumber">Phone Number:</label>
@@ -479,34 +479,29 @@ input[type="submit"]:hover {
     <div class="experience-section">
         <div class="experience-header" onclick="toggleProjects(this)">
             <i class="fas fa-chevron-down"></i>
-            <p><b>Project 1</b></p>
+            <p><b>Project 1</b></p><br>
         </div>
         <div class="experience-content">
             <form id="experience1">
                 <div class="form-group">
-                    <input type="text" id="company1" class="form-control" placeholder="Institution Name" name="company1" style="height: 30px;">
+                    <input type="text" id="company1" class="form-control" placeholder="Project Name" name="company1" style="height: 30px;">
+                </div>
+               
+                <div class="form-group">
+                    <label for="description1">Tools used:</label>
+                    <textarea id="description1" class="form-control" name="description1" rows="3"></textarea>
                 </div>
                 <div class="form-group">
-                    <input type="text" id="jobtitle1" class="form-control" placeholder="Field Of Study" name="jobtitle1" style="height: 30px;">
+                    <label for="description1">Link:</label>
+                    <input type="text" id="jobtitle1" class="form-control" placeholder="Link" name="jobtitle1" style="height: 30px;">
 
                 </div>
                 <div class="form-group">
-                    <input type="text" id="city1" class="form-control" placeholder="Degree" name="city1" style="height: 30px;">
+                    <label for="description1">Description:</label>
+                    <textarea id="description1" class="form-control" name="description1" rows="5"></textarea>
                 </div>
-                <div class="form-group">
-                    <input type="text" id="country1" class="form-control" placeholder="City" name="country1" style="height: 30px;">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="country1" class="form-control" placeholder="Country" name="country1" style="height: 30px;">
-                </div>
-                <div class="form-group">
-                    <label for="from1" style="margin-right: 10px;">From:</label>
-                    <input type="date" id="from1" name="from1" class="form-control" style="height: 35px;">
-                </div>
-                <div class="form-group">
-                    <label for="to1" style="margin-right: 10px;">To:</label>
-                    <input type="date" id="to1" class="form-control" name="to1" style="height: 35px;">
-                </div>
+               
+                
                 
             </form>
         </div>
@@ -592,33 +587,27 @@ input[type="submit"]:hover {
         var header = document.createElement('div');
         header.classList.add('experience-header');
         header.onclick = function() { toggleProjects(this) };
-        header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Education ' + experienceCount + '</b></p>';
+        header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Projects ' + experienceCount + '</b></p>';
 
         var content = document.createElement('div');
         content.classList.add('experience-content');
         content.innerHTML = '<form id="experience' + experienceCount + '">' +
             '<div class="form-group">' +
-            '<input type="text" id="company' + experienceCount + '" class="form-control" placeholder="Institution Name" name="company' + experienceCount + '" style="height: 30px;">' +
+            '<input type="text" id="company' + experienceCount + '" class="form-control" placeholder="Project Name" name="company' + experienceCount + '" style="height: 30px;">' +
             '</div>' +
             '<div class="form-group">' +
-            '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Field Of Study" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
+                
+            '<label for="description' + experienceCount + '">Tools used:</label>' +
+            '<textarea id="description' + experienceCount + '" class="form-control" name="description' + experienceCount + '" rows="3"></textarea>' +
             '</div>' +
             '<div class="form-group">' +
-            '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Degree" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
+                '<label for="description' + experienceCount + '">:</label>' +
+            '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Link" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
             '</div>' +
+            
             '<div class="form-group">' +
-            '<input type="text" id="city' + experienceCount + '" class="form-control" placeholder="City" name="city' + experienceCount + '" style="height: 30px;">' +
-            '</div>' +
-            '<div class="form-group">' +
-            '<input type="text" id="country' + experienceCount + '" class="form-control" placeholder="Country" name="country' + experienceCount + '" style="height: 30px;">' +
-            '</div>' +
-            '<div class="form-group">' +
-            '<label for="from' + experienceCount + '" style="margin-right: 10px;">From:</label>' +
-            '<input type="date" id="from' + experienceCount + '" name="from' + experienceCount + '" class="form-control" style="height: 35px;">' +
-            '</div>' +
-            '<div class="form-group">' +
-            '<label for="to' + experienceCount + '" style="margin-right: 10px;">To:</label>' +
-            '<input type="date" id="to' + experienceCount + '" class="form-control" name="to' + experienceCount + '" style="height: 35px;">' +
+            '<label for="description' + experienceCount + '">Description:</label>' +
+            '<textarea id="description' + experienceCount + '" class="form-control" name="description' + experienceCount + '" rows="5"></textarea>' +
             '</div>' +
            
             '</form>';
@@ -705,10 +694,43 @@ input[type="submit"]:hover {
 
 
 
-    <div class="right-side">
-        <img src="/{{plain_temp}}" alt="Placeholder Image" class="zoomable">
-        
-    </div>
+<div class="right-side" style="position: relative;">
+    <img src="/{{ plain_temp1 }}" alt="Placeholder Image" class="zoomable" id="resumeImage">
+    <!-- Container for dynamically positioned text -->
+    <div id="dynamicTextContainer" style="position: absolute;"></div>
+</div>
+<script>
+    // Function to update the position of the dynamically positioned text
+    function updateTextPosition() {
+        // Get the text entered into the input field
+        var text = document.getElementById('firstName').value;
+
+        // Get the image element
+        var image = document.getElementById('resumeImage');
+
+        // Get the coordinates (x, y) extracted from OCR (replace these with actual values)
+        var x = {{ name_x }};
+        var y = {{ name_y }};
+
+        // Get the container for dynamically positioned text
+        var textContainer = document.getElementById('dynamicTextContainer');
+
+        // Clear any existing text
+        textContainer.innerHTML = '';
+
+        // Create a new text element
+        var newTextElement = document.createElement('div');
+        newTextElement.textContent = text;
+
+        // Set the position of the text element
+        newTextElement.style.position = 'absolute';
+        newTextElement.style.left = x + 'px';
+        newTextElement.style.top = y + 'px';
+
+        // Append the text element to the container
+        textContainer.appendChild(newTextElement);
+    }
+</script>
     <div class="right-side1">
       
         <div class="zoom-controls">
@@ -717,15 +739,7 @@ input[type="submit"]:hover {
         </div>
     </div>
 </div>
-<script>
-   function updateZoom() {
-    const zoomValue = document.getElementById('zoomRange').value;
-    const zoomableImage = document.querySelector('.right-side .zoomable');
-    zoomableImage.style.transform = scale(${zoomValue / 100});
-}
 
-
-</script>
 <script>
     function openPopup() {
         // Show the popup
