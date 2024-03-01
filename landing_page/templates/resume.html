@@ -345,7 +345,7 @@ input[type="submit"]:hover {
                 <!-- Column 2: User Information -->
                 <div class="form-group">
                     <label for="firstName">First Name:</label>
-                    <input type="text" class="form-control" id="firstName" onkeyup="updateTextPosition()">
+                    <input type="text" class="form-control" id="firstName" onkeyup="updateText()">
                 </div>
                 <div class="form-group">
                     <label for="phoneNumber">Phone Number:</label>
@@ -693,42 +693,42 @@ input[type="submit"]:hover {
 
 
 
-
 <div class="right-side" style="position: relative;">
-    <img src="/{{ plain_temp1 }}" alt="Placeholder Image" class="zoomable" id="resumeImage">
-    <!-- Container for dynamically positioned text -->
-    <div id="dynamicTextContainer" style="position: absolute;"></div>
+    <!-- Canvas for drawing text on the image -->
+    <canvas id="imageCanvas" width="600" height="400" style="position: absolute; left: 0; top: 0;"></canvas>
+    <img src="/{{ plain_temp1 }}" alt="Placeholder Image" class="zoomable" id="resumeImage" style="position: relative;">
 </div>
 <script>
-    // Function to update the position of the dynamically positioned text
-    function updateTextPosition() {
+    // Function to update the canvas with the entered text
+    function updateText() {
         // Get the text entered into the input field
         var text = document.getElementById('firstName').value;
 
+        // Get the canvas element
+        var canvas = document.getElementById('imageCanvas');
+        var ctx = canvas.getContext('2d');
+
+        // Clear the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
         // Get the image element
         var image = document.getElementById('resumeImage');
+
+        // Draw the image onto the canvas
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+        // Set the font properties
+        ctx.font = '20px Arial'; // Set the font size and type
+
+        // Set the color of the text
+        ctx.fillStyle = 'red'; // Set the color to red
 
         // Get the coordinates (x, y) extracted from OCR (replace these with actual values)
         var x = {{ name_x }};
         var y = {{ name_y }};
 
-        // Get the container for dynamically positioned text
-        var textContainer = document.getElementById('dynamicTextContainer');
-
-        // Clear any existing text
-        textContainer.innerHTML = '';
-
-        // Create a new text element
-        var newTextElement = document.createElement('div');
-        newTextElement.textContent = text;
-
-        // Set the position of the text element
-        newTextElement.style.position = 'absolute';
-        newTextElement.style.left = x + 'px';
-        newTextElement.style.top = y + 'px';
-
-        // Append the text element to the container
-        textContainer.appendChild(newTextElement);
+        // Draw the text onto the canvas at the specified coordinates
+        ctx.fillText(text, x, y);
     }
 </script>
     <div class="right-side1">
