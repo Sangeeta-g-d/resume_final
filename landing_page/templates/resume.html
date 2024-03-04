@@ -18,7 +18,7 @@
         height: 100vh;
     }
     .left-side {
-        flex: 1.2;
+        flex: 1.27;
         background: linear-gradient(to right, hsl(30, 100%, 100%), #f8f7f7);
         padding: 20px;
         border-radius: 5px;
@@ -255,6 +255,13 @@ input[type="submit"]:hover {
             flex-direction: column;
             align-items: center; /* Adjust the width as needed */
         }
+        .column2 {
+            width: 47%; 
+            height: 100%;/* Adjust the width as needed */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Adjust the width as needed */
+        }
         .profile-image {
             border-radius: 50%;
             width: 100px; /* Adjust the size as needed */
@@ -370,6 +377,64 @@ input[type="submit"]:hover {
             </div>  
         </div>
 <br>
+
+<button type="button" class="custom-button"  onclick="toggleSummary()">
+  <i class="fas fa-chevron-down"></i>
+  <h2 style="margin-right: 120px;">Profile Summary</h2>
+</button><br>
+<div id="summary" class="custom-container hidden">
+  <div class="experience-content">
+    <form>
+        <div class="form-group">
+            <label for="description1">Add Profile Summary:</label>
+            <textarea id="description1" class="form-control" name="description1" cols="45" rows="5"></textarea>
+        </div>
+    </form>
+</div>
+</div>
+<br>
+
+<button type="button" class="custom-button"  onclick="toggleSkills()">
+  <i class="fas fa-chevron-down"></i>
+  <h2 style="margin-right: 230px;">Skills</h2>
+</button>
+
+<div id="skills" class="custom-container custom-container1 hidden">
+  <div class="columns-wrapper">
+  <div class="column2">
+      <!-- Column 1: Profile Image -->
+      <div class="form-group">
+        <label for="firstName">Skill (1):</label>
+        <input type="text" class="form-control" id="firstName" onkeyup="updateText()">
+    </div>
+    <div class="form-group">
+        <label for="phoneNumber">Skill (2):</label>
+        <input type="text" class="form-control" id="phoneNumber" onkeyup="updateText()">
+    </div>
+
+    <div class="form-group">
+      <input type="submit" value="+ Add Skills" >
+  </div>
+     
+  </div>
+
+  <div class="column2">
+      <!-- Column 2: User Information -->
+      <div class="form-group">
+          <label for="firstName">Skill (3):</label>
+          <input type="text" class="form-control" id="firstName" onkeyup="updateText()">
+      </div>
+      <div class="form-group">
+          <label for="phoneNumber">Skill (4):</label>
+          <input type="text" class="form-control" id="phoneNumber" onkeyup="updateText()">
+      </div>
+     
+  </div>
+  
+  </div>  
+</div>
+<br>
+
 <button type="button" class="custom-button" onclick="workexperience()">
     <i class="fas fa-chevron-down"></i>
     <h2 style="margin-right: 110px;">Work Experience</h2>
@@ -416,11 +481,11 @@ input[type="submit"]:hover {
         <input type="submit" value="+ Add New Experience" onclick="addNewExperience()">
     </div>
 </div>
-
+<br>
 <br>
 <button type="button" class="custom-button" onclick="education()">
     <i class="fas fa-chevron-down"></i>
-    <h2 style="margin-right: 170px;">Education</h2>
+    <h2 style="margin-right: 180px;">Education</h2>
 </button>
 
 <div id="container2" class="custom-container hidden">
@@ -465,11 +530,11 @@ input[type="submit"]:hover {
     </div>
 </div>
 
-
+<br>
 <br>
 <button type="button" class="custom-button" onclick="projects()">
     <i class="fas fa-chevron-down"></i>
-    <h2 style="margin-right: 170px;">Projects</h2>
+    <h2 style="margin-right: 205px;">Projects</h2>
 </button>
 
 <div id="container3" class="custom-container hidden">
@@ -684,6 +749,21 @@ input[type="submit"]:hover {
         var container = document.getElementById('profile');
         container.classList.toggle('hidden');
     }
+</script>
+
+<script>
+  function toggleSkills() {
+      var container = document.getElementById('skills');
+      container.classList.toggle('hidden');
+  }
+</script>
+
+
+<script>
+  function toggleSummary() {
+      var container = document.getElementById('summary');
+      container.classList.toggle('hidden');
+  }
 </script>
 
 <!--Dynamic text-->
