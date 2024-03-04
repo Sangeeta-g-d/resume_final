@@ -345,11 +345,11 @@ input[type="submit"]:hover {
                 <!-- Column 2: User Information -->
                 <div class="form-group">
                     <label for="firstName">First Name:</label>
-                    <input type="text" class="form-control" id="firstName" onkeyup="updateTextPosition()">
+                    <input type="text" class="form-control" id="firstName" onkeyup="updateText()">
                 </div>
                 <div class="form-group">
                     <label for="phoneNumber">Phone Number:</label>
-                    <input type="text" class="form-control" id="phoneNumber">
+                    <input type="text" class="form-control" id="phoneNumber" onkeyup="updateText()">
                 </div>
                 <div class="form-group">
                     <label for="phoneNumber">Linked URL:</label>
@@ -358,16 +358,16 @@ input[type="submit"]:hover {
             </div>
             <div class="column">
                 <div class="form-group">
-                    <label for="firstName">Last Name:</label>
-                    <input type="text" class="form-control" id="firstName">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" class="form-control" id="lastName" onkeyup="updateText()">
                 </div>
                 <div class="form-group">
-                    <label for="phoneNumber">Email:</label>
-                    <input type="email" class="form-control" id="phoneNumber">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" onkeyup="updateText()">
                 </div>
                 <div class="form-group">
-                    <label for="phoneNumber">Address</label>
-                    <textarea name="address" id="address" cols="30" class="form-control" rows="3"></textarea>
+                    <label for="address">Address:</label>
+                    <textarea name="address" id="address" cols="30" class="form-control" rows="3" onkeyup="updateText()"></textarea>
                 </div>
             </div>
             </div>  
@@ -689,7 +689,64 @@ input[type="submit"]:hover {
     }
 </script>
 
+<!--Dynamic text-->
+<script>
+    // Function to update the displayed name
+    function updateText() {
+        var firstName = document.getElementById("firstName").value;
+        var lastName = document.getElementById("lastName").value;
+        var phoneNumber = document.getElementById("phoneNumber").value;
+        var email = document.getElementById("email").value;
+        var address = document.getElementById("address").value;
 
+    // Update the content of the span elements
+        document.getElementById("FIELD_FNAM").textContent = firstName;
+        document.getElementById("FIELD_LNAM").textContent = lastName;
+        document.getElementById("FIELD_CPHN").textContent = phoneNumber;
+        document.getElementById("FIELD_EMAI").textContent = email;
+        document.getElementById("FIELD_ADDR").textContent = address;
+
+        
+
+        // Store the entered names in localStorage
+        localStorage.setItem("firstName", firstName);
+        localStorage.setItem("lastName", lastName);
+        localStorage.setItem("phoneNumber", phoneNumber);
+        localStorage.setItem("email", email);
+        localStorage.setItem("address", address);
+    }
+
+    // Function to retrieve stored names and update the displayed name  FIELD_CMN
+    window.onload = function() {
+        var firstName = localStorage.getItem("firstName");
+        var lastName = localStorage.getItem("lastName");
+        var phoneNumber = localStorage.getItem("phoneNumber");
+        var email = localStorage.getItem("email");
+        var address = localStorage.getItem("address");
+        var address = localStorage.getItem("address");
+        var address = localStorage.getItem("address");
+        var address = localStorage.getItem("address");
+
+        if (firstName && lastName) {
+            document.getElementById("FIELD_FNAM").textContent = firstName;
+            document.getElementById("FIELD_LNAM").textContent = lastName;
+            document.getElementById("FIELD_CPHN").textContent = phoneNumber;
+            document.getElementById("FIELD_EMAI").textContent = email;
+            document.getElementById("FIELD_ADDR").textContent = address;
+            document.getElementById("FIELD_ADDR").textContent = address;
+            document.getElementById("FIELD_ADDR").textContent = address;
+            document.getElementById("FIELD_ADDR").textContent = address;
+
+            // Update the input fields with stored values
+            document.getElementById("firstName").value = firstName;
+            document.getElementById("lastName").value = lastName;
+            document.getElementById("phoneNumber").value = phoneNumber;
+            document.getElementById("email").value = email;
+            document.getElementById("address").value = address;
+            
+        }
+    };
+</script>
 
 
 
@@ -927,17 +984,12 @@ input[type="submit"]:hover {
                         <div id="PARAGRAPH_EXPR_3e3aa949-f856-d1c2-ea5a-6ffc91424457" class="paragraph PARAGRAPH_EXPR firstparagraph  ">
                           <div class="clearfix doc-item">
                             <div class="singlecolumn">
-                              <span class="disp-blk expr-size" dependency="JSTD|EDDT">
-                                <span id="FIELD_JSTD" format="%m/%Y">
-                                  02/2017
-                                </span>
-                                <span dependency="JSTD+EDDT">
-                                  - 
-                                </span>
-                                <span id="FIELD_EDDT" format="%m/%Y">
-                                  Current
-                                </span>
-                              </span>
+                                <span class="disp-blk expr-size" dependency="JSTD|EDDT">
+                                    <span id="FIELD_CMN" format="%m/%Y">
+                                     xyz company
+                                    </span>
+                                    
+                                  </span>
                               <span class="disp-blk expr-size" dependency="JTIT|COMP|JCIT|JSTA|JCNT">
                                 <span id="FIELD_JTIT">
                                   Retail Sales Associate
@@ -968,6 +1020,17 @@ input[type="submit"]:hover {
                                   , 
                                 </span>
                                 <span id="FIELD_JCNT">
+                                </span>
+                              </span>
+                              <span class="disp-blk expr-size" dependency="JSTD|EDDT">
+                                <span id="FIELD_JSTD" format="%m/%Y">
+                                  02/2017
+                                </span>
+                                <span dependency="JSTD+EDDT">
+                                  - 
+                                </span>
+                                <span id="FIELD_EDDT" format="%m/%Y">
+                                  Current
                                 </span>
                               </span>
                               <span id="FIELD_JDES">
@@ -1249,35 +1312,7 @@ input[type="submit"]:hover {
       </div>
     </div>
 </div>
-<script>
-    // Function to update the position of the dynamically positioned text
-    function updateTextPosition() {
-        // Get the text entered into the input field
-        var text = document.getElementById('firstName').value;
 
-        // Get the coordinates (x, y) extracted from OCR (replace these with actual values)
-        var x = {{ name_x }};
-        var y = {{ name_y }};
-
-        // Get the container for dynamically positioned text
-        var textContainer = document.getElementById('dynamicTextContainer');
-
-        // Clear any existing text
-        textContainer.innerHTML = '';
-
-        // Create a new text element
-        var newTextElement = document.createElement('div');
-        newTextElement.textContent = text;
-
-        // Set the position of the text element
-        newTextElement.style.position = 'absolute';
-        newTextElement.style.left = x + 'px';
-        newTextElement.style.top = y + 'px';
-
-        // Append the text element to the container
-        textContainer.appendChild(newTextElement);
-    }
-</script>
     <div class="right-side1">
       
         <div class="zoom-controls">
