@@ -1,11 +1,14 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse,HttpResponseRedirect,HttpResponseForbidden,HttpResponseBadRequest
+from django.http import HttpResponse,HttpResponseRedirect,HttpResponseForbidden,HttpResponseBadRequest, JsonResponse
 from django.template import loader
 from django.contrib.auth import authenticate,login,logout
 import pdfplumber
 from .models import  Templates
 import PyPDF2
 import re
+from PIL import Image
+import pytesseract
+from django.views.decorators.csrf import csrf_exempt
 import json
 from django.urls import reverse
 import tempfile
@@ -23,7 +26,7 @@ import pytesseract
 #from generativeai import GenAIConfig, GenAI
 
 import openai
-
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 # Create your views here.
 
 """def get_and_use_gemini_api(prompt):
@@ -107,152 +110,56 @@ def resume(request, id):
     # Retrieve the image from the database
     data = Templates.objects.get(id=id)
     plain_temp1 = data.plain_template
-    image_path = str(data.plain_template)
-
-    # Load the image using OpenCV
-    image = cv2.imread(image_path)
-
-    # Convert the image to grayscale
-    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-    # Use pytesseract to do OCR on the grayscale image
-    text = pytesseract.image_to_string(gray_image)
-
-    # Search for the name within the extracted text
-    name = "Name"
-    name_location = text.find(name)
-    print('name_location',name_location)
-
-    if name_location != -1:
-        # Use some logic to determine the x, y coordinates of the name
-        # For example, you could count the number of characters before the name
-        # and assume that the name starts after those characters
-        x = text[:name_location].count('\n')  # Counting newlines for y-coordinate
-        y = text[:name_location].rfind('\n')  # Finding the last occurrence of newline for x-coordinate
-
-        # Output the coordinates
-        print("Name found at coordinates (x={}, y={})".format(x, y))
-    else:
-        print("Name not found in the text extracted from the image.")
-
-    # Pass the extracted coordinates or any other relevant data to the template
-    context = {'name_x': x, 'name_y': y,'plain_temp1':plain_temp1}  # Modify this context as per your requirements
+     # Pass the extracted coordinates or any other relevant data to the template
+    context = {'plain_temp1':plain_temp1}  # Modify this context as per your requirements
 
     # Render the template with the context
     return render(request, 'resume.html', context)
 
-'''
-def upload_file(request):
+@csrf_exempt  # Disable CSRF for demonstration purposes. Implement CSRF properly in a production environment.
+def update_image(request, id):
     if request.method == 'POST':
-        uploaded_file = request.FILES['pdf_file']
-        # Save the uploaded file to the database
-        uploaded_file_obj = UploadedFile.objects.create(file=uploaded_file)
-        # Extract emails from the PDF file
-        extracted_emails = extract_emails_from_pdf(uploaded_file_obj.file.path)
-        # Serialize the uploaded file and extracted emails as JSON
-        data_to_save = {     
-            'emails': extracted_emails
-        }
-        print(data_to_save)
-        extracted_email = data_to_save['emails'][0]
-        print(extracted_email)
-        serialized_data = json.dumps(extracted_email)
-        # Save the serialized data in the database
-        uploaded_file_obj.email = serialized_data
-        uploaded_file_obj.save()
-        id=uploaded_file_obj.id
-        print("iddddddddddddddddd",id)
-        return redirect(reverse('team', kwargs={'id': id}))
-  # Redirect to a success page
-    #return render(request, 'upload.html')
+        data = Templates.objects.get(id=id)
+        plain_temp_path = data.plain_template.path
 
-def extract_emails_from_pdf(file_path):
-    emails = []
-    with open(file_path, 'rb') as f:
-        pdf_reader = PyPDF2.PdfReader(f)
+        # Get coordinates for Name
+        name_coordinates = get_coordinates(plain_temp_path, "Name")
 
-        for page_num in range(len(pdf_reader.pages)):
+        # Get the entered value from the POST request
+        entered_value = request.POST.get('entered_value', '')
 
-            page = pdf_reader.pages[page_num]
+        # Update the image with the entered value at the correct coordinates
+        updated_image_path = update_image_with_value(plain_temp_path, name_coordinates, entered_value)
 
-            text = page.extract_text()
+        # Save the updated image to the model
+        with open(updated_image_path, 'rb') as updated_image_file:
+            data.plain_template.save('updated_image.png', File(updated_image_file))
 
-            # Use regular expressions to find email addresses
-            email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-            emails += re.findall(email_pattern, text)
-    return emails
+        # Return a success response
+        return JsonResponse({'success': True})
 
-def resume(request, id, u_id):
-    print("111111111111",id,u_id)
-    data = get_object_or_404(Templates, id=id)
-    plain_temp = data.template
-    print(plain_temp)
-    details = get_object_or_404(UploadedFile, id=u_id)
+    return JsonResponse({'error': 'Invalid request method'})
 
-    # Check if details already exist
-    existing_details = Ectracted_Resume_Details.objects.filter(UploadedFile_id=details)
-    if existing_details.exists():
-        # If details already exist, retrieve them and return the template
-        extracted_data = existing_details.first()
-        context = {'data': data, 'extracted_data': extracted_data,'plain_temp':plain_temp}
-        return render(request, 'resume.html', context)
+def get_coordinates(image_path, keyword):
+    # Open the image
+    img = Image.open(image_path)
+
+    # Perform OCR on the image
+    text = pytesseract.image_to_string(img)
+
+    # Find the position of the keyword in the text
+    start_index = text.find(keyword)
+    
+    if start_index != -1:
+        # If the keyword is found, get the bounding box (x, y, width, height)
+        x, y, _, _ = img.getbbox()
+        x += start_index * 10  # Adjust this value based on your font size and spacing
+        return x, y
     else:
-        if details.file.name.endswith('.pdf'):
-            with details.file.open('rb') as pdf_file:
-                pdf = pdfplumber.open(pdf_file)
-                text = ""
-                for page in pdf.pages:
-                    text += page.extract_text()
+        return None
 
-            # Extracting information using regular expressions
-            name_match = re.search(r'([A-Za-z]+) ([A-Za-z]+)', text)
-      
-            phone_match = re.search(r'\b\d{10}\b', text)
-            email_match = re.search(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', text)
-            experience_match = re.search(r'(?i)EXPERIENCE(.*?)(?=EDUCATION|INTERNSHIP|PROJECTS|LANGUAGES|DECLARATION|$)', text, re.DOTALL)
-            education_match = re.search(r'(?i)EDUCATION(.*?)(?=EXPERIENCE|INTERNSHIP|PROJECTS|LANGUAGES|DECLARATION|$)', text, re.DOTALL)
-            internships_match = re.search(r'(?i)INTERNSHIP(.*?)(?=EXPERIENCE|EDUCATION|PROJECTS|LANGUAGES|DECLARATION|$)', text, re.DOTALL)
-            projects_match = re.search(r'(?i)PROJECTS(.*?)(?=EXPERIENCE|EDUCATION|INTERNSHIP|LANGUAGES|DECLARATION|$)', text, re.DOTALL)
-            languages_match = re.search(r'(?i)LANGUAGES(.*?)(?=EXPERIENCE|EDUCATION|INTERNSHIP|PROJECTS|DECLARATION|$)', text, re.DOTALL)
 
-            # Extracted information
-            first_name = name_match.group(1) if name_match else ""
-            last_name = name_match.group(2) if name_match else ""
-            phone_number = phone_match.group() if phone_match else ""
-            print("phone_match",phone_number)
-            email = email_match.group() if email_match else ""
-            print("email_match",email)
-            experience = experience_match.group() if experience_match else ""
-            print("experience_match",experience)
-            education = education_match.group() if education_match else ""
-            print("education_match",education)
-            internships = internships_match.group() if internships_match else ""
-            print("internships_match",internships)
-            projects = projects_match.group() if projects_match else ""
-            print("projects_match",projects)
-            languages = languages_match.group() if languages_match else ""
-            print("languages_match",languages)
 
-            # Saving to the database
-            extracted_data = Ectracted_Resume_Details.objects.create(
-                UploadedFile_id=details,
-                first_name=first_name,
-                last_name=last_name,
-                phone_number=phone_number,
-                email=email,
-                experience=experience,
-                education=education,
-                internships=internships,
-                projects=projects,
-                langauges=languages
-            )
-            context = {'data': data, 'extracted_data': extracted_data,'plain_temp':plain_temp}
-            return render(request, 'resume.html', context)
-        else:
-            error_message = "The file is not a PDF."
-            return HttpResponse(error_message)
- '''       
- 
 openai.api_key = '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'
 
 def generate_enhanced_content(form_data):
