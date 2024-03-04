@@ -5,10 +5,11 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i&display=swap'); 
 
 .content_wrapper{
-    margin-left: 145px;
+    margin-left: 65px;
     padding: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
+   
 }
 
 li { 
@@ -60,7 +61,7 @@ ul {
 
 .document { 
     background-color: #fff; 
-    min-height: 83.5rem; 
+    min-height: 60rem;
     margin-bottom: 3rem; 
     box-sizing: content-box; 
     -webkit-user-select: none; 

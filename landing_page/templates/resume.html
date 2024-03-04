@@ -18,7 +18,7 @@
         height: 100vh;
     }
     .left-side {
-        flex: 1.2;
+        flex: 1.27;
         background: linear-gradient(to right, hsl(30, 100%, 100%), #f8f7f7);
         padding: 20px;
         border-radius: 5px;
@@ -119,18 +119,24 @@ input[type="submit"]:hover {
     background-color: #010e02;
 }
 .custom-button {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 400px; /* Adjust the width as needed */
-            background: linear-gradient(#e1ecf2, #d5ebf7);
-            color: #171616;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 400px;
+  height: 50px;
+  background: linear-gradient(#e1ecf2, #d5ebf7);
+  color: #171616;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.custom-button h3 {
+  margin-right: auto; /* Push the h3 to the right by taking up available space */
+  margin-left: 10px;  /* Push the h3 to the left by taking up available space */
+}
 
         .custom-button i {
             margin-left: 10px; /* Adjust the margin as needed */
@@ -256,6 +262,15 @@ input[type="submit"]:hover {
             flex-direction: column;
             align-items: center; /* Adjust the width as needed */
         }
+        .column2 {
+      width: 47%;
+      height: 100%;
+      /* Adjust the width as needed */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* Adjust the width as needed */
+    }
         .profile-image {
             border-radius: 50%;
             width: 100px; /* Adjust the size as needed */
@@ -316,7 +331,7 @@ input[type="submit"]:hover {
         <h2>User Details Form</h2>
         <button type="button" class="custom-button"  onclick="toggleContainer()">
             <i class="fas fa-chevron-down"></i>
-            <h2 style="margin-right: 70px;">Personal Information</h2>
+            <h3>Personal Information</h3>
         </button>
 
         <div id="profile" class="custom-container custom-container1 hidden">
@@ -371,9 +386,64 @@ input[type="submit"]:hover {
             </div>  
         </div>
 <br>
+<button type="button" class="custom-button" onclick="toggleSummary()">
+  <i class="fas fa-chevron-down"></i>
+  <h3>Profile Summary</h3>
+</button>
+<div id="summary" class="custom-container hidden">
+  <div class="experience-content">
+    <form>
+      <div class="form-group">
+        <label for="description1">Add Profile Summary:</label>
+        <textarea  class="form-control"  cols="45" rows="5"></textarea>
+      </div>
+    </form>
+  </div>
+</div>
+<br>
+<button type="button" class="custom-button" onclick="toggleSkills()">
+  <i class="fas fa-chevron-down"></i>
+  <h3>Skills</h3>
+</button>
+
+<div id="skills" class="custom-container custom-container1 hidden">
+  <div class="columns-wrapper">
+    <div class="column2" id="column1">
+      <!-- Column 1: Profile Image -->
+      <div class="form-group">
+        <label for="firstName">Skill (1):</label>
+        <input type="text" class="form-control" id="firstName" onkeyup="updateText()">
+      </div>
+      <div class="form-group" id="skillContainer1">
+        <label for="phoneNumber">Skill (3):</label>
+        <input type="text" class="form-control" id="phoneNumber" onkeyup="updateText()">
+      </div>
+
+      <div class="form-group">
+        <input type="submit" value="+ Add Skills" onclick="addInputFields('column1', 'column3')">
+      </div>
+
+    </div>
+
+    <div class="column2" id="column3">
+      <!-- Column 2: User Information -->
+      <div class="form-group">
+        <label for="firstName">Skill (2):</label>
+        <input type="text" class="form-control" id="firstName" onkeyup="updateText()">
+      </div>
+      <div class="form-group" id="skillContainer3">
+        <label for="phoneNumber">Skill (4):</label>
+        <input type="text" class="form-control" id="phoneNumber" onkeyup="updateText()">
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<br>
 <button type="button" class="custom-button" onclick="workexperience()">
     <i class="fas fa-chevron-down"></i>
-    <h2 style="margin-right: 110px;">Work Experience</h2>
+    <h3>Work Experience</h3>
 </button>
 
 
@@ -427,7 +497,7 @@ input[type="submit"]:hover {
 <br>
 <button type="button" class="custom-button" onclick="education()">
     <i class="fas fa-chevron-down"></i>
-    <h2 style="margin-right: 170px;">Education</h2>
+    <h3>Education</h3>
 </button>
 
 <div id="container2" class="custom-container hidden">
@@ -476,7 +546,7 @@ input[type="submit"]:hover {
 <br>
 <button type="button" class="custom-button" onclick="projects()">
     <i class="fas fa-chevron-down"></i>
-    <h2 style="margin-right: 170px;">Projects</h2>
+    <h3>Projects</h3>
 </button>
 
 <div id="container3" class="custom-container hidden">
@@ -514,8 +584,55 @@ input[type="submit"]:hover {
     <div class="form-group">
         <input type="submit" value="+ Add New Project" onclick="addNewProject()">
     </div>
+</div><br>
+<button type="button" class="custom-button" onclick="toggleAchievements()">
+  <i class="fas fa-chevron-down"></i>
+  <h3>Achievements</h3>
+</button>
+<div id="achievements" class="custom-container hidden">
+  <div class="experience-content">
+    <form>
+      <div class="form-group">
+        <label for="description1">Add Achievements:</label>
+        <textarea id="description1" class="form-control" name="description1" cols="45" rows="5"></textarea>
+      </div>
+    </form>
+  </div>
 </div>
+<br>
+<button type="button" class="custom-button" onclick="toggleLanguages()">
+  <i class="fas fa-chevron-down"></i>
+  <h3>Languages Known</h3>
+</button>
 
+<div id="languages" class="custom-container custom-container1 hidden">
+  <div class="columns-wrapper">
+    <div class="column2" id="column1">
+      <!-- Column 1: Profile Image -->
+      <div class="form-group" id="languageContainer1">
+        <label for="firstName">Language (1):</label>
+        <input type="text" class="form-control" id="firstName" >
+      </div>
+      
+
+      <div class="form-group">
+        <input type="submit" value="+ Add Languages" onclick="addLanguageInputFields('column1', 'column3')">
+      </div>
+
+    </div>
+
+    <div class="column2" id="column3">
+      <!-- Column 2: User Information -->
+      <div class="form-group" id="languageContainer3">
+        <label for="firstName">Language (2):</label>
+        <input type="text" class="form-control" id="firstName" >
+      </div>
+     
+    </div>
+
+  </div>
+</div>
+<br>
 </div>
 <script>
     function education() {
@@ -713,7 +830,102 @@ function addNewExperience() {
         container.classList.toggle('hidden');
     }
 </script>
+<script>
+  function toggleSummary() {
+    var container = document.getElementById('summary');
+    container.classList.toggle('hidden');
+  }
+  function toggleAchievements() {
+    var container = document.getElementById('achievements');
+    container.classList.toggle('hidden');
+  }
+</script>
+<script>
+  function toggleSkills() {
+    var container = document.getElementById('skills');
+    container.classList.toggle('hidden');
+  }
 
+  function toggleLanguages() {
+    var container = document.getElementById('languages');
+    container.classList.toggle('hidden');
+  }
+</script>
+<script>
+  var skillCounter1 = 3; // Initial counter for column1 (odd)
+  var skillCounter2 = 4; // Initial counter for column3 (even)
+
+  function addInputFields(columnId1, columnId2) {
+    skillCounter1 += 2; // Increment by 2 to get odd numbers
+    skillCounter2 += 2; // Increment by 2 to get even numbers
+
+    // Create new input field
+    var newInput = document.createElement("input");
+    newInput.type = "text";
+    newInput.className = "form-control";
+    newInput.setAttribute("onkeyup", "updateText()");
+
+    // Create new label
+    var newLabel = document.createElement("label");
+
+    // Get the specified containers and insert new label and input field
+    var container1 = document.getElementById("skillContainer1");
+    newLabel.textContent = "Skill (" + skillCounter1 + "):";
+    newInput.id = "skillInput" + skillCounter1;
+    console.log(newInput.id)
+    container1.appendChild(newLabel.cloneNode(true));
+    container1.appendChild(newInput.cloneNode(true));
+
+    var container3 = document.getElementById("skillContainer3");
+    newLabel.textContent = "Skill (" + skillCounter2 + "):";
+    newInput.id = "skillInput" + skillCounter2;
+    console.log(newInput.id)
+    container3.appendChild(newLabel.cloneNode(true));
+    container3.appendChild(newInput.cloneNode(true));
+  }
+
+  function updateText() {
+    // Your updateText function logic here
+  }
+</script>
+
+<script>
+var languageCounter1 = 1; // Initial counter for column1 (odd)
+var languageCounter2 = 2; // Initial counter for column3 (even)
+
+function addLanguageInputFields(columnId1, columnId2) {
+languageCounter1 += 2; // Increment by 2 to get odd numbers
+languageCounter2 += 2; // Increment by 2 to get even numbers
+
+// Create new input field
+var newInput = document.createElement("input");
+newInput.type = "text";
+newInput.className = "form-control";
+newInput.setAttribute("onkeyup", "updateText()");
+
+// Create new label
+var newLabel = document.createElement("label");
+
+// Get the specified containers and insert new label and input field
+var container1 = document.getElementById("languageContainer1");
+newLabel.textContent = "Language (" + languageCounter1 + "):";
+newInput.id = "languageInput" + languageCounter1;
+console.log(newInput.id)
+container1.appendChild(newLabel.cloneNode(true));
+container1.appendChild(newInput.cloneNode(true));
+
+var container3 = document.getElementById("languageContainer3");
+newLabel.textContent = "Language (" + languageCounter2 + "):";
+newInput.id = "languageInput" + languageCounter2;
+console.log(newInput.id)
+container3.appendChild(newLabel.cloneNode(true));
+container3.appendChild(newInput.cloneNode(true));
+}
+
+function updateText() {
+// Your updateText function logic here
+}
+</script>
 <!--Dynamic text-->
 <script>
   // Function to update the displayed name
@@ -853,7 +1065,7 @@ function addNewExperience() {
 
 <div class="right-side" style="position: relative; overflow-y: auto;">
   <div class="content_wrapper">
-    <div class="document doc-root fontsize fontface vmargins hmargins pagesize skn-mld8 MLD8 RNA snipcss-ImqcD" docskinwidth="612">
+    <div style="width: 880px;" class="document doc-root fontsize fontface vmargins hmargins pagesize skn-mld8 MLD8 RNA snipcss-ImqcD" docskinwidth="612">
         <div id="CONTAINER_PARENT_0" class="top-section">
           <div id="CONTAINER_0">
             <div data-react-beautiful-dnd-draggable="22" class="sortable-item section-container SortableItem-sibling name-contact ">
@@ -1346,6 +1558,36 @@ function addNewExperience() {
           </div>
         </div>
       </div>
+      <p>sdfghbnj</p>
+      <br>
+      <br>
+      <p>sdfghbnj</p>
+      <br>
+      <br>
+      <p>sdfghbnj</p>
+      <br>
+      <br>
+      <p>sdfghbnj</p>
+      <br>
+      <br>
+      <p>sdfghbnj</p>
+      <br>
+      <br>
+      <p>sdfghbnj</p>
+      <br>
+      <br>
+      <p>sdfghbnj</p>
+      <br>
+      <br>
+      <p>sdfghbnj</p>
+      <br>
+      <br>
+      <p>sdfghbnj</p>
+      <br>
+      <br>
+      <p>sdfghbnj</p>
+      <br>
+      <br>
       
     </div>
 </div>
