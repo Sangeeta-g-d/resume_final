@@ -107,7 +107,7 @@ def admin_logout(request):
     return redirect('/admin_login')
 
 def resume(request, id):
-    print(id)
+    print("iiiiiiiiiiiiiiiiiiiiiiiii",id)
     
      # Pass the extracted coordinates or any other relevant data to the template
     context = {'id':id}  # Modify this context as per your requirements
