@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i&display=swap'); 
 
 .content_wrapper{
-    margin-left: 65px;
+    margin-left: 75px;
     padding: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -17,6 +17,7 @@ li {
     padding: 0; 
     border: 0; 
     outline: 0; 
+    font-size: 16px;
     vertical-align: baseline; 
     background: transparent;
 } 
@@ -293,7 +294,7 @@ span {
 } 
 
 .skn-mld8 .sectiontitle  { 
-    font-size: 16px; 
+    font-size: 19px; 
     line-height: 18px;
 } 
 
@@ -318,6 +319,7 @@ span {
 .skn-mld8 .firstparagraph  { 
     margin-top: 0; 
     padding-top: 0!important;
+    font-size: larger;
 } 
 
 .paragraph  { 
@@ -474,6 +476,7 @@ button,[type="button"]  {
     letter-spacing: 1px; 
     padding: 0; 
     padding-bottom: 5px;
+    
 } 
 
 .skn-mld8 .name  { 
@@ -501,6 +504,9 @@ button,[type="button"]  {
 
 .skn-mld8 .singlecolumn  { 
     margin-left: 165px;
+    font-size: 16px;
+    line-height: 160%;
+    margin-top: 5px;
 } 
 
 .skn-mld8 .singlecolumn ,.skn-mld8 .maincolumn  { 
@@ -629,8 +635,8 @@ p {
 } 
 
 .skn-mld8 .expr-size  { 
-    font-size: 12px; 
-    line-height: 15px;
+    font-size: 16px; 
+    line-height: 160%;
 } 
 
 .skn-mld8 .displayNoneThisField  { 
@@ -675,6 +681,7 @@ p {
 
 .skn-mld8 .address li .email  { 
     word-break: break-all;
+    font-size: 16px;
 } 
 
 .skn-mld8 .expr-sec ul  { 
