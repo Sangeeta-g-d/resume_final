@@ -394,8 +394,8 @@ input[type="submit"]:hover {
   <div class="experience-content">
     <form>
       <div class="form-group">
-        <label for="description1">Add Profile Summary:</label>
-        <textarea  class="form-control"  cols="45" rows="5"></textarea>
+        <label for="summaryTextArea">Add Profile Summary:</label>
+        <textarea class="form-control" id="summaryTextArea" name="summary" cols="45" rows="5" onkeyup="updateSummaryText()"></textarea>
       </div>
     </form>
   </div>
@@ -928,6 +928,12 @@ function updateText() {
 </script>
 <!--Dynamic text-->
 <script>
+  function updateSummaryText() {
+    var summary = document.getElementById("summaryTextArea").value;
+    document.getElementById("FIELD_FRFM").textContent = summary;
+    localStorage.setItem("summary", summary);
+}
+
   // Function to update the displayed name
   function updateText() {
       var firstName = document.getElementById("firstName").value;
@@ -1009,6 +1015,7 @@ function updateText() {
     var fromDate = localStorage.getItem("fromDate");
     var toDate = localStorage.getItem("toDate");
     var description = localStorage.getItem("description");
+    var summary = localStorage.getItem("summary");
 
     if (firstName && lastName) {
         // Update the displayed name
@@ -1026,6 +1033,13 @@ function updateText() {
         document.getElementById("address").value = address;
         document.getElementById("linkedin").value = linkedin;
     }
+    if (summary) {
+        // Populate the textarea with the stored summary
+        document.getElementById("summaryTextArea").value = summary;
+        // Update the displayed summary
+        document.getElementById("FIELD_FRFM").textContent = summary;
+    }
+
 
     if (company && jobTitle) {
         // Update the displayed experience
@@ -1034,7 +1048,17 @@ function updateText() {
         document.getElementById("FIELD_JCIT").textContent = city;
         document.getElementById("FIELD_JSTA").textContent = country;
         document.getElementById("FIELD_JSTD").textContent = fromDate;
-        document.getElementById("FIELD_EDDT").textContent = toDate;
+        
+        // Check if 'Present' checkbox is checked
+        var presentChecked = document.getElementById("present1").checked;
+
+        if (presentChecked) {
+            // If 'Present' checkbox was checked, update the displayed 'To' field to show 'Present'
+            document.getElementById("FIELD_EDDT").textContent = "Present";
+        } else {
+            // If 'Present' checkbox was not checked, update the displayed 'To' field with the stored value
+            document.getElementById("FIELD_EDDT").textContent = toDate;
+        }
 
         // Parse the stored description and format it correctly
         var descriptionList = "<ul>";
@@ -1053,10 +1077,14 @@ function updateText() {
         document.getElementById("city1").value = city;
         document.getElementById("country1").value = country;
         document.getElementById("from1").value = fromDate;
-        document.getElementById("to1").value = toDate;
+        // Don't update 'To' input field value if 'Present' checkbox is checked
+        if (!presentChecked) {
+            document.getElementById("to1").value = toDate;
+        }
         document.getElementById("description1").value = description;
     }
 };
+
 
 </script>
 
@@ -1065,7 +1093,7 @@ function updateText() {
 
 <div class="right-side" style="position: relative; overflow-y: auto;">
   <div class="content_wrapper">
-    <div style="width: 880px;" class="document doc-root fontsize fontface vmargins hmargins pagesize skn-mld8 MLD8 RNA snipcss-ImqcD" docskinwidth="612">
+    <div style="width: 880px; " class="document doc-root fontsize fontface vmargins hmargins pagesize skn-mld8 MLD8 RNA snipcss-ImqcD" docskinwidth="612">
         <div id="CONTAINER_PARENT_0" class="top-section">
           <div id="CONTAINER_0">
             <div data-react-beautiful-dnd-draggable="22" class="sortable-item section-container SortableItem-sibling name-contact ">
@@ -1558,36 +1586,7 @@ function updateText() {
           </div>
         </div>
       </div>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
+    
       
     </div>
 </div>
