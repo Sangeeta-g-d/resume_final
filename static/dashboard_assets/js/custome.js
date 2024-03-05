@@ -1,3 +1,7 @@
+  // Get the id passed from the view
+  
+
+
 function toggleContainer() {
     var container = document.getElementById('profile');
     container.classList.toggle('hidden');
