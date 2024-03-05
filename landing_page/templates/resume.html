@@ -337,7 +337,8 @@
 
     <div class="right-side" style="position: relative; overflow-y: auto;">
       <div class="content_wrapper">
-        <div style="width: 595px; height: 842px; position: relative; background: white">
+        {% if id == 'temp1' %}
+        <div id="{{ id }}" style="width: 595px; height: 842px; position: relative; background: white">
           <div style="width: 245px; height: 362px; left: 318px; top: 232px; position: absolute">
             <div
               style="left: 0px; top: 0px; position: absolute; color: #CA6D18; font-size: 14px; font-family: Prata; font-weight: 400; line-height: 20px; word-wrap: break-word">
@@ -471,7 +472,8 @@
               src="https://via.placeholder.com/104x104" />
           </div>
         </div>
-
+        
+      {% endif %}
       </div>
     </div>
 
@@ -485,7 +487,6 @@
   </div>
 
   
-
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="/static/dashboard_assets/js/custome.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

@@ -107,11 +107,10 @@ def admin_logout(request):
     return redirect('/admin_login')
 
 def resume(request, id):
-    # Retrieve the image from the database
-    data = Templates.objects.get(id=id)
-    plain_temp1 = data.plain_template
+    print("iiiiiiiiiiiiiiiiiiiiiii",id)
+    
      # Pass the extracted coordinates or any other relevant data to the template
-    context = {'plain_temp1':plain_temp1}  # Modify this context as per your requirements
+    context = {'id':id}  # Modify this context as per your requirements
 
     # Render the template with the context
     return render(request, 'resume.html', context)
