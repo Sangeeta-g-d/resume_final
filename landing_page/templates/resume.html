@@ -1,268 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Two Part HTML Page</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="stylesheet" href="/static/dashboard_assets/css/template1.css">
-<style>
-   
-    body, html {
-        margin: 0;
-        padding: 0;
-        height: 100%;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two Part HTML Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="/static/dashboard_assets/css/template1.css">
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
     }
+
     .container {
-        display: flex;
-        height: 100vh;
+      display: flex;
+      height: 100vh;
     }
+
     .left-side {
-        flex: 1.27;
-        background: linear-gradient(to right, hsl(30, 100%, 100%), #f8f7f7);
-        padding: 20px;
-        border-radius: 5px;
-        overflow-y: auto; /* Enable vertical scrollbar */
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      flex: 1.27;
+      background: linear-gradient(to right, hsl(30, 100%, 100%), #f8f7f7);
+      padding: 20px;
+      border-radius: 5px;
+      overflow-y: auto;
+      /* Enable vertical scrollbar */
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     }
+
     .right-side {
-    flex: 2;
-    
-    background-color: #bf7d7d;
-    overflow-y: auto; /* Enable vertical scrollbar */
-    /* Set a maximum height */
-}
+      flex: 2;
+
+      background-color: #bf7d7d;
+      overflow-y: auto;
+      /* Enable vertical scrollbar */
+      /* Set a maximum height */
+    }
 
     .right-side1 {
-        flex: 0.6;
-        background-color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 30px;
-        margin-top: 30px;
-       
+      flex: 0.6;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+      margin-top: 30px;
+
     }
+
     .user-form {
-        max-width: 400px;
-        margin: 0 auto;
-        padding: 20px;
-    border-radius: 30px;
-    
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 30px;
+
     }
 
     label {
-    font-weight: bold;
-}
+      font-weight: bold;
+    }
+
     .user-form label,
     .user-form input,
     .user-form textarea {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 8px;
-        margin-bottom: 10px;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px;
+      margin-bottom: 10px;
     }
+
     .user-form textarea {
-        resize: vertical; /* Allow vertical resizing of textarea */
+      resize: vertical;
+      /* Allow vertical resizing of textarea */
     }
+
     img {
-        max-width: 100%;
-        max-height: 100%;
+      max-width: 100%;
+      max-height: 100%;
     }
 
     .right-side {
-    position: relative;
-    overflow: hidden;
-}
+      position: relative;
+      overflow: hidden;
+    }
 
-.right-side img {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    transition: box-shadow 0.3s ease;
-}
+    .right-side img {
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      transition: box-shadow 0.3s ease;
+    }
 
-.right-side:hover img {
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
-}
-.zoomable {
-    transition: transform 0.5s ease;
-}
+    .right-side:hover img {
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+    }
 
-.zoom-controls {
-    margin-top: 10px;
-}
+    .zoomable {
+      transition: transform 0.5s ease;
+    }
 
-#zoomRange {
-    width: 100%;
-}
+    .zoom-controls {
+      margin-top: 10px;
+    }
+
+    #zoomRange {
+      width: 100%;
+    }
+
     input[type="text"],
-input[type="email"],
-input[type="number"],
+    input[type="email"],
+    input[type="number"],
 
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #363434;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-}
-input[type="submit"] {
-    background-color: #343438;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #363434;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    }
 
-input[type="submit"]:hover {
-    background-color: #010e02;
-}
-.custom-button {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 400px;
-  height: 50px;
-  background: linear-gradient(#e1ecf2, #d5ebf7);
-  color: #171616;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+    input[type="submit"] {
+      background-color: #343438;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
 
-.custom-button h3 {
-  margin-right: auto; /* Push the h3 to the right by taking up available space */
-  margin-left: 10px;  /* Push the h3 to the left by taking up available space */
-}
+    input[type="submit"]:hover {
+      background-color: #010e02;
+    }
 
-        .custom-button i {
-            margin-left: 10px; /* Adjust the margin as needed */
-        }
+    .custom-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 400px;
+      height: 50px;
+      background: linear-gradient(#e1ecf2, #d5ebf7);
+      color: #171616;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-        .custom-button:hover {
-            background: linear-gradient(#ffffff, #9dd6f3);
-        }
+    .custom-button h3 {
+      margin-right: auto;
+      /* Push the h3 to the right by taking up available space */
+      margin-left: 10px;
+      /* Push the h3 to the left by taking up available space */
+    }
 
-        .custom-container {
-            width: 360px; /* Adjust the width as needed */
-            /* Adjust the height as needed */
-            background: linear-gradient(#ffffff, #9dd6f3);
-            color: #171616;
-            padding: 20px;
-            border-radius: 20px;
-            margin-top: 10px; /* Adjust the margin as needed */
-            transition: height 0.3s ease;
-             /* Add transition for smooth height change */
-        }
-        .custom-container2 {
-            width: 320px; /* Adjust the width as needed */
-            /* Adjust the height as needed */
-            background: linear-gradient(#ffffff, #9dd6f3);
-            color: #171616;
-            padding: 20px;
-            border-radius: 20px;
-            margin-top: 10px; /* Adjust the margin as needed */
-            transition: height 0.3s ease;
-             /* Add transition for smooth height change */
-        }
+    .custom-button i {
+      margin-left: 10px;
+      /* Adjust the margin as needed */
+    }
 
-        .custom-container p {
-            margin: 0;
-        }
+    .custom-button:hover {
+      background: linear-gradient(#ffffff, #9dd6f3);
+    }
 
-        /* Hide the container by default */
-        .custom-container.hidden {
-            height: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        
+    .custom-container {
+      width: 360px;
+      /* Adjust the width as needed */
+      /* Adjust the height as needed */
+      background: linear-gradient(#ffffff, #9dd6f3);
+      color: #171616;
+      padding: 20px;
+      border-radius: 20px;
+      margin-top: 10px;
+      /* Adjust the margin as needed */
+      transition: height 0.3s ease;
+      /* Add transition for smooth height change */
+    }
+
+    .custom-container2 {
+      width: 320px;
+      /* Adjust the width as needed */
+      /* Adjust the height as needed */
+      background: linear-gradient(#ffffff, #9dd6f3);
+      color: #171616;
+      padding: 20px;
+      border-radius: 20px;
+      margin-top: 10px;
+      /* Adjust the margin as needed */
+      transition: height 0.3s ease;
+      /* Add transition for smooth height change */
+    }
+
+    .custom-container p {
+      margin: 0;
+    }
+
+    /* Hide the container by default */
+    .custom-container.hidden {
+      height: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
     /* Adjust as needed for responsiveness */
-    .container1  {
-    border: 1px solid #868788;
-    padding: 20px;
-    width: 350px;
-    height: 200px;
-    overflow: auto;
-    border-radius: 20px;
-    background-color: #9b9d9e;
-  }
+    .container1 {
+      border: 1px solid #868788;
+      padding: 20px;
+      width: 350px;
+      height: 200px;
+      overflow: auto;
+      border-radius: 20px;
+      background-color: #9b9d9e;
+    }
 
 
 
     .custom-button i {
-        margin-right: 10px;
+      margin-right: 10px;
     }
 
-   
+
 
     .hidden {
-        display: none;
+      display: none;
     }
 
     .form-group {
-            margin-bottom: 15px;
-            width: 100%;
-            box-sizing: border-box;
-            position: relative;
-        }
+      margin-bottom: 15px;
+      width: 100%;
+      box-sizing: border-box;
+      position: relative;
+    }
 
-        label {
-            display: block;
-            font-weight:lighter;
-            margin-bottom: 5px;
-            font-size: 14px; /* Adjust the font size as needed */
-        }
+    label {
+      display: block;
+      font-weight: lighter;
+      margin-bottom: 5px;
+      font-size: 14px;
+      /* Adjust the font size as needed */
+    }
 
-        .form-control {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            opacity: 0.5; /* Adjust the transparency as needed */
-            color: #070606; /* Text color when not focused */
-        }
+    .form-control {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      opacity: 0.5;
+      /* Adjust the transparency as needed */
+      color: #070606;
+      /* Text color when not focused */
+    }
 
-        .placeholder-label {
-    position: absolute;
-    top: 10px; /* Adjust vertically as needed */
-    left: 10px; /* Adjust horizontally as needed */
-    pointer-events: none;
-    color: #070606; /* Color for the placeholder text */
-    transition: all 0.3s ease-in-out;
-}
+    .placeholder-label {
+      position: absolute;
+      top: 10px;
+      /* Adjust vertically as needed */
+      left: 10px;
+      /* Adjust horizontally as needed */
+      pointer-events: none;
+      color: #070606;
+      /* Color for the placeholder text */
+      transition: all 0.3s ease-in-out;
+    }
 
-.form-control:focus {
-            outline: none;
-            border-color: #4CAF50;
-            color: #000; /* Text color when focused */
-            box-shadow: 0 0 15px rgba(71, 88, 71, 0.5); /* Adjust the shadow as needed */
-        }
+    .form-control:focus {
+      outline: none;
+      border-color: #4CAF50;
+      color: #000;
+      /* Text color when focused */
+      box-shadow: 0 0 15px rgba(71, 88, 71, 0.5);
+      /* Adjust the shadow as needed */
+    }
 
 
-        .custom-container1 {
-            display: flex;
-            justify-content: space-between;
-            transition: height 0.3s ease;
-            overflow: hidden;
-        }
-        .custom-container1 p {
-            margin: 0;
-            text-align: center;
-        }
+    .custom-container1 {
+      display: flex;
+      justify-content: space-between;
+      transition: height 0.3s ease;
+      overflow: hidden;
+    }
 
-        .column {
-            width: 30%; 
-            height: 100%;/* Adjust the width as needed */
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Adjust the width as needed */
-        }
-        .column2 {
+    .custom-container1 p {
+      margin: 0;
+      text-align: center;
+    }
+
+    .column {
+      width: 30%;
+      height: 100%;
+      /* Adjust the width as needed */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* Adjust the width as needed */
+    }
+
+    .column2 {
       width: 47%;
       height: 100%;
       /* Adjust the width as needed */
@@ -271,376 +306,400 @@ input[type="submit"]:hover {
       align-items: center;
       /* Adjust the width as needed */
     }
-        .profile-image {
-            border-radius: 50%;
-            width: 100px; /* Adjust the size as needed */
-            height: 100px; /* Adjust the size as needed */
-            object-fit: cover;
-        }
-        .edit-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px 16px;
-            background-color: #4e5050;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .edit-button:hover {
-            background-color: #9b9d9e;
-        }
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            animation: slideIn 0.5s ease-in-out;
-        }
 
-        @keyframes slideIn {
-            from {
-                top: -100%;
-            }
-            to {
-                top: 0;
-            }
-        }
-        .columns-wrapper {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap; /* Allow columns to wrap to the next row if needed */
+    .profile-image {
+      border-radius: 50%;
+      width: 100px;
+      /* Adjust the size as needed */
+      height: 100px;
+      /* Adjust the size as needed */
+      object-fit: cover;
+    }
 
-}
+    .edit-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 17px;
+      background-color: #4e5050;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
+    .edit-button:hover {
+      background-color: #9b9d9e;
+    }
 
-</style>
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      animation: slideIn 0.5s ease-in-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        top: -100%;
+      }
+
+      to {
+        top: 0;
+      }
+    }
+
+    .columns-wrapper {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      /* Allow columns to wrap to the next row if needed */
+
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="container">
+  <div class="container">
     <div class="left-side">
-        <h2>User Details Form</h2>
-        <button type="button" class="custom-button"  onclick="toggleContainer()">
-            <i class="fas fa-chevron-down"></i>
-            <h3>Personal Information</h3>
-        </button>
+      <h2>User Details Form</h2>
+      <button type="button" class="custom-button" onclick="toggleContainer()">
+        <i class="fas fa-chevron-down"></i>
+        <h3>Personal Information</h3>
+      </button>
 
-        <div id="profile" class="custom-container custom-container1 hidden">
-            <div class="columns-wrapper">
-            <div class="column">
-                <!-- Column 1: Profile Image -->
-                <img src="/static/dashboard_assets/img/team-2.jpg" alt="Profile Image" class="profile-image"><br>
-                <button class="edit-button" onclick="openPopup()">
-                    <i class="fas fa-pencil-alt"></i>&nbsp;
-                    Edit
-                </button><br>
-              
-        
-                <div id="imagePopup" class="popup">
-                    <!-- Popup content -->
-                    <label for="imageInput">Image:</label>
-                    <input type="file" id="imageInput" accept="image/*">
-                    <button onclick="closePopup()">Close</button>
-                </div>
-               
+      <div id="profile" class="custom-container custom-container1 hidden">
+        <div class="columns-wrapper">
+          <div class="column">
+            <!-- Column 1: Profile Image -->
+            <img src="/static/dashboard_assets/img/team-2.jpg" alt="Profile Image" class="profile-image"><br>
+            <button class="edit-button" onclick="openPopup()">
+              <i class="fas fa-pencil-alt"></i>&nbsp;
+              Edit
+            </button><br>
+
+
+            <div id="imagePopup" class="popup">
+              <!-- Popup content -->
+              <label for="imageInput">Image:</label>
+              <input type="file" id="imageInput" accept="image/*">
+              <button onclick="closePopup()">Close</button>
             </div>
-          
-            <div class="column">
-                <!-- Column 2: User Information -->
-                <div class="form-group">
-                    <label for="firstName">First Name:</label>
-                    <input type="text" class="form-control" id="firstName" onkeyup="updateText()">
-                </div>
-                <div class="form-group">
-                    <label for="phoneNumber">Phone Number:</label>
-                    <input type="text" class="form-control" id="phoneNumber" onkeyup="updateText()">
-                </div>
-                <div class="form-group">
-                    <label for="phoneNumber">Linked URL:</label>
-                    <input type="text" class="form-control" id="linkedin" onkeyup="updateText()">
-                </div>
-            </div>
-            <div class="column">
-                <div class="form-group">
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" class="form-control" id="lastName" onkeyup="updateText()">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" onkeyup="updateText()">
-                </div>
-                <div class="form-group">
-                    <label for="address">Address:</label>
-                    <textarea name="address" id="address" cols="30" class="form-control" rows="3" onkeyup="updateText()"></textarea>
-                </div>
-            </div>
-            </div>  
-        </div>
-<br>
-<button type="button" class="custom-button" onclick="toggleSummary()">
-  <i class="fas fa-chevron-down"></i>
-  <h3>Profile Summary</h3>
-</button>
-<div id="summary" class="custom-container hidden">
-  <div class="experience-content">
-    <form>
-      <div class="form-group">
-        <label for="description1">Add Profile Summary:</label>
-        <textarea  class="form-control"  cols="45" rows="5"></textarea>
-      </div>
-    </form>
-  </div>
-</div>
-<br>
-<button type="button" class="custom-button" onclick="toggleSkills()">
-  <i class="fas fa-chevron-down"></i>
-  <h3>Skills</h3>
-</button>
 
-<div id="skills" class="custom-container custom-container1 hidden">
-  <div class="columns-wrapper">
-    <div class="column2" id="column1">
-      <!-- Column 1: Profile Image -->
-      <div class="form-group">
-        <label for="firstName">Skill (1):</label>
-        <input type="text" class="form-control" id="firstName" onkeyup="updateText()">
-      </div>
-      <div class="form-group" id="skillContainer1">
-        <label for="phoneNumber">Skill (3):</label>
-        <input type="text" class="form-control" id="phoneNumber" onkeyup="updateText()">
-      </div>
-
-      <div class="form-group">
-        <input type="submit" value="+ Add Skills" onclick="addInputFields('column1', 'column3')">
-      </div>
-
-    </div>
-
-    <div class="column2" id="column3">
-      <!-- Column 2: User Information -->
-      <div class="form-group">
-        <label for="firstName">Skill (2):</label>
-        <input type="text" class="form-control" id="firstName" onkeyup="updateText()">
-      </div>
-      <div class="form-group" id="skillContainer3">
-        <label for="phoneNumber">Skill (4):</label>
-        <input type="text" class="form-control" id="phoneNumber" onkeyup="updateText()">
-      </div>
-
-    </div>
-
-  </div>
-</div>
-<br>
-<button type="button" class="custom-button" onclick="workexperience()">
-    <i class="fas fa-chevron-down"></i>
-    <h3>Work Experience</h3>
-</button>
-
-
-<div id="container1" class="custom-container">
-  <div class="experience-section">
-      <div class="experience-header" onclick="toggleExperience(this)">
-          <i class="fas fa-chevron-down"></i>
-          <p><b>Experience 1</b></p>
-      </div>
-      <div class="experience-content">
-          <form id="experience1">
-            <div class="form-group">
-              <input type="text" id="company1" class="form-control" placeholder="Company Name" name="company1" style="height: 30px;" onkeyup="updateExperience()">
           </div>
-          <div class="form-group">
-            <input type="text" id="jobtitle1" class="form-control" placeholder="Designation" name="jobtitle1" style="height: 30px;" onkeyup="updateExperience()">
+
+          <div class="column">
+            <!-- Column 2: User Information -->
+            <div class="form-group">
+              <label for="firstName">First Name:</label>
+              <input type="text" class="form-control" id="firstName" onkeyup="updateText()">
+            </div>
+            <div class="form-group">
+              <label for="phoneNumber">Phone Number:</label>
+              <input type="text" class="form-control" id="phoneNumber" onkeyup="updateText()">
+            </div>
+            <div class="form-group">
+              <label for="phoneNumber">Linked URL:</label>
+              <input type="text" class="form-control" id="linkedin" onkeyup="updateText()">
+            </div>
+          </div>
+          <div class="column">
+            <div class="form-group">
+              <label for="lastName">Last Name:</label>
+              <input type="text" class="form-control" id="lastName" onkeyup="updateText()">
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" class="form-control" id="email" onkeyup="updateText()">
+            </div>
+            <div class="form-group">
+              <label for="address">Address:</label>
+              <textarea name="address" id="address" cols="30" class="form-control" rows="3"
+                onkeyup="updateText()"></textarea>
+            </div>
+          </div>
         </div>
-          
+      </div>
+      <br>
+      <button type="button" class="custom-button" onclick="toggleSummary()">
+        <i class="fas fa-chevron-down"></i>
+        <h3>Profile Summary</h3>
+      </button>
+      <div id="summary" class="custom-container hidden">
+        <div class="experience-content">
+          <form>
+            <div class="form-group">
+              <label for="description1">Add Profile Summary:</label>
+              <textarea class="form-control" cols="45" rows="5"></textarea>
+            </div>
+          </form>
+        </div>
+      </div>
+      <br>
+      <button type="button" class="custom-button" onclick="toggleSkills()">
+        <i class="fas fa-chevron-down"></i>
+        <h3>Skills</h3>
+      </button>
+
+      <div id="skills" class="custom-container custom-container1 hidden">
+        <div class="columns-wrapper">
+          <div class="column2" id="column1">
+            <!-- Column 1: Profile Image -->
+            <div class="form-group">
+              <label for="firstName">Skill (1):</label>
+              <input type="text" class="form-control" id="firstName" onkeyup="updateText()">
+            </div>
+            <div class="form-group" id="skillContainer1">
+              <label for="phoneNumber">Skill (3):</label>
+              <input type="text" class="form-control" id="phoneNumber" onkeyup="updateText()">
+            </div>
+
+            <div class="form-group">
+              <input type="submit" value="+ Add Skills" onclick="addInputFields('column1', 'column3')">
+            </div>
+
+          </div>
+
+          <div class="column2" id="column3">
+            <!-- Column 2: User Information -->
+            <div class="form-group">
+              <label for="firstName">Skill (2):</label>
+              <input type="text" class="form-control" id="firstName" onkeyup="updateText()">
+            </div>
+            <div class="form-group" id="skillContainer3">
+              <label for="phoneNumber">Skill (4):</label>
+              <input type="text" class="form-control" id="phoneNumber" onkeyup="updateText()">
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <br>
+      <button type="button" class="custom-button" onclick="workexperience()">
+        <i class="fas fa-chevron-down"></i>
+        <h3>Work Experience</h3>
+      </button>
+
+
+      <div id="container1" class="custom-container">
+        <div class="experience-section">
+          <div class="experience-header" onclick="toggleExperience(this)">
+            <i class="fas fa-chevron-down"></i>
+            <p><b>Experience 1</b></p>
+          </div>
+          <div class="experience-content">
+            <form id="experience1">
               <div class="form-group">
-                  <input type="text" id="city1" class="form-control" placeholder="City" name="city1" style="height: 30px;" onkeyup="updateExperience()">
+                <input type="text" id="company1" class="form-control" placeholder="Company Name" name="company1"
+                  style="height: 30px;" onkeyup="updateExperience()">
               </div>
               <div class="form-group">
-                  <input type="text" id="country1" class="form-control" placeholder="Country" name="country1" style="height: 30px;" onkeyup="updateExperience()">
+                <input type="text" id="jobtitle1" class="form-control" placeholder="Designation" name="jobtitle1"
+                  style="height: 30px;" onkeyup="updateExperience()">
+              </div>
+
+              <div class="form-group">
+                <input type="text" id="city1" class="form-control" placeholder="City" name="city1" style="height: 30px;"
+                  onkeyup="updateExperience()">
+              </div>
+              <div class="form-group">
+                <input type="text" id="country1" class="form-control" placeholder="Country" name="country1"
+                  style="height: 30px;" onkeyup="updateExperience()">
               </div>
               <div class="form-group">
                 <label for="from1" style="margin-right: 10px;">From:</label>
-                <input type="month" id="from1" name="from1" class="form-control" style="height: 35px;" onchange="updateExperience()">
-            </div>
-            <div class="form-group">
-              <label for="to1" style="margin-right: 10px;">To:</label>
-              <span id="to1Container">
-                  <input type="month" id="to1" class="form-control" name="to1" style="height: 35px;" onchange="updateExperience()">
-              </span>
-              <label for="present1" style="margin-left: 10px;"><input type="checkbox" id="present1" onchange="handlePresentCheckbox()"> Present</label>
-          </div>
-          
-            
-              <div class="form-group">
-                  <label for="description1">Description:</label>
-                  <textarea id="description1" class="form-control" name="description1" rows="5" onkeyup="updateExperience()"></textarea>
+                <input type="month" id="from1" name="from1" class="form-control" style="height: 35px;"
+                  onchange="updateExperience()">
               </div>
-          </form>
+              <div class="form-group">
+                <label for="to1" style="margin-right: 10px;">To:</label>
+                <span id="to1Container">
+                  <input type="month" id="to1" class="form-control" name="to1" style="height: 35px;"
+                    onchange="updateExperience()">
+                </span>
+                <label for="present1" style="margin-left: 10px;"><input type="checkbox" id="present1"
+                    onchange="handlePresentCheckbox()"> Present</label>
+              </div>
+
+
+              <div class="form-group">
+                <label for="description1">Description:</label>
+                <textarea id="description1" class="form-control" name="description1" rows="5"
+                  onkeyup="updateExperience()"></textarea>
+              </div>
+            </form>
+          </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <input type="submit" value="+ Add New Experience" onclick="addNewExperience()">
-    </div>
-</div>
+        <div class="form-group">
+          <input type="submit" value="+ Add New Experience" onclick="addNewExperience()">
+        </div>
+      </div>
 
-<br>
-<button type="button" class="custom-button" onclick="education()">
-    <i class="fas fa-chevron-down"></i>
-    <h3>Education</h3>
-</button>
+      <br>
+      <button type="button" class="custom-button" onclick="education()">
+        <i class="fas fa-chevron-down"></i>
+        <h3>Education</h3>
+      </button>
 
-<div id="container2" class="custom-container hidden">
-    <div class="experience-section">
-        <div class="experience-header" onclick="toggleEducation(this)">
+      <div id="container2" class="custom-container hidden">
+        <div class="experience-section">
+          <div class="experience-header" onclick="toggleEducation(this)">
             <i class="fas fa-chevron-down"></i>
             <p><b>Education 1</b></p>
-        </div>
-        <div class="experience-content">
+          </div>
+          <div class="experience-content">
             <form id="experience1">
-                <div class="form-group">
-                    <input type="text" id="company1" class="form-control" placeholder="Institution Name" name="company1" style="height: 30px;">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="jobtitle1" class="form-control" placeholder="Field Of Study" name="jobtitle1" style="height: 30px;">
+              <div class="form-group">
+                <input type="text" id="company1" class="form-control" placeholder="Institution Name" name="company1"
+                  style="height: 30px;">
+              </div>
+              <div class="form-group">
+                <input type="text" id="jobtitle1" class="form-control" placeholder="Field Of Study" name="jobtitle1"
+                  style="height: 30px;">
 
-                </div>
-                <div class="form-group">
-                    <input type="text" id="city1" class="form-control" placeholder="Degree" name="city1" style="height: 30px;">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="country1" class="form-control" placeholder="City" name="country1" style="height: 30px;">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="country1" class="form-control" placeholder="Country" name="country1" style="height: 30px;">
-                </div>
-                <div class="form-group">
-                    <label for="from1" style="margin-right: 10px;">From:</label>
-                    <input type="date" id="from1" name="from1" class="form-control" style="height: 35px;">
-                </div>
-                <div class="form-group">
-                    <label for="to1" style="margin-right: 10px;">To:</label>
-                    <input type="date" id="to1" class="form-control" name="to1" style="height: 35px;">
-                </div>
-                
+              </div>
+              <div class="form-group">
+                <input type="text" id="city1" class="form-control" placeholder="Degree" name="city1"
+                  style="height: 30px;">
+              </div>
+              <div class="form-group">
+                <input type="text" id="country1" class="form-control" placeholder="City" name="country1"
+                  style="height: 30px;">
+              </div>
+              <div class="form-group">
+                <input type="text" id="country1" class="form-control" placeholder="Country" name="country1"
+                  style="height: 30px;">
+              </div>
+              <div class="form-group">
+                <label for="from1" style="margin-right: 10px;">From:</label>
+                <input type="date" id="from1" name="from1" class="form-control" style="height: 35px;">
+              </div>
+              <div class="form-group">
+                <label for="to1" style="margin-right: 10px;">To:</label>
+                <input type="date" id="to1" class="form-control" name="to1" style="height: 35px;">
+              </div>
+
             </form>
+          </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <input type="submit" value="+ Add New Education" onclick="addNewEducation()">
-    </div>
-</div>
+        <div class="form-group">
+          <input type="submit" value="+ Add New Education" onclick="addNewEducation()">
+        </div>
+      </div>
 
 
-<br>
-<button type="button" class="custom-button" onclick="projects()">
-    <i class="fas fa-chevron-down"></i>
-    <h3>Projects</h3>
-</button>
+      <br>
+      <button type="button" class="custom-button" onclick="projects()">
+        <i class="fas fa-chevron-down"></i>
+        <h3>Projects</h3>
+      </button>
 
-<div id="container3" class="custom-container hidden">
-    <div class="experience-section">
-        <div class="experience-header" onclick="toggleProjects(this)">
+      <div id="container3" class="custom-container hidden">
+        <div class="experience-section">
+          <div class="experience-header" onclick="toggleProjects(this)">
             <i class="fas fa-chevron-down"></i>
             <p><b>Project 1</b></p><br>
-        </div>
-        <div class="experience-content">
+          </div>
+          <div class="experience-content">
             <form id="experience1">
-                <div class="form-group">
-                    <input type="text" id="company1" class="form-control" placeholder="Project Name" name="company1" style="height: 30px;">
-                </div>
-               
-                <div class="form-group">
-                    <label for="description1">Tools used:</label>
-                    <textarea id="description1" class="form-control" name="description1" rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="description1">Link:</label>
-                    <input type="text" id="jobtitle1" class="form-control" placeholder="Link" name="jobtitle1" style="height: 30px;">
+              <div class="form-group">
+                <input type="text" id="company1" class="form-control" placeholder="Project Name" name="company1"
+                  style="height: 30px;">
+              </div>
 
-                </div>
-                <div class="form-group">
-                    <label for="description1">Description:</label>
-                    <textarea id="description1" class="form-control" name="description1" rows="5"></textarea>
-                </div>
-               
-                
-                
+              <div class="form-group">
+                <label for="description1">Tools used:</label>
+                <textarea id="description1" class="form-control" name="description1" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="description1">Link:</label>
+                <input type="text" id="jobtitle1" class="form-control" placeholder="Link" name="jobtitle1"
+                  style="height: 30px;">
+
+              </div>
+              <div class="form-group">
+                <label for="description1">Description:</label>
+                <textarea id="description1" class="form-control" name="description1" rows="5"></textarea>
+              </div>
+
+
+
             </form>
+          </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <input type="submit" value="+ Add New Project" onclick="addNewProject()">
-    </div>
-</div><br>
-<button type="button" class="custom-button" onclick="toggleAchievements()">
-  <i class="fas fa-chevron-down"></i>
-  <h3>Achievements</h3>
-</button>
-<div id="achievements" class="custom-container hidden">
-  <div class="experience-content">
-    <form>
-      <div class="form-group">
-        <label for="description1">Add Achievements:</label>
-        <textarea id="description1" class="form-control" name="description1" cols="45" rows="5"></textarea>
+        <div class="form-group">
+          <input type="submit" value="+ Add New Project" onclick="addNewProject()">
+        </div>
+      </div><br>
+      <button type="button" class="custom-button" onclick="toggleAchievements()">
+        <i class="fas fa-chevron-down"></i>
+        <h3>Achievements</h3>
+      </button>
+      <div id="achievements" class="custom-container hidden">
+        <div class="experience-content">
+          <form>
+            <div class="form-group">
+              <label for="description1">Add Achievements:</label>
+              <textarea id="description1" class="form-control" name="description1" cols="45" rows="5"></textarea>
+            </div>
+          </form>
+        </div>
       </div>
-    </form>
-  </div>
-</div>
-<br>
-<button type="button" class="custom-button" onclick="toggleLanguages()">
-  <i class="fas fa-chevron-down"></i>
-  <h3>Languages Known</h3>
-</button>
+      <br>
+      <button type="button" class="custom-button" onclick="toggleLanguages()">
+        <i class="fas fa-chevron-down"></i>
+        <h3>Languages Known</h3>
+      </button>
 
-<div id="languages" class="custom-container custom-container1 hidden">
-  <div class="columns-wrapper">
-    <div class="column2" id="column1">
-      <!-- Column 1: Profile Image -->
-      <div class="form-group" id="languageContainer1">
-        <label for="firstName">Language (1):</label>
-        <input type="text" class="form-control" id="firstName" >
+      <div id="languages" class="custom-container custom-container1 hidden">
+        <div class="columns-wrapper">
+          <div class="column2" id="column1">
+            <!-- Column 1: Profile Image -->
+            <div class="form-group" id="languageContainer1">
+              <label for="firstName">Language (1):</label>
+              <input type="text" class="form-control" id="firstName">
+            </div>
+
+
+            <div class="form-group">
+              <input type="submit" value="+ Add Languages" onclick="addLanguageInputFields('column1', 'column3')">
+            </div>
+
+          </div>
+
+          <div class="column2" id="column3">
+            <!-- Column 2: User Information -->
+            <div class="form-group" id="languageContainer3">
+              <label for="firstName">Language (2):</label>
+              <input type="text" class="form-control" id="firstName">
+            </div>
+
+          </div>
+
+        </div>
       </div>
-      
-
-      <div class="form-group">
-        <input type="submit" value="+ Add Languages" onclick="addLanguageInputFields('column1', 'column3')">
-      </div>
-
+      <br>
     </div>
-
-    <div class="column2" id="column3">
-      <!-- Column 2: User Information -->
-      <div class="form-group" id="languageContainer3">
-        <label for="firstName">Language (2):</label>
-        <input type="text" class="form-control" id="firstName" >
-      </div>
-     
-    </div>
-
-  </div>
-</div>
-<br>
-</div>
-<script>
-    function education() {
+    <script>
+      function education() {
         var container = document.getElementById('container2');
         container.classList.toggle('hidden');
-    }
+      }
 
-    function addNewEducation() {
+      function addNewEducation() {
         var container = document.getElementById('container2');
         var experienceCount = container.getElementsByClassName('experience-section').length + 1;
         var newExperience = document.createElement('div');
@@ -648,58 +707,58 @@ input[type="submit"]:hover {
 
         var header = document.createElement('div');
         header.classList.add('experience-header');
-        header.onclick = function() { toggleEducation(this) };
+        header.onclick = function () { toggleEducation(this) };
         header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Education ' + experienceCount + '</b></p>';
 
         var content = document.createElement('div');
         content.classList.add('experience-content');
         content.innerHTML = '<form id="experience' + experienceCount + '">' +
-            '<div class="form-group">' +
-            '<input type="text" id="company' + experienceCount + '" class="form-control" placeholder="Institution Name" name="company' + experienceCount + '" style="height: 30px;">' +
-            '</div>' +
-            '<div class="form-group">' +
-            '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Field Of Study" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
-            '</div>' +
-            '<div class="form-group">' +
-            '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Degree" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
-            '</div>' +
-            '<div class="form-group">' +
-            '<input type="text" id="city' + experienceCount + '" class="form-control" placeholder="City" name="city' + experienceCount + '" style="height: 30px;">' +
-            '</div>' +
-            '<div class="form-group">' +
-            '<input type="text" id="country' + experienceCount + '" class="form-control" placeholder="Country" name="country' + experienceCount + '" style="height: 30px;">' +
-            '</div>' +
-            '<div class="form-group">' +
-            '<label for="from' + experienceCount + '" style="margin-right: 10px;">From:</label>' +
-            '<input type="date" id="from' + experienceCount + '" name="from' + experienceCount + '" class="form-control" style="height: 35px;">' +
-            '</div>' +
-            '<div class="form-group">' +
-            '<label for="to' + experienceCount + '" style="margin-right: 10px;">To:</label>' +
-            '<input type="date" id="to' + experienceCount + '" class="form-control" name="to' + experienceCount + '" style="height: 35px;">' +
-            '</div>' +
-           
-            '</form>';
+          '<div class="form-group">' +
+          '<input type="text" id="company' + experienceCount + '" class="form-control" placeholder="Institution Name" name="company' + experienceCount + '" style="height: 30px;">' +
+          '</div>' +
+          '<div class="form-group">' +
+          '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Field Of Study" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
+          '</div>' +
+          '<div class="form-group">' +
+          '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Degree" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
+          '</div>' +
+          '<div class="form-group">' +
+          '<input type="text" id="city' + experienceCount + '" class="form-control" placeholder="City" name="city' + experienceCount + '" style="height: 30px;">' +
+          '</div>' +
+          '<div class="form-group">' +
+          '<input type="text" id="country' + experienceCount + '" class="form-control" placeholder="Country" name="country' + experienceCount + '" style="height: 30px;">' +
+          '</div>' +
+          '<div class="form-group">' +
+          '<label for="from' + experienceCount + '" style="margin-right: 10px;">From:</label>' +
+          '<input type="date" id="from' + experienceCount + '" name="from' + experienceCount + '" class="form-control" style="height: 35px;">' +
+          '</div>' +
+          '<div class="form-group">' +
+          '<label for="to' + experienceCount + '" style="margin-right: 10px;">To:</label>' +
+          '<input type="date" id="to' + experienceCount + '" class="form-control" name="to' + experienceCount + '" style="height: 35px;">' +
+          '</div>' +
+
+          '</form>';
 
         newExperience.appendChild(header);
         newExperience.appendChild(content);
         container.insertBefore(newExperience, container.lastElementChild);
-    }
+      }
 
-    function toggleEducation(header) {
+      function toggleEducation(header) {
         var content = header.nextElementSibling;
         header.querySelector('i').classList.toggle('fa-chevron-down');
         header.querySelector('i').classList.toggle('fa-chevron-up');
         content.classList.toggle('hidden');
-    }
-</script>
+      }
+    </script>
 
-<script>
-    function projects() {
+    <script>
+      function projects() {
         var container = document.getElementById('container3');
         container.classList.toggle('hidden');
-    }
+      }
 
-    function addNewProject() {
+      function addNewProject() {
         var container = document.getElementById('container3');
         var experienceCount = container.getElementsByClassName('experience-section').length + 1;
         var newExperience = document.createElement('div');
@@ -707,328 +766,264 @@ input[type="submit"]:hover {
 
         var header = document.createElement('div');
         header.classList.add('experience-header');
-        header.onclick = function() { toggleProjects(this) };
+        header.onclick = function () { toggleProjects(this) };
         header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Projects ' + experienceCount + '</b></p>';
 
         var content = document.createElement('div');
         content.classList.add('experience-content');
         content.innerHTML = '<form id="experience' + experienceCount + '">' +
-            '<div class="form-group">' +
-            '<input type="text" id="company' + experienceCount + '" class="form-control" placeholder="Project Name" name="company' + experienceCount + '" style="height: 30px;">' +
-            '</div>' +
-            '<div class="form-group">' +
-                
-            '<label for="description' + experienceCount + '">Tools used:</label>' +
-            '<textarea id="description' + experienceCount + '" class="form-control" name="description' + experienceCount + '" rows="3"></textarea>' +
-            '</div>' +
-            '<div class="form-group">' +
-                '<label for="description' + experienceCount + '">:</label>' +
-            '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Link" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
-            '</div>' +
-            
-            '<div class="form-group">' +
-            '<label for="description' + experienceCount + '">Description:</label>' +
-            '<textarea id="description' + experienceCount + '" class="form-control" name="description' + experienceCount + '" rows="5"></textarea>' +
-            '</div>' +
-           
-            '</form>';
+          '<div class="form-group">' +
+          '<input type="text" id="company' + experienceCount + '" class="form-control" placeholder="Project Name" name="company' + experienceCount + '" style="height: 30px;">' +
+          '</div>' +
+          '<div class="form-group">' +
+
+          '<label for="description' + experienceCount + '">Tools used:</label>' +
+          '<textarea id="description' + experienceCount + '" class="form-control" name="description' + experienceCount + '" rows="3"></textarea>' +
+          '</div>' +
+          '<div class="form-group">' +
+          '<label for="description' + experienceCount + '">:</label>' +
+          '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Link" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
+          '</div>' +
+
+          '<div class="form-group">' +
+          '<label for="description' + experienceCount + '">Description:</label>' +
+          '<textarea id="description' + experienceCount + '" class="form-control" name="description' + experienceCount + '" rows="5"></textarea>' +
+          '</div>' +
+
+          '</form>';
 
         newExperience.appendChild(header);
         newExperience.appendChild(content);
         container.insertBefore(newExperience, container.lastElementChild);
-    }
-    function toggleProject(header) {
+      }
+      function toggleProject(header) {
         var content = header.nextElementSibling;
         header.querySelector('i').classList.toggle('fa-chevron-down');
         header.querySelector('i').classList.toggle('fa-chevron-up');
         content.classList.toggle('hidden');
-    }
-</script>
-<script>
-    function workexperience() {
+      }
+    </script>
+    <script>
+      function workexperience() {
         var container = document.getElementById('container1');
         container.classList.toggle('hidden');
-    }
+      }
 
-    function handlePresentCheckbox() {
-    var toInput = document.getElementById("to1");
-    var toContainer = document.getElementById("to1Container");
-    var fieldEDDT = document.getElementById("FIELD_EDDT");
+      function handlePresentCheckbox() {
+        var toInput = document.getElementById("to1");
+        var toContainer = document.getElementById("to1Container");
+        var fieldEDDT = document.getElementById("FIELD_EDDT");
 
-    if (document.getElementById("present1").checked) {
-        toInput.disabled = true; // Disable the input field
-        toContainer.innerHTML = "Present"; // Display "Present" text
-        fieldEDDT.textContent = "Present"; // Update FIELD_EDDT span with "Present" text
-    } else {
-        toInput.disabled = false; // Enable the input field when present is unchecked
-        toContainer.innerHTML = '<input type="month" id="to1" class="form-control" name="to1" style="height: 35px;" onchange="updateExperience()">'; // Restore input field
-        fieldEDDT.textContent = ""; // Reset FIELD_EDDT span
-    }
-}
-
-
-
-function addNewExperience() {
-    var container = document.getElementById('container1');
-    var experienceCount = container.getElementsByClassName('experience-section').length + 1;
-    var newExperience = document.createElement('div');
-    newExperience.classList.add('experience-section');
-
-    var header = document.createElement('div');
-    header.classList.add('experience-header');
-    header.onclick = function() { toggleExperience(this) };
-    header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Experience ' + experienceCount + '</b></p>';
-
-    var content = document.createElement('div');
-    content.classList.add('experience-content');
-    content.innerHTML = '<form id="experience' + experienceCount + '">' +
-        '<div class="form-group">' +
-        '<input type="text" id="company' + experienceCount + '" class="form-control" placeholder="Company Name" name="company' + experienceCount + '" style="height: 30px;">' +
-        '</div>' +
-        '<div class="form-group">' +
-        '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Job Title" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
-        '</div>' +
-        '<div class="form-group">' +
-        '<input type="text" id="city' + experienceCount + '" class="form-control" placeholder="City" name="city' + experienceCount + '" style="height: 30px;">' +
-        '</div>' +
-        '<div class="form-group">' +
-        '<input type="text" id="country' + experienceCount + '" class="form-control" placeholder="Country" name="country' + experienceCount + '" style="height: 30px;">' +
-        '</div>' +
-        '<div class="form-group">' +
-        '<label for="from' + experienceCount + '" style="margin-right: 10px;">From:</label>' +
-        '<input type="date" id="from' + experienceCount + '" name="from' + experienceCount + '" class="form-control" style="height: 35px;">' +
-        '</div>' +
-        '<div class="form-group">' +
-        '<label for="to' + experienceCount + '" style="margin-right: 10px;">To:</label>' +
-        '<input type="date" id="to' + experienceCount + '" class="form-control" name="to' + experienceCount + '" style="height: 35px;">' +
-        '</div>' +
-        '<div class="form-group">' +
-        '<label for="description' + experienceCount + '">Description:</label>' +
-        '<textarea id="description' + experienceCount + '" class="form-control" name="description' + experienceCount + '" rows="5" onkeyup="updateExperience()"></textarea>' +
-        '</div>' +
-        '</form>';
-
-    newExperience.appendChild(header);
-    newExperience.appendChild(content);
-    container.insertBefore(newExperience, container.lastElementChild);
-}
+        if (document.getElementById("present1").checked) {
+          toInput.disabled = true; // Disable the input field
+          toContainer.innerHTML = "Present"; // Display "Present" text
+          fieldEDDT.textContent = "Present"; // Update FIELD_EDDT span with "Present" text
+        } else {
+          toInput.disabled = false; // Enable the input field when present is unchecked
+          toContainer.innerHTML = '<input type="month" id="to1" class="form-control" name="to1" style="height: 35px;" onchange="updateExperience()">'; // Restore input field
+          fieldEDDT.textContent = ""; // Reset FIELD_EDDT span
+        }
+      }
 
 
 
+      function addNewExperience() {
+        var container = document.getElementById('container1');
+        var experienceCount = container.getElementsByClassName('experience-section').length + 1;
+        var newExperience = document.createElement('div');
+        newExperience.classList.add('experience-section');
 
-    function toggleExperience(header) {
+        var header = document.createElement('div');
+        header.classList.add('experience-header');
+        header.onclick = function () { toggleExperience(this) };
+        header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Experience ' + experienceCount + '</b></p>';
+
+        var content = document.createElement('div');
+        content.classList.add('experience-content');
+        content.innerHTML = '<form id="experience' + experienceCount + '">' +
+          '<div class="form-group">' +
+          '<input type="text" id="company' + experienceCount + '" class="form-control" placeholder="Company Name" name="company' + experienceCount + '" style="height: 30px;">' +
+          '</div>' +
+          '<div class="form-group">' +
+          '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Job Title" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
+          '</div>' +
+          '<div class="form-group">' +
+          '<input type="text" id="city' + experienceCount + '" class="form-control" placeholder="City" name="city' + experienceCount + '" style="height: 30px;">' +
+          '</div>' +
+          '<div class="form-group">' +
+          '<input type="text" id="country' + experienceCount + '" class="form-control" placeholder="Country" name="country' + experienceCount + '" style="height: 30px;">' +
+          '</div>' +
+          '<div class="form-group">' +
+          '<label for="from' + experienceCount + '" style="margin-right: 10px;">From:</label>' +
+          '<input type="date" id="from' + experienceCount + '" name="from' + experienceCount + '" class="form-control" style="height: 35px;">' +
+          '</div>' +
+          '<div class="form-group">' +
+          '<label for="to' + experienceCount + '" style="margin-right: 10px;">To:</label>' +
+          '<input type="date" id="to' + experienceCount + '" class="form-control" name="to' + experienceCount + '" style="height: 35px;">' +
+          '</div>' +
+          '<div class="form-group">' +
+          '<label for="description' + experienceCount + '">Description:</label>' +
+          '<textarea id="description' + experienceCount + '" class="form-control" name="description' + experienceCount + '" rows="5" onkeyup="updateExperience()"></textarea>' +
+          '</div>' +
+          '</form>';
+
+        newExperience.appendChild(header);
+        newExperience.appendChild(content);
+        container.insertBefore(newExperience, container.lastElementChild);
+      }
+
+
+
+
+      function toggleExperience(header) {
         var content = header.nextElementSibling;
         header.querySelector('i').classList.toggle('fa-chevron-down');
         header.querySelector('i').classList.toggle('fa-chevron-up');
         content.classList.toggle('hidden');
-    }
-</script>
+      }
+    </script>
 
-<script>
-    function toggleContainer() {
+    <script>
+      function toggleContainer() {
         var container = document.getElementById('profile');
         container.classList.toggle('hidden');
-    }
-</script>
-<script>
-  function toggleSummary() {
-    var container = document.getElementById('summary');
-    container.classList.toggle('hidden');
-  }
-  function toggleAchievements() {
-    var container = document.getElementById('achievements');
-    container.classList.toggle('hidden');
-  }
-</script>
-<script>
-  function toggleSkills() {
-    var container = document.getElementById('skills');
-    container.classList.toggle('hidden');
-  }
+      }
+    </script>
+    <script>
+      function toggleSummary() {
+        var container = document.getElementById('summary');
+        container.classList.toggle('hidden');
+      }
+      function toggleAchievements() {
+        var container = document.getElementById('achievements');
+        container.classList.toggle('hidden');
+      }
+    </script>
+    <script>
+      function toggleSkills() {
+        var container = document.getElementById('skills');
+        container.classList.toggle('hidden');
+      }
 
-  function toggleLanguages() {
-    var container = document.getElementById('languages');
-    container.classList.toggle('hidden');
-  }
-</script>
-<script>
-  var skillCounter1 = 3; // Initial counter for column1 (odd)
-  var skillCounter2 = 4; // Initial counter for column3 (even)
+      function toggleLanguages() {
+        var container = document.getElementById('languages');
+        container.classList.toggle('hidden');
+      }
+    </script>
+    <script>
+      var skillCounter1 = 3; // Initial counter for column1 (odd)
+      var skillCounter2 = 4; // Initial counter for column3 (even)
 
-  function addInputFields(columnId1, columnId2) {
-    skillCounter1 += 2; // Increment by 2 to get odd numbers
-    skillCounter2 += 2; // Increment by 2 to get even numbers
+      function addInputFields(columnId1, columnId2) {
+        skillCounter1 += 2; // Increment by 2 to get odd numbers
+        skillCounter2 += 2; // Increment by 2 to get even numbers
 
-    // Create new input field
-    var newInput = document.createElement("input");
-    newInput.type = "text";
-    newInput.className = "form-control";
-    newInput.setAttribute("onkeyup", "updateText()");
+        // Create new input field
+        var newInput = document.createElement("input");
+        newInput.type = "text";
+        newInput.className = "form-control";
+        newInput.setAttribute("onkeyup", "updateText()");
 
-    // Create new label
-    var newLabel = document.createElement("label");
+        // Create new label
+        var newLabel = document.createElement("label");
 
-    // Get the specified containers and insert new label and input field
-    var container1 = document.getElementById("skillContainer1");
-    newLabel.textContent = "Skill (" + skillCounter1 + "):";
-    newInput.id = "skillInput" + skillCounter1;
-    console.log(newInput.id)
-    container1.appendChild(newLabel.cloneNode(true));
-    container1.appendChild(newInput.cloneNode(true));
+        // Get the specified containers and insert new label and input field
+        var container1 = document.getElementById("skillContainer1");
+        newLabel.textContent = "Skill (" + skillCounter1 + "):";
+        newInput.id = "skillInput" + skillCounter1;
+        console.log(newInput.id)
+        container1.appendChild(newLabel.cloneNode(true));
+        container1.appendChild(newInput.cloneNode(true));
 
-    var container3 = document.getElementById("skillContainer3");
-    newLabel.textContent = "Skill (" + skillCounter2 + "):";
-    newInput.id = "skillInput" + skillCounter2;
-    console.log(newInput.id)
-    container3.appendChild(newLabel.cloneNode(true));
-    container3.appendChild(newInput.cloneNode(true));
-  }
+        var container3 = document.getElementById("skillContainer3");
+        newLabel.textContent = "Skill (" + skillCounter2 + "):";
+        newInput.id = "skillInput" + skillCounter2;
+        console.log(newInput.id)
+        container3.appendChild(newLabel.cloneNode(true));
+        container3.appendChild(newInput.cloneNode(true));
+      }
 
-  function updateText() {
-    // Your updateText function logic here
-  }
-</script>
+      function updateText() {
+        // Your updateText function logic here
+      }
+    </script>
 
-<script>
-var languageCounter1 = 1; // Initial counter for column1 (odd)
-var languageCounter2 = 2; // Initial counter for column3 (even)
+    <script>
+      var languageCounter1 = 1; // Initial counter for column1 (odd)
+      var languageCounter2 = 2; // Initial counter for column3 (even)
 
-function addLanguageInputFields(columnId1, columnId2) {
-languageCounter1 += 2; // Increment by 2 to get odd numbers
-languageCounter2 += 2; // Increment by 2 to get even numbers
+      function addLanguageInputFields(columnId1, columnId2) {
+        languageCounter1 += 2; // Increment by 2 to get odd numbers
+        languageCounter2 += 2; // Increment by 2 to get even numbers
 
-// Create new input field
-var newInput = document.createElement("input");
-newInput.type = "text";
-newInput.className = "form-control";
-newInput.setAttribute("onkeyup", "updateText()");
+        // Create new input field
+        var newInput = document.createElement("input");
+        newInput.type = "text";
+        newInput.className = "form-control";
+        newInput.setAttribute("onkeyup", "updateText()");
 
-// Create new label
-var newLabel = document.createElement("label");
+        // Create new label
+        var newLabel = document.createElement("label");
 
-// Get the specified containers and insert new label and input field
-var container1 = document.getElementById("languageContainer1");
-newLabel.textContent = "Language (" + languageCounter1 + "):";
-newInput.id = "languageInput" + languageCounter1;
-console.log(newInput.id)
-container1.appendChild(newLabel.cloneNode(true));
-container1.appendChild(newInput.cloneNode(true));
+        // Get the specified containers and insert new label and input field
+        var container1 = document.getElementById("languageContainer1");
+        newLabel.textContent = "Language (" + languageCounter1 + "):";
+        newInput.id = "languageInput" + languageCounter1;
+        console.log(newInput.id)
+        container1.appendChild(newLabel.cloneNode(true));
+        container1.appendChild(newInput.cloneNode(true));
 
-var container3 = document.getElementById("languageContainer3");
-newLabel.textContent = "Language (" + languageCounter2 + "):";
-newInput.id = "languageInput" + languageCounter2;
-console.log(newInput.id)
-container3.appendChild(newLabel.cloneNode(true));
-container3.appendChild(newInput.cloneNode(true));
-}
+        var container3 = document.getElementById("languageContainer3");
+        newLabel.textContent = "Language (" + languageCounter2 + "):";
+        newInput.id = "languageInput" + languageCounter2;
+        console.log(newInput.id)
+        container3.appendChild(newLabel.cloneNode(true));
+        container3.appendChild(newInput.cloneNode(true));
+      }
 
-function updateText() {
-// Your updateText function logic here
-}
-</script>
-<!--Dynamic text-->
-<script>
-  // Function to update the displayed name
-  function updateText() {
-      var firstName = document.getElementById("firstName").value;
-      var lastName = document.getElementById("lastName").value;
-      var phoneNumber = document.getElementById("phoneNumber").value;
-      var email = document.getElementById("email").value;
-      var address = document.getElementById("address").value;
-      var linkedin = document.getElementById("linkedin").value;
+      function updateText() {
+        // Your updateText function logic here
+      }
+    </script>
+    <!--Dynamic text-->
+    <script>
+      // Function to update the displayed name
+      function updateText() {
+        var firstName = document.getElementById("firstName").value;
+        var lastName = document.getElementById("lastName").value;
+        var phoneNumber = document.getElementById("phoneNumber").value;
+        var email = document.getElementById("email").value;
+        var address = document.getElementById("address").value;
+        var linkedin = document.getElementById("linkedin").value;
 
-      // Update the content of the span elements
-      document.getElementById("FIELD_FNAM").textContent = firstName;
-      document.getElementById("FIELD_LNAM").textContent = lastName;
-      document.getElementById("FIELD_CPHN").textContent = phoneNumber;
-      document.getElementById("FIELD_EMAI").textContent = email;
-      document.getElementById("FIELD_ADDR").textContent = address;
-      document.getElementById("FIELD_LNKD").textContent = linkedin;
-
-      // Store the entered names in localStorage
-      localStorage.setItem("firstName", firstName);
-      localStorage.setItem("lastName", lastName);
-      localStorage.setItem("phoneNumber", phoneNumber);
-      localStorage.setItem("email", email);
-      localStorage.setItem("address", address);
-      localStorage.setItem("linkedin", linkedin);
-  }
-
-  // Function to update the displayed experience
-  function updateExperience() {
-    var company = document.getElementById("company1").value;
-    var jobTitle = document.getElementById("jobtitle1").value;
-    var city = document.getElementById("city1").value;
-    var country = document.getElementById("country1").value;
-    var fromDate = document.getElementById("from1").value;
-    var toDate = document.getElementById("to1").value;
-    var description = document.getElementById("description1").value;
-
-    // Update the content of the corresponding elements
-    document.getElementById("FIELD_CMN").textContent = company;
-    document.getElementById("FIELD_JTIT").textContent = jobTitle;
-    document.getElementById("FIELD_JCIT").textContent = city;
-    document.getElementById("FIELD_JSTA").textContent = country;
-    document.getElementById("FIELD_JSTD").textContent = fromDate;
-    document.getElementById("FIELD_EDDT").textContent = toDate;
-
-    // Parse the description and generate the list with bullet points
-    var descriptionList = "<ul>";
-    var descriptionPoints = description.split('.');
-    for (var i = 0; i < descriptionPoints.length; i++) {
-        if (descriptionPoints[i].trim() !== "") { // Check if the point is not empty
-            descriptionList += "<li>" + descriptionPoints[i] + ".</li><br>";
-        }
-    }
-    descriptionList += "</ul>";
-    document.getElementById("FIELD_JDES").innerHTML = descriptionList;
-
-    // Store the entered values in localStorage
-    localStorage.setItem("company", company);
-    localStorage.setItem("jobTitle", jobTitle);
-    localStorage.setItem("city", city);
-    localStorage.setItem("country", country);
-    localStorage.setItem("fromDate", fromDate);
-    localStorage.setItem("toDate", toDate);
-    localStorage.setItem("description", description);
-}
-
-
-  // Function to retrieve stored values and update the displayed information
-  window.onload = function() {
-    var firstName = localStorage.getItem("firstName");
-    var lastName = localStorage.getItem("lastName");
-    var phoneNumber = localStorage.getItem("phoneNumber");
-    var email = localStorage.getItem("email");
-    var address = localStorage.getItem("address");
-    var linkedin = localStorage.getItem("linkedin");
-    var company = localStorage.getItem("company");
-    var jobTitle = localStorage.getItem("jobTitle");
-    var city = localStorage.getItem("city");
-    var country = localStorage.getItem("country");
-    var fromDate = localStorage.getItem("fromDate");
-    var toDate = localStorage.getItem("toDate");
-    var description = localStorage.getItem("description");
-
-    if (firstName && lastName) {
-        // Update the displayed name
+        // Update the content of the span elements
         document.getElementById("FIELD_FNAM").textContent = firstName;
         document.getElementById("FIELD_LNAM").textContent = lastName;
         document.getElementById("FIELD_CPHN").textContent = phoneNumber;
         document.getElementById("FIELD_EMAI").textContent = email;
         document.getElementById("FIELD_ADDR").textContent = address;
         document.getElementById("FIELD_LNKD").textContent = linkedin;
-        // Update the input fields with stored values
-        document.getElementById("firstName").value = firstName;
-        document.getElementById("lastName").value = lastName;
-        document.getElementById("phoneNumber").value = phoneNumber;
-        document.getElementById("email").value = email;
-        document.getElementById("address").value = address;
-        document.getElementById("linkedin").value = linkedin;
-    }
 
-    if (company && jobTitle) {
-        // Update the displayed experience
+        // Store the entered names in localStorage
+        localStorage.setItem("firstName", firstName);
+        localStorage.setItem("lastName", lastName);
+        localStorage.setItem("phoneNumber", phoneNumber);
+        localStorage.setItem("email", email);
+        localStorage.setItem("address", address);
+        localStorage.setItem("linkedin", linkedin);
+      }
+
+      // Function to update the displayed experience
+      function updateExperience() {
+        var company = document.getElementById("company1").value;
+        var jobTitle = document.getElementById("jobtitle1").value;
+        var city = document.getElementById("city1").value;
+        var country = document.getElementById("country1").value;
+        var fromDate = document.getElementById("from1").value;
+        var toDate = document.getElementById("to1").value;
+        var description = document.getElementById("description1").value;
+
+        // Update the content of the corresponding elements
         document.getElementById("FIELD_CMN").textContent = company;
         document.getElementById("FIELD_JTIT").textContent = jobTitle;
         document.getElementById("FIELD_JCIT").textContent = city;
@@ -1036,409 +1031,538 @@ function updateText() {
         document.getElementById("FIELD_JSTD").textContent = fromDate;
         document.getElementById("FIELD_EDDT").textContent = toDate;
 
-        // Parse the stored description and format it correctly
+        // Parse the description and generate the list with bullet points
         var descriptionList = "<ul>";
         var descriptionPoints = description.split('.');
         for (var i = 0; i < descriptionPoints.length; i++) {
-            if (descriptionPoints[i].trim() !== "") {
-                descriptionList += "<li>" + descriptionPoints[i] + ".</li><br>";
-            }
+          if (descriptionPoints[i].trim() !== "") { // Check if the point is not empty
+            descriptionList += "<li>" + descriptionPoints[i] + ".</li><br>";
+          }
         }
         descriptionList += "</ul>";
         document.getElementById("FIELD_JDES").innerHTML = descriptionList;
 
-        // Update the input fields with stored values
-        document.getElementById("company1").value = company;
-        document.getElementById("jobtitle1").value = jobTitle;
-        document.getElementById("city1").value = city;
-        document.getElementById("country1").value = country;
-        document.getElementById("from1").value = fromDate;
-        document.getElementById("to1").value = toDate;
-        document.getElementById("description1").value = description;
-    }
-};
-
-</script>
+        // Store the entered values in localStorage
+        localStorage.setItem("company", company);
+        localStorage.setItem("jobTitle", jobTitle);
+        localStorage.setItem("city", city);
+        localStorage.setItem("country", country);
+        localStorage.setItem("fromDate", fromDate);
+        localStorage.setItem("toDate", toDate);
+        localStorage.setItem("description", description);
+      }
 
 
+      // Function to retrieve stored values and update the displayed information
+      window.onload = function () {
+        var firstName = localStorage.getItem("firstName");
+        var lastName = localStorage.getItem("lastName");
+        var phoneNumber = localStorage.getItem("phoneNumber");
+        var email = localStorage.getItem("email");
+        var address = localStorage.getItem("address");
+        var linkedin = localStorage.getItem("linkedin");
+        var company = localStorage.getItem("company");
+        var jobTitle = localStorage.getItem("jobTitle");
+        var city = localStorage.getItem("city");
+        var country = localStorage.getItem("country");
+        var fromDate = localStorage.getItem("fromDate");
+        var toDate = localStorage.getItem("toDate");
+        var description = localStorage.getItem("description");
+
+        if (firstName && lastName) {
+          // Update the displayed name
+          document.getElementById("FIELD_FNAM").textContent = firstName;
+          document.getElementById("FIELD_LNAM").textContent = lastName;
+          document.getElementById("FIELD_CPHN").textContent = phoneNumber;
+          document.getElementById("FIELD_EMAI").textContent = email;
+          document.getElementById("FIELD_ADDR").textContent = address;
+          document.getElementById("FIELD_LNKD").textContent = linkedin;
+          // Update the input fields with stored values
+          document.getElementById("firstName").value = firstName;
+          document.getElementById("lastName").value = lastName;
+          document.getElementById("phoneNumber").value = phoneNumber;
+          document.getElementById("email").value = email;
+          document.getElementById("address").value = address;
+          document.getElementById("linkedin").value = linkedin;
+        }
+
+        if (company && jobTitle) {
+          // Update the displayed experience
+          document.getElementById("FIELD_CMN").textContent = company;
+          document.getElementById("FIELD_JTIT").textContent = jobTitle;
+          document.getElementById("FIELD_JCIT").textContent = city;
+          document.getElementById("FIELD_JSTA").textContent = country;
+          document.getElementById("FIELD_JSTD").textContent = fromDate;
+          document.getElementById("FIELD_EDDT").textContent = toDate;
+
+          // Parse the stored description and format it correctly
+          var descriptionList = "<ul>";
+          var descriptionPoints = description.split('.');
+          for (var i = 0; i < descriptionPoints.length; i++) {
+            if (descriptionPoints[i].trim() !== "") {
+              descriptionList += "<li>" + descriptionPoints[i] + ".</li><br>";
+            }
+          }
+          descriptionList += "</ul>";
+          document.getElementById("FIELD_JDES").innerHTML = descriptionList;
+
+          // Update the input fields with stored values
+          document.getElementById("company1").value = company;
+          document.getElementById("jobtitle1").value = jobTitle;
+          document.getElementById("city1").value = city;
+          document.getElementById("country1").value = country;
+          document.getElementById("from1").value = fromDate;
+          document.getElementById("to1").value = toDate;
+          document.getElementById("description1").value = description;
+        }
+      };
+
+    </script>
 
 
-<div class="right-side" style="position: relative; overflow-y: auto;">
-  <div class="content_wrapper">
-    <div style="width:140%" class="document doc-root fontsize fontface vmargins hmargins pagesize skn-mld8 MLD8 RNA snipcss-ImqcD" docskinwidth="612">
-        <div id="CONTAINER_PARENT_0" class="top-section">
-          <div id="CONTAINER_0">
-            <div data-react-beautiful-dnd-draggable="22" class="sortable-item section-container SortableItem-sibling name-contact ">
-              <div class="document-tool sec-tool style-Za2JB" id="editIcons">
-              </div>
-              <div id="SECTION_NAME952a5bc1-5ef8-4882-b4d2-26c6e3be147f" class="section name-sec notdraggable SECTION_NAME     " data-section-cd="NAME">
-                <div class=" doc-item">
-                  <div class="">
+
+
+    <div class="right-side" style="position: relative; overflow-y: auto;">
+      <div class="content_wrapper">
+        <div style="width:140%"
+          class="document doc-root fontsize fontface vmargins hmargins pagesize skn-mld8 MLD8 RNA snipcss-ImqcD"
+          docskinwidth="612">
+          <div id="CONTAINER_PARENT_0" class="top-section page">
+            <div id="CONTAINER_0">
+              <div data-react-beautiful-dnd-draggable="22"
+                class="sortable-item section-container SortableItem-sibling name-contact ">
+                <div class="document-tool sec-tool style-Za2JB" id="editIcons">
+                </div>
+                <div id="SECTION_NAME952a5bc1-5ef8-4882-b4d2-26c6e3be147f"
+                  class="section name-sec notdraggable SECTION_NAME     " data-section-cd="NAME">
+                  <div class=" doc-item">
                     <div class="">
-                      <div id="PARAGRAPH_NAME_c506b585-ce5a-edb1-0b0d-90bb25d5144d" class="paragraph PARAGRAPH_NAME firstparagraph  ">
-                        <div>
-                          <div class="name txt-bold">
-                            <span style="font-size: 30px;" id="FIELD_FNAM">
-                              Diya
-                            </span>
-                            <span style="font-size: 30px;" id="FIELD_LNAM">
-                              Agarwal
-                            </span>
-                          </div>
-                          <div class="resume-title txt-bold style-RRs54" dependency="DCTL" id="style-RRs54">
-                            <span id="FIELD_DCTL">
-                            </span>
+                      <div class="">
+                        <div id="PARAGRAPH_NAME_c506b585-ce5a-edb1-0b0d-90bb25d5144d"
+                          class="paragraph PARAGRAPH_NAME firstparagraph  ">
+                          <div>
+                            <div class="name txt-bold">
+                              <span style="font-size: 30px;" id="FIELD_FNAM">
+                                Diya
+                              </span>
+                              <span style="font-size: 30px;" id="FIELD_LNAM">
+                                Agarwal
+                              </span>
+                            </div>
+                            <div class="resume-title txt-bold style-RRs54" dependency="DCTL" id="style-RRs54">
+                              <span id="FIELD_DCTL">
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div id="SECTION_CNTCc5262a04-bcfb-4d27-9dea-67daf11aa0dc" class="section cntc-sec notdraggable SECTION_CNTC     " data-section-cd="CNTC">
-                <div class=" doc-item">
-                  <div class="">
+                <div id="SECTION_CNTCc5262a04-bcfb-4d27-9dea-67daf11aa0dc"
+                  class="section cntc-sec notdraggable SECTION_CNTC     " data-section-cd="CNTC">
+                  <div class=" doc-item">
                     <div class="">
-                      <div id="PARAGRAPH_CNTC_7ab68409-48ac-ae65-6122-d533b7a85654" class="paragraph PARAGRAPH_CNTC firstparagraph  ">
-                        <div class="clearfix doc-item">
-                          <div class="address">
-                            <ul>
-                              <li dependency="CPHN">
-                                <span  style="font-size: 16px;"  id="FIELD_CPHN">
-                                  +91 11 5555 3345
-                                </span>
-                              </li>
-                              <li dependency="EMAI">
-                                <span  class="email" id="FIELD_EMAI">
-                                  d.agarwal@sample.in
-                                </span>
-                              </li>
-                              <li dependency="ADDR|STRT|CITY|STAT|ZIPC|CNTY">
-                                <span id="FIELD_STRT">
-                                </span>
-                                <span dependency="STRT" id="style-oAxeS" class="style-oAxeS">
-                                  <span dependency="CITY|STAT|CNTY|ZIPC" id="style-plliV" class="style-plliV">
-                                    , 
+                      <div class="">
+                        <div id="PARAGRAPH_CNTC_7ab68409-48ac-ae65-6122-d533b7a85654"
+                          class="paragraph PARAGRAPH_CNTC firstparagraph  ">
+                          <div class="clearfix doc-item">
+                            <div class="address">
+                              <ul>
+                                <li dependency="CPHN">
+                                  <span style="font-size: 17px;" id="FIELD_CPHN">
+                                    +91 11 5555 3345
                                   </span>
-                                </span>
-                                <span id="FIELD_CITY">
-                                </span>
-                                <span dependency="CITY" id="style-3V4hM" class="style-3V4hM">
-                                  <span dependency="STAT|CNTY|ZIPC" id="style-ggG8S" class="style-ggG8S">
-                                    , 
+                                </li>
+                                <li dependency="EMAI">
+                                  <span class="email" id="FIELD_EMAI">
+                                    d.agarwal@sample.in
                                   </span>
-                                </span>
-                                <span id="FIELD_STAT">
-                                </span>
-                                <span dependency="STAT|CNTY+ZIPC" id="style-pf4GX" class="style-pf4GX">
-                                  , 
-                                </span>
-                                <span id="FIELD_CNTY">
-                                </span>
-                                <span dependency="CNTY+ZIPC" id="style-6Cjon" class="style-6Cjon">
-                                  , 
-                                </span>
-                                <span id="FIELD_ZIPC">
-                                </span>
-                                <span style="font-size: 16px;" id="FIELD_ADDR">
-                                  New Delhi, India 110034
-                                </span>
-                              </li><br><br>
-                              
-                              <li dependency="DOB1" id="style-CL9OX" class="style-CL9OX">
-                                <span class="txt-bold">
-                                  <span class="xslt_static_change" id="DOCDATAINFO_DOB1">
-                                    undefined
+                                </li>
+                                <li dependency="ADDR|STRT|CITY|STAT|ZIPC|CNTY">
+                                  <span id="FIELD_STRT">
                                   </span>
-                                  <span>
-                                    : 
+                                  <span dependency="STRT" id="style-oAxeS" class="style-oAxeS">
+                                    <span dependency="CITY|STAT|CNTY|ZIPC" id="style-plliV" class="style-plliV">
+                                      ,
+                                    </span>
                                   </span>
-                                </span>
-                                <span id="FIELD_DOB1">
-                                </span>
-                              </li>
-                              <li dependency="DRIV" id="style-ANUlr" class="style-ANUlr">
-                                <span class="txt-bold">
-                                  <span class="xslt_static_change" id="DOCDATAINFO_DRIV">
-                                    undefined
+                                  <span id="FIELD_CITY">
                                   </span>
-                                  <span>
-                                    : 
+                                  <span dependency="CITY" id="style-3V4hM" class="style-3V4hM">
+                                    <span dependency="STAT|CNTY|ZIPC" id="style-ggG8S" class="style-ggG8S">
+                                      ,
+                                    </span>
                                   </span>
-                                </span>
-                                <span id="FIELD_DRIV">
-                                </span>
-                              </li>
-                              <li dependency="WEB1" id="style-o3yBR" class="style-o3yBR">
-                                <span id="FIELD_WEB1">
-                                </span>
-                              </li>
-                              
-                              <li >
-                                <span style="font-size: 16px;" id="FIELD_LNKD">
-                                  https://www.linkedin.com/company/haegl-technologies-pvt-ltd/
-                                </span>
-                              </li>
-                            </ul>
+                                  <span id="FIELD_STAT">
+                                  </span>
+                                  <span dependency="STAT|CNTY+ZIPC" id="style-pf4GX" class="style-pf4GX">
+                                    ,
+                                  </span>
+                                  <span id="FIELD_CNTY">
+                                  </span>
+                                  <span dependency="CNTY+ZIPC" id="style-6Cjon" class="style-6Cjon">
+                                    ,
+                                  </span>
+                                  <span id="FIELD_ZIPC">
+                                  </span>
+                                  <span style="font-size: 17px;" id="FIELD_ADDR">
+                                    New Delhi, India 110034
+                                  </span>
+                                </li><br><br>
+
+                                <li dependency="DOB1" id="style-CL9OX" class="style-CL9OX">
+                                  <span class="txt-bold">
+                                    <span class="xslt_static_change" id="DOCDATAINFO_DOB1">
+                                      undefined
+                                    </span>
+                                    <span>
+                                      :
+                                    </span>
+                                  </span>
+                                  <span id="FIELD_DOB1">
+                                  </span>
+                                </li>
+                                <li dependency="DRIV" id="style-ANUlr" class="style-ANUlr">
+                                  <span class="txt-bold">
+                                    <span class="xslt_static_change" id="DOCDATAINFO_DRIV">
+                                      undefined
+                                    </span>
+                                    <span>
+                                      :
+                                    </span>
+                                  </span>
+                                  <span id="FIELD_DRIV">
+                                  </span>
+                                </li>
+                                <li dependency="WEB1" id="style-o3yBR" class="style-o3yBR">
+                                  <span id="FIELD_WEB1">
+                                  </span>
+                                </li>
+
+                                <li>
+                                  <span style="font-size: 17px;" id="FIELD_LNKD">
+                                    https://www.linkedin.com/company/haegl-technologies-pvt-ltd/
+                                  </span>
+                                </li>
+                              </ul>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
 
-             
 
 
-              <div class="doc-overlay section-overlay style-Bth3P" id="style-Bth3P">
-                <span>
-                </span>
+
+                <div class="doc-overlay section-overlay style-Bth3P" id="style-Bth3P">
+                  <span>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div id="CONTAINER_PARENT_1" class="parent-container">
-          <div id="CONTAINER_1" class="">
-            <div data-react-beautiful-dnd-draggable="23" class="sortable-item section-container SortableItem-sibling  data-SUMM">
-              <div class="document-tool sec-tool style-Ua1Yi" id="editIcons">
-              </div>
-              <div id="SECTION_SUMMb31c8680-0f77-40de-87b7-b415abbdb0d3" class="section SECTION_SUMM    has-title  " data-section-cd="SUMM">
-                <div class=" doc-item">
-                  <div class="heading">
-                    <div class="sectiontitle" id="SECTIONNAME_SUMM">
-                      Summary
-                      <span title=" Summary " class="rename-section text-rename">
-                      </span>
-                    </div>
-                  </div>
-                  <div class="">
-                    <div class="">
-                      <div id="PARAGRAPH_SUMM_7f9c042d-b5f2-c45e-a414-5c86a97981c3" class="paragraph PARAGRAPH_SUMM firstparagraph  ">
-                        <div class="clearfix doc-item">
-                          <div class="singlecolumn" id="FIELD_FRFM">
-                            <p>
-                              Customer-focused Retail Sales professional with solid understanding of retail dynamics, marketing and customer service. Offering 5 years of experience providing quality product recommendations and solutions to meet customer needs and exceed expectations. Demonstrated record of exceeding revenue targets by leveraging communication skills and sales expertise.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+          <div id="CONTAINER_PARENT_1" class="parent-container">
+            <div id="CONTAINER_1" class="">
+              <div data-react-beautiful-dnd-draggable="23"
+                class="sortable-item section-container SortableItem-sibling  data-SUMM">
+                <div class="document-tool sec-tool style-Ua1Yi" id="editIcons">
                 </div>
-              </div>
-            </div>
-            <div data-react-beautiful-dnd-draggable="23" class="sortable-item section-container SortableItem-sibling  data-HILT">
-              <div class="document-tool sec-tool style-ghxqt" id="editIcons">
-              </div>
-              <div id="SECTION_HILT2623a66d-3a37-48c7-8312-2afde3481844" class="section SECTION_HILT    has-title  " data-section-cd="HILT">
-                <div class=" doc-item">
-                  <div class="heading">
-                    <div class="sectiontitle" id="SECTIONNAME_HILT">
-                      Skills
-                      <span title=" Skills " class="rename-section text-rename">
-                      </span>
-                    </div>
-                  </div>
-                  <div class="">
-                    <div class="">
-                      <div id="PARAGRAPH_HILT_42010f6e-3132-5d28-c6a3-d9136d6d3f0b" class="paragraph PARAGRAPH_HILT firstparagraph  ">
-                        <div class="clearfix doc-item">
-                          <div class="singlecolumn maincolumn">
-                            <div class="skill">
-                              <span class="paddedline" id="FIELD_SKC1">
-                                <ul>
-                                  <li>
-                                    Cash register operation&nbsp;
-                                  </li>
-                                  <li>
-                                    POS system operation&nbsp;
-                                  </li>
-                                  <li>
-                                    Sales expertise&nbsp;
-                                  </li>
-                                  <li>
-                                    Teamwork
-                                  </li>
-                                </ul>
-                              </span>
-                              <span class="paddedline" id="FIELD_SKC2">
-                                <ul>
-                                  <li>
-                                    Inventory management&nbsp;
-                                  </li>
-                                  <li>
-                                    Accurate money handling&nbsp;
-                                  </li>
-                                  <li>
-                                    Documentation and recordkeeping&nbsp;
-                                  </li>
-                                  <li>
-                                    Retail merchandising expertise
-                                  </li>
-                                </ul>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div data-react-beautiful-dnd-draggable="23" class="sortable-item section-container SortableItem-sibling  data-EXPR">
-              <div class="document-tool sec-tool style-3Yerh" id="editIcons"></div>
-              <div id="SECTION_EXPR106767ef-9f26-4772-aa69-49692b236bad" class="section expr-sec SECTION_EXPR   multi-para has-title" data-section-cd="EXPR">
+                <div id="SECTION_SUMMb31c8680-0f77-40de-87b7-b415abbdb0d3" class="section SECTION_SUMM    has-title  "
+                  data-section-cd="SUMM">
                   <div class=" doc-item">
-                      <div class="heading">
-                          <div class="sectiontitle" id="SECTIONNAME_EXPR">
-                              Experience
-                              <span title=" Experience " class="rename-section text-rename"></span>
-                          </div>
+                    <div class="heading">
+                      <div class="sectiontitle" id="SECTIONNAME_SUMM">
+                        Summary
+                        <span title=" Summary " class="rename-section text-rename">
+                        </span>
                       </div>
+                    </div>
+                    <div class="">
                       <div class="">
-                          <div id="CONTAINER_106767ef-9f26-4772-aa69-49692b236bad" class="sortableInner">
-                      <div data-react-beautiful-dnd-draggable="23" class="sortable-item paragraph-container SortableItem-sibling ">
-                        <button type="button" tabindex="0" data-react-beautiful-dnd-drag-handle="23" aria-roledescription="Draggable item. Press space bar to lift" draggable="false" class="btn-icon-tertiary btn-icon-move d-none">
-                        </button>
-                        <div id="PARAGRAPH_EXPR_3e3aa949-f856-d1c2-ea5a-6ffc91424457" class="paragraph PARAGRAPH_EXPR firstparagraph  ">
-                          <div class="clearfix doc-item">
-                            <div class="singlecolumn">
-                                <span class="disp-blk expr-size" dependency="JSTD|EDDT">
-                                    <span id="FIELD_CMN" format="%m/%Y">
-                                     xyz company
-                                    </span>
-                                    
-                                  </span>
-                              <span class="disp-blk expr-size" dependency="JTIT|COMP|JCIT|JSTA|JCNT">
-                                <span id="FIELD_JTIT">
-                                  Retail Sales Associate
-                                </span>
-                                
-                                <span dependency="COMP">
-                                  <span dependency="JCIT|JSTA|JCNT">
-                                    , 
-                                  </span>
-                                </span>
-                                <span id="FIELD_JCIT">
-                                  New Delhi
-                                </span>
-                                <span dependency="JCIT+JSTA|JCNT">
-                                  , 
-                                </span>
-                                <span id="FIELD_JSTA">
-                                  India
-                                </span>
-                                <span dependency="JSTA+JCNT" id="style-QiEZa" class="style-QiEZa">
-                                  , 
-                                </span>
-                                <span id="FIELD_JCNT">
-                                </span>
-                              </span>
-                              <span class="disp-blk expr-size" dependency="JSTD|EDDT">
-                                <span id="FIELD_JSTD" format="%m/%Y">
-                                  02/2017
-                                </span>
-                                <span dependency="JSTD+EDDT">
-                                  - 
-                                </span>
-                                <span id="FIELD_EDDT" format="%m/%Y">
-                                  Current
-                                </span>
-                              </span>
-                              <span id="FIELD_JDES">
-                                <ul>
-                                  <li style="line-height: 50%;">
-                                    Increased monthly sales 10% by effectively upselling and cross-selling products to maximize profitability.&nbsp;
-                                  </li>
-                                  <li>
-                                    Prevented store losses by leveraging awareness, attention to detail, and integrity to identify and investigate concerns.&nbsp;
-                                  </li>
-                                  <li>
-                                    Processed payments and maintained accurate drawers to meet financial targets.
-                                  </li>
-                                </ul>
-                              </span>
+                        <div id="PARAGRAPH_SUMM_7f9c042d-b5f2-c45e-a414-5c86a97981c3"
+                          class="paragraph PARAGRAPH_SUMM firstparagraph  ">
+                          <div class="clearfix doc-item ">
+                            <div class="singlecolumn content-container" id="FIELD_FRFM">
+                              <p> 
+                                Customer-focused Retail Sales professional with solid understanding of retail dynamics,
+                                marketing and customer service. Offering 5 years of experience providing quality product
+                                recommendations and solutions to meet customer needs and exceed expectations.
+                                Demonstrated record of exceeding revenue targets by leveraging communication skills and
+                                sales expertise.
+                              </p>
                             </div>
                           </div>
                         </div>
                       </div>
-                     
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div data-react-beautiful-dnd-draggable="23" class="sortable-item section-container SortableItem-sibling  data-EDUC">
-              <div class="document-tool sec-tool style-PmtNv" id="editIcons">
-              </div>
-              <div id="SECTION_EDUC6481c545-a7e0-477e-ad64-7aa6660f8855" class="section educ-sec SECTION_EDUC   multi-para has-title  " data-section-cd="EDUC">
-                <div class=" doc-item">
-                  <div class="heading">
-                    <div class="sectiontitle" id="SECTIONNAME_EDUC">
-                      Education and Training
-                      <span title=" Education and Training " class="rename-section text-rename">
-                      </span>
+              <div data-react-beautiful-dnd-draggable="23"
+                class="sortable-item section-container SortableItem-sibling  data-HILT">
+                <div class="document-tool sec-tool style-ghxqt" id="editIcons">
+                </div>
+                <div id="SECTION_HILT2623a66d-3a37-48c7-8312-2afde3481844" class="section SECTION_HILT    has-title  "
+                  data-section-cd="HILT">
+                  <div class=" doc-item">
+                    <div class="heading">
+                      <div class="sectiontitle" id="SECTIONNAME_HILT">
+                        Skills
+                        <span title=" Skills " class="rename-section text-rename">
+                        </span>
+                      </div>
+                    </div>
+                    <div class="">
+                      <div class="">
+                        <div id="PARAGRAPH_HILT_42010f6e-3132-5d28-c6a3-d9136d6d3f0b"
+                          class="paragraph PARAGRAPH_HILT firstparagraph  ">
+                          <div class="clearfix doc-item">
+                            <div class="singlecolumn maincolumn content-container skills">
+                              <div class="skill">
+                                <span class="paddedline" id="FIELD_SKC1">
+                                  <ul>
+                                    <li>
+                                      Cash register operation&nbsp;
+                                    </li>
+                                    <li>
+                                      POS system operation&nbsp;
+                                    </li>
+                                    <li>
+                                      Sales expertise&nbsp;
+                                    </li>
+                                    <li>
+                                      Teamwork
+                                    </li>
+                                  </ul>
+                                </span>
+                                <span class="paddedline" id="FIELD_SKC2">
+                                  <ul>
+                                    <li>
+                                      Inventory management&nbsp;
+                                    </li>
+                                    <li>
+                                      Accurate money handling&nbsp;
+                                    </li>
+                                    <li>
+                                      Documentation and recordkeeping&nbsp;
+                                    </li>
+                                    <li>
+                                      Retail merchandising expertise
+                                    </li>
+                                  </ul>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="">
+                </div>
+              </div>
+              <div data-react-beautiful-dnd-draggable="23"
+                class="sortable-item section-container SortableItem-sibling  data-EXPR">
+                <div class="document-tool sec-tool style-3Yerh" id="editIcons"></div>
+                <div id="SECTION_EXPR106767ef-9f26-4772-aa69-49692b236bad"
+                  class="section expr-sec SECTION_EXPR   multi-para has-title" data-section-cd="EXPR">
+                  <div class=" doc-item">
+                    <div class="heading">
+                      <div class="sectiontitle" id="SECTIONNAME_EXPR">
+                        Experience
+                        <span title=" Experience " class="rename-section text-rename"></span>
+                      </div>
+                    </div>
                     <div class="">
-                      <div id="PARAGRAPH_EDUC_95eaf4ba-ee3c-27ba-2523-308b7a2a242f" class="paragraph PARAGRAPH_EDUC firstparagraph  ">
-                        <div class="clearfix doc-item">
-                          <div class="singlecolumn">
-                            <span class="disp-blk txt-bold" dependency="GRYR">
-                              <span class="xslt_static_change displayNoneThisField">
-                                Expected in 
-                              </span>
-                              <span id="FIELD_GRYR" format="%m/%Y">
-                                2016
-                              </span>
-                            </span>
-                            <span class="disp-blk" dependency="DGRE|STUY">
-                              <span class="degree txt-bold txt-caps" id="FIELD_DGRE">
-                                Diploma in Financial Accounting
-                              </span>
-                              <span dependency="DGRE+STUY" id="style-JLer2" class="style-JLer2">
-                                , 
-                              </span>
-                              <span class="programline" id="FIELD_STUY">
-                              </span>
-                            </span>
-                            <span class="disp-blk" dependency="SCHO|SCIT|SSTA|SCNT">
-                              <span class="txt-bold txt-italic txt-caps" id="FIELD_SCHO">
-                                Oxford Software Institute &amp; Oxford School of English
-                              </span>
-                              <span dependency="SCHO">
-                                <span dependency="SCIT|SSTA|SCNT">
-                                  , 
+                      <div id="CONTAINER_106767ef-9f26-4772-aa69-49692b236bad" class="sortableInner">
+                        <div data-react-beautiful-dnd-draggable="23"
+                          class="sortable-item paragraph-container SortableItem-sibling ">
+                          <button type="button" tabindex="0" data-react-beautiful-dnd-drag-handle="23"
+                            aria-roledescription="Draggable item. Press space bar to lift" draggable="false"
+                            class="btn-icon-tertiary btn-icon-move d-none">
+                          </button>
+                          <div id="PARAGRAPH_EXPR_3e3aa949-f856-d1c2-ea5a-6ffc91424457"
+                            class="paragraph PARAGRAPH_EXPR firstparagraph  ">
+                            <div class="clearfix doc-item">
+                              <div class="singlecolumn content-container exp">
+                                <span class="disp-blk expr-size" dependency="JSTD|EDDT">
+                                  <span style="font-weight: bold;" id="FIELD_CMN" format="%m/%Y">
+                                    xyz company
+                                  </span>
+
+                                </span>
+                                <span class="disp-blk expr-size" dependency="JTIT|COMP|JCIT|JSTA|JCNT">
+                                  <span id="FIELD_JTIT">
+                                    Retail Sales Associate
+                                  </span>
+
+                                  <span dependency="COMP">
+                                    <span dependency="JCIT|JSTA|JCNT">
+                                      ,
+                                    </span>
+                                  </span>
+                                  <span id="FIELD_JCIT">
+                                    New Delhi
+                                  </span>
+                                  <span dependency="JCIT+JSTA|JCNT">
+                                    ,
+                                  </span>
+                                  <span id="FIELD_JSTA">
+                                    India
+                                  </span>
+                                  <span dependency="JSTA+JCNT" id="style-QiEZa" class="style-QiEZa">
+                                    ,
+                                  </span>
+                                  <span id="FIELD_JCNT">
+                                  </span>
+                                </span>
+                                <span class="disp-blk expr-size" dependency="JSTD|EDDT">
+                                  <span id="FIELD_JSTD" format="%m/%Y">
+                                    02/2017
+                                  </span>
+                                  <span dependency="JSTD+EDDT">
+                                    -
+                                  </span>
+                                  <span id="FIELD_EDDT" format="%m/%Y">
+                                    Current
+                                  </span>
+                                </span>
+                                <span id="FIELD_JDES">
+                                  <ul>
+                                    <li style="line-height: 50%;">
+                                      Increased monthly sales 10% by effectively upselling and cross-selling products to
+                                      maximize profitability.&nbsp;
+                                    </li>
+                                    <li>
+                                      Prevented store losses by leveraging awareness, attention to detail, and integrity
+                                      to identify and investigate concerns.&nbsp;
+                                    </li>
+                                    <li>
+                                      Processed payments and maintained accurate drawers to meet financial targets.
+                                    </li>
+                                  </ul>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div data-react-beautiful-dnd-draggable="23"
+                class="sortable-item section-container SortableItem-sibling  data-EXPR">
+                <div class="document-tool sec-tool style-3Yerh" id="editIcons"></div>
+                <div id="SECTION_EXPR106767ef-9f26-4772-aa69-49692b236bad"
+                  class="section expr-sec SECTION_EXPR   multi-para has-title" data-section-cd="EXPR">
+                  <div class=" doc-item">
+                    <div class="heading">
+                      <div class="sectiontitle" id="SECTIONNAME_EXPR">
+                        Project
+                        <span title=" Experience " class="rename-section text-rename"></span>
+                      </div>
+                    </div>
+                    <div class="">
+                      <div id="CONTAINER_106767ef-9f26-4772-aa69-49692b236bad" class="sortableInner">
+                        <div data-react-beautiful-dnd-draggable="23"
+                          class="sortable-item paragraph-container SortableItem-sibling ">
+                          <button type="button" tabindex="0" data-react-beautiful-dnd-drag-handle="23"
+                            aria-roledescription="Draggable item. Press space bar to lift" draggable="false"
+                            class="btn-icon-tertiary btn-icon-move d-none">
+                          </button>
+                          <div id="PARAGRAPH_EXPR_3e3aa949-f856-d1c2-ea5a-6ffc91424457"
+                            class="paragraph PARAGRAPH_EXPR firstparagraph  ">
+                            <div class="clearfix doc-item">
+                              <div class="singlecolumn content-container project">
+                                <span class="disp-blk expr-size" dependency="JSTD|EDDT">
+                                  <span style="font-weight: bold;" id="FIELD_PRO">
+                                    ATM Database Management
+                                  </span>
+
+                                </span>
+                                <span class="disp-blk expr-size" dependency="JTIT|COMP|JCIT|JSTA|JCNT">
+                                  <span id="FIELD_PROTOOLS">
+                                    Tools used :
+                                  </span>
+
+
+                                  <span id="FIELD_TOOLS">
+                                    &nbsp Python, MySQL, Excel, Django
+                                  </span><br>
+
+                                  <span id="FIELD_URL">
+                                    https://github.com/Sangeeta-g-d/websolutions1
+                                  </span>
+
+                                </span>
+
+                                <span id="FIELD_PRODES">
+                                  <ul>
+                                    <li>
+                                      Role in the project
+                                    </li>
+
+                                  </ul>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div data-react-beautiful-dnd-draggable="23"
+                class="sortable-item section-container SortableItem-sibling  data-EDUC">
+                <div class="document-tool sec-tool style-PmtNv" id="editIcons">
+                </div>
+                <div id="SECTION_EDUC6481c545-a7e0-477e-ad64-7aa6660f8855"
+                  class="section educ-sec SECTION_EDUC   multi-para has-title  " data-section-cd="EDUC">
+                  <div class=" doc-item">
+                    <div class="heading">
+                      <div class="sectiontitle" id="SECTIONNAME_EDUC">
+                        Education and Training
+                        <span title=" Education and Training " class="rename-section text-rename">
+                        </span>
+                      </div>
+                    </div>
+                    <div class="">
+                      <div class="">
+                        <div id="PARAGRAPH_EDUC_95eaf4ba-ee3c-27ba-2523-308b7a2a242f"
+                          class="paragraph PARAGRAPH_EDUC firstparagraph  ">
+                          <div class="clearfix doc-item">
+                            <div class="singlecolumn content-container education">
+                              <span class="disp-blk txt-bold" dependency="GRYR">
+                                <span class="xslt_static_change displayNoneThisField">
+                                  Expected in
+                                </span>
+                                <span id="FIELD_GRYR" format="%m/%Y">
+                                  2016 -
+                                </span>
+                                <span id="FIELD_GRYR" format="%m/%Y">
+                                  2016 |
+                                  <span class="txt-bold txt-italic txt-caps" id="FIELD_SCHO">
+                                    Oxford Software Institute &amp; Oxford School of English
+                                  </span>
                                 </span>
                               </span>
                               <span id="FIELD_SCIT">
                                 New Delhi, India
                               </span>
-                              <span dependency="SCIT+SSTA|SCNT" id="style-LfNzZ" class="style-LfNzZ">
-                                , 
+                              <span class="disp-blk" dependency="DGRE|STUY">
+                                <span class="degree txt-bold txt-caps" id="FIELD_DGRE">
+                                  Diploma in Financial Accounting
+                                </span>
                               </span>
-                              <span id="FIELD_SSTA">
-                              </span>
-                              <span dependency="SSTA+SCNT" id="style-fnGOf" class="style-fnGOf">
-                                , 
-                              </span>
-                              <span id="FIELD_SCNT">
-                              </span>
-                            </span>
-                            <span class="disp-blk style-fHWIw" dependency="GRPA" id="style-fHWIw">
-                              <span>
-                                GPA: 
-                              </span>
-                              <span id="FIELD_GRPA">
-                              </span>
-                            </span>
-                            
-                            <span id="FIELD_FRFM">
-                            </span>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -1446,105 +1570,82 @@ function updateText() {
                   </div>
                 </div>
               </div>
-            </div>
-            <div data-react-beautiful-dnd-draggable="23" class="sortable-item section-container SortableItem-sibling  data-LNGG">
-              <div class="document-tool sec-tool style-wUCAE" id="editIcons">
-              </div>
-              <div id="SECTION_LNGG36369f28-1717-c0d3-39a5-96f0b2c27702" class="section lang-sec infobarsec SECTION_LNGG    has-title  " data-section-cd="LNGG">
-                <div class=" doc-item">
-                  <div class="heading">
-                    <div class="sectiontitle" id="SECTIONNAME_LNGG">
-                      Languages
-                      <span title=" Languages " class="rename-section text-rename">
-                      </span>
+              <div data-react-beautiful-dnd-draggable="23"
+                class="sortable-item section-container SortableItem-sibling  data-SUMM">
+                <div class="document-tool sec-tool style-Ua1Yi" id="editIcons">
+                </div>
+                <div id="SECTION_SUMMb31c8680-0f77-40de-87b7-b415abbdb0d3" class="section SECTION_SUMM    has-title  "
+                  data-section-cd="SUMM">
+                  <div class=" doc-item">
+                    <div class="heading">
+                      <div class="sectiontitle" id="SECTIONNAME_ACHIEVE">
+                        Achievements
+                        <span title=" Summary " class="rename-section text-rename">
+                        </span>
+                      </div>
+                    </div>
+                    <div class="">
+                      <div class="">
+                        <div id="PARAGRAPH_SUMM_7f9c042d-b5f2-c45e-a414-5c86a97981c3"
+                          class="paragraph PARAGRAPH_SUMM firstparagraph  ">
+                          <div class="clearfix doc-item">
+                            <div class="singlecolumn content-container" id="FIELD_ACHIEVEMENTS">
+                              <ul>
+                                <li>
+                                  Customer-focused Retail Sales professional with solid understanding of retail
+                                  dynamics, marketing and customer service.
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="">
-                    <div id="CONTAINER_36369f28-1717-c0d3-39a5-96f0b2c27702" class="sortableInner">
-                      <div data-react-beautiful-dnd-draggable="23" class="sortable-item paragraph-container SortableItem-sibling ">
-                        <button type="button" tabindex="0" data-react-beautiful-dnd-drag-handle="23" aria-roledescription="Draggable item. Press space bar to lift" draggable="false" class="btn-icon-tertiary btn-icon-move d-none">
-                        </button>
-                        <div id="PARAGRAPH_LNGG_20023c30-89ef-3a99-3f68-d7715a46b8f2" class="paragraph PARAGRAPH_LNGG firstparagraph  nativeLangPara">
-                          <div class="clearfix doc-item">
-                            <div class="singlecolumn infobarpara">
-                              <div class="field">
-                                <span class="txt-bold" id="FIELD_FRFM">
-                                  Hindi
-                                </span>
-                                <span class="colon" dependency="FRFM">
-                                  :
-                                </span>
-                                <span class="flt-right" id="FIELD_RATG">
-                                </span>
-                              </div>
-                              <div class="rating-bar style-zjUj9" dependency="RATV" id="style-zjUj9">
-                                <div class="inner-rating style-rvDQt" id="FIELD_RATV" type="width">
-                                </div>
-                              </div>
-                              <div class="field field-ratt">
-                                <span id="FIELD_RATT">
-                                  Native speaker
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                </div>
+              </div>
+              <div data-react-beautiful-dnd-draggable="23"
+                class="sortable-item section-container SortableItem-sibling  data-LNGG">
+                <div class="document-tool sec-tool style-wUCAE" id="editIcons">
+                </div>
+                <div id="SECTION_LNGG36369f28-1717-c0d3-39a5-96f0b2c27702"
+                  class="section lang-sec infobarsec SECTION_LNGG    has-title  " data-section-cd="LNGG">
+                  <div class=" doc-item">
+                    <div class="heading">
+                      <div class="sectiontitle" id="SECTIONNAME_LNGG">
+                        Languages
+                        <span title=" Languages " class="rename-section text-rename">
+                        </span>
                       </div>
-                      <div data-react-beautiful-dnd-draggable="23" class="sortable-item paragraph-container SortableItem-sibling ">
-                        <button type="button" tabindex="0" data-react-beautiful-dnd-drag-handle="23" aria-roledescription="Draggable item. Press space bar to lift" draggable="false" class="btn-icon-tertiary btn-icon-move d-none">
-                        </button>
-                        <div id="PARAGRAPH_LNGG_756f3fd5-3415-d225-25f6-26433cdf5859" class="paragraph PARAGRAPH_LNGG  para_odd">
-                          <div class="clearfix doc-item">
-                            <div class="singlecolumn infobarpara">
-                              <div class="field">
-                                <span class="txt-bold" id="FIELD_FRFM">
-                                  English
-                                </span>
-                                <span class="colon" dependency="FRFM">
-                                  :
-                                </span>
-                                <span class="flt-right" id="FIELD_RATG">
-                                  C2
-                                </span>
-                              </div>
-                              <div class="rating-bar" dependency="RATV">
-                                <div class="inner-rating style-Nev3b" id="FIELD_RATV" type="width">
+                    </div>
+                    <div class="">
+                      <div id="CONTAINER_36369f28-1717-c0d3-39a5-96f0b2c27702" class="sortableInner">
+                        <div data-react-beautiful-dnd-draggable="23"
+                          class="sortable-item paragraph-container SortableItem-sibling ">
+                          <button type="button" tabindex="0" data-react-beautiful-dnd-drag-handle="23"
+                            aria-roledescription="Draggable item. Press space bar to lift" draggable="false"
+                            class="btn-icon-tertiary btn-icon-move d-none">
+                          </button>
+                          <div id="PARAGRAPH_LNGG_20023c30-89ef-3a99-3f68-d7715a46b8f2"
+                            class="paragraph PARAGRAPH_LNGG firstparagraph  nativeLangPara">
+                            <div class="clearfix doc-item">
+                              <div class="singlecolumn infobarpara content-container">
+                                <div class="field">
+                                  <span style="font-size: 17px;" id="FIELD_LANG">
+                                    <ul>
+                                      <li style="font-size: 17px;">
+                                        English &nbsp; &nbsp;
+                                      </li>
+                                      <li style="font-size: 17px;">
+                                        Hindi &nbsp; &nbsp;
+                                      </li>
+                                    </ul>
                                 </div>
-                              </div>
-                              <div class="field field-ratt">
-                                <span id="FIELD_RATT">
-                                  Proficient
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div data-react-beautiful-dnd-draggable="23" class="sortable-item paragraph-container SortableItem-sibling ">
-                        <button type="button" tabindex="0" data-react-beautiful-dnd-drag-handle="23" aria-roledescription="Draggable item. Press space bar to lift" draggable="false" class="btn-icon-tertiary btn-icon-move d-none">
-                        </button>
-                        <div id="PARAGRAPH_LNGG_5cf93e39-188c-5232-51b9-f59f27dbcb4d" class="paragraph PARAGRAPH_LNGG  para_even">
-                          <div class="clearfix doc-item">
-                            <div class="singlecolumn infobarpara">
-                              <div class="field">
-                                <span class="txt-bold" id="FIELD_FRFM">
-                                  Bengali
-                                </span>
-                                <span class="colon" dependency="FRFM">
-                                  :
-                                </span>
-                                <span class="flt-right" id="FIELD_RATG">
-                                  B2
-                                </span>
-                              </div>
-                              <div class="rating-bar" dependency="RATV">
-                                <div class="inner-rating style-IYpdn" id="FIELD_RATV" type="width">
+                                <div class="rating-bar style-zjUj9" dependency="RATV" id="style-zjUj9">
+                                  <div class="inner-rating style-rvDQt" id="FIELD_RATV" type="width">
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="field field-ratt">
-                                <span id="FIELD_RATT">
-                                  Upper-intermediate
-                                </span>
+
                               </div>
                             </div>
                           </div>
@@ -1557,89 +1658,64 @@ function updateText() {
             </div>
           </div>
         </div>
+
+
+        <p>sdfghbnj</p>
+        <br>
+        <br>
+
       </div>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      <p>sdfghbnj</p>
-      <br>
-      <br>
-      
     </div>
-</div>
 
     <div class="right-side1">
-      
-        <div class="zoom-controls">
-            <label for="zoomRange">Zoom:</label>
-            <input type="range" id="zoomRange" min="50" max="200" value="100" step="1" oninput="updateZoom()">
-        </div>
-    </div>
-</div>
 
-<script>
+      <div class="zoom-controls">
+        <label for="zoomRange">Zoom:</label>
+        <input type="range" id="zoomRange" min="50" max="200" value="100" step="1" oninput="updateZoom()">
+      </div>
+    </div>
+  </div>
+
+  <script>
     function openPopup() {
-        // Show the popup
-        document.getElementById('imagePopup').style.display = 'block';
+      // Show the popup
+      document.getElementById('imagePopup').style.display = 'block';
     }
 
     function closePopup() {
-        // Close the popup
-        document.getElementById('imagePopup').style.display = 'none';
+      // Close the popup
+      document.getElementById('imagePopup').style.display = 'none';
     }
-</script>
+  </script>
 
-<script>
-    $(document).ready(function() {
-        // Attach input event to all input fields
-        $("input").on("input", function() {
-            // Get the input value
-            var inputValue = $(this).val();
+  <script>
+    $(document).ready(function () {
+      // Attach input event to all input fields
+      $("input").on("input", function () {
+        // Get the input value
+        var inputValue = $(this).val();
 
-            // Get the corresponding template field id
-            var templateField = $(this).data("template-field");
+        // Get the corresponding template field id
+        var templateField = $(this).data("template-field");
 
-            // Update the template with the input value
-            $("#" + templateField).text(inputValue);
-        });
+        // Update the template with the input value
+        $("#" + templateField).text(inputValue);
+      });
 
-        // Add similar event handling for textarea
-        $("textarea").on("input", function() {
-            var inputValue = $(this).val();
-            var templateField = $(this).data("template-field");
-            $("#" + templateField).text(inputValue);
-        });
+      // Add similar event handling for textarea
+      $("textarea").on("input", function () {
+        var inputValue = $(this).val();
+        var templateField = $(this).data("template-field");
+        $("#" + templateField).text(inputValue);
+      });
     });
-</script>
+  </script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 </body>
+
 </html>
