@@ -324,7 +324,7 @@ function toggleContainer() {
       });
       
 // dynamic ------------------------
-      function updateSkills() {
+ /*     function updateSkills() {
         var skills1 = document.getElementById("skillContainer1").getElementsByTagName("input");
         var skills2 = document.getElementById("skillContainer3").getElementsByTagName("input");
 
@@ -540,3 +540,4 @@ function toggleContainer() {
           document.getElementById("description1").value = description;
         }
       };
+*/
