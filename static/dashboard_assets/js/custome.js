@@ -542,9 +542,13 @@ var languageCounter1 = 1; // Initial counter for column1 (odd)
     };
 */
 
+
+
+
 var storedFirstName = localStorage.getItem('firstName');
 if (storedFirstName) {
-  document.getElementById('firstName').value = storedFirstName;
+    document.getElementById('firstName').value = storedFirstName;
+
 }
 
 var storedLastName = localStorage.getItem('lastName');
