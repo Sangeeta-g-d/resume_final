@@ -541,3 +541,66 @@ function toggleContainer() {
         }
       };
 */
+
+var storedFirstName = localStorage.getItem('firstName');
+if (storedFirstName) {
+    document.getElementById('firstName').value = storedFirstName;
+}
+
+var storedLastName = localStorage.getItem('lastName');
+if (storedLastName) {
+    document.getElementById('lastName').value = storedLastName;
+}
+var storedEmail = localStorage.getItem('email');
+if (storedEmail) {
+    document.getElementById('email').value = storedEmail;
+}
+var storedPhoneno = localStorage.getItem('phoneNumber');
+if (storedPhoneno) {
+    document.getElementById('phoneNumber').value = storedPhoneno;
+}
+var storedlinkedin = localStorage.getItem('linkedin');
+if (storedlinkedin) {
+    document.getElementById('linkedin').value = storedlinkedin;
+}
+var storedsummary = localStorage.getItem('summaryTextArea');
+if (storedsummary) {
+    document.getElementById('summaryTextArea').value = storedsummary;
+}
+
+
+updateText(); // Update the display with the stored values
+
+function updateText() {
+    var firstName = document.getElementById("firstName").value;
+    var Display_Fname = document.getElementById("Display_Fname");
+    Display_Fname.textContent = firstName;
+
+    var lastName = document.getElementById('lastName').value;
+    var Display_Lname = document.getElementById("Display_Lname");
+    Display_Lname.textContent = lastName;
+
+    var email = document.getElementById('email').value;
+    var Display_Email = document.getElementById("Display_Email");
+    Display_Email.textContent = email;
+
+    var phoneNumber = document.getElementById('phoneNumber').value;
+    var Display_Phoneno = document.getElementById("Display_Phoneno");
+    Display_Phoneno.textContent = phoneNumber;
+
+    var linkedin = document.getElementById('linkedin').value;
+    var Display_lnkedin = document.getElementById("Display_lnkedin");
+    Display_lnkedin.textContent = linkedin;
+
+    var summaryTextArea = document.getElementById('summaryTextArea').value;
+    var Display_Summary = document.getElementById("Display_Summary");
+    Display_Summary.textContent = summaryTextArea;
+
+    // Store the values in localStorage
+    localStorage.setItem('firstName', firstName);
+    localStorage.setItem('lastName', lastName);
+    localStorage.setItem('email', email);
+    localStorage.setItem('phoneNumber', phoneNumber);
+    localStorage.setItem('linkedin', linkedin);
+    localStorage.setItem('summaryTextArea', summaryTextArea);
+}
