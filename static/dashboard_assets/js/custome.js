@@ -542,9 +542,13 @@ function toggleContainer() {
       };
 */
 
+
+
+
 var storedFirstName = localStorage.getItem('firstName');
 if (storedFirstName) {
     document.getElementById('firstName').value = storedFirstName;
+
 }
 
 var storedLastName = localStorage.getItem('lastName');
