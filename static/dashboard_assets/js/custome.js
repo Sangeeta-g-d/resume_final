@@ -134,17 +134,12 @@ function addNewEducation() {
     '<div class="form-group">' +
     '<input type="text" id="company' + experienceCount + '" class="form-control" placeholder="Institution Name" name="company' + experienceCount + '" style="height: 30px;">' +
     '</div>' +
-    '<div class="form-group">' +
-    '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Field Of Study" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
     '</div>' +
     '<div class="form-group">' +
-    '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Degree" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
+    '<input type="text" id="degreeInput"' + experienceCount + '" class="form-control" placeholder="Degree" name="jobtitle' + experienceCount + '" style="height: 30px;"onkeyup="updateDegree()">' +
     '</div>' +
     '<div class="form-group">' +
     '<input type="text" id="city' + experienceCount + '" class="form-control" placeholder="City" name="city' + experienceCount + '" style="height: 30px;">' +
-    '</div>' +
-    '<div class="form-group">' +
-    '<input type="text" id="country' + experienceCount + '" class="form-control" placeholder="Country" name="country' + experienceCount + '" style="height: 30px;">' +
     '</div>' +
     '<div class="form-group">' +
     '<label for="from' + experienceCount + '" style="margin-right: 10px;">From:</label>' +
@@ -154,15 +149,36 @@ function addNewEducation() {
     '<label for="to' + experienceCount + '" style="margin-right: 10px;">To:</label>' +
     '<input type="date" id="to' + experienceCount + '" class="form-control" name="to' + experienceCount + '" style="height: 35px;">' +
     '</div>' +
-
     '</form>';
 
   newExperience.appendChild(header);
   newExperience.appendChild(content);
   container.insertBefore(newExperience, container.lastElementChild);
-
+  // Display div generation and appending
+  var displayDiv = generateDisplayDiv(experienceCount);
+  educationContainer.appendChild(displayDiv);
 }
+function generateDisplayDiv(experienceCount) {
+  var displayDiv = document.createElement('div');
+  displayDiv.classList.add('education');
+  displayDiv.style.marginTop = "40px";
 
+  displayDiv.innerHTML = 
+    '<div style="width: 258px; ">' +
+    '<div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
+    '<span id="displayDegree' + experienceCount + '">Bachelor of Engineering</span><br>' +
+    '<span id="displayDegreeFrom' + experienceCount + '"> 2015  </span> | <span id="displayDegreeTo' + experienceCount + '"> 2017 </span>' +
+    '</div>' +
+    '<div id="displayCollege' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    'Copenhagen School of Design and Technology,' +
+    '</div>' +
+    '<div id="displayCity' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    'City' +
+    '</div>' +
+    '</div>';
+
+  return displayDiv;
+}
 function toggleEducation(header) {
   var content = header.nextElementSibling;
   header.querySelector('i').classList.toggle('fa-chevron-down');
@@ -332,6 +348,8 @@ var languageCounter1 = 1; // Initial counter for column1 (odd)
 var storedFirstName = localStorage.getItem('firstName');
 if (storedFirstName) {
     document.getElementById('firstName').value = storedFirstName;
+    
+    document.getElementById("Display_Fname").textContent = storedFirstName;
 
 }
 
@@ -392,68 +410,120 @@ function updateText() {
   localStorage.setItem('linkedin', linkedin);
   localStorage.setItem('summaryTextArea', summaryTextArea);
 }
- // Example JavaScript to dynamically adjust margin-top
 
- //education section
-   // Retrieve the stored value from localStorage
-   var storedInstitutionName = localStorage.getItem('userInstitutionName');
-   var initialInstitutionName = storedInstitutionName || 'Copenhagen School of Design and Technology';
-   var storedDegree = localStorage.getItem('userDegree') || 'Bachelor of Engineering';
-   var storedDegreeFrom = localStorage.getItem('userDegreeFrom') || '2015';
-   var storedDegreeTo = localStorage.getItem('userDegreeTo') || '2017';
- 
-   // Set the initial value in the input and div
-   document.getElementById('institution1').setAttribute('placeholder', initialInstitutionName);
-   document.getElementById('schoolDiv').textContent = initialInstitutionName + ',';
-   document.getElementById('degreeDiv').textContent = storedDegree;
-  document.getElementById('degreeInput').setAttribute('placeholder', storedDegree);
-  document.getElementById('degreeFrom').textContent = storedDegreeFrom + ' - ';
-  document.getElementById('degreeTo').textContent = storedDegreeTo;
 
- 
-   function updateInstitution() {
-     // Get the input value
-     var institutionName = document.getElementById('institution1').value;
- 
-     // Update the div content
-     document.getElementById('schoolDiv').textContent = institutionName + ',';
- 
-     // Update the placeholder attribute
-     document.getElementById('institution1').setAttribute('placeholder', institutionName);
- 
-     // Store the value in localStorage
-     localStorage.setItem('userInstitutionName', institutionName);
-   }
-   function updateDegree() {
-    // Get the input value
-    var degreeValue = document.getElementById('degreeInput').value;
+ // Experience
+ function updateExperience() {
+  var inputValue = document.getElementById("jobtitle1").value;
+  var divElement = document.getElementById("Display_Designation");
+  divElement.innerText = inputValue;
+  
+  var companyValue = document.getElementById("company1").value;
+  
+  // Update company name
+  var companyNameElement = document.getElementById("Display_Cname");
+  companyNameElement.innerText = companyValue;
+  // Store all values in local storage
+  localStorage.setItem("jobTitle", inputValue);
+  localStorage.setItem("companyName", companyValue);
+  
+}
 
-    // Update the div content and placeholder
-    document.getElementById('degreeDiv').textContent = degreeValue;
-    document.getElementById('degreeInput').setAttribute('placeholder', degreeValue);
+function updateExperienceDescription() {
+  var descriptionValue = document.getElementById("description1").value;
+    // Update description
+    var descriptionElement = document.getElementById("Display_Description");
+    descriptionElement.innerText = descriptionValue;
+  
+    var descriptionElement = document.getElementById("Display_Description");
+    descriptionElement.innerText = descriptionValue;
 
-    // Store the value in localStorage
-    localStorage.setItem('userDegree', degreeValue);
+    localStorage.setItem("description", descriptionValue);
+}
+
+function updateDegree() {
+  var degreeValue = document.getElementById("degreeInput").value;
+  var degreeElement = document.getElementById("displayDegree")
+  degreeElement.innerHTML = degreeValue
+  localStorage.setItem("degreeInputLocal", degreeValue);
+}
+
+function updateDegreeYear() {
+  var degreeFromValue = document.getElementById("degreeFromInput").value;
+  var degreeFromElement = document.getElementById("displayDegreeFrom")
+  degreeFromElement.innerHTML = degreeFromValue
+
+  var degreeToValue = document.getElementById("degreeToInput").value;
+  var degreeToElement = document.getElementById("displayDegreeTo")
+  degreeToElement.innerHTML = degreeToValue
+
+  localStorage.setItem("degreeFromLocal", degreeFromValue);
+  localStorage.setItem("degreeToLocal", degreeToValue);
+}
+
+function updateInstitution() {
+  var collegeValue = document.getElementById("institution1").value;
+  var collegeElement = document.getElementById("displayCollege")
+  collegeElement.innerHTML = collegeValue
+  localStorage.setItem("collegeInputLocal", collegeValue);
+}
+
+function updateCityCountry() {
+  var cityValue = document.getElementById("city").value;
+  var cityElement = document.getElementById("displayCity")
+  cityElement.innerHTML = cityValue
+  localStorage.setItem("cityLocal", cityValue);
+ 
+}
+
+function retrieveStoredValue() {
+  var storedValue = localStorage.getItem("jobTitle");
+  var storedCompanyName = localStorage.getItem("companyName");
+  var storedDescription = localStorage.getItem("description");
+  var storedDegree = localStorage.getItem("degreeInputLocal")
+  var storedFromDegree = localStorage.getItem("degreeFromLocal")
+  var storedToDegree = localStorage.getItem("degreeToLocal")
+  var storedCollege = localStorage.getItem("collegeInputLocal")
+  var storedCity = localStorage.getItem("cityLocal")
+ 
+
+  if (storedValue) {
+    document.getElementById("jobtitle1").value = storedValue;
+    document.getElementById("Display_Designation").innerText = storedValue;
+  }
+  
+  if (storedCompanyName) {
+    document.getElementById("company1").value = storedCompanyName;
+    document.getElementById("Display_Cname").innerText = storedCompanyName;
   }
 
-  function updateFromYear() {
-    // Get the input value
-    var fromYearValue = document.getElementById('degreeFromInput').value;
-
-    // Update the div content
-    document.getElementById('degreeFrom').textContent = fromYearValue + ' | ';
-
-    // Store the value in localStorage
-    localStorage.setItem('userDegreeFrom', fromYearValue);
+  if (storedDescription) {
+    document.getElementById("description1").value = storedDescription;
+    document.getElementById("Display_Description").innerText = storedDescription;
   }
-
-  function updateToYear() {
-    // Get the input value
-    var toYearValue = document.getElementById('degreeToInput').value;
-
-    // Update the div content
-    document.getElementById('degreeTo').textContent = toYearValue;
-
-    // Store the value in localStorage
-    localStorage.setItem('userDegreeTo', toYearValue);
+  if (storedDegree){
+    document.getElementById("degreeInput").value = storedDegree
+    document.getElementById("displayDegree").innerHTML = storedDegree
   }
+  if (storedFromDegree){
+    document.getElementById("degreeFromInput").value = storedFromDegree
+    document.getElementById("displayDegreeFrom").innerHTML = storedFromDegree
+  }
+  if (storedToDegree){
+    document.getElementById("degreeToInput").value = storedToDegree
+    document.getElementById("displayDegreeTo").innerHTML = storedToDegree
+  }
+  if (storedCollege){
+    document.getElementById("institution1").value = storedCollege
+    document.getElementById("displayCollege").innerHTML = storedCollege
+  }
+  if (storedCity){
+    document.getElementById('city').value = storedCity
+    document.getElementById('displayCity').innerHTML = storedCity
+  }
+ 
+}
+
+
+// Call the function to retrieve stored value when the page loads
+window.onload = retrieveStoredValue;

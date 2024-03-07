@@ -132,22 +132,16 @@
           <div class="experience-content">
             <form id="experience1">
               <div class="form-group">
-                <input type="text" id="company1" class="form-control" placeholder="Company Name" name="company1"
-                  style="height: 30px;" onkeyup="updateExperience()">
-              </div>
-              <div class="form-group">
                 <input type="text" id="jobtitle1" class="form-control" placeholder="Designation" name="jobtitle1"
                   style="height: 30px;" onkeyup="updateExperience()">
               </div>
 
               <div class="form-group">
-                <input type="text" id="city1" class="form-control" placeholder="City" name="city1" style="height: 30px;"
-                  onkeyup="updateExperience()">
-              </div>
-              <div class="form-group">
-                <input type="text" id="country1" class="form-control" placeholder="Country" name="country1"
+                <input type="text" id="company1" class="form-control" placeholder="Company Name" name="company1"
                   style="height: 30px;" onkeyup="updateExperience()">
               </div>
+             
+             
               <div class="form-group">
                 <label for="from1" style="margin-right: 10px;">From:</label>
                 <input type="month" id="from1" name="from1" class="form-control" style="height: 35px;"
@@ -167,7 +161,7 @@
               <div class="form-group">
                 <label for="description1">Description:</label>
                 <textarea id="description1" class="form-control" name="description1" rows="5"
-                  onkeyup="updateExperience()"></textarea>
+                  onkeyup="updateExperienceDescription()"></textarea>
               </div>
             </form>
           </div>
@@ -192,34 +186,27 @@
           <div class="experience-content">
             <form>
               <div class="form-group">
+                <input type="text" id="degreeInput" class="form-control" placeholder="Degree" name="degreeInput" style="height: 30px;" onkeyup="updateDegree()">
+              </div>
+              <div class="form-group">
                 <input type="text" id="institution1" class="form-control" placeholder="Institution Name" name="institution1"
                   style="height: 30px;"oninput="updateInstitution()">
               </div>
-            
               <div class="form-group">
-                <input type="text" id="degreeInput" class="form-control" placeholder="Degree" name="degreeInput" style="height: 30px;" oninput="updateDegree()">
-              </div>
-              <div class="form-group">
-                <input type="text" id="country1" class="form-control" placeholder="City" name="country1"
-                  style="height: 30px;">
-              </div>
-              <div class="form-group">
-                <input type="text" id="country1" class="form-control" placeholder="Country" name="country1"
-                  style="height: 30px;">
+                <input type="text" id="city" class="form-control" placeholder="City" name="country1"
+                  style="height: 30px;" onkeyup="updateCityCountry()">
               </div>
               <div class="form-group">
                 <label for="from1" style="margin-right: 10px;">From:</label>
-                <input type="month" id="degreeFromInput" name="degreeFromInput" class="form-control" style="height: 35px;" onchange="updateFromYear()">
+                <input type="month" id="degreeFromInput" name="degreeFromInput" class="form-control" style="height: 35px;"onchange="updateDegreeYear()" >
               </div>
-            
               <div class="form-group">
                 <label for="to1" style="margin-right: 10px;">To:</label>
-                <input type="month" id="degreeToInput" class="form-control" name="degreeToInput" style="height: 35px;" onchange="updateToYear()">
+                <input type="month" id="degreeToInput" class="form-control" name="degreeToInput" style="height: 35px;" onchange="updateDegreeYear()">
               </div>
             </form>
           </div>
         </div>
-
         <div class="form-group">
           <input type="submit" value="+ Add New Education" onclick="addNewEducation()">
         </div>
@@ -401,41 +388,41 @@
                   <div style="color: #1C8EB5; font-size: 14px; font-family: Poppins; font-weight: 400; line-height: 20px; word-wrap: break-word;">
                     Work experience
                   </div>
-                  <div style="width: 254px;">
-                    <div style="color: #222222; font-size: 14px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">
+                  <div style="width: 254px;">     
+                    <div id="Display_Designation" style="color: #222222; font-size: 14px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">
                       Product Designer
                     </div>
                     <div style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">
-                      Fintef, Oct 2019 - Present
+                     <span id="Display_Cname"> Fintef</span>, Oct 2019 - Present
                     </div>
-                    <div style="color: #222222; font-size: 10px; font-family: Poppins; font-weight: 400; line-height: 14px; word-wrap: break-word;">
-                      Designing end-to-end experience for financial products on mobile & web 
-                     
-                    </div>
+                    <div class="content">
+                      <div id="Display_Description" style="color: #222222; font-size: 10px; font-family: Poppins; font-weight: 400; line-height: 14px; word-wrap: break-word; overflow: hidden;">
+                          Designing end-to-end experience for financial products on mobile & web platforms. Working closely with managers, marketing specialists, and developers..cfvgbhnjsfgvbhjnksafghbjnedfghdbwcfgvhbjnkdfgdhbjnkansxgahjsnxbvcasxnrdtfy.crvtybunertgyhu567yghjrftgyhujrtgyhgyhujsccvgbhnjcvybnjrtyuhijrtyuhij.
+                      </div>
+                  </div>
+                  
                   </div>  
                 </div>
               
-                <div class="education" style="margin-top: 40px;">
+                <div class="education">
                   <div style="color: #1C8EB5; font-size: 14px; font-family: Poppins; font-weight: 400; line-height: 20px; word-wrap: break-word;">
                     Education & Learning
                   </div>
               
-                  <div style="width: 258px; height: 52px;">
+                  <div style="width: 258px; ">
                     <div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">
-                      <span id="degreeDiv">Bachelor of Engineering</span> &nbsp;&nbsp;&nbsp;&nbsp; <span id="degreeFrom"> 2015 | </span> <span id="degreeTo"> 2017 </span>
+                      <span id="displayDegree">Bachelor of Engineering</span><br> <span id="displayDegreeFrom"> 2015  </span> | <span id="displayDegreeTo"> 2017 </span>
                     </div>
-                    <div id="schoolDiv" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">
+                    <div id="displayCollege" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">
                       Copenhagen School of Design and Technology,
                     </div>
-                    <div id="cityCountryDiv" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">
-                      City, <span id="countrySpan">country</span>
+                    <div id="displayCity" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">
+                      City 
                     </div>
                   </div>
-              
-                
+                  <div style="margin-top: -25px;" id="educationContainer"></div>
                 </div>
               </div>
-              
             </div>
             <div style="width: 595px; height: 176px; left: 0px; top: 0px; position: absolute">
               <div
