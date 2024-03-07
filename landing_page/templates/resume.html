@@ -132,14 +132,15 @@
           <div class="experience-content">
             <form id="experience1">
               <div class="form-group">
-                <input type="text" id="company1" class="form-control" placeholder="Company Name" name="company1"
-                  style="height: 30px;" onkeyup="updateExperience()">
-              </div>
-              <div class="form-group">
                 <input type="text" id="jobtitle1" class="form-control" placeholder="Designation" name="jobtitle1"
                   style="height: 30px;" onkeyup="updateExperience()">
               </div>
 
+              <div class="form-group">
+                <input type="text" id="company1" class="form-control" placeholder="Company Name" name="company1"
+                  style="height: 30px;" onkeyup="updateExperience()">
+              </div>
+             
              
               <div class="form-group">
                 <label for="from1" style="margin-right: 10px;">From:</label>
@@ -161,7 +162,7 @@
               <div class="form-group">
                 <label for="description1">Description:</label>
                 <textarea id="description1" class="form-control" name="description1" rows="5"
-                  onkeyup="updateExperience()"></textarea>
+                  onkeyup="updateExperienceDescription()"></textarea>
               </div>
             </form>
           </div>
@@ -184,41 +185,29 @@
             <p><b>Education 1</b></p>
           </div>
           <div class="experience-content">
-            <form id="experience1">
+            <form>
               <div class="form-group">
-                <input type="text" id="company1" class="form-control" placeholder="Institution Name" name="company1"
-                  style="height: 30px;">
+                <input type="text" id="degreeInput" class="form-control" placeholder="Degree" name="degreeInput" style="height: 30px;" onkeyup="updateDegree()">
               </div>
               <div class="form-group">
-                <input type="text" id="jobtitle1" class="form-control" placeholder="Field Of Study" name="jobtitle1"
-                  style="height: 30px;">
-
+                <input type="text" id="institution1" class="form-control" placeholder="Institution Name" name="institution1"
+                  style="height: 30px;"oninput="updateInstitution()">
               </div>
               <div class="form-group">
-                <input type="text" id="city1" class="form-control" placeholder="Degree" name="city1"
-                  style="height: 30px;">
-              </div>
-              <div class="form-group">
-                <input type="text" id="country1" class="form-control" placeholder="City" name="country1"
-                  style="height: 30px;">
-              </div>
-              <div class="form-group">
-                <input type="text" id="country1" class="form-control" placeholder="Country" name="country1"
-                  style="height: 30px;">
+                <input type="text" id="city" class="form-control" placeholder="City" name="country1"
+                  style="height: 30px;" onkeyup="updateCityCountry()">
               </div>
               <div class="form-group">
                 <label for="from1" style="margin-right: 10px;">From:</label>
-                <input type="date" id="from1" name="from1" class="form-control" style="height: 35px;">
+                <input type="month" id="degreeFromInput" name="degreeFromInput" class="form-control" style="height: 35px;"onchange="updateDegreeYear()" >
               </div>
               <div class="form-group">
                 <label for="to1" style="margin-right: 10px;">To:</label>
-                <input type="date" id="to1" class="form-control" name="to1" style="height: 35px;">
+                <input type="month" id="degreeToInput" class="form-control" name="degreeToInput" style="height: 35px;" onchange="updateDegreeYear()">
               </div>
-
             </form>
           </div>
         </div>
-
         <div class="form-group">
           <input type="submit" value="+ Add New Education" onclick="addNewEducation()">
         </div>
@@ -326,10 +315,6 @@
     <div class="right-side" style="position: relative; overflow-y: auto;">
       <div class="content_wrapper">
         <div id="dynamicContent">
-         
-
-         
-
           <div id="temp2" style="width: 595px; height: 842px; position: relative; background: white">
             <div style="height: 196px; left: 310px; top: 590px; position: absolute">
               <div
@@ -352,8 +337,8 @@
                   style="left: 0px; top: 0px; position: absolute; color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word">
                   Master’s in Human-Computer Interaction</div>
                 <div
-                  style="width: 245px; left: 0px; top: 20px; position: absolute; color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word">
-                  Copenhagen School of Design and Technology, 2015 – 2016</div>
+                  style="width: 245px; left: 0px; top: 20px; position: absolute; color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word"><br>
+                  Copenhagen School of Design and Technology 2015 – 2016</div>
               </div>
               <div style="width: 245px; height: 52px; left: 0px; top: 100px; position: absolute">
                 <div
@@ -418,31 +403,25 @@
                   </div>  
                 </div>
               
-                <div class="education" style="margin-top: 20px;">
+                <div class="education">
                   <div style="color: #1C8EB5; font-size: 14px; font-family: Poppins; font-weight: 400; line-height: 20px; word-wrap: break-word;">
                     Education & Learning
                   </div>
               
-                  <div style="width: 258px; height: 52px;">
+                  <div style="width: 258px; ">
                     <div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">
-                      Master’s in Human-Computer Interaction
+                      <span id="displayDegree">Bachelor of Engineering</span><br> <span id="displayDegreeFrom"> 2015  </span> | <span id="displayDegreeTo"> 2017 </span>
                     </div>
-                    <div style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">
-                      Copenhagen School of Design and Technology, 2015 – 2016
+                    <div id="displayCollege" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">
+                      Copenhagen School of Design and Technology,
+                    </div>
+                    <div id="displayCity" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">
+                      City 
                     </div>
                   </div>
-              
-                  <div style="width: 245px; height: 52px;">
-                    <div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">
-                      Bachelor's of Arts
-                    </div>
-                    <div style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">
-                      Copenhagen School of Design and Technology, 2011 – 2015
-                    </div>
-                  </div>
+                  <div style="margin-top: -25px;" id="educationContainer"></div>
                 </div>
               </div>
-              
             </div>
             <div style="width: 595px; height: 176px; left: 0px; top: 0px; position: absolute">
               <div

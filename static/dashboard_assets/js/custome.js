@@ -37,6 +37,8 @@ function workexperience() {
   container.classList.toggle('hidden');
 }
 
+
+
 function handlePresentCheckbox() {
   var toInput = document.getElementById("to1");
   var toContainer = document.getElementById("to1Container");
@@ -132,17 +134,12 @@ function addNewEducation() {
     '<div class="form-group">' +
     '<input type="text" id="company' + experienceCount + '" class="form-control" placeholder="Institution Name" name="company' + experienceCount + '" style="height: 30px;">' +
     '</div>' +
-    '<div class="form-group">' +
-    '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Field Of Study" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
     '</div>' +
     '<div class="form-group">' +
-    '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Degree" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
+    '<input type="text" id="degreeInput"' + experienceCount + '" class="form-control" placeholder="Degree" name="jobtitle' + experienceCount + '" style="height: 30px;"onkeyup="updateDegree()">' +
     '</div>' +
     '<div class="form-group">' +
     '<input type="text" id="city' + experienceCount + '" class="form-control" placeholder="City" name="city' + experienceCount + '" style="height: 30px;">' +
-    '</div>' +
-    '<div class="form-group">' +
-    '<input type="text" id="country' + experienceCount + '" class="form-control" placeholder="Country" name="country' + experienceCount + '" style="height: 30px;">' +
     '</div>' +
     '<div class="form-group">' +
     '<label for="from' + experienceCount + '" style="margin-right: 10px;">From:</label>' +
@@ -152,15 +149,36 @@ function addNewEducation() {
     '<label for="to' + experienceCount + '" style="margin-right: 10px;">To:</label>' +
     '<input type="date" id="to' + experienceCount + '" class="form-control" name="to' + experienceCount + '" style="height: 35px;">' +
     '</div>' +
-
     '</form>';
 
   newExperience.appendChild(header);
   newExperience.appendChild(content);
   container.insertBefore(newExperience, container.lastElementChild);
-
+  // Display div generation and appending
+  var displayDiv = generateDisplayDiv(experienceCount);
+  educationContainer.appendChild(displayDiv);
 }
+function generateDisplayDiv(experienceCount) {
+  var displayDiv = document.createElement('div');
+  displayDiv.classList.add('education');
+  displayDiv.style.marginTop = "40px";
 
+  displayDiv.innerHTML = 
+    '<div style="width: 258px; ">' +
+    '<div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
+    '<span id="displayDegree' + experienceCount + '">Bachelor of Engineering</span><br>' +
+    '<span id="displayDegreeFrom' + experienceCount + '"> 2015  </span> | <span id="displayDegreeTo' + experienceCount + '"> 2017 </span>' +
+    '</div>' +
+    '<div id="displayCollege' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    'Copenhagen School of Design and Technology,' +
+    '</div>' +
+    '<div id="displayCity' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    'City' +
+    '</div>' +
+    '</div>';
+
+  return displayDiv;
+}
 function toggleEducation(header) {
   var content = header.nextElementSibling;
   header.querySelector('i').classList.toggle('fa-chevron-down');
@@ -323,225 +341,7 @@ var languageCounter1 = 1; // Initial counter for column1 (odd)
       });
     });
     
-// dynamic ------------------------
-/*     function updateSkills() {
-      var skills1 = document.getElementById("skillContainer1").getElementsByTagName("input");
-      var skills2 = document.getElementById("skillContainer3").getElementsByTagName("input");
-
-      var skillList1 = [];
-      var skillList2 = [];
-
-      for (var i = 0; i < skills1.length; i++) {
-        if (skills1[i].value.trim() !== "") {
-          skillList1.push(skills1[i].value.trim());
-        }
-      }
-
-      for (var j = 0; j < skills2.length; j++) {
-        if (skills2[j].value.trim() !== "") {
-          skillList2.push(skills2[j].value.trim());
-        }
-      }
-
-      // Convert array to string before storing in localStorage
-      localStorage.setItem("skills1", JSON.stringify(skillList1));
-      localStorage.setItem("skills2", JSON.stringify(skillList2));
-
-      // Update the displayed skills list
-      updateSkillsList(skillList1, skillList2);
-    }
-
-    // Function to update the displayed skills list
-    function updateSkillsList(skillList1, skillList2) {
-      var skillListHTML1 = "<ul>";
-      var skillListHTML2 = "<ul>";
-
-      for (var i = 0; i < skillList1.length; i++) {
-        skillListHTML1 += "<li>" + skillList1[i] + "</li>";
-      }
-      skillListHTML1 += "</ul>";
-
-      for (var j = 0; j < skillList2.length; j++) {
-        skillListHTML2 += "<li>" + skillList2[j] + "</li>";
-      }
-      skillListHTML2 += "</ul>";
-
-      document.getElementById("FIELD_SKC1").innerHTML = skillListHTML1;
-      document.getElementById("FIELD_SKC2").innerHTML = skillListHTML2;
-
-
-    }
-
-
-
-    function updateSummaryText() {
-      var summary = document.getElementById("summaryTextArea").value;
-      document.getElementById("FIELD_FRFM").textContent = summary;
-      localStorage.setItem("summary", summary);
-    }
-
-    // Function to update the displayed name
-    function updateText() {
-      var firstName = document.getElementById("firstName").value;
-      var lastName = document.getElementById("lastName").value;
-      var phoneNumber = document.getElementById("phoneNumber").value;
-      var email = document.getElementById("email").value;
-      var address = document.getElementById("address").value;
-      var linkedin = document.getElementById("linkedin").value;
-
-      // Update the content of the span elements
-      document.getElementById("FIELD_FNAM").textContent = firstName;
-      document.getElementById("FIELD_LNAM").textContent = lastName;
-      document.getElementById("FIELD_CPHN").textContent = phoneNumber;
-      document.getElementById("FIELD_EMAI").textContent = email;
-      document.getElementById("FIELD_ADDR").textContent = address;
-      document.getElementById("FIELD_LNKD").textContent = linkedin;
-
-      // Store the entered names in localStorage
-      localStorage.setItem("firstName", firstName);
-      localStorage.setItem("lastName", lastName);
-      localStorage.setItem("phoneNumber", phoneNumber);
-      localStorage.setItem("email", email);
-      localStorage.setItem("address", address);
-      localStorage.setItem("linkedin", linkedin);
-    }
-
-    // Function to update the displayed experience
-    function updateExperience() {
-      var company = document.getElementById("company1").value;
-      var jobTitle = document.getElementById("jobtitle1").value;
-      var city = document.getElementById("city1").value;
-      var country = document.getElementById("country1").value;
-      var fromDate = document.getElementById("from1").value;
-      var toDate = document.getElementById("to1").value;
-      var description = document.getElementById("description1").value;
-
-      // Update the content of the corresponding elements
-      document.getElementById("FIELD_CMN").textContent = company;
-      document.getElementById("FIELD_JTIT").textContent = jobTitle;
-      document.getElementById("FIELD_JCIT").textContent = city;
-      document.getElementById("FIELD_JSTA").textContent = country;
-      document.getElementById("FIELD_JSTD").textContent = fromDate;
-      document.getElementById("FIELD_EDDT").textContent = toDate;
-
-      // Parse the description and generate the list with bullet points
-      var descriptionList = "<ul>";
-      var descriptionPoints = description.split('.');
-      for (var i = 0; i < descriptionPoints.length; i++) {
-        if (descriptionPoints[i].trim() !== "") { // Check if the point is not empty
-          descriptionList += "<li>" + descriptionPoints[i] + ".</li>";
-        }
-      }
-      descriptionList += "</ul>";
-      document.getElementById("FIELD_JDES").innerHTML = descriptionList;
-
-      // Store the entered values in localStorage
-      localStorage.setItem("company", company);
-      localStorage.setItem("jobTitle", jobTitle);
-      localStorage.setItem("city", city);
-      localStorage.setItem("country", country);
-      localStorage.setItem("fromDate", fromDate);
-      localStorage.setItem("toDate", toDate);
-      localStorage.setItem("description", description);
-    }
-
-
-    // Function to retrieve stored values and update the displayed information
-    window.onload = function () {
-      var firstName = localStorage.getItem("firstName");
-      var lastName = localStorage.getItem("lastName");
-      var phoneNumber = localStorage.getItem("phoneNumber");
-      var email = localStorage.getItem("email");
-      var address = localStorage.getItem("address");
-      var linkedin = localStorage.getItem("linkedin");
-      var company = localStorage.getItem("company");
-      var jobTitle = localStorage.getItem("jobTitle");
-      var city = localStorage.getItem("city");
-      var country = localStorage.getItem("country");
-      var fromDate = localStorage.getItem("fromDate");
-      var toDate = localStorage.getItem("toDate");
-      var description = localStorage.getItem("description");
-      var summary = localStorage.getItem("summary");
-      var skills1 = localStorage.getItem("skills1");
-      var skills2 = localStorage.getItem("skills2");
-
-      if (firstName && lastName) {
-        // Update the displayed name
-        document.getElementById("FIELD_FNAM").textContent = firstName;
-        document.getElementById("FIELD_LNAM").textContent = lastName;
-        document.getElementById("FIELD_CPHN").textContent = phoneNumber;
-        document.getElementById("FIELD_EMAI").textContent = email;
-        document.getElementById("FIELD_ADDR").textContent = address;
-        document.getElementById("FIELD_LNKD").textContent = linkedin;
-        // Update the input fields with stored values
-        document.getElementById("firstName").value = firstName;
-        document.getElementById("lastName").value = lastName;
-        document.getElementById("phoneNumber").value = phoneNumber;
-        document.getElementById("email").value = email;
-        document.getElementById("address").value = address;
-        document.getElementById("linkedin").value = linkedin;
-      }
-      if (summary) {
-        // Populate the textarea with the stored summary
-        document.getElementById("summaryTextArea").value = summary;
-        // Update the displayed summary
-        document.getElementById("FIELD_FRFM").textContent = summary;
-      }
-      if (skills1 && skills2) {
-        // Convert string back to array
-        var skillList1 = JSON.parse(skills1);
-        var skillList2 = JSON.parse(skills2);
-
-        // Update the displayed skills list
-        updateSkillsList(skillList1, skillList2);
-      }
-
-
-      if (company && jobTitle) {
-        // Update the displayed experience
-        document.getElementById("FIELD_CMN").textContent = company;
-        document.getElementById("FIELD_JTIT").textContent = jobTitle;
-        document.getElementById("FIELD_JCIT").textContent = city;
-        document.getElementById("FIELD_JSTA").textContent = country;
-        document.getElementById("FIELD_JSTD").textContent = fromDate;
-
-        // Check if 'Present' checkbox is checked
-        var presentChecked = document.getElementById("present1").checked;
-
-        if (presentChecked) {
-          // If 'Present' checkbox was checked, update the displayed 'To' field to show 'Present'
-          document.getElementById("FIELD_EDDT").textContent = "Present";
-        } else {
-          // If 'Present' checkbox was not checked, update the displayed 'To' field with the stored value
-          document.getElementById("FIELD_EDDT").textContent = toDate;
-        }
-
-        // Parse the stored description and format it correctly
-        var descriptionList = "<ul>";
-        var descriptionPoints = description.split('.');
-        for (var i = 0; i < descriptionPoints.length; i++) {
-          if (descriptionPoints[i].trim() !== "") {
-            descriptionList += "<li>" + descriptionPoints[i] + ".</li>";
-          }
-        }
-        descriptionList += "</ul>";
-        document.getElementById("FIELD_JDES").innerHTML = descriptionList;
-
-        // Update the input fields with stored values
-        document.getElementById("company1").value = company;
-        document.getElementById("jobtitle1").value = jobTitle;
-        document.getElementById("city1").value = city;
-        document.getElementById("country1").value = country;
-        document.getElementById("from1").value = fromDate;
-        // Don't update 'To' input field value if 'Present' checkbox is checked
-        if (!presentChecked) {
-          document.getElementById("to1").value = toDate;
-        }
-        document.getElementById("description1").value = description;
-      }
-    };
-*/
-
+// dynamic ---------------------------------
 
 
 
@@ -609,7 +409,6 @@ function handlePresentCheckbox() {
   divElement.innerText = inputValue;
   
   var companyValue = document.getElementById("company1").value;
-  var descriptionValue = document.getElementById("description1").value;
   
   // Update company name
   var companyNameElement = document.getElementById("Display_Cname");
@@ -650,16 +449,68 @@ function handlePresentCheckbox() {
 
 }
 
+function updateExperienceDescription() {
+  var descriptionValue = document.getElementById("description1").value;
+    // Update description
+    var descriptionElement = document.getElementById("Display_Description");
+    descriptionElement.innerText = descriptionValue;
+  
+    var descriptionElement = document.getElementById("Display_Description");
+    descriptionElement.innerText = descriptionValue;
+
+    localStorage.setItem("description", descriptionValue);
+}
+
+function updateDegree() {
+  var degreeValue = document.getElementById("degreeInput").value;
+  var degreeElement = document.getElementById("displayDegree")
+  degreeElement.innerHTML = degreeValue
+  localStorage.setItem("degreeInputLocal", degreeValue);
+}
+
+function updateDegreeYear() {
+  var degreeFromValue = document.getElementById("degreeFromInput").value;
+  var degreeFromElement = document.getElementById("displayDegreeFrom")
+  degreeFromElement.innerHTML = degreeFromValue
+
+  var degreeToValue = document.getElementById("degreeToInput").value;
+  var degreeToElement = document.getElementById("displayDegreeTo")
+  degreeToElement.innerHTML = degreeToValue
+
+  localStorage.setItem("degreeFromLocal", degreeFromValue);
+  localStorage.setItem("degreeToLocal", degreeToValue);
+}
+
+function updateInstitution() {
+  var collegeValue = document.getElementById("institution1").value;
+  var collegeElement = document.getElementById("displayCollege")
+  collegeElement.innerHTML = collegeValue
+  localStorage.setItem("collegeInputLocal", collegeValue);
+}
+
+function updateCityCountry() {
+  var cityValue = document.getElementById("city").value;
+  var cityElement = document.getElementById("displayCity")
+  cityElement.innerHTML = cityValue
+  localStorage.setItem("cityLocal", cityValue);
+ 
+}
 
 function retrieveStoredValue() {
   var storedValue = localStorage.getItem("jobTitle");
+  var storedCompanyName = localStorage.getItem("companyName");
+  var storedDescription = localStorage.getItem("description");
+  var storedDegree = localStorage.getItem("degreeInputLocal")
+  var storedFromDegree = localStorage.getItem("degreeFromLocal")
+  var storedToDegree = localStorage.getItem("degreeToLocal")
+  var storedCollege = localStorage.getItem("collegeInputLocal")
+  var storedCity = localStorage.getItem("cityLocal")
+ 
+
   if (storedValue) {
     document.getElementById("jobtitle1").value = storedValue;
     document.getElementById("Display_Designation").innerText = storedValue;
   }
-
-  var storedCompanyName = localStorage.getItem("companyName");
-  var storedDescription = localStorage.getItem("description");
   
   if (storedCompanyName) {
     document.getElementById("company1").value = storedCompanyName;
@@ -670,6 +521,28 @@ function retrieveStoredValue() {
     document.getElementById("description1").value = storedDescription;
     document.getElementById("Display_Description").innerText = storedDescription;
   }
+  if (storedDegree){
+    document.getElementById("degreeInput").value = storedDegree
+    document.getElementById("displayDegree").innerHTML = storedDegree
+  }
+  if (storedFromDegree){
+    document.getElementById("degreeFromInput").value = storedFromDegree
+    document.getElementById("displayDegreeFrom").innerHTML = storedFromDegree
+  }
+  if (storedToDegree){
+    document.getElementById("degreeToInput").value = storedToDegree
+    document.getElementById("displayDegreeTo").innerHTML = storedToDegree
+  }
+  if (storedCollege){
+    document.getElementById("institution1").value = storedCollege
+    document.getElementById("displayCollege").innerHTML = storedCollege
+  }
+  if (storedCity){
+    document.getElementById('city').value = storedCity
+    document.getElementById('displayCity').innerHTML = storedCity
+  }
+ 
+}
 
   var storedFirstname = localStorage.getItem("firstName");
   if (storedFirstname) {
@@ -716,7 +589,7 @@ function retrieveStoredValue() {
             updateExperience();
         }
   
-}
+
 
 // Call the function to retrieve stored value when the page loads
 window.onload = retrieveStoredValue;
