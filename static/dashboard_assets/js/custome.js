@@ -37,6 +37,8 @@ function workexperience() {
   container.classList.toggle('hidden');
 }
 
+
+
 function handlePresentCheckbox() {
   var toInput = document.getElementById("to1");
   var toContainer = document.getElementById("to1Container");
@@ -323,225 +325,7 @@ var languageCounter1 = 1; // Initial counter for column1 (odd)
       });
     });
     
-// dynamic ------------------------
-/*     function updateSkills() {
-      var skills1 = document.getElementById("skillContainer1").getElementsByTagName("input");
-      var skills2 = document.getElementById("skillContainer3").getElementsByTagName("input");
-
-      var skillList1 = [];
-      var skillList2 = [];
-
-      for (var i = 0; i < skills1.length; i++) {
-        if (skills1[i].value.trim() !== "") {
-          skillList1.push(skills1[i].value.trim());
-        }
-      }
-
-      for (var j = 0; j < skills2.length; j++) {
-        if (skills2[j].value.trim() !== "") {
-          skillList2.push(skills2[j].value.trim());
-        }
-      }
-
-      // Convert array to string before storing in localStorage
-      localStorage.setItem("skills1", JSON.stringify(skillList1));
-      localStorage.setItem("skills2", JSON.stringify(skillList2));
-
-      // Update the displayed skills list
-      updateSkillsList(skillList1, skillList2);
-    }
-
-    // Function to update the displayed skills list
-    function updateSkillsList(skillList1, skillList2) {
-      var skillListHTML1 = "<ul>";
-      var skillListHTML2 = "<ul>";
-
-      for (var i = 0; i < skillList1.length; i++) {
-        skillListHTML1 += "<li>" + skillList1[i] + "</li>";
-      }
-      skillListHTML1 += "</ul>";
-
-      for (var j = 0; j < skillList2.length; j++) {
-        skillListHTML2 += "<li>" + skillList2[j] + "</li>";
-      }
-      skillListHTML2 += "</ul>";
-
-      document.getElementById("FIELD_SKC1").innerHTML = skillListHTML1;
-      document.getElementById("FIELD_SKC2").innerHTML = skillListHTML2;
-
-
-    }
-
-
-
-    function updateSummaryText() {
-      var summary = document.getElementById("summaryTextArea").value;
-      document.getElementById("FIELD_FRFM").textContent = summary;
-      localStorage.setItem("summary", summary);
-    }
-
-    // Function to update the displayed name
-    function updateText() {
-      var firstName = document.getElementById("firstName").value;
-      var lastName = document.getElementById("lastName").value;
-      var phoneNumber = document.getElementById("phoneNumber").value;
-      var email = document.getElementById("email").value;
-      var address = document.getElementById("address").value;
-      var linkedin = document.getElementById("linkedin").value;
-
-      // Update the content of the span elements
-      document.getElementById("FIELD_FNAM").textContent = firstName;
-      document.getElementById("FIELD_LNAM").textContent = lastName;
-      document.getElementById("FIELD_CPHN").textContent = phoneNumber;
-      document.getElementById("FIELD_EMAI").textContent = email;
-      document.getElementById("FIELD_ADDR").textContent = address;
-      document.getElementById("FIELD_LNKD").textContent = linkedin;
-
-      // Store the entered names in localStorage
-      localStorage.setItem("firstName", firstName);
-      localStorage.setItem("lastName", lastName);
-      localStorage.setItem("phoneNumber", phoneNumber);
-      localStorage.setItem("email", email);
-      localStorage.setItem("address", address);
-      localStorage.setItem("linkedin", linkedin);
-    }
-
-    // Function to update the displayed experience
-    function updateExperience() {
-      var company = document.getElementById("company1").value;
-      var jobTitle = document.getElementById("jobtitle1").value;
-      var city = document.getElementById("city1").value;
-      var country = document.getElementById("country1").value;
-      var fromDate = document.getElementById("from1").value;
-      var toDate = document.getElementById("to1").value;
-      var description = document.getElementById("description1").value;
-
-      // Update the content of the corresponding elements
-      document.getElementById("FIELD_CMN").textContent = company;
-      document.getElementById("FIELD_JTIT").textContent = jobTitle;
-      document.getElementById("FIELD_JCIT").textContent = city;
-      document.getElementById("FIELD_JSTA").textContent = country;
-      document.getElementById("FIELD_JSTD").textContent = fromDate;
-      document.getElementById("FIELD_EDDT").textContent = toDate;
-
-      // Parse the description and generate the list with bullet points
-      var descriptionList = "<ul>";
-      var descriptionPoints = description.split('.');
-      for (var i = 0; i < descriptionPoints.length; i++) {
-        if (descriptionPoints[i].trim() !== "") { // Check if the point is not empty
-          descriptionList += "<li>" + descriptionPoints[i] + ".</li>";
-        }
-      }
-      descriptionList += "</ul>";
-      document.getElementById("FIELD_JDES").innerHTML = descriptionList;
-
-      // Store the entered values in localStorage
-      localStorage.setItem("company", company);
-      localStorage.setItem("jobTitle", jobTitle);
-      localStorage.setItem("city", city);
-      localStorage.setItem("country", country);
-      localStorage.setItem("fromDate", fromDate);
-      localStorage.setItem("toDate", toDate);
-      localStorage.setItem("description", description);
-    }
-
-
-    // Function to retrieve stored values and update the displayed information
-    window.onload = function () {
-      var firstName = localStorage.getItem("firstName");
-      var lastName = localStorage.getItem("lastName");
-      var phoneNumber = localStorage.getItem("phoneNumber");
-      var email = localStorage.getItem("email");
-      var address = localStorage.getItem("address");
-      var linkedin = localStorage.getItem("linkedin");
-      var company = localStorage.getItem("company");
-      var jobTitle = localStorage.getItem("jobTitle");
-      var city = localStorage.getItem("city");
-      var country = localStorage.getItem("country");
-      var fromDate = localStorage.getItem("fromDate");
-      var toDate = localStorage.getItem("toDate");
-      var description = localStorage.getItem("description");
-      var summary = localStorage.getItem("summary");
-      var skills1 = localStorage.getItem("skills1");
-      var skills2 = localStorage.getItem("skills2");
-
-      if (firstName && lastName) {
-        // Update the displayed name
-        document.getElementById("FIELD_FNAM").textContent = firstName;
-        document.getElementById("FIELD_LNAM").textContent = lastName;
-        document.getElementById("FIELD_CPHN").textContent = phoneNumber;
-        document.getElementById("FIELD_EMAI").textContent = email;
-        document.getElementById("FIELD_ADDR").textContent = address;
-        document.getElementById("FIELD_LNKD").textContent = linkedin;
-        // Update the input fields with stored values
-        document.getElementById("firstName").value = firstName;
-        document.getElementById("lastName").value = lastName;
-        document.getElementById("phoneNumber").value = phoneNumber;
-        document.getElementById("email").value = email;
-        document.getElementById("address").value = address;
-        document.getElementById("linkedin").value = linkedin;
-      }
-      if (summary) {
-        // Populate the textarea with the stored summary
-        document.getElementById("summaryTextArea").value = summary;
-        // Update the displayed summary
-        document.getElementById("FIELD_FRFM").textContent = summary;
-      }
-      if (skills1 && skills2) {
-        // Convert string back to array
-        var skillList1 = JSON.parse(skills1);
-        var skillList2 = JSON.parse(skills2);
-
-        // Update the displayed skills list
-        updateSkillsList(skillList1, skillList2);
-      }
-
-
-      if (company && jobTitle) {
-        // Update the displayed experience
-        document.getElementById("FIELD_CMN").textContent = company;
-        document.getElementById("FIELD_JTIT").textContent = jobTitle;
-        document.getElementById("FIELD_JCIT").textContent = city;
-        document.getElementById("FIELD_JSTA").textContent = country;
-        document.getElementById("FIELD_JSTD").textContent = fromDate;
-
-        // Check if 'Present' checkbox is checked
-        var presentChecked = document.getElementById("present1").checked;
-
-        if (presentChecked) {
-          // If 'Present' checkbox was checked, update the displayed 'To' field to show 'Present'
-          document.getElementById("FIELD_EDDT").textContent = "Present";
-        } else {
-          // If 'Present' checkbox was not checked, update the displayed 'To' field with the stored value
-          document.getElementById("FIELD_EDDT").textContent = toDate;
-        }
-
-        // Parse the stored description and format it correctly
-        var descriptionList = "<ul>";
-        var descriptionPoints = description.split('.');
-        for (var i = 0; i < descriptionPoints.length; i++) {
-          if (descriptionPoints[i].trim() !== "") {
-            descriptionList += "<li>" + descriptionPoints[i] + ".</li>";
-          }
-        }
-        descriptionList += "</ul>";
-        document.getElementById("FIELD_JDES").innerHTML = descriptionList;
-
-        // Update the input fields with stored values
-        document.getElementById("company1").value = company;
-        document.getElementById("jobtitle1").value = jobTitle;
-        document.getElementById("city1").value = city;
-        document.getElementById("country1").value = country;
-        document.getElementById("from1").value = fromDate;
-        // Don't update 'To' input field value if 'Present' checkbox is checked
-        if (!presentChecked) {
-          document.getElementById("to1").value = toDate;
-        }
-        document.getElementById("description1").value = description;
-      }
-    };
-*/
-
+// dynamic ---------------------------------
 
 
 
@@ -609,4 +393,67 @@ function updateText() {
   localStorage.setItem('summaryTextArea', summaryTextArea);
 }
  // Example JavaScript to dynamically adjust margin-top
+
+ //education section
+   // Retrieve the stored value from localStorage
+   var storedInstitutionName = localStorage.getItem('userInstitutionName');
+   var initialInstitutionName = storedInstitutionName || 'Copenhagen School of Design and Technology';
+   var storedDegree = localStorage.getItem('userDegree') || 'Bachelor of Engineering';
+   var storedDegreeFrom = localStorage.getItem('userDegreeFrom') || '2015';
+   var storedDegreeTo = localStorage.getItem('userDegreeTo') || '2017';
  
+   // Set the initial value in the input and div
+   document.getElementById('institution1').setAttribute('placeholder', initialInstitutionName);
+   document.getElementById('schoolDiv').textContent = initialInstitutionName + ',';
+   document.getElementById('degreeDiv').textContent = storedDegree;
+  document.getElementById('degreeInput').setAttribute('placeholder', storedDegree);
+  document.getElementById('degreeFrom').textContent = storedDegreeFrom + ' - ';
+  document.getElementById('degreeTo').textContent = storedDegreeTo;
+
+ 
+   function updateInstitution() {
+     // Get the input value
+     var institutionName = document.getElementById('institution1').value;
+ 
+     // Update the div content
+     document.getElementById('schoolDiv').textContent = institutionName + ',';
+ 
+     // Update the placeholder attribute
+     document.getElementById('institution1').setAttribute('placeholder', institutionName);
+ 
+     // Store the value in localStorage
+     localStorage.setItem('userInstitutionName', institutionName);
+   }
+   function updateDegree() {
+    // Get the input value
+    var degreeValue = document.getElementById('degreeInput').value;
+
+    // Update the div content and placeholder
+    document.getElementById('degreeDiv').textContent = degreeValue;
+    document.getElementById('degreeInput').setAttribute('placeholder', degreeValue);
+
+    // Store the value in localStorage
+    localStorage.setItem('userDegree', degreeValue);
+  }
+
+  function updateFromYear() {
+    // Get the input value
+    var fromYearValue = document.getElementById('degreeFromInput').value;
+
+    // Update the div content
+    document.getElementById('degreeFrom').textContent = fromYearValue + ' | ';
+
+    // Store the value in localStorage
+    localStorage.setItem('userDegreeFrom', fromYearValue);
+  }
+
+  function updateToYear() {
+    // Get the input value
+    var toYearValue = document.getElementById('degreeToInput').value;
+
+    // Update the div content
+    document.getElementById('degreeTo').textContent = toYearValue;
+
+    // Store the value in localStorage
+    localStorage.setItem('userDegreeTo', toYearValue);
+  }

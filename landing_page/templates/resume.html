@@ -190,19 +190,14 @@
             <p><b>Education 1</b></p>
           </div>
           <div class="experience-content">
-            <form id="experience1">
+            <form>
               <div class="form-group">
-                <input type="text" id="company1" class="form-control" placeholder="Institution Name" name="company1"
-                  style="height: 30px;">
+                <input type="text" id="institution1" class="form-control" placeholder="Institution Name" name="institution1"
+                  style="height: 30px;"oninput="updateInstitution()">
               </div>
+            
               <div class="form-group">
-                <input type="text" id="jobtitle1" class="form-control" placeholder="Field Of Study" name="jobtitle1"
-                  style="height: 30px;">
-
-              </div>
-              <div class="form-group">
-                <input type="text" id="city1" class="form-control" placeholder="Degree" name="city1"
-                  style="height: 30px;">
+                <input type="text" id="degreeInput" class="form-control" placeholder="Degree" name="degreeInput" style="height: 30px;" oninput="updateDegree()">
               </div>
               <div class="form-group">
                 <input type="text" id="country1" class="form-control" placeholder="City" name="country1"
@@ -214,13 +209,13 @@
               </div>
               <div class="form-group">
                 <label for="from1" style="margin-right: 10px;">From:</label>
-                <input type="date" id="from1" name="from1" class="form-control" style="height: 35px;">
+                <input type="month" id="degreeFromInput" name="degreeFromInput" class="form-control" style="height: 35px;" onchange="updateFromYear()">
               </div>
+            
               <div class="form-group">
                 <label for="to1" style="margin-right: 10px;">To:</label>
-                <input type="date" id="to1" class="form-control" name="to1" style="height: 35px;">
+                <input type="month" id="degreeToInput" class="form-control" name="degreeToInput" style="height: 35px;" onchange="updateToYear()">
               </div>
-
             </form>
           </div>
         </div>
@@ -334,10 +329,6 @@
     <div class="right-side" style="position: relative; overflow-y: auto;">
       <div class="content_wrapper">
         <div id="dynamicContent">
-         
-
-         
-
           <div id="temp2" style="width: 595px; height: 842px; position: relative; background: white">
             <div style="height: 196px; left: 310px; top: 590px; position: absolute">
               <div
@@ -360,8 +351,8 @@
                   style="left: 0px; top: 0px; position: absolute; color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word">
                   Master’s in Human-Computer Interaction</div>
                 <div
-                  style="width: 245px; left: 0px; top: 20px; position: absolute; color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word">
-                  Copenhagen School of Design and Technology, 2015 – 2016</div>
+                  style="width: 245px; left: 0px; top: 20px; position: absolute; color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word"><br>
+                  Copenhagen School of Design and Technology 2015 – 2016</div>
               </div>
               <div style="width: 245px; height: 52px; left: 0px; top: 100px; position: absolute">
                 <div
@@ -410,7 +401,7 @@
                   <div style="color: #1C8EB5; font-size: 14px; font-family: Poppins; font-weight: 400; line-height: 20px; word-wrap: break-word;">
                     Work experience
                   </div>
-                  <div style="width: 254px; height: 100px;">
+                  <div style="width: 254px;">
                     <div style="color: #222222; font-size: 14px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">
                       Product Designer
                     </div>
@@ -418,36 +409,30 @@
                       Fintef, Oct 2019 - Present
                     </div>
                     <div style="color: #222222; font-size: 10px; font-family: Poppins; font-weight: 400; line-height: 14px; word-wrap: break-word;">
-                      Designing end-to-end experience for financial products on mobile & web platforms. Working closely with
-                      managers, marketing specialists, and developers..cfvgbhnjsfgvbhjnksafghbjnedfghdbwcfgvhbjnkdfgdhbjnkansxgahjsnxbvcasxnrdtfy.crvtybunertgyhu567yghjrftgyhujrtgyhgyhujsccvgbhnjcvybnjrtyuhijrtyuhij.rftgyuhijktfgyhujxvgbhnjmdafvgsbhjka gbhnjmaGHJ VYBUHNJ.
-                      
-                      
+                      Designing end-to-end experience for financial products on mobile & web 
+                     
                     </div>
                   </div>  
                 </div>
               
-                <div class="education" style="margin-top: 20px;">
+                <div class="education" style="margin-top: 40px;">
                   <div style="color: #1C8EB5; font-size: 14px; font-family: Poppins; font-weight: 400; line-height: 20px; word-wrap: break-word;">
                     Education & Learning
                   </div>
               
                   <div style="width: 258px; height: 52px;">
                     <div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">
-                      Master’s in Human-Computer Interaction
+                      <span id="degreeDiv">Bachelor of Engineering</span> &nbsp;&nbsp;&nbsp;&nbsp; <span id="degreeFrom"> 2015 | </span> <span id="degreeTo"> 2017 </span>
                     </div>
-                    <div style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">
-                      Copenhagen School of Design and Technology, 2015 – 2016
+                    <div id="schoolDiv" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">
+                      Copenhagen School of Design and Technology,
+                    </div>
+                    <div id="cityCountryDiv" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">
+                      City, <span id="countrySpan">country</span>
                     </div>
                   </div>
               
-                  <div style="width: 245px; height: 52px;">
-                    <div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">
-                      Bachelor's of Arts
-                    </div>
-                    <div style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">
-                      Copenhagen School of Design and Technology, 2011 – 2015
-                    </div>
-                  </div>
+                
                 </div>
               </div>
               
