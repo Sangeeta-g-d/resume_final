@@ -548,6 +548,8 @@ var languageCounter1 = 1; // Initial counter for column1 (odd)
 var storedFirstName = localStorage.getItem('firstName');
 if (storedFirstName) {
     document.getElementById('firstName').value = storedFirstName;
+    
+    document.getElementById("Display_Fname").textContent = storedFirstName;
 
 }
 
@@ -608,5 +610,56 @@ function updateText() {
   localStorage.setItem('linkedin', linkedin);
   localStorage.setItem('summaryTextArea', summaryTextArea);
 }
- // Example JavaScript to dynamically adjust margin-top
- 
+
+
+ // Experience
+ function updateExperience() {
+  var inputValue = document.getElementById("jobtitle1").value;
+  var divElement = document.getElementById("Display_Designation");
+  divElement.innerText = inputValue;
+  
+  var companyValue = document.getElementById("company1").value;
+  var descriptionValue = document.getElementById("description1").value;
+  
+  // Update company name
+  var companyNameElement = document.getElementById("Display_Cname");
+  companyNameElement.innerText = companyValue;
+
+  // Update description
+  var descriptionElement = document.getElementById("Display_Description");
+  descriptionElement.innerText = descriptionValue;
+
+  var descriptionElement = document.getElementById("Display_Description");
+  descriptionElement.innerText = descriptionValue;
+
+  // Store all values in local storage
+  localStorage.setItem("jobTitle", inputValue);
+  localStorage.setItem("companyName", companyValue);
+  localStorage.setItem("description", descriptionValue);
+}
+
+
+function retrieveStoredValue() {
+  var storedValue = localStorage.getItem("jobTitle");
+  if (storedValue) {
+    document.getElementById("jobtitle1").value = storedValue;
+    document.getElementById("Display_Designation").innerText = storedValue;
+  }
+
+  var storedCompanyName = localStorage.getItem("companyName");
+  var storedDescription = localStorage.getItem("description");
+  
+  if (storedCompanyName) {
+    document.getElementById("company1").value = storedCompanyName;
+    document.getElementById("Display_Cname").innerText = storedCompanyName;
+  }
+
+  if (storedDescription) {
+    document.getElementById("description1").value = storedDescription;
+    document.getElementById("Display_Description").innerText = storedDescription;
+  }
+}
+
+
+// Call the function to retrieve stored value when the page loads
+window.onload = retrieveStoredValue;
