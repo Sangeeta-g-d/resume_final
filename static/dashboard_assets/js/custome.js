@@ -545,72 +545,62 @@ var languageCounter1 = 1; // Initial counter for column1 (odd)
 
 
 
-var storedFirstName = localStorage.getItem('firstName');
-if (storedFirstName) {
-    document.getElementById('firstName').value = storedFirstName;
-    
-    document.getElementById("Display_Fname").textContent = storedFirstName;
+ // Update the display with the stored values
 
+function updateFName_Lname() {
+  // Update first name
+  var firstNameValue = document.getElementById("firstName").value;
+  document.getElementById("Display_Fname").innerText = firstNameValue;
+
+  // Update last name
+  var lastNameValue = document.getElementById("lastName").value;
+  document.getElementById("Display_Lname").innerText = lastNameValue;
+
+  // Store values in local storage
+  localStorage.setItem("firstName", firstNameValue);
+  localStorage.setItem("lastName", lastNameValue);
+  
 }
 
-var storedLastName = localStorage.getItem('lastName');
-if (storedLastName) {
-  document.getElementById('lastName').value = storedLastName;
-}
-var storedEmail = localStorage.getItem('email');
-if (storedEmail) {
-  document.getElementById('email').value = storedEmail;
-}
-var storedPhoneno = localStorage.getItem('phoneNumber');
-if (storedPhoneno) {
-  document.getElementById('phoneNumber').value = storedPhoneno;
-}
-var storedlinkedin = localStorage.getItem('linkedin');
-if (storedlinkedin) {
-  document.getElementById('linkedin').value = storedlinkedin;
-}
-var storedsummary = localStorage.getItem('summaryTextArea');
-if (storedsummary) {
-  document.getElementById('summaryTextArea').value = storedsummary;
+function updateLinkedin(){
+  // Update LinkedIn URL
+  var linkedinValue = document.getElementById("linkedin").value;
+  document.getElementById("Display_lnkedin").innerText = linkedinValue;
+  localStorage.setItem("linkedin", linkedinValue); 
 }
 
-
-updateText(); // Update the display with the stored values
-
-function updateText() {
-  var firstName = document.getElementById("firstName").value;
-  var Display_Fname = document.getElementById("Display_Fname");
-  Display_Fname.textContent = firstName;
-
-  var lastName = document.getElementById('lastName').value;
-  var Display_Lname = document.getElementById("Display_Lname");
-  Display_Lname.textContent = lastName;
-
-  var email = document.getElementById('email').value;
-  var Display_Email = document.getElementById("Display_Email");
-  Display_Email.textContent = email;
-
-  var phoneNumber = document.getElementById('phoneNumber').value;
-  var Display_Phoneno = document.getElementById("Display_Phoneno");
-  Display_Phoneno.textContent = phoneNumber;
-
-  var linkedin = document.getElementById('linkedin').value;
-  var Display_lnkedin = document.getElementById("Display_lnkedin");
-  Display_lnkedin.textContent = linkedin;
-
-  var summaryTextArea = document.getElementById('summaryTextArea').value;
-  var Display_Summary = document.getElementById("Display_Summary");
-  Display_Summary.textContent = summaryTextArea;
-
-  // Store the values in localStorage
-  localStorage.setItem('firstName', firstName);
-  localStorage.setItem('lastName', lastName);
-  localStorage.setItem('email', email);
-  localStorage.setItem('phoneNumber', phoneNumber);
-  localStorage.setItem('linkedin', linkedin);
-  localStorage.setItem('summaryTextArea', summaryTextArea);
+function updateEmail(){
+  // Update email
+  var emailValue = document.getElementById("email").value;
+  document.getElementById("Display_Email").innerText = emailValue;
+  localStorage.setItem("email", emailValue);
 }
 
+function updatePhoneno(){
+  // Update phone number
+  var phoneNumberValue = document.getElementById("phoneNumber").value;
+  document.getElementById("Display_Phoneno").innerText = phoneNumberValue;
+  localStorage.setItem("phoneNumber", phoneNumberValue);
+}
+
+function updateSummary(){ 
+  var SummaryValue = document.getElementById("summary1").value;
+  document.getElementById("Display_Summary").innerText = SummaryValue;
+  localStorage.setItem("summary1", SummaryValue);
+}
+
+
+
+function handlePresentCheckbox() {
+  var presentCheckbox = document.getElementById('present1');
+  if (presentCheckbox.checked) {
+      document.getElementById('Display_To').textContent = 'Present';
+      document.getElementById('to1').value = '';
+      localStorage.setItem('toValue', '');
+  } else {
+      updateExperience();
+  }
+}
 
  // Experience
  function updateExperience() {
@@ -632,10 +622,32 @@ function updateText() {
   var descriptionElement = document.getElementById("Display_Description");
   descriptionElement.innerText = descriptionValue;
 
+
+  var FromValue = document.getElementById("from1").value;
+  var FromElement = document.getElementById("Display_From");
+  FromElement.innerText = FromValue;
+
+  var ToValue = document.getElementById("to1").value;
+  var ToElement = document.getElementById("Display_To");
+  ToElement.innerText = ToValue;
+
+  var toDate = document.getElementById('to1').value;
+  if (!toDate) {
+      document.getElementById('Display_To').textContent = '';
+  } else {
+      document.getElementById('Display_To').textContent = toDate;
+  }
+  // Save the current value to localStorage
+  localStorage.setItem('toValue', toDate);
+  
   // Store all values in local storage
   localStorage.setItem("jobTitle", inputValue);
   localStorage.setItem("companyName", companyValue);
   localStorage.setItem("description", descriptionValue);
+  localStorage.setItem("from1", FromValue);
+  
+  
+
 }
 
 
@@ -658,8 +670,53 @@ function retrieveStoredValue() {
     document.getElementById("description1").value = storedDescription;
     document.getElementById("Display_Description").innerText = storedDescription;
   }
-}
 
+  var storedFirstname = localStorage.getItem("firstName");
+  if (storedFirstname) {
+    document.getElementById("firstName").value = storedFirstname;
+    document.getElementById("Display_Fname").innerText = storedFirstname;
+  }
+
+  var storedLastname = localStorage.getItem("lastName");
+  if (storedLastname) {
+    document.getElementById("lastName").value = storedLastname;
+    document.getElementById("Display_Lname").innerText = storedLastname;
+  }
+
+  var storedPhoneNumber = localStorage.getItem("phoneNumber");
+  if (storedPhoneNumber) {
+    document.getElementById("phoneNumber").value = storedPhoneNumber;
+    document.getElementById("Display_Phoneno").innerText = storedPhoneNumber;
+  }
+
+  var storedEmail = localStorage.getItem("email");
+  if (storedEmail) {
+    document.getElementById("email").value = storedEmail;
+    document.getElementById("Display_Email").innerText = storedEmail;
+  }
+
+  var storedLinkedin = localStorage.getItem("linkedin");
+  if (storedLinkedin) {
+    document.getElementById("linkedin").value = storedLinkedin;
+    document.getElementById("Display_lnkedin").innerText = storedLinkedin;
+  }
+  var storedSummary = localStorage.getItem("summary1");
+  if (storedSummary) {
+    document.getElementById("summary1").value = storedSummary;
+    document.getElementById("Display_Summary").innerText = storedSummary;
+  }
+  var storedFrom = localStorage.getItem("from1");
+  if (storedFrom) {
+    document.getElementById("from1").value = storedFrom;
+    document.getElementById("Display_From").innerText = storedFrom;
+  }
+  var lastToValue = localStorage.getItem('toValue');
+        if (lastToValue) {
+            document.getElementById('to1').value = lastToValue;
+            updateExperience();
+        }
+  
+}
 
 // Call the function to retrieve stored value when the page loads
 window.onload = retrieveStoredValue;
