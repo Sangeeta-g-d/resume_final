@@ -172,6 +172,7 @@ function generateDisplayDiv(experienceCount) {
     '<div id="displayCollege' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
     'Copenhagen School of Design and Technology,' +
     '</div>' +
+    
     '<div id="displayCity' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
     'City' +
     '</div>' +
