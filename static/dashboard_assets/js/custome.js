@@ -117,7 +117,9 @@ function education() {
 
 function addNewEducation() {
   var container = document.getElementById('container2');
-  var experienceCount = container.getElementsByClassName('experience-section').length + 1;
+  var experienceSections = container.getElementsByClassName('experience-section');
+  var experienceCount = experienceSections.length + 1;
+
   var newExperience = document.createElement('div');
   newExperience.classList.add('experience-section');
 
@@ -128,94 +130,86 @@ function addNewEducation() {
 
   var content = document.createElement('div');
   content.classList.add('experience-content');
-
-  var formId = 'experience' + experienceCount;
-  var degreeInputId = 'degreeInput' + experienceCount;
-  var institutionInputId = 'institution' + experienceCount;
-  var cityInputId = 'city' + experienceCount;
-  var fromInputId = 'from' + experienceCount;
-  var toInputId = 'to' + experienceCount;
-  
-  content.innerHTML = '<form id="' + formId + '">' +
+  content.innerHTML = '<form id="experience' + experienceCount + '">' +
     '<div class="form-group">' +
-    '<input type="text" id="' + institutionInputId + '" class="form-control" placeholder="Institution Name" name="' + institutionInputId + '" style="height: 30px;" oninput="updateInstitution(' + experienceCount + ')">' +
+    '<input type="text" id="company' + experienceCount + '" class="form-control" placeholder="Institution Name" name="company' + experienceCount + '" style="height: 30px;">' +
     '</div>' +
     '<div class="form-group">' +
-    '<input type="text" id="' + degreeInputId + '" class="form-control" placeholder="Degree" name="' + degreeInputId + '" style="height: 30px;" onkeyup="updateDegree(' + experienceCount + ')">' +
+    '<input type="text" id="degreeInput' + experienceCount + '" class="form-control" placeholder="Degree" name="jobtitle' + experienceCount + '" style="height: 30px;"onkeyup="updateDegree()">' +
     '</div>' +
     '<div class="form-group">' +
-    '<input type="text" id="' + cityInputId + '" class="form-control" placeholder="City" name="' + cityInputId + '" style="height: 30px;" onkeyup="updateCity(' + experienceCount + ')">' +
+    '<input type="text" id="city' + experienceCount + '" class="form-control" placeholder="City" name="city' + experienceCount + '" style="height: 30px;">' +
     '</div>' +
     '<div class="form-group">' +
-    '<label for="' + fromInputId + '" style="margin-right: 10px;">From:</label>' +
-    '<input type="date" id="' + fromInputId + '" name="' + fromInputId + '" class="form-control" style="height: 35px;" onchange="updateDegreeYear(' + experienceCount + ')">' +
+    '<label for="from' + experienceCount + '" style="margin-right: 10px;">From:</label>' +
+    '<input type="date" id="from' + experienceCount + '" name="from' + experienceCount + '" class="form-control" style="height: 35px;">' +
     '</div>' +
     '<div class="form-group">' +
-    '<label for="' + toInputId + '" style="margin-right: 10px;">To:</label>' +
-    '<input type="date" id="' + toInputId + '" class="form-control" name="' + toInputId + '" style="height: 35px;" onchange="updateDegreeYear(' + experienceCount + ')">' +
+    '<label for="to' + experienceCount + '" style="margin-right: 10px;">To:</label>' +
+    '<input type="date" id="to' + experienceCount + '" class="form-control" name="to' + experienceCount + '" style="height: 35px;">' +
     '</div>' +
     '</form>';
 
   newExperience.appendChild(header);
   newExperience.appendChild(content);
   container.insertBefore(newExperience, container.lastElementChild);
-  
-  // Display div generation and appending
-  var displayDiv = generateDisplayDiv(experienceCount);
-  var educationContainer = document.getElementById('educationContainer'); // Assuming you have an element with id 'educationContainer'
-  educationContainer.appendChild(displayDiv);
+
+  // Store data in local storage
+  storeEducationData(experienceCount);
+
+  // Generate display div
+  generateDisplayDiv(experienceCount);
 }
 
-function updateInstitution(experienceCount) {
-  var institutionInputValue = document.getElementById('institution' + experienceCount).value;
-  document.getElementById('displayCollege' + experienceCount).innerText = institutionInputValue;
+function storeEducationData(experienceCount) {
+  // Example: store degree, institution name, city, etc.
+  localStorage.setItem('degree' + experienceCount, document.getElementById('degreeInput' + experienceCount).value);
+  localStorage.setItem('institution' + experienceCount, document.getElementById('company' + experienceCount).value);
+  localStorage.setItem('city' + experienceCount, document.getElementById('city' + experienceCount).value);
+  // You can add more data to store as per your requirements
 }
-
-function updateDegree(experienceCount) {
-  var degreeInputValue = document.getElementById('degreeInput' + experienceCount).value;
-  document.getElementById('displayDegree' + experienceCount).innerText = degreeInputValue;
-}
-
-function updateCity(experienceCount) {
-  var cityInputValue = document.getElementById('city' + experienceCount).value;
-  document.getElementById('displayCity' + experienceCount).innerText = cityInputValue;
-}
-
-function updateDegreeYear(experienceCount) {
-  var fromInputValue = document.getElementById('from' + experienceCount).value;
-  document.getElementById('displayDegreeFrom' + experienceCount).innerText = fromInputValue;
-  
-  var toInputValue = document.getElementById('to' + experienceCount).value;
-  document.getElementById('displayDegreeTo' + experienceCount).innerText = toInputValue;
-}
-
 function generateDisplayDiv(experienceCount) {
   var displayDiv = document.createElement('div');
   displayDiv.classList.add('education');
   displayDiv.style.marginTop = "40px";
 
+  // Retrieve data from local storage
+  var degree = localStorage.getItem('degree' + experienceCount);
+  var institution = localStorage.getItem('institution' + experienceCount);
+  var city = localStorage.getItem('city' + experienceCount);
+
   displayDiv.innerHTML = 
     '<div style="width: 258px; ">' +
     '<div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
-    '<span id="displayDegree' + experienceCount + '">Bachelor of Engineering</span><br>' +
+    '<span id="displayDegree' + experienceCount + '">' + degree + '</span><br>' +
     '<span id="displayDegreeFrom' + experienceCount + '"> 2015  </span> | <span id="displayDegreeTo' + experienceCount + '"> 2017 </span>' +
     '</div>' +
     '<div id="displayCollege' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
-    'Copenhagen School of Design and Technology,' +
+    institution +
     '</div>' +
     '<div id="displayCity' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
-    'City' +
+    city +
     '</div>' +
     '</div>';
 
-  return displayDiv;
+  // Append display div to the appropriate container
+  var educationContainer = document.getElementById('educationContainer');
+  educationContainer.appendChild(displayDiv);
 }
 
-function toggleEducation(header) {
-  var content = header.nextElementSibling;
-  header.querySelector('i').classList.toggle('fa-chevron-down');
-  header.querySelector('i').classList.toggle('fa-chevron-up');
-  content.classList.toggle('hidden');
+// Check if there is any education data in local storage on page load
+// Check if there is any education data in local storage on page load
+window.onload = function() {
+  // Iterate over localStorage keys
+  for (var key in localStorage) {
+    // Check if the key starts with 'degree'
+    if (key.startsWith('degree')) {
+      // Extract the experienceCount from the key
+      var experienceCount = key.replace('degree', '');
+      // Generate display div for the corresponding education section
+      generateDisplayDiv(experienceCount);
+    }
+  }
 }
 
 
