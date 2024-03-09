@@ -138,7 +138,7 @@ function addNewEducation() {
   var cityInputId = 'city' + experienceCount;
   var fromInputId = 'from' + experienceCount;
   var toInputId = 'to' + experienceCount;
-  
+
   content.innerHTML = '<form id="' + formId + '">' +
     '<div class="form-group">' +
     '<input type="text" id="' + institutionInputId + '" class="form-control" placeholder="Institution Name" name="' + institutionInputId + '" style="height: 30px;" oninput="updateInstitution(' + experienceCount + ')">' +
@@ -169,6 +169,31 @@ function addNewEducation() {
   educationContainer.appendChild(displayDiv);
   
 }
+function generateDisplayDiv(experienceCount) {
+  var displayDiv = document.createElement('div');
+  displayDiv.classList.add('education');
+  displayDiv.style.marginTop = "40px";
+
+  displayDiv.innerHTML = 
+    '<div style="width: 258px; ">' +
+    '<div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
+    '<span id="displayDegree' + experienceCount + '">Bachelor of Engineering</span><br>' +
+    '<span id="displayDegreeFrom' + experienceCount + '"> 2015  </span> | <span id="displayDegreeTo' + experienceCount + '"> 2017 </span>' +
+    '</div>' +
+    '<div id="displayCollege' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    'Copenhagen School of Design and Technology,' +
+    '</div>' +
+    
+    '<div id="displayCity' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    'City' +
+    '</div>' +
+    '</div>';
+
+    return displayDiv;
+  }
+
+
+
 
 function updateInstitution(experienceCount) {
   var institutionInputValue = document.getElementById('institution' + experienceCount).value;
@@ -193,29 +218,21 @@ function updateDegreeYear(experienceCount) {
   document.getElementById('displayDegreeTo' + experienceCount).innerText = toInputValue;
 }
 
-function generateDisplayDiv(experienceCount) {
-  var displayDiv = document.createElement('div');
-  displayDiv.classList.add('education');
-  displayDiv.style.marginTop = "40px";
 
-  displayDiv.innerHTML = 
-    '<div style="width: 258px; ">' +
-    '<div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
-    '<span id="displayDegree' + experienceCount + '">Bachelor of Engineering</span><br>' +
-    '<span id="displayDegreeFrom' + experienceCount + '"> 2015  </span> | <span id="displayDegreeTo' + experienceCount + '"> 2017 </span>' +
-    '</div>' +
-    '<div id="displayCollege' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
-    'Copenhagen School of Design and Technology,' +
-    '</div>' +
-    
-    '<div id="displayCity' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
-    'City' +
-    '</div>' +
-    '</div>';
 
-  return displayDiv;
+
+function storeEducationData(experienceCount) {
+  var educationData = {
+    degree: document.getElementById('degreeInput' + experienceCount).value,
+    institution: document.getElementById('institution' + experienceCount).value,
+    city: document.getElementById('city' + experienceCount).value,
+    from: document.getElementById('from' + experienceCount).value,
+    to: document.getElementById('to' + experienceCount).value
+  };
+
+  // Store educationData in localStorage
+  localStorage.setItem('education' + experienceCount, JSON.stringify(educationData));
 }
-
 
 
 function toggleEducation(header) {
@@ -306,38 +323,6 @@ function toggleProject(header) {
 }
 
 
-var skillCounter1 = 1; // Initial counter for column1 (odd)
-var skillCounter2 = 2; // Initial counter for column3 (even)
-
-function addInputFields(columnId1, columnId2) {
-  skillCounter1 += 2; // Increment by 2 to get odd numbers
-  skillCounter2 += 2; // Increment by 2 to get even numbers
-
-  // Create new input field
-  var newInput = document.createElement("input");
-  newInput.type = "text";
-  newInput.className = "form-control";
-  newInput.setAttribute("onkeyup", "updateSkills()"); // Add event listener for updating skills
-
-  // Create new label
-  var newLabel = document.createElement("label");
-
-  // Get the specified containers and insert new label and input field
-  var container1 = document.getElementById("skillContainer1");
-  newLabel.textContent = "Skill (" + skillCounter1 + "):";
-  newInput.id = "skillInput" + skillCounter1;
-  container1.appendChild(newLabel.cloneNode(true));
-  container1.appendChild(newInput.cloneNode(true));
-
-  var container3 = document.getElementById("skillContainer3");
-  newLabel.textContent = "Skill (" + skillCounter2 + "):";
-  newInput.id = "skillInput" + skillCounter2;
-  container3.appendChild(newLabel.cloneNode(true));
-  container3.appendChild(newInput.cloneNode(true));
-
-  // Call updateSkills function after adding new input fields
-  updateSkills();
-}
 
 function updateText() {
   // Your updateText function logic here
@@ -414,6 +399,11 @@ var languageCounter1 = 1; // Initial counter for column1 (odd)
 
 
  // Update the display with the stored values
+
+ 
+
+
+
 
 function updateFName_Lname() {
   // Update first name
@@ -587,6 +577,29 @@ function updateCityCountry() {
   cityElement.innerHTML = cityValue
   localStorage.setItem("cityLocal", cityValue); 
 }
+function updateSkills() {
+  var skill1 = document.getElementById('skill1').value;
+  var skillsList = document.getElementById('skillsList');
+  
+  // Split input by commas and trim extra spaces
+  var skillsArray = skill1.split(',').map(skill => skill.trim());
+  
+  // Generate the HTML for the skills list
+  var skillsHTML = '<ul>';
+  skillsArray.forEach(skill => {
+    skillsHTML += '<li>' + skill + '</li>';
+  });
+  skillsHTML += '</ul>';
+  
+  // Update the content of the skills list
+  skillsList.innerHTML = skillsHTML;
+
+  // Store entered skills in localStorage
+  localStorage.setItem('enteredSkills', skill1);
+}
+
+
+
 
 function retrieveStoredValue() {
   var storedValue = localStorage.getItem("jobTitle");
@@ -601,6 +614,7 @@ function retrieveStoredValue() {
   var storedProjectTools = localStorage.getItem("projectToolsLocal")
   var storedProjectLink = localStorage.getItem("projectLinkLocal")
   var storedProjectDes = localStorage.getItem("projectDesLocal")
+  var storedSkills = localStorage.getItem("enteredSkills")
  
 
   if (storedValue) {
@@ -654,6 +668,10 @@ function retrieveStoredValue() {
     document.getElementById('city').value = storedCity
     document.getElementById('displayCity').innerHTML = storedCity
   }
+  if (storedSkills){
+    document.getElementById('skill1').value = storedSkills
+    document.getElementById('skillsList').innerHTML = storedSkills
+  }
  
 
 
@@ -696,14 +714,22 @@ function retrieveStoredValue() {
     document.getElementById("from1").value = storedFrom;
     document.getElementById("Display_From").innerText = storedFrom;
   }
-  var lastToValue = localStorage.getItem('toValue');
-        if (lastToValue) {
-            document.getElementById('to1').value = lastToValue;
-            updateExperience();
-        }
-  
+  var skill1 = localStorage.getItem('enteredSkills');
+  if (skill1) {
+      document.getElementById('skill1').value = skill1;
+      updateSkills(); // Corrected function call
+  }
+      
+  populatePageFromLocalStorage();
+
       }
   
 
+ 
 // Call the function to retrieve stored value when the page loads
 window.onload = retrieveStoredValue;
+
+
+
+
+
