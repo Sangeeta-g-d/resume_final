@@ -164,6 +164,7 @@ function addNewEducation() {
   var displayDiv = generateDisplayDiv(experienceCount);
   var educationContainer = document.getElementById('educationContainer'); // Assuming you have an element with id 'educationContainer'
   educationContainer.appendChild(displayDiv);
+  
 }
 
 function updateInstitution(experienceCount) {
@@ -211,6 +212,8 @@ function generateDisplayDiv(experienceCount) {
 
   return displayDiv;
 }
+
+
 
 function toggleEducation(header) {
   var content = header.nextElementSibling;
