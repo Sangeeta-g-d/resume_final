@@ -1,6 +1,9 @@
 // Get the id passed from the view
   
-
+function deleteProject() {
+  var projectSection = document.querySelector('.project-section');
+  projectSection.parentNode.removeChild(projectSection);
+}
 
 function toggleContainer() {
   var container = document.getElementById('profile');
@@ -251,7 +254,7 @@ function addNewProject() {
     '<textarea id="description' + experienceCount + '" class="form-control" name="description' + experienceCount + '" rows="3"></textarea>' +
     '</div>' +
     '<div class="form-group">' +
-    '<label for="description' + experienceCount + '">:</label>' +
+    '<label for="description' + experienceCount + '">Link:</label>' +
     '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Link" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
     '</div>' +
 
@@ -265,7 +268,36 @@ function addNewProject() {
   newExperience.appendChild(header);
   newExperience.appendChild(content);
   container.insertBefore(newExperience, container.lastElementChild);
+  var displayDiv = generateProjectDisplayDiv(experienceCount);
+  var projectsContainer = document.getElementById('projectsContainer'); // Assuming you have an element with id 'projectsContainer'
+  projectsContainer.appendChild(displayDiv);
 }
+
+function generateProjectDisplayDiv(experienceCount) {
+  var displayDiv = document.createElement('div');
+  displayDiv.classList.add('projects');
+  displayDiv.style.marginTop = "10px";
+
+  displayDiv.innerHTML =
+    '<div class="project-section" style="width: 258px; ">' +
+    '<div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
+    '<span id="displayProjectName' + experienceCount + '">Fees Management System</span>' +
+    '</div>' +
+    '<div id="displayProjectTools' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    'Tools used: Python, Django, MySQL, Excel' +
+    '</div>' +
+    '<div id="displayProjectLink' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    'https://www.kickresume.com/dashboard/resumes/' +
+    '</div>' +
+    '<div id="displayProjectDes' + experienceCount + '" style="color: #222222; font-size: 10px; font-family: Poppins; font-weight: 400; line-height: 14px; word-wrap: break-word; overflow: hidden;">' +
+    'Developed a streamlined and efficient fees processing website. <br> User-friendly web-based Fees management System that automated entire fee processing workflow by integrating secure payment gateway. <br>Reduced administrative workload and processing time. <br> Students can crack their fees and pay accordingly through Razor pay gateway.' +
+    '</div>' +
+    '</div>';
+
+  return displayDiv;
+}
+
+
 function toggleProject(header) {
   var content = header.nextElementSibling;
   header.querySelector('i').classList.toggle('fa-chevron-down');
@@ -425,7 +457,35 @@ function updateSummary(){
   localStorage.setItem("summary1", SummaryValue);
 }
 
+function updateProjectname(){ 
+  var projectNameValue = document.getElementById("projectName").value;
+  var projectNameElement = document.getElementById("displayProjectName")
+  projectNameElement.innerHTML = projectNameValue
+  localStorage.setItem("projectNameLocal", projectNameValue);
+}
 
+function updateProjectTools(){ 
+  var projectToolsValue = document.getElementById("projectTools").value;
+  var projectToolsElement = document.getElementById("displayTools")
+  projectToolsElement.innerHTML = projectToolsValue
+  localStorage.setItem("projectToolsLocal", projectToolsValue);
+}
+
+function updateProjectLink(){ 
+  var projectLinkValue = document.getElementById("projectLink").value;
+  var projectLinkElement = document.getElementById("displayProjectLink")
+  projectLinkElement.innerHTML = projectLinkValue
+  localStorage.setItem("projectLinkLocal", projectLinkValue);
+}
+
+function updateProjectDes(){ 
+  var projectDesValue = document.getElementById("projectDes").value;
+  var projectDesElement = document.getElementById("displayProjectDes")
+   // Replace periods with a round dot and a line break
+   var formattedValue = projectDesValue.replace(/\.\s*/g, '<br>&bull; ');
+    projectDesElement.innerHTML = formattedValue;
+  localStorage.setItem("projectDesLocal", projectDesValue);
+}
 
 function handlePresentCheckbox() {
   var presentCheckbox = document.getElementById('present1');
@@ -480,9 +540,6 @@ function handlePresentCheckbox() {
   localStorage.setItem("companyName", companyValue);
   localStorage.setItem("description", descriptionValue);
   localStorage.setItem("from1", FromValue);
-  
-  
-
 }
 
 function updateExperienceDescription() {
@@ -528,8 +585,7 @@ function updateCityCountry() {
   var cityValue = document.getElementById("city").value;
   var cityElement = document.getElementById("displayCity")
   cityElement.innerHTML = cityValue
-  localStorage.setItem("cityLocal", cityValue);
- 
+  localStorage.setItem("cityLocal", cityValue); 
 }
 
 function retrieveStoredValue() {
@@ -541,11 +597,32 @@ function retrieveStoredValue() {
   var storedToDegree = localStorage.getItem("degreeToLocal")
   var storedCollege = localStorage.getItem("collegeInputLocal")
   var storedCity = localStorage.getItem("cityLocal")
+  var storedProjectName = localStorage.getItem("projectNameLocal")
+  var storedProjectTools = localStorage.getItem("projectToolsLocal")
+  var storedProjectLink = localStorage.getItem("projectLinkLocal")
+  var storedProjectDes = localStorage.getItem("projectDesLocal")
  
 
   if (storedValue) {
     document.getElementById("jobtitle1").value = storedValue;
     document.getElementById("Display_Designation").innerText = storedValue;
+  }
+  if (storedProjectTools) {
+    document.getElementById("projectTools").value = storedValue;
+    document.getElementById("displayProjectTools").innerText = storedValue;
+  }
+  if (storedProjectLink) {
+    document.getElementById("projectLink").value = storedValue;
+    document.getElementById("displayProjectLink").innerText = storedValue;
+  }
+  if(storedProjectName){
+    document.getElementById("projectName").value = storedProjectName
+    document.getElementById("displayProjectName").innerHTML = storedProjectName
+  }
+
+  if(storedProjectDes){
+    document.getElementById("projectDes").value = storedProjectName
+    document.getElementById("displayProjectDes").innerHTML = storedProjectName
   }
   
   if (storedCompanyName) {
@@ -626,6 +703,7 @@ function retrieveStoredValue() {
         }
   
       }
+  
 
 // Call the function to retrieve stored value when the page loads
 window.onload = retrieveStoredValue;

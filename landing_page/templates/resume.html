@@ -229,23 +229,23 @@
           <div class="experience-content">
             <form id="experience1">
               <div class="form-group">
-                <input type="text" id="company1" class="form-control" placeholder="Project Name" name="company1"
+                <input type="text" id="projectName" class="form-control" placeholder="Project Name" oninput="updateProjectname()" name="company1"
                   style="height: 30px;">
               </div>
 
               <div class="form-group">
                 <label for="description1">Tools used:</label>
-                <textarea id="description1" class="form-control" name="description1" rows="3"></textarea>
+                <textarea id="projectTools" class="form-control" name="description1" rows="3" oninput="updateProjectTools()"></textarea>
               </div>
               <div class="form-group">
                 <label for="description1">Link:</label>
-                <input type="text" id="jobtitle1" class="form-control" placeholder="Link" name="jobtitle1"
+                <input type="text" id="projectLink" class="form-control" placeholder="Link" name="jobtitle1" oninput="updateProjectLink()"
                   style="height: 30px;">
 
               </div>
               <div class="form-group">
                 <label for="description1">Description:</label>
-                <textarea id="description1" class="form-control" name="description1" rows="5"></textarea>
+                <textarea oninput="updateProjectDes()" id="projectDes" class="form-control" name="description1" rows="5"></textarea>
               </div>
 
 
@@ -316,7 +316,7 @@
       <div class="content_wrapper">
         <div id="dynamicContent">
           <div id="temp2" style="width: 595px; height: 842px; position: relative; background: white">
-            <div style="height: 196px; left: 310px; top: 590px; position: absolute">
+            <div style=" left: 310px; top: 590px; position: absolute">
               <div
                 style="left: 0px; top: 0px; position: absolute; color: #1C8EB5; font-size: 14px; font-family: Poppins; font-weight: 400; line-height: 20px; word-wrap: break-word">
                 Skills</div>
@@ -330,56 +330,32 @@
             </div>
             <div style="width: 258px; height: 366px; left: 310px; top: 200px; position: absolute">
               <div
-                style="left: 0px; top: 0px; position: absolute; color: #1C8EB5; font-size: 14px; font-family: Poppins; font-weight: 400; line-height: 20px; word-wrap: break-word">
-                Education & Learning</div>
-              <div style="width: 258px; height: 52px; left: 0px; top: 32px; position: absolute">
-                <div
-                  style="left: 0px; top: 0px; position: absolute; color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word">
-                  Master’s in Human-Computer Interaction</div>
-                <div
-                  style="width: 245px; left: 0px; top: 20px; position: absolute; color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word"><br>
-                  Copenhagen School of Design and Technology 2015 – 2016</div>
-              </div>
-              <div style="width: 245px; height: 52px; left: 0px; top: 100px; position: absolute">
-                <div
-                  style="left: 0px; top: 0px; position: absolute; color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word">
-                  Bachelor's of Arts</div>
-                <div
-                  style="width: 245px; left: 0px; top: 20px; position: absolute; color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word">
-                  Copenhagen School of Design and Technology, 2011 – 2015</div>
-              </div>
-              <div style="width: 245px; height: 36px; left: 0px; top: 222px; position: absolute">
-                <div
-                  style="left: 0px; top: 0px; position: absolute; color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word">
-                  UX: Interaction Design</div>
-                <div
-                  style="width: 245px; left: 0px; top: 20px; position: absolute; color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word">
-                  Trydesignlab.com, Dec 2017</div>
-              </div>
-              <div style="width: 245px; height: 36px; left: 0px; top: 176px; position: absolute">
-                <div
-                  style="left: 0px; top: 0px; position: absolute; color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word">
-                  Design Leadership Masterclass</div>
-                <div
-                  style="width: 245px; left: 0px; top: 20px; position: absolute; color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word">
-                  Design Lab Inc., Mar 2020</div>
-              </div>
-              <div style="width: 245px; height: 52px; left: 0px; top: 268px; position: absolute">
-                <div
-                  style="left: 0px; top: 0px; position: absolute; color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word">
-                  UX Design Specialization</div>
-                <div
-                  style="width: 245px; left: 0px; top: 20px; position: absolute; color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word">
-                  Udacity.com, online course by Google, <br />Aug 2016</div>
-              </div>
-              <div style="width: 245px; height: 36px; left: 0px; top: 330px; position: absolute">
-                <div
-                  style="left: 0px; top: 0px; position: absolute; color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word">
-                  Branding fundamentals</div>
-                <div
-                  style="width: 245px; left: 0px; top: 20px; position: absolute; color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word">
-                  Design Lab Inc., Nov 2014</div>
-              </div>
+                style="left: 0px; top: 0px;  color: #1C8EB5; font-size: 14px; font-family: Poppins; font-weight: 400; line-height: 20px; word-wrap: break-word">
+                Projects</div>
+                <div class="projects">
+                <div class="project-section" style="width: 254px;">   
+                  <div class="delete-symbol" onclick="deleteProject()">&#10006;</div>  
+                  <div id="displayProjectName" style="color: #222222; font-size: 14px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">
+                    Fees Management System
+                  </div>
+                  <div style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">
+                   <span id="displayProjectTools"> Tools used : </span><span id="displayTools"> Python, Django, MySQL, Excel </span >
+                  </div>
+                  <div style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">
+                    <span id="displayProjectLink"> https://www.kickresume.com/dashboard/resumes/ </span >
+                   </div>
+                  <div class="content">
+                    <div id="displayProjectDes" style="color: #222222; font-size: 10px; font-family: Poppins; font-weight: 400; line-height: 14px; word-wrap: break-word; overflow: hidden;">
+                      Developed a streamlined and efficient fees processing website. <br> User-friendly web-based Fees management System that automated entire fee processing
+                      workflow by integrating secure payment gateway. <br>Reduced administrative workload and processing time. <br> Students can crack their fees and pay accordingly through Razor pay gateway.                      
+                    </div>
+                </div>
+                
+                </div>  
+                <div style="margin-top: 5px;" id="projectsContainer"></div>
+                </div>
+              
+             
             </div>
             <div style="width: 254px; height: 602px; left: 32px; top: 200px; position: absolute">
               <div class="experience-education-container">

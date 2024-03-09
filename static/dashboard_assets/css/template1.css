@@ -332,4 +332,29 @@ flex-wrap: wrap; /* Allow columns to wrap to the next row if needed */
   .education {
     margin-top: 20px;
   }
- 
+
+  .project-section {
+    position: relative;
+    width: 254px;
+    overflow: hidden;
+   
+    transition: border 0.3s; /* Adding a smooth transition effect */
+  }
+
+  .project-section:hover {
+    border: 2px solid #3498db; /* Border color on hover */
+  }
+
+  .delete-symbol {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #e74c3c; /* Delete symbol color */
+    display: none; /* Hide by default */
+  }
+
+  .project-section:hover .delete-symbol {
+    display: block; /* Show on hover */
+  }
