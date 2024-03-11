@@ -249,49 +249,50 @@ function projects() {
   container.classList.toggle('hidden');
 }
 
+
+
+
 function addNewProject() {
   var container = document.getElementById('container3');
-  var experienceCount = container.getElementsByClassName('experience-section').length + 1;
+  var projectCount = container.getElementsByClassName('project-section1').length + 1;
+  console.log('varrrrr', projectCount);
+
   var newExperience = document.createElement('div');
-  newExperience.classList.add('experience-section');
+  newExperience.classList.add('project-section1');
 
   var header = document.createElement('div');
   header.classList.add('experience-header');
   header.onclick = function () { toggleProjects(this) };
-  header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Projects ' + experienceCount + '</b></p>';
+  header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Projects ' + projectCount + '</b></p>';
 
   var content = document.createElement('div');
   content.classList.add('experience-content');
-  content.innerHTML = '<form id="experience' + experienceCount + '">' +
+  content.innerHTML = '<form id="experience' + projectCount + '">' +
     '<div class="form-group">' +
-    '<input type="text" id="company' + experienceCount + '" class="form-control" placeholder="Project Name" name="company' + experienceCount + '" style="height: 30px;">' +
+    '<input type="text" id="projectName' + projectCount + '" class="form-control" placeholder="Project Name" name="company' + projectCount + '" onkeyup="updateProjectName2(' + projectCount + ')" style="height: 30px;">' +
     '</div>' +
     '<div class="form-group">' +
-
-    '<label for="description' + experienceCount + '">Tools used:</label>' +
-    '<textarea id="description' + experienceCount + '" class="form-control" name="description' + experienceCount + '" rows="3"></textarea>' +
+    '<label for="description' + projectCount + '">Tools used:</label>' +
+    '<textarea id="description' + projectCount + '" class="form-control" name="description' + projectCount + '" rows="3"></textarea>' +
     '</div>' +
     '<div class="form-group">' +
-    '<label for="description' + experienceCount + '">Link:</label>' +
-    '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Link" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
+    '<label for="description' + projectCount + '">Link:</label>' +
+    '<input type="text" id="jobtitle' + projectCount + '" class="form-control" placeholder="Link" name="jobtitle' + projectCount + '" style="height: 30px;">' +
     '</div>' +
-
     '<div class="form-group">' +
-    '<label for="description' + experienceCount + '">Description:</label>' +
-    '<textarea id="description' + experienceCount + '" class="form-control" name="description' + experienceCount + '" rows="5"></textarea>' +
+    '<label for="description' + projectCount + '">Description:</label>' +
+    '<textarea id="description' + projectCount + '" class="form-control" name="description' + projectCount + '" rows="5"></textarea>' +
     '</div>' +
-
     '</form>';
 
   newExperience.appendChild(header);
   newExperience.appendChild(content);
   container.insertBefore(newExperience, container.lastElementChild);
-  var displayDiv = generateProjectDisplayDiv(experienceCount);
-  var projectsContainer = document.getElementById('projectsContainer'); // Assuming you have an element with id 'projectsContainer'
-  projectsContainer.appendChild(displayDiv);
-}
+  console.log(projectCount)
+  retrieveStoredProjectName(projectCount);
+  }
 
-function generateProjectDisplayDiv(experienceCount) {
+function generateProjectDisplayDiv(projectCount) {
   var displayDiv = document.createElement('div');
   displayDiv.classList.add('projects');
   displayDiv.style.marginTop = "10px";
@@ -299,22 +300,47 @@ function generateProjectDisplayDiv(experienceCount) {
   displayDiv.innerHTML =
     '<div class="project-section" style="width: 258px; ">' +
     '<div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
-    '<span id="displayProjectName' + experienceCount + '">Fees Management System</span>' +
+    '<span id="displayProjectName' + projectCount + '">Fees Management System</span>' +
     '</div>' +
-    '<div id="displayProjectTools' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    '<div id="displayProjectTools' + projectCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
     'Tools used: Python, Django, MySQL, Excel' +
     '</div>' +
-    '<div id="displayProjectLink' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    '<div id="displayProjectLink' + projectCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
     'https://www.kickresume.com/dashboard/resumes/' +
     '</div>' +
-    '<div id="displayProjectDes' + experienceCount + '" style="color: #222222; font-size: 10px; font-family: Poppins; font-weight: 400; line-height: 14px; word-wrap: break-word; overflow: hidden;">' +
+    '<div id="displayProjectDes' + projectCount + '" style="color: #222222; font-size: 10px; font-family: Poppins; font-weight: 400; line-height: 14px; word-wrap: break-word; overflow: hidden;">' +
     'Developed a streamlined and efficient fees processing website. <br> User-friendly web-based Fees management System that automated entire fee processing workflow by integrating secure payment gateway. <br>Reduced administrative workload and processing time. <br> Students can crack their fees and pay accordingly through Razor pay gateway.' +
     '</div>' +
     '</div>';
 
-      return displayDiv;
+  return displayDiv;
 }
 
+function saveProject() {
+  var containerHtml = document.getElementById('container3').innerHTML;
+  var projectContainerHtml = document.getElementById('projectsContainer').innerHTML;
+  localStorage.setItem('containerHtml', containerHtml);
+  localStorage.setItem('projectContainerHtml', projectContainerHtml);
+  localStorage.setItem('projectsData', JSON.stringify(projectsData));
+}
+
+function loadProject() {
+  var containerHtml = localStorage.getItem('containerHtml');
+  var projectContainerHtml = localStorage.getItem('projectContainerHtml');
+  if (containerHtml && projectContainerHtml) {
+    document.getElementById('container3').innerHTML = containerHtml;
+    document.getElementById('projectsContainer').innerHTML = projectContainerHtml;
+  }
+}
+
+
+function updateProjectData(index, field, value) {
+  // Update the project data array
+  projectsData[index][field] = value;
+
+  // Save projectsData to localStorage
+  localStorage.setItem('projectsData', JSON.stringify(projectsData));
+}
 
 function toggleProject(header) {
   var content = header.nextElementSibling;
@@ -454,6 +480,20 @@ function updateProjectname(){
   projectNameElement.innerHTML = projectNameValue
   localStorage.setItem("projectNameLocal", projectNameValue);
 }
+
+
+function updateProjectName2(projectCount) {
+  var projectNameValue = document.getElementById("projectName" + projectCount).value;
+  var projectNameElement = document.getElementById("displayProjectName" + projectCount);
+  projectNameElement.innerHTML = projectNameValue;
+
+  // Store project name in localStorage
+  localStorage.setItem("dynamicProjectNameLocal" + projectCount, projectNameValue);
+}
+
+
+
+
 
 function updateProjectTools(){ 
   var projectToolsValue = document.getElementById("projectTools").value;
@@ -623,21 +663,24 @@ function retrieveStoredValue() {
     document.getElementById("Display_Designation").innerText = storedValue;
   }
   if (storedProjectTools) {
-    document.getElementById("projectTools").value = storedValue;
-    document.getElementById("displayProjectTools").innerText = storedValue;
+    document.getElementById("projectTools").value = storedProjectTools;
+    document.getElementById("displayTools").innerText = storedProjectTools;
   }
   if (storedProjectLink) {
-    document.getElementById("projectLink").value = storedValue;
-    document.getElementById("displayProjectLink").innerText = storedValue;
+    document.getElementById("projectLink").value = storedProjectLink;
+    document.getElementById("displayProjectLink").innerText = storedProjectLink;
   }
   if(storedProjectName){
     document.getElementById("projectName").value = storedProjectName
     document.getElementById("displayProjectName").innerHTML = storedProjectName
   }
 
-  if(storedProjectDes){
-    document.getElementById("projectDes").value = storedProjectName
-    document.getElementById("displayProjectDes").innerHTML = storedProjectName
+  if (storedProjectDes) {
+    // Replace periods with a round dot and a line break
+    var formattedValue = storedProjectDes.replace(/\.\s*/g, '<br>&bull; ');
+
+    document.getElementById("projectDes").value = storedProjectDes;
+    document.getElementById("displayProjectDes").innerHTML = formattedValue;
   }
   
   if (storedCompanyName) {
@@ -724,13 +767,7 @@ function retrieveStoredValue() {
   loadEducationFromLocalStorage();
 
       }
-  
-
+      loadProject();
  
 // Call the function to retrieve stored value when the page loads
-window.onload = retrieveStoredValue;
-
-
-
-
-
+window.onload = retrieveStoredValue
