@@ -311,7 +311,7 @@ function generateProjectDisplayDiv(experienceCount) {
     '</div>' +
     '</div>';
 
-  return displayDiv;
+      return displayDiv;
 }
 
 
