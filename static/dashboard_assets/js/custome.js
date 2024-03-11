@@ -117,7 +117,6 @@ function education() {
   var container = document.getElementById('container2');
   container.classList.toggle('hidden');
 }
-
 function addNewEducation() {
   var container = document.getElementById('container2');
   var experienceCount = container.getElementsByClassName('experience-section').length + 1;
@@ -191,6 +190,8 @@ function generateDisplayDiv(experienceCount) {
 
     return displayDiv;
   }
+
+
 
 
 
@@ -720,7 +721,7 @@ function retrieveStoredValue() {
       updateSkills(); // Corrected function call
   }
       
-  populatePageFromLocalStorage();
+  loadEducationFromLocalStorage();
 
       }
   
