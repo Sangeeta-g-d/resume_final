@@ -358,3 +358,6 @@ flex-wrap: wrap; /* Allow columns to wrap to the next row if needed */
   .project-section:hover .delete-symbol {
     display: block; /* Show on hover */
   }
+  #skillsList {
+    top: 28px;
+  }
