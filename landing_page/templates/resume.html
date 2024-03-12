@@ -171,12 +171,12 @@
       </button>
 
       <div id="container2" class="custom-container hidden">
-        <div class="experience-section">
-          <div class="experience-header" onclick="toggleEducation(this)">
+        <div class="education-section">
+          <div class="education-header" onclick="toggleEducation(this)">
             <i class="fas fa-chevron-down"></i>
             <p><b>Education 1</b></p>
           </div>
-          <div class="experience-content">
+          <div class="education-content">
             <form>
               <div class="form-group">
                 <input type="text" id="degreeInput" class="form-control" placeholder="Degree" name="degreeInput" style="height: 30px;" onkeyup="updateDegree()">
@@ -300,14 +300,11 @@
       <br>
     </div>
 
-
-
-
-
     <div class="right-side" style="position: relative; overflow-y: auto;">
       <div class="content_wrapper">
         <div id="dynamicContent">
           <div id="temp2" style="width: 595px;  background: white">
+            
             <div style="left: 310px; width: 595px; position: absolute; top: 386px;">
               <div style="left: 0px; top: 0px; position: absolute; color: #1C8EB5; font-size: 14px; font-family: Poppins; font-weight: 400; line-height: 20px; word-wrap: break-word">
                 Skills
@@ -334,7 +331,7 @@
               <div
                 style="left: 0px; top: 0px;  color: #1C8EB5; font-size: 14px; font-family: Poppins; font-weight: 400; line-height: 20px; word-wrap: break-word">
                 Projects</div>
-                <div class="projects">
+                <div class="projects" style="width: 254px; position: absolute;">
                 <div class="project-section" style="width: 254px;">   
                   <div class="delete-symbol" onclick="deleteProject()">&#10006;</div>  
                   <div id="displayProjectName" style="color: #222222; font-size: 14px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">
@@ -379,6 +376,7 @@
                   </div>
                   
                   </div>  
+                  <div  id="experienceContainer"></div>
                 </div>
               
                 <div class="education">
