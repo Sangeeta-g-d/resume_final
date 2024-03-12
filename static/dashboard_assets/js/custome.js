@@ -151,25 +151,26 @@ function updateExperience2(experienceCount) {
 
    
 }
-
-
 function handlePresentCheckbox() {
+  console.log("hhhhhhooooooooooo")
   var toInput = document.getElementById("to1");
   var toContainer = document.getElementById("to1Container");
   var fieldEDDT = document.getElementById("FIELD_EDDT");
 
   if (document.getElementById("present1").checked) {
-    toInput.disabled = true; // Disable the input field
-    toContainer.innerHTML = "Present"; // Display "Present" text
-    fieldEDDT.textContent = "Present"; // Update FIELD_EDDT span with "Present" text
+      toInput.disabled = true; // Disable the input field
+      toContainer.innerHTML = "Present"; // Display "Present" text
+      if (fieldEDDT) {
+          fieldEDDT.textContent = "Present"; // Update FIELD_EDDT span with "Present" text if it exists
+      }
   } else {
-    toInput.disabled = false; // Enable the input field when present is unchecked
-    toContainer.innerHTML = '<input type="month" id="to1" class="form-control" name="to1" style="height: 35px;" onchange="updateExperience()">'; // Restore input field
-    fieldEDDT.textContent = ""; // Reset FIELD_EDDT span
+      toInput.disabled = false; // Enable the input field when present is unchecked
+      toContainer.innerHTML = '<input type="month" id="to1" class="form-control" name="to1" style="height: 35px;" onchange="updateExperience()">'; // Restore input field
+      if (fieldEDDT) {
+          fieldEDDT.textContent = ""; // Reset FIELD_EDDT span if it exists
+      }
   }
 }
-
-
 function toggleExperience(header) {
   var content = header.nextElementSibling;
   header.querySelector('i').classList.toggle('fa-chevron-down');
@@ -559,16 +560,6 @@ function updateProjectDes(){
   localStorage.setItem("projectDesLocal", projectDesValue);
 }
 
-function handlePresentCheckbox() {
-  var presentCheckbox = document.getElementById('present1');
-  if (presentCheckbox.checked) {
-      document.getElementById('Display_To').textContent = 'Present';
-      document.getElementById('to1').value = '';
-      localStorage.setItem('toValue', '');
-  } else {
-      updateExperience();
-  }
-}
 
  // Experience
  function updateExperience() {
@@ -794,7 +785,7 @@ function retrieveStoredValue() {
       updateSkills(); // Corrected function call
   }
       
-  
+  handlePresentCheckbox();
   loadEducation();
   loadExperience();
       }
