@@ -39,38 +39,9 @@ function workexperience() {
   var container = document.getElementById('container1');
   container.classList.toggle('hidden');
 }
-
-
-
-function handlePresentCheckbox() {
-  var toInput = document.getElementById("to1");
-  var toContainer = document.getElementById("to1Container");
-  var fieldEDDT = document.getElementById("FIELD_EDDT");
-
-  if (document.getElementById("present1").checked) {
-    toInput.disabled = true; // Disable the input field
-    toContainer.innerHTML = "Present"; // Display "Present" text
-    fieldEDDT.textContent = "Present"; // Update FIELD_EDDT span with "Present" text
-  } else {
-    toInput.disabled = false; // Enable the input field when present is unchecked
-    toContainer.innerHTML = '<input type="month" id="to1" class="form-control" name="to1" style="height: 35px;" onchange="updateExperience()">'; // Restore input field
-    fieldEDDT.textContent = ""; // Reset FIELD_EDDT span
-  }
-}
-
-
-
-
-function toggleExperience(header) {
-  var content = header.nextElementSibling;
-  header.querySelector('i').classList.toggle('fa-chevron-down');
-  header.querySelector('i').classList.toggle('fa-chevron-up');
-  content.classList.toggle('hidden');
-}
 function addNewExperience() {
   var container = document.getElementById('container1');
   var experienceCount = container.getElementsByClassName('experience-section').length + 1;
-  console.log(experienceCount)
   var newExperience = document.createElement('div');
   newExperience.classList.add('experience-section');
 
@@ -90,45 +61,39 @@ function addNewExperience() {
   var descriptionInputId = 'description' + experienceCount;
 
   content.innerHTML = '<form id="' + formId + '">' +
-  '<div class="form-group">' +
-  '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Designation" name="' + jobtitleInputId + '" style="height: 30px;" oninput="updateExperienceDisplay(' + experienceCount +')">' +
-  '</div>' +
-  '<div class="form-group">' +
-  '<input type="text" id="' + companyInputId + '" class="form-control" placeholder="Company Name" name="' + companyInputId + '" style="height: 30px;" oninput="updateExperienceDisplay(' + experienceCount +')">' +
-  '</div>' +
-  '<div class="form-group">' +
-  '<label for="' + fromInputId + '" style="margin-right: 10px;">From:</label>' +
-  '<input type="month" id="' + fromInputId + '" name="' + fromInputId + '" class="form-control" style="height: 35px;" oninput="updateExperienceDisplay(' + experienceCount +')">' +
-  '</div>' +
-  '<div class="form-group">' +
-  '<label for="' + toInputId + '" style="margin-right: 10px;">To:</label>' +
-  '<input type="month" id="' + toInputId + '" class="form-control" name="' + toInputId + '" style="height: 35px;" oninput="updateExperienceDisplay(' + experienceCount +')">' +
-  '</div>' +
-  '<div class="form-group">' +
-  '<label for="' + descriptionInputId + '">Description:</label>' +
-  '<textarea id="' + descriptionInputId + '" class="form-control" name="' + descriptionInputId + '" rows="5" oninput="updateExperienceDisplay(' + experienceCount +')"></textarea>' +
-  '</div>' +
-  '</form>';
-
+    '<div class="form-group">' +
+    '<input type="text" id="' + jobtitleInputId + '" class="form-control" placeholder="Designation" name="' + jobtitleInputId + '" style="height: 30px;" oninput="updateExperience2(' + experienceCount + ')">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<input type="text" id="' + companyInputId + '" class="form-control" placeholder="Company Name" name="' + companyInputId + '" style="height: 30px;" oninput="updateExperience2(' + experienceCount + ')">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label for="' + fromInputId + '" style="margin-right: 10px;">From:</label>' +
+    '<input type="month" id="' + fromInputId + '" name="' + fromInputId + '" class="form-control" style="height: 35px;" oninput="updateExperience2(' + experienceCount + ')">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label for="' + toInputId + '" style="margin-right: 10px;">To:</label>' +
+    '<input type="month" id="' + toInputId + '" class="form-control" name="' + toInputId + '" style="height: 35px;" oninput="updateExperience2(' + experienceCount + ')">'+
+    '</div>' +
+    '<div class="form-group">' +
+    '<label for="' + descriptionInputId + '">Description:</label>' +
+    '<textarea id="' + descriptionInputId + '" class="form-control" name="' + descriptionInputId + '" rows="5" oninput="updateExperience2(' + experienceCount + ')"></textarea>' +
+    '</div>' +
+    '</form>';
 
   newExperience.appendChild(header);
   newExperience.appendChild(content);
   container.insertBefore(newExperience, container.lastElementChild);
 
-  // Update display for the newly added experience
-  updateExperienceDisplay(experienceCount);
-
   // Generate display div for the new experience section
   var displayDiv = generateExperienceDisplayDiv(experienceCount);
   document.getElementById('experienceContainer').appendChild(displayDiv);
-
   saveExperience();
 }
-
 function generateExperienceDisplayDiv(experienceCount) {
   var displayDiv = document.createElement('div');
   displayDiv.classList.add('work-experience');
-  displayDiv.style.marginTop = "40px";
+  displayDiv.style.marginTop = "10px";
 
   displayDiv.innerHTML = 
     
@@ -148,22 +113,6 @@ function generateExperienceDisplayDiv(experienceCount) {
 
   return displayDiv;
 }
-
-function updateExperienceDisplay(experienceCount) {
-  console.log(experienceCount)
-  var jobtitleInput = document.getElementById('jobtitle' + experienceCount).value;
-  var companyInput = document.getElementById('company' + experienceCount).value;
-  var fromInput = document.getElementById('from' + experienceCount).value;
-  var toInput = document.getElementById('to' + experienceCount).value;
-  var descriptionInput = document.getElementById('description' + experienceCount).value;
-  
-  document.getElementById('Display_Designation' + experienceCount).textContent = jobtitleInput;
-  document.getElementById('Display_Cname' + experienceCount).textContent = companyInput;
-  document.getElementById('Display_From' + experienceCount).textContent = fromInput;
-  document.getElementById('Display_To' + experienceCount).textContent = toInput;
-  document.getElementById('Display_Description' + experienceCount).textContent = descriptionInput;
-}
-
 function saveExperience() {
   var containerHtml = document.getElementById('container1').innerHTML;
   var experienceContainerHtml = document.getElementById('experienceContainer').innerHTML;
@@ -178,9 +127,55 @@ function loadExperience() {
     document.getElementById('container1').innerHTML = containerHtml;
     document.getElementById('experienceContainer').innerHTML = experienceContainerHtml;
   }
+ // localStorage.clear();
+}
+function updateExperience2(experienceCount) {
+  console.log(experienceCount)
+  var jobtitleValue2 = document.getElementById('jobtitle' + experienceCount).value;
+  document.getElementById('Display_Designation' + experienceCount).innerText = jobtitleValue2;
+  
+    var companyValue2 = document.getElementById('company' + experienceCount).value;
+    document.getElementById('Display_Cname' + experienceCount).innerText = companyValue2;
+  
+  
+    var desValue2 = document.getElementById('description' + experienceCount).value;
+    document.getElementById('Display_Description' + experienceCount).innerText = desValue2;
+  
+  
+    var fromValue2 = document.getElementById('from' + experienceCount).value;
+    console.log(fromInputValue)
+    document.getElementById('Display_From' + experienceCount).innerText = fromValue2;
+    
+    var toValue2 = document.getElementById('to' + experienceCount).value;
+    document.getElementById('Display_To' + experienceCount).innerText = toValue2;
+
+   
 }
 
 
+function handlePresentCheckbox() {
+  var toInput = document.getElementById("to1");
+  var toContainer = document.getElementById("to1Container");
+  var fieldEDDT = document.getElementById("FIELD_EDDT");
+
+  if (document.getElementById("present1").checked) {
+    toInput.disabled = true; // Disable the input field
+    toContainer.innerHTML = "Present"; // Display "Present" text
+    fieldEDDT.textContent = "Present"; // Update FIELD_EDDT span with "Present" text
+  } else {
+    toInput.disabled = false; // Enable the input field when present is unchecked
+    toContainer.innerHTML = '<input type="month" id="to1" class="form-control" name="to1" style="height: 35px;" onchange="updateExperience()">'; // Restore input field
+    fieldEDDT.textContent = ""; // Reset FIELD_EDDT span
+  }
+}
+
+
+function toggleExperience(header) {
+  var content = header.nextElementSibling;
+  header.querySelector('i').classList.toggle('fa-chevron-down');
+  header.querySelector('i').classList.toggle('fa-chevron-up');
+  content.classList.toggle('hidden');
+}
 
 
 function education() {
@@ -188,22 +183,21 @@ function education() {
   container.classList.toggle('hidden');
 }
 
-
 function addNewEducation() {
   var container = document.getElementById('container2');
   var educationCount = container.getElementsByClassName('education-section').length + 1;
-  var newExperience = document.createElement('div');
-  newExperience.classList.add('education-section');
+  var newEducation = document.createElement('div');
+  newEducation.classList.add('education-section');
 
   var header = document.createElement('div');
-  header.classList.add('experience-header');
+  header.classList.add('education-header');
   header.onclick = function () { toggleEducation(this) };
   header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Education ' + educationCount + '</b></p>';
 
   var content = document.createElement('div');
-  content.classList.add('experience-content');
+  content.classList.add('education-content');
 
-  var formId = 'experience' + educationCount;
+  var formId = 'education' + educationCount;
   var degreeInputId = 'degreeInput' + educationCount;
   var institutionInputId = 'institution' + educationCount;
   var cityInputId = 'city' + educationCount;
@@ -212,7 +206,7 @@ function addNewEducation() {
 
   content.innerHTML = '<form id="' + formId + '">' +
     '<div class="form-group">' +
-    '<input type="text" id="' + degreeInputId + '" class="form-control" placeholder="Degree" name="' + degreeInputId + '" style="height: 30px;" oninput="updateDisplay(' + educationCount + ')">' +
+    '<input type="text" id="' + institutionInputId + '" class="form-control" placeholder="Institution Name" name="' + institutionInputId + '" style="height: 30px;" oninput="updateDisplay(' + educationCount + ')">' +
     '</div>' +
     '<div class="form-group">' +
     '<input type="text" id="' + degreeInputId + '" class="form-control" placeholder="Degree" name="' + degreeInputId + '" style="height: 30px;" oninput="updateDisplay(' + educationCount + ')">' +
@@ -222,27 +216,30 @@ function addNewEducation() {
     '</div>' +
     '<div class="form-group">' +
     '<label for="' + fromInputId + '" style="margin-right: 10px;">From:</label>' +
-    '<input type="date" id="' + fromInputId + '" name="' + fromInputId + '" class="form-control" style="height: 35px;" onchange="updateDisplay(' + educationCount + ')">' +
+    '<input type="month" id="' + fromInputId + '" name="' + fromInputId + '" class="form-control" style="height: 35px;" onchange="updateDisplay(' + educationCount + ')">' +
     '</div>' +
     '<div class="form-group">' +
     '<label for="' + toInputId + '" style="margin-right: 10px;">To:</label>' +
-    '<input type="date" id="' + toInputId + '" class="form-control" name="' + toInputId + '" style="height: 35px;" onchange="updateDisplay(' + educationCount + ')">' +
+    '<input type="month" id="' + toInputId + '" class="form-control" name="' + toInputId + '" style="height: 35px;" onchange="updateDisplay(' + educationCount + ')">' +
     '</div>' +
     '</form>';
 
-  newExperience.appendChild(header);
-  newExperience.appendChild(content);
-  container.insertBefore(newExperience, container.lastElementChild);
+    newEducation.appendChild(header);
+    newEducation.appendChild(content);
+  container.insertBefore(newEducation, container.lastElementChild);
   
+  var displayDiv = generateDisplayDiv(educationCount);
+      var educationContainer = document.getElementById('educationContainer'); // Assuming you have an element with id 'educationContainer'
+      educationContainer.appendChild(displayDiv);
+      
   // Save added education to local storage
   saveEducation();
 }
 
-
 function generateDisplayDiv(educationCount) {
   var displayDiv = document.createElement('div');
   displayDiv.classList.add('education');
-  displayDiv.style.marginTop = "40px";
+  displayDiv.style.marginTop = "30px";
 
   displayDiv.innerHTML = 
     '<div style="width: 258px; ">' +
@@ -261,80 +258,12 @@ function generateDisplayDiv(educationCount) {
   return displayDiv;
 }
 
-function updateDisplay(educationCount) {
-  var degreeValue = document.getElementById("degreeInput" + educationCount).value;
-  var degreeElement = document.getElementById("displayDegree" + educationCount);
-  degreeElement.innerHTML = degreeValue;
-
-  var degreeFromValue = document.getElementById("degreeFromInput" + educationCount).value;
-  var degreeFromElement = document.getElementById("displayDegreeFrom" + educationCount);
-  degreeFromElement.innerHTML = degreeFromValue;
-
-  var degreeToValue = document.getElementById("to" + educationCount).value;
-  var degreeToElement = document.getElementById("displayDegreeTo" + educationCount);
-  degreeToElement.innerHTML = degreeToValue;
-
-  var collegeValue = document.getElementById("institution" + educationCount).value;
-  var collegeElement = document.getElementById("displayCollege" + educationCount);
-  collegeElement.innerHTML = collegeValue;
-
-  var cityValue = document.getElementById("city" + educationCount).value;
-  var cityElement = document.getElementById("displayCity" + educationCount);
-  cityElement.innerHTML = cityValue;
-
-  // Save the updated education to local storage
-  saveEducation();
-}
-
 function saveEducation() {
   var containerHtml = document.getElementById('container2').innerHTML;
   var educationContainerHtml = document.getElementById('educationContainer').innerHTML;
   localStorage.setItem('containerHtml', containerHtml);
   localStorage.setItem('educationContainerHtml', educationContainerHtml);
 }
-
-function loadEducation() {
-  var containerHtml = localStorage.getItem('containerHtml');
-  var educationContainerHtml = localStorage.getItem('educationContainerHtml');
-  if (containerHtml && educationContainerHtml) {
-    document.getElementById('container2').innerHTML = containerHtml;
-    document.getElementById('educationContainer').innerHTML = educationContainerHtml;
-  }
-}
-
-
-
-
-
-
-
-
-
-function updateInstitution(experienceCount) {
-  var institutionInputValue = document.getElementById('institution' + experienceCount).value;
-  document.getElementById('displayCollege' + experienceCount).innerText = institutionInputValue;
-}
-
-function updateDegree(experienceCount) {
-  var degreeInputValue = document.getElementById('degreeInput' + experienceCount).value;
-  document.getElementById('displayDegree' + experienceCount).innerText = degreeInputValue;
-}
-
-function updateCity(experienceCount) {
-  var cityInputValue = document.getElementById('city' + experienceCount).value;
-  document.getElementById('displayCity' + experienceCount).innerText = cityInputValue;
-}
-
-function updateDegreeYear(experienceCount) {
-  var fromInputValue = document.getElementById('from' + experienceCount).value;
-  document.getElementById('displayDegreeFrom' + experienceCount).innerText = fromInputValue;
-  
-  var toInputValue = document.getElementById('to' + experienceCount).value;
-  document.getElementById('displayDegreeTo' + experienceCount).innerText = toInputValue;
-}
-
-
-
 
 function storeEducationData(experienceCount) {
   var educationData = {
@@ -348,6 +277,44 @@ function storeEducationData(experienceCount) {
   // Store educationData in localStorage
   localStorage.setItem('education' + experienceCount, JSON.stringify(educationData));
 }
+function loadEducation() {
+  var containerHtml = localStorage.getItem('containerHtml');
+  var educationContainerHtml = localStorage.getItem('educationContainerHtml');
+  if (containerHtml && educationContainerHtml) {
+    document.getElementById('container2').innerHTML = containerHtml;
+    document.getElementById('educationContainer').innerHTML = educationContainerHtml;
+  }
+ // localStorage.clear();
+}
+
+function updateDisplay(educationCount) {
+  console.log(educationCount)
+  var institutionInputValue = document.getElementById('institution' + educationCount).value;
+  document.getElementById('displayCollege' + educationCount).innerText = institutionInputValue;
+  
+    var degreeInputValue = document.getElementById('degreeInput' + educationCount).value;
+    document.getElementById('displayDegree' + educationCount).innerText = degreeInputValue;
+  
+  
+    var cityInputValue = document.getElementById('city' + educationCount).value;
+    document.getElementById('displayCity' + educationCount).innerText = cityInputValue;
+  
+  
+    var fromInputValue = document.getElementById('degreeFromInput' + educationCount).value;
+    console.log(fromInputValue)
+    document.getElementById('displayDegreeFrom' + educationCount).innerText = fromInputValue;
+    
+    var toInputValue = document.getElementById('to' + educationCount).value;
+    document.getElementById('displayDegreeTo' + educationCount).innerText = toInputValue;
+
+    localStorage.setItem("institution1", institutionInputValue);
+    localStorage.setItem("degreeInput1", degreeInputValue);
+    localStorage.setItem("city1", cityInputValue);
+    localStorage.setItem("from1", fromInputValue);
+    localStorage.setItem("to1", toInputValue);
+}
+
+
 
 
 function toggleEducation(header) {
@@ -365,9 +332,9 @@ function projects() {
 
 function addNewProject() {
   var container = document.getElementById('container3');
-  var experienceCount = container.getElementsByClassName('experience-section').length + 1;
+  var experienceCount = container.getElementsByClassName('project-section1').length + 1;
   var newExperience = document.createElement('div');
-  newExperience.classList.add('experience-section');
+  newExperience.classList.add('project-section1');
 
   var header = document.createElement('div');
   header.classList.add('experience-header');
@@ -375,7 +342,7 @@ function addNewProject() {
   header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Projects ' + experienceCount + '</b></p>';
 
   var content = document.createElement('div');
-  content.classList.add('experience-content');
+  content.classList.add('project-content');
   content.innerHTML = '<form id="experience' + experienceCount + '">' +
     '<div class="form-group">' +
     '<input type="text" id="company' + experienceCount + '" class="form-control" placeholder="Project Name" name="company' + experienceCount + '" style="height: 30px;">' +
@@ -610,24 +577,19 @@ function handlePresentCheckbox() {
   divElement.innerText = inputValue;
   
   var companyValue = document.getElementById("company1").value;
-  
-  // Update company name
   var companyNameElement = document.getElementById("Display_Cname");
   companyNameElement.innerText = companyValue;
 
-  // Retrieve description value from local storage or input field
-  var descriptionValue = localStorage.getItem("description") || document.getElementById("description1").value;
-
-  // Update description
-  var descriptionElement = document.getElementById("Display_Description");
-  descriptionElement.innerText = descriptionValue;
+ 
 
   var FromValue = document.getElementById("from1").value;
   var FromElement = document.getElementById("Display_From");
   FromElement.innerText = FromValue;
 
   var ToValue = document.getElementById("to1").value;
+  console.log(ToValue)
   var ToElement = document.getElementById("Display_To");
+  console.log(ToElement)
   ToElement.innerText = ToValue;
 
   var toDate = document.getElementById('to1').value;
@@ -642,19 +604,15 @@ function handlePresentCheckbox() {
   // Store all values in local storage
   localStorage.setItem("jobTitle", inputValue);
   localStorage.setItem("companyName", companyValue);
-  localStorage.setItem("description", descriptionValue);
+  
   localStorage.setItem("from1", FromValue);
 }
 
 function updateExperienceDescription() {
   var descriptionValue = document.getElementById("description1").value;
-    // Update description
     var descriptionElement = document.getElementById("Display_Description");
     descriptionElement.innerText = descriptionValue;
   
-    var descriptionElement = document.getElementById("Display_Description");
-    descriptionElement.innerText = descriptionValue;
-
     localStorage.setItem("description", descriptionValue);
 }
 
@@ -736,12 +694,12 @@ function retrieveStoredValue() {
     document.getElementById("Display_Designation").innerText = storedValue;
   }
   if (storedProjectTools) {
-    document.getElementById("projectTools").value = storedValue;
-    document.getElementById("displayProjectTools").innerText = storedValue;
+    document.getElementById("projectTools").value = storedProjectTools;
+    document.getElementById("displayProjectTools").innerText = storedProjectTools;
   }
   if (storedProjectLink) {
-    document.getElementById("projectLink").value = storedValue;
-    document.getElementById("displayProjectLink").innerText = storedValue;
+    document.getElementById("projectLink").value = storedProjectLink;
+    document.getElementById("displayProjectLink").innerText = storedProjectLink;
   }
   if(storedProjectName){
     document.getElementById("projectName").value = storedProjectName
@@ -749,8 +707,10 @@ function retrieveStoredValue() {
   }
 
   if(storedProjectDes){
-    document.getElementById("projectDes").value = storedProjectName
-    document.getElementById("displayProjectDes").innerHTML = storedProjectName
+    var formattedValue = storedProjectDes.replace(/\.\s*/g, '<br>&bull; ');
+
+    document.getElementById("projectDes").value = storedProjectDes;
+    document.getElementById("displayProjectDes").innerHTML = formattedValue;
   }
   
   if (storedCompanyName) {
@@ -834,17 +794,12 @@ function retrieveStoredValue() {
       updateSkills(); // Corrected function call
   }
       
+  
   loadEducation();
   loadExperience();
-
       }
   
 
  
 // Call the function to retrieve stored value when the page loads
 window.onload = retrieveStoredValue;
-
-
-
-
-
