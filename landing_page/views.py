@@ -32,6 +32,8 @@ pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tessera
 def temp1(request):
     return render(request,'temp1.html')
 
+def temp6(request):
+    return render(request,'temp6.html')
 
 """def get_and_use_gemini_api(prompt):
     
