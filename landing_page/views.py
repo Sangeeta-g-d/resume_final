@@ -29,6 +29,10 @@ import openai
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 # Create your views here.
 
+def temp1(request):
+    return render(request,'temp1.html')
+
+
 """def get_and_use_gemini_api(prompt):
     
     Retrieves Gemini API key from environment variable, creates a GenAI client,
