@@ -29,8 +29,8 @@ import openai
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 # Create your views here.
 
-def temp4(request):
-    return render(request,'temp4.html')
+def temp1(request):
+    return render(request,'temp1.html')
 
 
 """def get_and_use_gemini_api(prompt):
@@ -73,7 +73,15 @@ def index(request):
 
 def team(request):
     data=Templates.objects.all()
-    context={'data':data,'u_id':id}
+    template_values = [template_obj.template for template_obj in data]
+    temp1 = template_values[0] if template_values else None
+    print(temp1)
+    temp2 = template_values[1] 
+    temp3 = template_values[2] 
+    temp4 = template_values[3] 
+    temp5 = template_values[4] 
+    temp6 = template_values[5] 
+    context={'data':data,'u_id':id,'temp1':temp1,'temp2':temp2,'temp3':temp3,'temp4':temp4,'temp5':temp5,'temp6':temp6}
     return render(request,'team.html',context)
 
 def admin_login(request):
@@ -110,7 +118,7 @@ def admin_logout(request):
     # Redirect to a specific page after logout (optional)
     return redirect('/admin_login')
 
-def resume(request, id):
+def resume(request):
     print("iiiiiiiiiiiiiiiiiiiiiiiii",id)
     
      # Pass the extracted coordinates or any other relevant data to the template

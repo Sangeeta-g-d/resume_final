@@ -756,6 +756,7 @@ function updateSkills() {
 
 
 
+
 function retrieveStoredValue() {
   var storedValue = localStorage.getItem("jobTitle");
   var storedCompanyName = localStorage.getItem("companyName");
