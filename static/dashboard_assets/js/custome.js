@@ -1,139 +1,305 @@
 // Get the id passed from the view
-  
-// Function to delete the first project section
-function deleteProject() {
-  var projectSection = document.querySelector('.project-section');
-  projectSection.parentNode.removeChild(projectSection);
-}
-// Add an event listener to a parent container (replace 'projectsContainer' with the actual parent container ID)
-document.getElementById('projectsContainer').addEventListener('click', function (event) {
-  // Check if the clicked element has the 'delete-symbol' class
-  if (event.target.classList.contains('delete-symbol')) {
-    // Extract the projectCount from the clicked element's ID
-    var projectCount = extractProjectCount(event.target.id);
-
-    // Call the deleteProject1 function with the extracted projectCount
-    deleteProject1(projectCount);
-  }
-});
-
-// Function to extract projectCount from the element's ID
-function extractProjectCount(elementId) {
-  // Assuming the element ID format is 'delete-symbol-{projectCount}'
-  var parts = elementId.split('-');
-  return parseInt(parts[parts.length - 1]);
+function education() {
+  var container = document.getElementById('container2');
+  container.classList.toggle('hidden');
 }
 
-function deleteProject1(projectCount) {
-  // Remove form content
-  var formElement = document.getElementById('project1' + projectCount);
-  if (formElement) {
-    formElement.parentNode.removeChild(formElement);
-    console.log('Form Element Deleted:', formElement);
-  } else {
-    console.log('Form Element not found.');
-  }
+function addNewEducation() {
+  var container = document.getElementById('container2');
+  var educationCount = container.getElementsByClassName('education-section').length + 1;
+  var newEducation = document.createElement('div');
+  newEducation.classList.add('education-section');
 
-  // Remove project section
-  var projectSection = document.getElementById('project-section' + projectCount);
-  if (projectSection) {
-    projectSection.parentNode.removeChild(projectSection);
-    console.log('Project Section Element Deleted:', projectSection);
-  } else {
-    console.log('Project Section Element not found.');
-  }
+  var header = document.createElement('div');
+  header.classList.add('education-header');
+  header.onclick = function () { toggleEducation(this) };
+  header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b><span id="educationTitle' + educationCount + '">Education ' + educationCount + '</span></b></p>' +
+                     '<i class="fas fa-trash-alt" onclick="deleteEducation(' + educationCount + ')"></i>'; // Delete icon added here
 
-  // Remove display div
-  var displayDiv = document.getElementById('displayDiv' + projectCount);
+  var content = document.createElement('div');
+  content.classList.add('education-content');
+
+  var formId = 'education' + educationCount;
+  var degreeInputId = 'degreeInput' + educationCount;
+  var institutionInputId = 'institution' + educationCount;
+  var cityInputId = 'city' + educationCount;
+  var fromInputId = 'degreeFromInput' + educationCount;
+  var toInputId = 'to' + educationCount;
+
+  content.innerHTML = '<form id="' + formId + '">' +
+    '<div class="form-group">' +
+    '<input type="text" id="' + institutionInputId + '" class="form-control" placeholder="Institution Name" name="' + institutionInputId + '" style="height: 30px;" oninput="updateDisplay(' + educationCount + ')">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<input type="text" id="' + degreeInputId + '" class="form-control" placeholder="Degree" name="' + degreeInputId + '" style="height: 30px;" oninput="updateDisplay(' + educationCount + ')">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<input type="text" id="' + cityInputId + '" class="form-control" placeholder="City" name="' + cityInputId + '" style="height: 30px;" oninput="updateDisplay(' + educationCount + ')">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label for="' + fromInputId + '" style="margin-right: 10px;">From:</label>' +
+    '<input type="month" id="' + fromInputId + '" name="' + fromInputId + '" class="form-control" style="height: 35px;" onchange="updateDisplay(' + educationCount + ')">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label for="' + toInputId + '" style="margin-right: 10px;">To:</label>' +
+    '<input type="month" id="' + toInputId + '" class="form-control" name="' + toInputId + '" style="height: 35px;" onchange="updateDisplay(' + educationCount + ')">' +
+    '</div>' +
+    '</form>';
+
+  newEducation.appendChild(header);
+  newEducation.appendChild(content);
+  container.insertBefore(newEducation, container.lastElementChild);
+
+  var displayDiv = generateDisplayDiv(educationCount);
+  var educationContainer = document.getElementById('educationContainer');
+  educationContainer.appendChild(displayDiv);
+
+  saveEducation();
+}
+
+function generateDisplayDiv(educationCount) {
+  var displayDiv = document.createElement('div');
+  displayDiv.classList.add('education');
+  displayDiv.style.marginTop = "30px";
+
+  displayDiv.innerHTML = 
+    '<div style="width: 258px; ">' +
+    '<div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
+    '<span id="displayDegree' + educationCount + '">Bachelor of Engineering</span><br>' +
+    '<span id="displayDegreeFrom' + educationCount + '"> 2015  </span> | <span id="displayDegreeTo' + educationCount + '"> 2017 </span>' +
+    '</div>' +
+    '<div id="displayCollege' + educationCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    'Copenhagen School of Design and Technology,' +
+    '</div>' +
+    '<div id="displayCity' + educationCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    'City' +
+    '</div>' +
+    '</div>';
+
+  return displayDiv;
+}
+function deleteEducation(educationCount) {
+  var container = document.getElementById('container2');
+  var educationSection = container.querySelector('.education-section:nth-child(' + educationCount + ')');
+  educationSection.remove();
+
+  // Remove corresponding display div
+  var displayDiv = document.getElementById('displayCollege' + educationCount);
   if (displayDiv) {
-    displayDiv.parentNode.removeChild(displayDiv);
-    console.log('Display Div Element Deleted:', displayDiv);
-  } else {
-    console.log('Display Div Element not found.');
+    displayDiv.parentNode.remove(); // Remove the parent element of the display div
   }
 
-  // Update local storage to reflect the changes (replace with your actual function)
-  updateLocalStorage();
-}
-// Update local storage to reflect the changes
-function updateLocalStorage() {
-  console.log("hiiiiiiiiiiiiii")
-  // Assuming projectsData is an array that stores project data
-  var projectsData = [];
-
-  // Loop through existing projects and store their data
-  var projectContainers = document.getElementsByClassName('project-section1');
-  console.log(projectContainers)
-  for (var i = 0; i < projectContainers.length; i++) {
-    var projectCount = i + 1;
-
-    var projectData = {
-      projectName: document.getElementById('projectName' + projectCount).value,
-      toolsUsed: document.getElementById('description' + projectCount).value,
-      link: document.getElementById('jobtitle' + projectCount).value,
-      description: document.getElementById('description' + projectCount).value
-    };
-
-    projectsData.push(projectData);
+  // Renumber the remaining education sections
+  var educationHeaders = container.getElementsByClassName('education-header');
+  for (var i = 0; i < educationHeaders.length; i++) {
+    educationHeaders[i].getElementsByTagName('b')[0].innerText = 'Education ' + (i + 1);
+    educationHeaders[i].querySelector('.fa-trash-alt').setAttribute('onclick', 'deleteEducation(' + (i + 1) + ')');
   }
 
-  // Save the data to local storage
-  localStorage.setItem('projectsData', JSON.stringify(projectsData));
+  saveEducation();
 }
 
-// Load projects from local storage
-function loadProjectsFromLocalStorage() {
-  var projectsData = localStorage.getItem('projectsData');
 
-  if (projectsData) {
-    projectsData = JSON.parse(projectsData);
+function saveEducation() {
+  var containerHtml = document.getElementById('container2').innerHTML;
+  var educationContainerHtml = document.getElementById('educationContainer').innerHTML;
+  localStorage.setItem('containerHtml', containerHtml);
+  localStorage.setItem('educationContainerHtml', educationContainerHtml);
+}
 
-    // Loop through the stored projects and recreate them
-    for (var i = 0; i < projectsData.length; i++) {
-      var projectCount = i + 1;
+function storeEducationData(experienceCount) {
+  var educationData = {
+    degree: document.getElementById('degreeInput' + experienceCount).value,
+    institution: document.getElementById('institution' + experienceCount).value,
+    city: document.getElementById('city' + experienceCount).value,
+    from: document.getElementById('from' + experienceCount).value,
+    to: document.getElementById('to' + experienceCount).value
+  };
 
-      // Recreate the project and display it
-      recreateProject(projectCount, projectsData[i]);
-    }
+  // Store educationData in localStorage
+  localStorage.setItem('education' + experienceCount, JSON.stringify(educationData));
+}
+function loadEducation() {
+  var containerHtml = localStorage.getItem('containerHtml');
+  var educationContainerHtml = localStorage.getItem('educationContainerHtml');
+  if (containerHtml && educationContainerHtml) {
+    document.getElementById('container2').innerHTML = containerHtml;
+    document.getElementById('educationContainer').innerHTML = educationContainerHtml;
   }
+  //localStorage.clear();
 }
 
-// Function to recreate a project based on stored data
-function recreateProject(projectCount, projectData) {
-  // Your code to recreate the project goes here
-  // Create the project HTML elements and append them to the container
+function updateDisplay(educationCount) {
+  console.log(educationCount)
+  var institutionInputValue = document.getElementById('institution' + educationCount).value;
+  document.getElementById('displayCollege' + educationCount).innerText = institutionInputValue;
+  
+    var degreeInputValue = document.getElementById('degreeInput' + educationCount).value;
+    document.getElementById('displayDegree' + educationCount).innerText = degreeInputValue;
+  
+  
+    var cityInputValue = document.getElementById('city' + educationCount).value;
+    document.getElementById('displayCity' + educationCount).innerText = cityInputValue;
+  
+  
+    var fromInputValue = document.getElementById('degreeFromInput' + educationCount).value;
+    console.log(fromInputValue)
+    document.getElementById('displayDegreeFrom' + educationCount).innerText = fromInputValue;
+    
+    var toInputValue = document.getElementById('to' + educationCount).value;
+    document.getElementById('displayDegreeTo' + educationCount).innerText = toInputValue;
 
-  // Example:
+    localStorage.setItem("institution1", institutionInputValue);
+    localStorage.setItem("degreeInput1", degreeInputValue);
+    localStorage.setItem("city1", cityInputValue);
+    localStorage.setItem("from1", fromInputValue);
+    localStorage.setItem("to1", toInputValue);
+}
+
+function toggleEducation(header) {
+  var content = header.nextElementSibling;
+  header.querySelector('i').classList.toggle('fa-chevron-down');
+  header.querySelector('i').classList.toggle('fa-chevron-up');
+  content.classList.toggle('hidden');
+}
+
+
+
+
+function projects() {
   var container = document.getElementById('container3');
+  container.classList.toggle('hidden');
+}
+
+function addNewProject() {
+  var container = document.getElementById('container3');
+  var projectCount = container.getElementsByClassName('project-section1').length + 1;
   var newProject = document.createElement('div');
   newProject.classList.add('project-section1');
 
-  // ... (create header and content elements as you did before)
+  var header = document.createElement('div');
+  header.classList.add('project-header');
+  header.onclick = function () { toggleProjects(this) };
+  header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Projects ' + projectCount + '</b></p>'+  '<i class="fas fa-trash-alt" onclick="deleteProject(' + projectCount + ')"></i>'; ;
 
-  // Populate the form fields with stored data
-  document.getElementById('projectName' + projectCount).value = projectData.projectName;
-  document.getElementById('description' + projectCount).value = projectData.toolsUsed;
-  document.getElementById('jobtitle' + projectCount).value = projectData.link;
-  document.getElementById('description' + projectCount).value = projectData.description;
+  var content = document.createElement('div');
+  content.classList.add('project-content');
+  var formId = 'project1' + projectCount;
+  console.log('Form ID:', formId); // Log the form ID
 
-  // ... (append newProject to the container)
+  content.innerHTML = '<form id="project1' + projectCount + '">' +
+    '<div class="form-group">' +
+    '<input type="text" id="projectName' + projectCount + '" class="form-control" placeholder="Project Name" name="company' + projectCount + '" oninput="updateProjectName2(' + projectCount + ')" style="height: 30px;">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label for="description' + projectCount + '">Tools used:</label>' +
+    '<textarea id="description' + projectCount + '" class="form-control" name="description' + projectCount + '" rows="3"></textarea>' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label for="description' + projectCount + '">Link:</label>' +
+    '<input type="text" id="jobtitle' + projectCount + '" class="form-control" placeholder="Link" name="jobtitle' + projectCount + '" style="height: 30px;">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label for="description' + projectCount + '">Description:</label>' +
+    '<textarea id="description' + projectCount + '" class="form-control" name="description' + projectCount + '" rows="5"></textarea>' +
+    '</div>' +
+    '</form>';
 
-  // Recreate the display div
+  newProject.appendChild(header);
+  newProject.appendChild(content);
+  container.insertBefore(newProject, container.lastElementChild);
+
+  // Create unique IDs for the display div and project section
   var displayDivId = 'displayDiv' + projectCount;
   var projectSectionId = 'project-section' + projectCount;
 
   var displayDiv = generateProjectDisplayDiv(projectCount, displayDivId, projectSectionId);
   var projectsContainer = document.getElementById('projectsContainer');
   projectsContainer.appendChild(displayDiv);
+
+  saveProject(projectCount);
 }
 
-// Load projects from local storage when the page loads
-window.addEventListener('load', loadProjectsFromLocalStorage);
 
-// Function to update local storage (replace with your actual implementation)
-function updateLocalStorage() {
-  console.log('Updating Local Storage...');
-  // Your logic to update local storage goes here
+// Function to generate project display div
+function generateProjectDisplayDiv(projectCount, displayDivId, projectSectionId) {
+  var displayDiv = document.createElement('div');
+  displayDiv.classList.add('projects');
+  displayDiv.style.marginTop = "10px";
+  displayDiv.id = displayDivId;
+
+  displayDiv.innerHTML =
+    '<div class="project-section" id="' + projectSectionId + '" style="width: 258px; ">' +
+   
+    '<div id="pjt' + projectCount + '" style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
+    '<span id="displayProjectName' + projectCount + '">Fees Management System</span>' +
+    '</div>' +
+    '<div id="displayProjectTools' + projectCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    'Tools used: Python, Django, MySQL, Excel' +
+    '</div>' +
+    '<div id="displayProjectLink' + projectCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    'https://www.kickresume.com/dashboard/resumes/' +
+    '</div>' +
+    '<div id="displayProjectDes' + projectCount + '" style="color: #222222; font-size: 10px; font-family: Poppins; font-weight: 400; line-height: 14px; word-wrap: break-word; overflow: hidden;">' +
+    'Developed a streamlined and efficient fees processing website. <br> User-friendly web-based Fees management System that automated entire fee processing workflow by integrating secure payment gateway. <br>Reduced administrative workload and processing time. <br> Students can crack their fees and pay accordingly through Razor pay gateway.' +
+    '</div>' +
+    '</div>';
+
+  return displayDiv;
+}
+function deleteProject(projectCount) {
+  var container = document.getElementById('container3');
+  var projectSection = container.querySelector('.project-section1:nth-child(' + projectCount + ')');
+  projectSection.remove();
+
+  // Remove corresponding display div
+  var displayDiv = document.getElementById('pjt' + projectCount);
+  if (displayDiv) {
+    displayDiv.parentNode.remove(); // Remove the parent element of the display div
+  }
+
+  // Renumber the remaining education sections
+  var projectHeaders = container.getElementsByClassName('project-header');
+  for (var i = 0; i < projectHeaders.length; i++) {
+    projectHeaders[i].getElementsByTagName('b')[0].innerText = 'Project ' + (i + 1);
+    projectHeaders[i].querySelector('.fa-trash-alt').setAttribute('onclick', 'deleteProject(' + (i + 1) + ')');
+  }
+
+  saveProject();
+}
+function saveProject() {
+  var containerHtml = document.getElementById('container3').innerHTML;
+  var projectContainerHtml = document.getElementById('projectsContainer').innerHTML;
+  localStorage.setItem('containerHtml', containerHtml);
+  localStorage.setItem('projectContainerHtml', projectContainerHtml);
+  var projectNameValue = document.getElementById("projectName" + projectCount).value;
+  localStorage.setItem("dynamicProjectNameLocal" + projectCount, projectNameValue);
+}
+function loadProject() {
+  var containerHtml = localStorage.getItem('containerHtml');
+  var projectContainerHtml = localStorage.getItem('projectContainerHtml');
+  if (containerHtml && projectContainerHtml) {
+    document.getElementById('container3').innerHTML = containerHtml;
+    document.getElementById('projectsContainer').innerHTML = projectContainerHtml;
+  }
+ // localStorage.clear()
+}
+function loadProjectData(projectCount) {
+  // Load project name from localStorage
+  var projectNameInput = document.getElementById("projectName" + projectCount);
+  if (projectNameInput) {
+    var storedValue = localStorage.getItem("dynamicProjectNameLocal" + projectCount);
+    if (storedValue) {
+      projectNameInput.value = storedValue;
+      updateProjectName2(projectCount); // Update the display immediately
+    }
+  }
+}
+function toggleProject(header) {
+  var content = header.nextElementSibling;
+  header.querySelector('i').classList.toggle('fa-chevron-down');
+  header.querySelector('i').classList.toggle('fa-chevron-up');
+  content.classList.toggle('hidden');
 }
 
 
@@ -172,25 +338,6 @@ function workexperience() {
   var container = document.getElementById('container1');
   container.classList.toggle('hidden');
 }
-
-
-
-function handlePresentCheckbox() {
-  var toInput = document.getElementById("to1");
-  var toContainer = document.getElementById("to1Container");
-  var fieldEDDT = document.getElementById("FIELD_EDDT");
-
-  if (document.getElementById("present1").checked) {
-    toInput.disabled = true; // Disable the input field
-    toContainer.innerHTML = "Present"; // Display "Present" text
-    fieldEDDT.textContent = "Present"; // Update FIELD_EDDT span with "Present" text
-  } else {
-    toInput.disabled = false; // Enable the input field when present is unchecked
-    toContainer.innerHTML = '<input type="month" id="to1" class="form-control" name="to1" style="height: 35px;" onchange="updateExperience()">'; // Restore input field
-    fieldEDDT.textContent = ""; // Reset FIELD_EDDT span
-  }
-}
-
 function addNewExperience() {
   var container = document.getElementById('container1');
   var experienceCount = container.getElementsByClassName('experience-section').length + 1;
@@ -200,7 +347,8 @@ function addNewExperience() {
   var header = document.createElement('div');
   header.classList.add('experience-header');
   header.onclick = function () { toggleExperience(this) };
-  header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Experience ' + experienceCount + '</b></p>';
+  header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Experience ' + experienceCount + '</b></p>'+
+  '<i class="fas fa-trash-alt" onclick="deleteExperience(' + experienceCount + ')"></i>';
 
   var content = document.createElement('div');
   content.classList.add('experience-content');
@@ -249,7 +397,7 @@ function generateExperienceDisplayDiv(experienceCount) {
 
   displayDiv.innerHTML = 
     
-    '<div style="width: 254px;">' +     
+    '<div id="exp' + experienceCount + '" style="width: 254px;">' +     
     '<div id="Display_Designation' + experienceCount + '" style="color: #222222; font-size: 14px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
     'Product Designer' +
     '</div>' +
@@ -264,6 +412,26 @@ function generateExperienceDisplayDiv(experienceCount) {
     '</div>';
 
   return displayDiv;
+}
+function deleteExperience(experienceCount) {
+  var container = document.getElementById('container1');
+  var experienceSection = container.querySelector('.experience-section:nth-child(' + experienceCount + ')');
+  experienceSection.remove();
+
+  // Remove corresponding display div
+  var displayDiv = document.getElementById('exp' + experienceCount);
+  if (displayDiv) {
+    displayDiv.parentNode.remove(); // Remove the parent element of the display div
+  }
+
+  // Renumber the remaining education sections
+  var experienceHeaders = container.getElementsByClassName('experience-header');
+  for (var i = 0; i < experienceHeaders.length; i++) {
+    experienceHeaders[i].getElementsByTagName('b')[0].innerText = 'Experience ' + (i + 1);
+    experienceHeaders[i].querySelector('.fa-trash-alt').setAttribute('onclick', 'deleteExperience(' + (i + 1) + ')');
+  }
+
+  saveExperience();
 }
 function saveExperience() {
   var containerHtml = document.getElementById('container1').innerHTML;
@@ -303,7 +471,26 @@ function updateExperience2(experienceCount) {
 
    
 }
+function handlePresentCheckbox() {
+  console.log("hhhhhhooooooooooo")
+  var toInput = document.getElementById("to1");
+  var toContainer = document.getElementById("to1Container");
+  var fieldEDDT = document.getElementById("FIELD_EDDT");
 
+  if (document.getElementById("present1").checked) {
+      toInput.disabled = true; // Disable the input field
+      toContainer.innerHTML = "Present"; // Display "Present" text
+      if (fieldEDDT) {
+          fieldEDDT.textContent = "Present"; // Update FIELD_EDDT span with "Present" text if it exists
+      }
+  } else {
+      toInput.disabled = false; // Enable the input field when present is unchecked
+      toContainer.innerHTML = '<input type="month" id="to1" class="form-control" name="to1" style="height: 35px;" onchange="updateExperience()">'; // Restore input field
+      if (fieldEDDT) {
+          fieldEDDT.textContent = ""; // Reset FIELD_EDDT span if it exists
+      }
+  }
+}
 function toggleExperience(header) {
   var content = header.nextElementSibling;
   header.querySelector('i').classList.toggle('fa-chevron-down');
@@ -312,316 +499,9 @@ function toggleExperience(header) {
 }
 
 
-function education() {
-  var container = document.getElementById('container2');
-  container.classList.toggle('hidden');
-}
-
-function addNewEducation() {
-  var container = document.getElementById('container2');
-  var educationCount = container.getElementsByClassName('education-section').length + 1;
-  var newEducation = document.createElement('div');
-  newEducation.classList.add('education-section');
-
-  var header = document.createElement('div');
-  header.classList.add('education-header');
-  header.onclick = function () { toggleEducation(this) };
-  header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Education ' + educationCount + '</b></p>';
-
-  var content = document.createElement('div');
-  content.classList.add('education-content');
-
-  var formId = 'education' + educationCount;
-  var degreeInputId = 'degreeInput' + educationCount;
-  var institutionInputId = 'institution' + educationCount;
-  var cityInputId = 'city' + educationCount;
-  var fromInputId = 'degreeFromInput' + educationCount;
-  var toInputId = 'to' + educationCount;
-
-  content.innerHTML = '<form id="' + formId + '">' +
-    '<div class="form-group">' +
-    '<input type="text" id="' + institutionInputId + '" class="form-control" placeholder="Institution Name" name="' + institutionInputId + '" style="height: 30px;" oninput="updateDisplay(' + educationCount + ')">' +
-    '</div>' +
-    '<div class="form-group">' +
-    '<input type="text" id="' + degreeInputId + '" class="form-control" placeholder="Degree" name="' + degreeInputId + '" style="height: 30px;" oninput="updateDisplay(' + educationCount + ')">' +
-    '</div>' +
-    '<div class="form-group">' +
-    '<input type="text" id="' + cityInputId + '" class="form-control" placeholder="City" name="' + cityInputId + '" style="height: 30px;" oninput="updateDisplay(' + educationCount + ')">' +
-    '</div>' +
-    '<div class="form-group">' +
-    '<label for="' + fromInputId + '" style="margin-right: 10px;">From:</label>' +
-    '<input type="month" id="' + fromInputId + '" name="' + fromInputId + '" class="form-control" style="height: 35px;" onchange="updateDisplay(' + educationCount + ')">' +
-    '</div>' +
-    '<div class="form-group">' +
-    '<label for="' + toInputId + '" style="margin-right: 10px;">To:</label>' +
-    '<input type="month" id="' + toInputId + '" class="form-control" name="' + toInputId + '" style="height: 35px;" onchange="updateDisplay(' + educationCount + ')">' +
-    '</div>' +
-    '</form>';
-
-    newEducation.appendChild(header);
-    newEducation.appendChild(content);
-  container.insertBefore(newEducation, container.lastElementChild);
-  
-  var displayDiv = generateDisplayDiv(educationCount);
-      var educationContainer = document.getElementById('educationContainer'); // Assuming you have an element with id 'educationContainer'
-      educationContainer.appendChild(displayDiv);
-      
-  // Save added education to local storage
-  saveEducation();
-}
-
-function generateDisplayDiv(educationCount) {
-  var displayDiv = document.createElement('div');
-  displayDiv.classList.add('education');
-  displayDiv.style.marginTop = "30px";
-
-  displayDiv.innerHTML = 
-    '<div style="width: 258px; ">' +
-    '<div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
-    '<span id="displayDegree' + educationCount + '">Bachelor of Engineering</span><br>' +
-    '<span id="displayDegreeFrom' + educationCount + '"> 2015  </span> | <span id="displayDegreeTo' + educationCount + '"> 2017 </span>' +
-    '</div>' +
-    '<div id="displayCollege' + educationCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
-    'Copenhagen School of Design and Technology,' +
-    '</div>' +
-    '<div id="displayCity' + educationCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
-    'City' +
-    '</div>' +
-    '</div>';
-
-  return displayDiv;
-}
-
-function saveEducation() {
-  var containerHtml = document.getElementById('container2').innerHTML;
-  var educationContainerHtml = document.getElementById('educationContainer').innerHTML;
-  localStorage.setItem('containerHtml', containerHtml);
-  localStorage.setItem('educationContainerHtml', educationContainerHtml);
-}
-
-function storeEducationData(experienceCount) {
-  var educationData = {
-    degree: document.getElementById('degreeInput' + experienceCount).value,
-    institution: document.getElementById('institution' + experienceCount).value,
-    city: document.getElementById('city' + experienceCount).value,
-    from: document.getElementById('from' + experienceCount).value,
-    to: document.getElementById('to' + experienceCount).value
-  };
-
-  // Store educationData in localStorage
-  localStorage.setItem('education' + experienceCount, JSON.stringify(educationData));
-}
-function loadEducation() {
-  var containerHtml = localStorage.getItem('containerHtml');
-  var educationContainerHtml = localStorage.getItem('educationContainerHtml');
-  if (containerHtml && educationContainerHtml) {
-    document.getElementById('container2').innerHTML = containerHtml;
-    document.getElementById('educationContainer').innerHTML = educationContainerHtml;
-  }
- // localStorage.clear();
-}
-
-function updateDisplay(educationCount) {
-  console.log(educationCount)
-  var institutionInputValue = document.getElementById('institution' + educationCount).value;
-  document.getElementById('displayCollege' + educationCount).innerText = institutionInputValue;
-  
-    var degreeInputValue = document.getElementById('degreeInput' + educationCount).value;
-    document.getElementById('displayDegree' + educationCount).innerText = degreeInputValue;
-  
-  
-    var cityInputValue = document.getElementById('city' + educationCount).value;
-    document.getElementById('displayCity' + educationCount).innerText = cityInputValue;
-  
-  
-    var fromInputValue = document.getElementById('degreeFromInput' + educationCount).value;
-    console.log(fromInputValue)
-    document.getElementById('displayDegreeFrom' + educationCount).innerText = fromInputValue;
-    
-    var toInputValue = document.getElementById('to' + educationCount).value;
-    document.getElementById('displayDegreeTo' + educationCount).innerText = toInputValue;
-
-    localStorage.setItem("institution1", institutionInputValue);
-    localStorage.setItem("degreeInput1", degreeInputValue);
-    localStorage.setItem("city1", cityInputValue);
-    localStorage.setItem("from1", fromInputValue);
-    localStorage.setItem("to1", toInputValue);
-}
 
 
 
-function updateInstitution(experienceCount) {
-  var institutionInputValue = document.getElementById('institution' + experienceCount).value;
-  document.getElementById('displayCollege' + experienceCount).innerText = institutionInputValue;
-}
-
-function updateDegree(experienceCount) {
-  var degreeInputValue = document.getElementById('degreeInput' + experienceCount).value;
-  document.getElementById('displayDegree' + experienceCount).innerText = degreeInputValue;
-}
-
-function updateCity(experienceCount) {
-  var cityInputValue = document.getElementById('city' + experienceCount).value;
-  document.getElementById('displayCity' + experienceCount).innerText = cityInputValue;
-}
-
-function updateDegreeYear(experienceCount) {
-  var fromInputValue = document.getElementById('from' + experienceCount).value;
-  document.getElementById('displayDegreeFrom' + experienceCount).innerText = fromInputValue;
-  
-  var toInputValue = document.getElementById('to' + experienceCount).value;
-  document.getElementById('displayDegreeTo' + experienceCount).innerText = toInputValue;
-}
-
-
-
-
-function storeEducationData(experienceCount) {
-  var educationData = {
-    degree: document.getElementById('degreeInput' + experienceCount).value,
-    institution: document.getElementById('institution' + experienceCount).value,
-    city: document.getElementById('city' + experienceCount).value,
-    from: document.getElementById('from' + experienceCount).value,
-    to: document.getElementById('to' + experienceCount).value
-  };
-
-  // Store educationData in localStorage
-  localStorage.setItem('education' + experienceCount, JSON.stringify(educationData));
-}
-
-
-function toggleEducation(header) {
-  var content = header.nextElementSibling;
-  header.querySelector('i').classList.toggle('fa-chevron-down');
-  header.querySelector('i').classList.toggle('fa-chevron-up');
-  content.classList.toggle('hidden');
-}
-
-
-function projects() {
-  var container = document.getElementById('container3');
-  container.classList.toggle('hidden');
-}
-function saveProject() {
-  var containerHtml = document.getElementById('container3').innerHTML;
-  var projectContainerHtml = document.getElementById('projectsContainer').innerHTML;
-  localStorage.setItem('containerHtml', containerHtml);
-  localStorage.setItem('projectContainerHtml', projectContainerHtml);
-  var projectNameValue = document.getElementById("projectName" + projectCount).value;
-  localStorage.setItem("dynamicProjectNameLocal" + projectCount, projectNameValue);
-}
-function addNewProject() {
-  var container = document.getElementById('container3');
-  var projectCount = container.getElementsByClassName('project-section1').length + 1;
-  var newProject = document.createElement('div');
-  newProject.classList.add('project-section1');
-
-  var header = document.createElement('div');
-  header.classList.add('project-header');
-  header.onclick = function () { toggleProjects(this) };
-  header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Projects ' + projectCount + '</b></p>';
-
-  var content = document.createElement('div');
-  content.classList.add('project-content');
-  var formId = 'project1' + projectCount;
-  console.log('Form ID:', formId); // Log the form ID
-
-  content.innerHTML = '<form id="project1' + projectCount + '">' +
-    '<div class="form-group">' +
-    '<input type="text" id="projectName' + projectCount + '" class="form-control" placeholder="Project Name" name="company' + projectCount + '" oninput="updateProjectName2(' + projectCount + ')" style="height: 30px;">' +
-    '</div>' +
-    '<div class="form-group">' +
-    '<label for="description' + projectCount + '">Tools used:</label>' +
-    '<textarea id="description' + projectCount + '" class="form-control" name="description' + projectCount + '" rows="3"></textarea>' +
-    '</div>' +
-    '<div class="form-group">' +
-    '<label for="description' + projectCount + '">Link:</label>' +
-    '<input type="text" id="jobtitle' + projectCount + '" class="form-control" placeholder="Link" name="jobtitle' + projectCount + '" style="height: 30px;">' +
-    '</div>' +
-    '<div class="form-group">' +
-    '<label for="description' + projectCount + '">Description:</label>' +
-    '<textarea id="description' + projectCount + '" class="form-control" name="description' + projectCount + '" rows="5"></textarea>' +
-    '</div>' +
-    '</form>';
-
-  newProject.appendChild(header);
-  newProject.appendChild(content);
-  container.insertBefore(newProject, container.lastElementChild);
-
-  // Create unique IDs for the display div and project section
-  var displayDivId = 'displayDiv' + projectCount;
-  var projectSectionId = 'project-section' + projectCount;
-
-  var displayDiv = generateProjectDisplayDiv(projectCount, displayDivId, projectSectionId);
-  var projectsContainer = document.getElementById('projectsContainer');
-  projectsContainer.appendChild(displayDiv);
-
-  saveProject(projectCount);
-}
-// Function to generate project display div
-function generateProjectDisplayDiv(projectCount, displayDivId, projectSectionId) {
-  var displayDiv = document.createElement('div');
-  displayDiv.classList.add('projects');
-  displayDiv.style.marginTop = "10px";
-  displayDiv.id = displayDivId;
-
-  displayDiv.innerHTML =
-    '<div class="project-section" id="' + projectSectionId + '" style="width: 258px; ">' +
-    '<div class="delete-symbol" id="delete-symbol-' + projectCount + '">&#10006;</div>' +
-    '<div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
-    '<span id="displayProjectName' + projectCount + '">Fees Management System</span>' +
-    '</div>' +
-    '<div id="displayProjectTools' + projectCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
-    'Tools used: Python, Django, MySQL, Excel' +
-    '</div>' +
-    '<div id="displayProjectLink' + projectCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
-    'https://www.kickresume.com/dashboard/resumes/' +
-    '</div>' +
-    '<div id="displayProjectDes' + projectCount + '" style="color: #222222; font-size: 10px; font-family: Poppins; font-weight: 400; line-height: 14px; word-wrap: break-word; overflow: hidden;">' +
-    'Developed a streamlined and efficient fees processing website. <br> User-friendly web-based Fees management System that automated entire fee processing workflow by integrating secure payment gateway. <br>Reduced administrative workload and processing time. <br> Students can crack their fees and pay accordingly through Razor pay gateway.' +
-    '</div>' +
-    '</div>';
-
-  return displayDiv;
-}
-
-
-
-
-function loadProject() {
-  var containerHtml = localStorage.getItem('containerHtml');
-  var projectContainerHtml = localStorage.getItem('projectContainerHtml');
-  if (containerHtml && projectContainerHtml) {
-    document.getElementById('container3').innerHTML = containerHtml;
-    document.getElementById('projectsContainer').innerHTML = projectContainerHtml;
-  }
-  localStorage.clear()
-}
-
-function loadProjectData(projectCount) {
-  // Load project name from localStorage
-  var projectNameInput = document.getElementById("projectName" + projectCount);
-  if (projectNameInput) {
-    var storedValue = localStorage.getItem("dynamicProjectNameLocal" + projectCount);
-    if (storedValue) {
-      projectNameInput.value = storedValue;
-      updateProjectName2(projectCount); // Update the display immediately
-    }
-  }
-}
-function toggleProject(header) {
-  localStorage.clear();
-  var content = header.nextElementSibling;
-  header.querySelector('i').classList.toggle('fa-chevron-down');
-  header.querySelector('i').classList.toggle('fa-chevron-up');
-  content.classList.toggle('hidden');
-}
-
-
-
-function updateText() {
-  // Your updateText function logic here
-}
 
 var languageCounter1 = 1; // Initial counter for column1 (odd)
     var languageCounter2 = 2; // Initial counter for column3 (even)
@@ -749,26 +629,6 @@ function updateProjectname(){
   localStorage.setItem("projectNameLocal", projectNameValue);
 }
 
-function updateProjectName2(projectCount) {
-  var projectNameValue = document.getElementById("projectName" + projectCount).value;
-  var projectNameElement = document.getElementById("displayProjectName" + projectCount);
-  if (projectNameElement) {
-    projectNameElement.innerHTML = projectNameValue;
-
-    // Store project name in localStorage
-    localStorage.setItem("dynamicProjectNameLocal" + projectCount, projectNameValue);
-  }
-}
-window.onload = function () {
-  var projects = document.querySelectorAll('#container3 .project-section1');
-  console.log(projects);
-
-  for (var i = 0; i < projects.length; i++) {
-    var projectCount = i + 1;
-    loadProjectData(projectCount);
-  }
-};
-
 function updateProjectTools(){ 
   var projectToolsValue = document.getElementById("projectTools").value;
   var projectToolsElement = document.getElementById("displayTools")
@@ -792,16 +652,6 @@ function updateProjectDes(){
   localStorage.setItem("projectDesLocal", projectDesValue);
 }
 
-function handlePresentCheckbox() {
-  var presentCheckbox = document.getElementById('present1');
-  if (presentCheckbox.checked) {
-      document.getElementById('Display_To').textContent = 'Present';
-      document.getElementById('to1').value = '';
-      localStorage.setItem('toValue', '');
-  } else {
-      updateExperience();
-  }
-}
 
  // Experience
  function updateExperience() {
@@ -810,25 +660,19 @@ function handlePresentCheckbox() {
   divElement.innerText = inputValue;
   
   var companyValue = document.getElementById("company1").value;
-  
-  // Update company name
   var companyNameElement = document.getElementById("Display_Cname");
   companyNameElement.innerText = companyValue;
 
-  // Update description
-  var descriptionElement = document.getElementById("Display_Description");
-  descriptionElement.innerText = descriptionValue;
-
-  var descriptionElement = document.getElementById("Display_Description");
-  descriptionElement.innerText = descriptionValue;
-
+ 
 
   var FromValue = document.getElementById("from1").value;
   var FromElement = document.getElementById("Display_From");
   FromElement.innerText = FromValue;
 
   var ToValue = document.getElementById("to1").value;
+  console.log(ToValue)
   var ToElement = document.getElementById("Display_To");
+  console.log(ToElement)
   ToElement.innerText = ToValue;
 
   var toDate = document.getElementById('to1').value;
@@ -843,19 +687,15 @@ function handlePresentCheckbox() {
   // Store all values in local storage
   localStorage.setItem("jobTitle", inputValue);
   localStorage.setItem("companyName", companyValue);
-  localStorage.setItem("description", descriptionValue);
+  
   localStorage.setItem("from1", FromValue);
 }
 
 function updateExperienceDescription() {
   var descriptionValue = document.getElementById("description1").value;
-    // Update description
     var descriptionElement = document.getElementById("Display_Description");
     descriptionElement.innerText = descriptionValue;
   
-    var descriptionElement = document.getElementById("Display_Description");
-    descriptionElement.innerText = descriptionValue;
-
     localStorage.setItem("description", descriptionValue);
 }
 
@@ -938,7 +778,7 @@ function retrieveStoredValue() {
   }
   if (storedProjectTools) {
     document.getElementById("projectTools").value = storedProjectTools;
-    document.getElementById("displayProjectTools").innerText = storedProjectTools;
+    document.getElementById("displayTools").innerText = storedProjectTools;
   }
   if (storedProjectLink) {
     document.getElementById("projectLink").value = storedProjectLink;
@@ -1037,17 +877,13 @@ function retrieveStoredValue() {
       updateSkills(); // Corrected function call
   }
       
- 
-
+  handlePresentCheckbox();
+  loadEducation();
+  loadExperience();
+  loadProject();
       }
-      loadProject();
-      loadEducation();
-      loadExperience();
+  
 
  
 // Call the function to retrieve stored value when the page loads
 window.onload = retrieveStoredValue;
-
-
-
-
