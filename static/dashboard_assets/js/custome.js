@@ -1,9 +1,308 @@
 // Get the id passed from the view
-  
-function deleteProject() {
-  var projectSection = document.querySelector('.project-section');
-  projectSection.parentNode.removeChild(projectSection);
+function education() {
+  var container = document.getElementById('container2');
+  container.classList.toggle('hidden');
 }
+
+function addNewEducation() {
+  var container = document.getElementById('container2');
+  var educationCount = container.getElementsByClassName('education-section').length + 1;
+  var newEducation = document.createElement('div');
+  newEducation.classList.add('education-section');
+
+  var header = document.createElement('div');
+  header.classList.add('education-header');
+  header.onclick = function () { toggleEducation(this) };
+  header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b><span id="educationTitle' + educationCount + '">Education ' + educationCount + '</span></b></p>' +
+                     '<i class="fas fa-trash-alt" onclick="deleteEducation(' + educationCount + ')"></i>'; // Delete icon added here
+
+  var content = document.createElement('div');
+  content.classList.add('education-content');
+
+  var formId = 'education' + educationCount;
+  var degreeInputId = 'degreeInput' + educationCount;
+  var institutionInputId = 'institution' + educationCount;
+  var cityInputId = 'city' + educationCount;
+  var fromInputId = 'degreeFromInput' + educationCount;
+  var toInputId = 'to' + educationCount;
+
+  content.innerHTML = '<form id="' + formId + '">' +
+    '<div class="form-group">' +
+    '<input type="text" id="' + institutionInputId + '" class="form-control" placeholder="Institution Name" name="' + institutionInputId + '" style="height: 30px;" oninput="updateDisplay(' + educationCount + ')">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<input type="text" id="' + degreeInputId + '" class="form-control" placeholder="Degree" name="' + degreeInputId + '" style="height: 30px;" oninput="updateDisplay(' + educationCount + ')">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<input type="text" id="' + cityInputId + '" class="form-control" placeholder="City" name="' + cityInputId + '" style="height: 30px;" oninput="updateDisplay(' + educationCount + ')">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label for="' + fromInputId + '" style="margin-right: 10px;">From:</label>' +
+    '<input type="month" id="' + fromInputId + '" name="' + fromInputId + '" class="form-control" style="height: 35px;" onchange="updateDisplay(' + educationCount + ')">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label for="' + toInputId + '" style="margin-right: 10px;">To:</label>' +
+    '<input type="month" id="' + toInputId + '" class="form-control" name="' + toInputId + '" style="height: 35px;" onchange="updateDisplay(' + educationCount + ')">' +
+    '</div>' +
+    '</form>';
+
+  newEducation.appendChild(header);
+  newEducation.appendChild(content);
+  container.insertBefore(newEducation, container.lastElementChild);
+
+  var displayDiv = generateDisplayDiv(educationCount);
+  var educationContainer = document.getElementById('educationContainer');
+  educationContainer.appendChild(displayDiv);
+
+  saveEducation();
+}
+
+function generateDisplayDiv(educationCount) {
+  var displayDiv = document.createElement('div');
+  displayDiv.classList.add('education');
+  displayDiv.style.marginTop = "30px";
+
+  displayDiv.innerHTML = 
+    '<div style="width: 258px; ">' +
+    '<div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
+    '<span id="displayDegree' + educationCount + '">Bachelor of Engineering</span><br>' +
+    '<span id="displayDegreeFrom' + educationCount + '"> 2015  </span> | <span id="displayDegreeTo' + educationCount + '"> 2017 </span>' +
+    '</div>' +
+    '<div id="displayCollege' + educationCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    'Copenhagen School of Design and Technology,' +
+    '</div>' +
+    '<div id="displayCity' + educationCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    'City' +
+    '</div>' +
+    '</div>';
+
+  return displayDiv;
+}
+function deleteEducation(educationCount) {
+  var container = document.getElementById('container2');
+  var educationSection = container.querySelector('.education-section:nth-child(' + educationCount + ')');
+  educationSection.remove();
+
+  // Remove corresponding display div
+  var displayDiv = document.getElementById('displayCollege' + educationCount);
+  if (displayDiv) {
+    displayDiv.parentNode.remove(); // Remove the parent element of the display div
+  }
+
+  // Renumber the remaining education sections
+  var educationHeaders = container.getElementsByClassName('education-header');
+  for (var i = 0; i < educationHeaders.length; i++) {
+    educationHeaders[i].getElementsByTagName('b')[0].innerText = 'Education ' + (i + 1);
+    educationHeaders[i].querySelector('.fa-trash-alt').setAttribute('onclick', 'deleteEducation(' + (i + 1) + ')');
+  }
+
+  saveEducation();
+}
+
+
+function saveEducation() {
+  var containerHtml = document.getElementById('container2').innerHTML;
+  var educationContainerHtml = document.getElementById('educationContainer').innerHTML;
+  localStorage.setItem('containerHtml', containerHtml);
+  localStorage.setItem('educationContainerHtml', educationContainerHtml);
+}
+
+function storeEducationData(experienceCount) {
+  var educationData = {
+    degree: document.getElementById('degreeInput' + experienceCount).value,
+    institution: document.getElementById('institution' + experienceCount).value,
+    city: document.getElementById('city' + experienceCount).value,
+    from: document.getElementById('from' + experienceCount).value,
+    to: document.getElementById('to' + experienceCount).value
+  };
+
+  // Store educationData in localStorage
+  localStorage.setItem('education' + experienceCount, JSON.stringify(educationData));
+}
+function loadEducation() {
+  var containerHtml = localStorage.getItem('containerHtml');
+  var educationContainerHtml = localStorage.getItem('educationContainerHtml');
+  if (containerHtml && educationContainerHtml) {
+    document.getElementById('container2').innerHTML = containerHtml;
+    document.getElementById('educationContainer').innerHTML = educationContainerHtml;
+  }
+  //localStorage.clear();
+}
+
+function updateDisplay(educationCount) {
+  console.log(educationCount)
+  var institutionInputValue = document.getElementById('institution' + educationCount).value;
+  document.getElementById('displayCollege' + educationCount).innerText = institutionInputValue;
+  
+    var degreeInputValue = document.getElementById('degreeInput' + educationCount).value;
+    document.getElementById('displayDegree' + educationCount).innerText = degreeInputValue;
+  
+  
+    var cityInputValue = document.getElementById('city' + educationCount).value;
+    document.getElementById('displayCity' + educationCount).innerText = cityInputValue;
+  
+  
+    var fromInputValue = document.getElementById('degreeFromInput' + educationCount).value;
+    console.log(fromInputValue)
+    document.getElementById('displayDegreeFrom' + educationCount).innerText = fromInputValue;
+    
+    var toInputValue = document.getElementById('to' + educationCount).value;
+    document.getElementById('displayDegreeTo' + educationCount).innerText = toInputValue;
+
+    localStorage.setItem("institution1", institutionInputValue);
+    localStorage.setItem("degreeInput1", degreeInputValue);
+    localStorage.setItem("city1", cityInputValue);
+    localStorage.setItem("from1", fromInputValue);
+    localStorage.setItem("to1", toInputValue);
+}
+
+function toggleEducation(header) {
+  var content = header.nextElementSibling;
+  header.querySelector('i').classList.toggle('fa-chevron-down');
+  header.querySelector('i').classList.toggle('fa-chevron-up');
+  content.classList.toggle('hidden');
+}
+
+
+
+
+function projects() {
+  var container = document.getElementById('container3');
+  container.classList.toggle('hidden');
+}
+
+function addNewProject() {
+  var container = document.getElementById('container3');
+  var projectCount = container.getElementsByClassName('project-section1').length + 1;
+  var newProject = document.createElement('div');
+  newProject.classList.add('project-section1');
+
+  var header = document.createElement('div');
+  header.classList.add('project-header');
+  header.onclick = function () { toggleProjects(this) };
+  header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Projects ' + projectCount + '</b></p>'+  '<i class="fas fa-trash-alt" onclick="deleteProject(' + projectCount + ')"></i>'; ;
+
+  var content = document.createElement('div');
+  content.classList.add('project-content');
+  var formId = 'project1' + projectCount;
+  console.log('Form ID:', formId); // Log the form ID
+
+  content.innerHTML = '<form id="project1' + projectCount + '">' +
+    '<div class="form-group">' +
+    '<input type="text" id="projectName' + projectCount + '" class="form-control" placeholder="Project Name" name="company' + projectCount + '" oninput="updateProjectName2(' + projectCount + ')" style="height: 30px;">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label for="description' + projectCount + '">Tools used:</label>' +
+    '<textarea id="description' + projectCount + '" class="form-control" name="description' + projectCount + '" rows="3"></textarea>' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label for="description' + projectCount + '">Link:</label>' +
+    '<input type="text" id="jobtitle' + projectCount + '" class="form-control" placeholder="Link" name="jobtitle' + projectCount + '" style="height: 30px;">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label for="description' + projectCount + '">Description:</label>' +
+    '<textarea id="description' + projectCount + '" class="form-control" name="description' + projectCount + '" rows="5"></textarea>' +
+    '</div>' +
+    '</form>';
+
+  newProject.appendChild(header);
+  newProject.appendChild(content);
+  container.insertBefore(newProject, container.lastElementChild);
+
+  // Create unique IDs for the display div and project section
+  var displayDivId = 'displayDiv' + projectCount;
+  var projectSectionId = 'project-section' + projectCount;
+
+  var displayDiv = generateProjectDisplayDiv(projectCount, displayDivId, projectSectionId);
+  var projectsContainer = document.getElementById('projectsContainer');
+  projectsContainer.appendChild(displayDiv);
+
+  saveProject(projectCount);
+}
+
+
+// Function to generate project display div
+function generateProjectDisplayDiv(projectCount, displayDivId, projectSectionId) {
+  var displayDiv = document.createElement('div');
+  displayDiv.classList.add('projects');
+  displayDiv.style.marginTop = "10px";
+  displayDiv.id = displayDivId;
+
+  displayDiv.innerHTML =
+    '<div class="project-section" id="' + projectSectionId + '" style="width: 258px; ">' +
+   
+    '<div id="pjt' + projectCount + '" style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
+    '<span id="displayProjectName' + projectCount + '">Fees Management System</span>' +
+    '</div>' +
+    '<div id="displayProjectTools' + projectCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    'Tools used: Python, Django, MySQL, Excel' +
+    '</div>' +
+    '<div id="displayProjectLink' + projectCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
+    'https://www.kickresume.com/dashboard/resumes/' +
+    '</div>' +
+    '<div id="displayProjectDes' + projectCount + '" style="color: #222222; font-size: 10px; font-family: Poppins; font-weight: 400; line-height: 14px; word-wrap: break-word; overflow: hidden;">' +
+    'Developed a streamlined and efficient fees processing website. <br> User-friendly web-based Fees management System that automated entire fee processing workflow by integrating secure payment gateway. <br>Reduced administrative workload and processing time. <br> Students can crack their fees and pay accordingly through Razor pay gateway.' +
+    '</div>' +
+    '</div>';
+
+  return displayDiv;
+}
+function deleteProject(projectCount) {
+  var container = document.getElementById('container3');
+  var projectSection = container.querySelector('.project-section1:nth-child(' + projectCount + ')');
+  projectSection.remove();
+
+  // Remove corresponding display div
+  var displayDiv = document.getElementById('pjt' + projectCount);
+  if (displayDiv) {
+    displayDiv.parentNode.remove(); // Remove the parent element of the display div
+  }
+
+  // Renumber the remaining education sections
+  var projectHeaders = container.getElementsByClassName('project-header');
+  for (var i = 0; i < projectHeaders.length; i++) {
+    projectHeaders[i].getElementsByTagName('b')[0].innerText = 'Project ' + (i + 1);
+    projectHeaders[i].querySelector('.fa-trash-alt').setAttribute('onclick', 'deleteProject(' + (i + 1) + ')');
+  }
+
+  saveProject();
+}
+function saveProject() {
+  var containerHtml = document.getElementById('container3').innerHTML;
+  var projectContainerHtml = document.getElementById('projectsContainer').innerHTML;
+  localStorage.setItem('containerHtml', containerHtml);
+  localStorage.setItem('projectContainerHtml', projectContainerHtml);
+  var projectNameValue = document.getElementById("projectName" + projectCount).value;
+  localStorage.setItem("dynamicProjectNameLocal" + projectCount, projectNameValue);
+}
+function loadProject() {
+  var containerHtml = localStorage.getItem('containerHtml');
+  var projectContainerHtml = localStorage.getItem('projectContainerHtml');
+  if (containerHtml && projectContainerHtml) {
+    document.getElementById('container3').innerHTML = containerHtml;
+    document.getElementById('projectsContainer').innerHTML = projectContainerHtml;
+  }
+ // localStorage.clear()
+}
+function loadProjectData(projectCount) {
+  // Load project name from localStorage
+  var projectNameInput = document.getElementById("projectName" + projectCount);
+  if (projectNameInput) {
+    var storedValue = localStorage.getItem("dynamicProjectNameLocal" + projectCount);
+    if (storedValue) {
+      projectNameInput.value = storedValue;
+      updateProjectName2(projectCount); // Update the display immediately
+    }
+  }
+}
+function toggleProject(header) {
+  var content = header.nextElementSibling;
+  header.querySelector('i').classList.toggle('fa-chevron-down');
+  header.querySelector('i').classList.toggle('fa-chevron-up');
+  content.classList.toggle('hidden');
+}
+
+
 
 function toggleContainer() {
   var container = document.getElementById('profile');
@@ -48,7 +347,8 @@ function addNewExperience() {
   var header = document.createElement('div');
   header.classList.add('experience-header');
   header.onclick = function () { toggleExperience(this) };
-  header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Experience ' + experienceCount + '</b></p>';
+  header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Experience ' + experienceCount + '</b></p>'+
+  '<i class="fas fa-trash-alt" onclick="deleteExperience(' + experienceCount + ')"></i>';
 
   var content = document.createElement('div');
   content.classList.add('experience-content');
@@ -97,7 +397,7 @@ function generateExperienceDisplayDiv(experienceCount) {
 
   displayDiv.innerHTML = 
     
-    '<div style="width: 254px;">' +     
+    '<div id="exp' + experienceCount + '" style="width: 254px;">' +     
     '<div id="Display_Designation' + experienceCount + '" style="color: #222222; font-size: 14px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
     'Product Designer' +
     '</div>' +
@@ -112,6 +412,26 @@ function generateExperienceDisplayDiv(experienceCount) {
     '</div>';
 
   return displayDiv;
+}
+function deleteExperience(experienceCount) {
+  var container = document.getElementById('container1');
+  var experienceSection = container.querySelector('.experience-section:nth-child(' + experienceCount + ')');
+  experienceSection.remove();
+
+  // Remove corresponding display div
+  var displayDiv = document.getElementById('exp' + experienceCount);
+  if (displayDiv) {
+    displayDiv.parentNode.remove(); // Remove the parent element of the display div
+  }
+
+  // Renumber the remaining education sections
+  var experienceHeaders = container.getElementsByClassName('experience-header');
+  for (var i = 0; i < experienceHeaders.length; i++) {
+    experienceHeaders[i].getElementsByTagName('b')[0].innerText = 'Experience ' + (i + 1);
+    experienceHeaders[i].querySelector('.fa-trash-alt').setAttribute('onclick', 'deleteExperience(' + (i + 1) + ')');
+  }
+
+  saveExperience();
 }
 function saveExperience() {
   var containerHtml = document.getElementById('container1').innerHTML;
@@ -179,237 +499,9 @@ function toggleExperience(header) {
 }
 
 
-function education() {
-  var container = document.getElementById('container2');
-  container.classList.toggle('hidden');
-}
-
-function addNewEducation() {
-  var container = document.getElementById('container2');
-  var educationCount = container.getElementsByClassName('education-section').length + 1;
-  var newEducation = document.createElement('div');
-  newEducation.classList.add('education-section');
-
-  var header = document.createElement('div');
-  header.classList.add('education-header');
-  header.onclick = function () { toggleEducation(this) };
-  header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Education ' + educationCount + '</b></p>';
-
-  var content = document.createElement('div');
-  content.classList.add('education-content');
-
-  var formId = 'education' + educationCount;
-  var degreeInputId = 'degreeInput' + educationCount;
-  var institutionInputId = 'institution' + educationCount;
-  var cityInputId = 'city' + educationCount;
-  var fromInputId = 'degreeFromInput' + educationCount;
-  var toInputId = 'to' + educationCount;
-
-  content.innerHTML = '<form id="' + formId + '">' +
-    '<div class="form-group">' +
-    '<input type="text" id="' + institutionInputId + '" class="form-control" placeholder="Institution Name" name="' + institutionInputId + '" style="height: 30px;" oninput="updateDisplay(' + educationCount + ')">' +
-    '</div>' +
-    '<div class="form-group">' +
-    '<input type="text" id="' + degreeInputId + '" class="form-control" placeholder="Degree" name="' + degreeInputId + '" style="height: 30px;" oninput="updateDisplay(' + educationCount + ')">' +
-    '</div>' +
-    '<div class="form-group">' +
-    '<input type="text" id="' + cityInputId + '" class="form-control" placeholder="City" name="' + cityInputId + '" style="height: 30px;" oninput="updateDisplay(' + educationCount + ')">' +
-    '</div>' +
-    '<div class="form-group">' +
-    '<label for="' + fromInputId + '" style="margin-right: 10px;">From:</label>' +
-    '<input type="month" id="' + fromInputId + '" name="' + fromInputId + '" class="form-control" style="height: 35px;" onchange="updateDisplay(' + educationCount + ')">' +
-    '</div>' +
-    '<div class="form-group">' +
-    '<label for="' + toInputId + '" style="margin-right: 10px;">To:</label>' +
-    '<input type="month" id="' + toInputId + '" class="form-control" name="' + toInputId + '" style="height: 35px;" onchange="updateDisplay(' + educationCount + ')">' +
-    '</div>' +
-    '</form>';
-
-    newEducation.appendChild(header);
-    newEducation.appendChild(content);
-  container.insertBefore(newEducation, container.lastElementChild);
-  
-  var displayDiv = generateDisplayDiv(educationCount);
-      var educationContainer = document.getElementById('educationContainer'); // Assuming you have an element with id 'educationContainer'
-      educationContainer.appendChild(displayDiv);
-      
-  // Save added education to local storage
-  saveEducation();
-}
-
-function generateDisplayDiv(educationCount) {
-  var displayDiv = document.createElement('div');
-  displayDiv.classList.add('education');
-  displayDiv.style.marginTop = "30px";
-
-  displayDiv.innerHTML = 
-    '<div style="width: 258px; ">' +
-    '<div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
-    '<span id="displayDegree' + educationCount + '">Bachelor of Engineering</span><br>' +
-    '<span id="displayDegreeFrom' + educationCount + '"> 2015  </span> | <span id="displayDegreeTo' + educationCount + '"> 2017 </span>' +
-    '</div>' +
-    '<div id="displayCollege' + educationCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
-    'Copenhagen School of Design and Technology,' +
-    '</div>' +
-    '<div id="displayCity' + educationCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
-    'City' +
-    '</div>' +
-    '</div>';
-
-  return displayDiv;
-}
-
-function saveEducation() {
-  var containerHtml = document.getElementById('container2').innerHTML;
-  var educationContainerHtml = document.getElementById('educationContainer').innerHTML;
-  localStorage.setItem('containerHtml', containerHtml);
-  localStorage.setItem('educationContainerHtml', educationContainerHtml);
-}
-
-function storeEducationData(experienceCount) {
-  var educationData = {
-    degree: document.getElementById('degreeInput' + experienceCount).value,
-    institution: document.getElementById('institution' + experienceCount).value,
-    city: document.getElementById('city' + experienceCount).value,
-    from: document.getElementById('from' + experienceCount).value,
-    to: document.getElementById('to' + experienceCount).value
-  };
-
-  // Store educationData in localStorage
-  localStorage.setItem('education' + experienceCount, JSON.stringify(educationData));
-}
-function loadEducation() {
-  var containerHtml = localStorage.getItem('containerHtml');
-  var educationContainerHtml = localStorage.getItem('educationContainerHtml');
-  if (containerHtml && educationContainerHtml) {
-    document.getElementById('container2').innerHTML = containerHtml;
-    document.getElementById('educationContainer').innerHTML = educationContainerHtml;
-  }
- // localStorage.clear();
-}
-
-function updateDisplay(educationCount) {
-  console.log(educationCount)
-  var institutionInputValue = document.getElementById('institution' + educationCount).value;
-  document.getElementById('displayCollege' + educationCount).innerText = institutionInputValue;
-  
-    var degreeInputValue = document.getElementById('degreeInput' + educationCount).value;
-    document.getElementById('displayDegree' + educationCount).innerText = degreeInputValue;
-  
-  
-    var cityInputValue = document.getElementById('city' + educationCount).value;
-    document.getElementById('displayCity' + educationCount).innerText = cityInputValue;
-  
-  
-    var fromInputValue = document.getElementById('degreeFromInput' + educationCount).value;
-    console.log(fromInputValue)
-    document.getElementById('displayDegreeFrom' + educationCount).innerText = fromInputValue;
-    
-    var toInputValue = document.getElementById('to' + educationCount).value;
-    document.getElementById('displayDegreeTo' + educationCount).innerText = toInputValue;
-
-    localStorage.setItem("institution1", institutionInputValue);
-    localStorage.setItem("degreeInput1", degreeInputValue);
-    localStorage.setItem("city1", cityInputValue);
-    localStorage.setItem("from1", fromInputValue);
-    localStorage.setItem("to1", toInputValue);
-}
 
 
 
-
-function toggleEducation(header) {
-  var content = header.nextElementSibling;
-  header.querySelector('i').classList.toggle('fa-chevron-down');
-  header.querySelector('i').classList.toggle('fa-chevron-up');
-  content.classList.toggle('hidden');
-}
-
-
-function projects() {
-  var container = document.getElementById('container3');
-  container.classList.toggle('hidden');
-}
-
-function addNewProject() {
-  var container = document.getElementById('container3');
-  var experienceCount = container.getElementsByClassName('project-section1').length + 1;
-  var newExperience = document.createElement('div');
-  newExperience.classList.add('project-section1');
-
-  var header = document.createElement('div');
-  header.classList.add('experience-header');
-  header.onclick = function () { toggleProjects(this) };
-  header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Projects ' + experienceCount + '</b></p>';
-
-  var content = document.createElement('div');
-  content.classList.add('project-content');
-  content.innerHTML = '<form id="experience' + experienceCount + '">' +
-    '<div class="form-group">' +
-    '<input type="text" id="company' + experienceCount + '" class="form-control" placeholder="Project Name" name="company' + experienceCount + '" style="height: 30px;">' +
-    '</div>' +
-    '<div class="form-group">' +
-
-    '<label for="description' + experienceCount + '">Tools used:</label>' +
-    '<textarea id="description' + experienceCount + '" class="form-control" name="description' + experienceCount + '" rows="3"></textarea>' +
-    '</div>' +
-    '<div class="form-group">' +
-    '<label for="description' + experienceCount + '">Link:</label>' +
-    '<input type="text" id="jobtitle' + experienceCount + '" class="form-control" placeholder="Link" name="jobtitle' + experienceCount + '" style="height: 30px;">' +
-    '</div>' +
-
-    '<div class="form-group">' +
-    '<label for="description' + experienceCount + '">Description:</label>' +
-    '<textarea id="description' + experienceCount + '" class="form-control" name="description' + experienceCount + '" rows="5"></textarea>' +
-    '</div>' +
-
-    '</form>';
-
-  newExperience.appendChild(header);
-  newExperience.appendChild(content);
-  container.insertBefore(newExperience, container.lastElementChild);
-  var displayDiv = generateProjectDisplayDiv(experienceCount);
-  var projectsContainer = document.getElementById('projectsContainer'); // Assuming you have an element with id 'projectsContainer'
-  projectsContainer.appendChild(displayDiv);
-}
-
-function generateProjectDisplayDiv(experienceCount) {
-  var displayDiv = document.createElement('div');
-  displayDiv.classList.add('projects');
-  displayDiv.style.marginTop = "10px";
-
-  displayDiv.innerHTML =
-    '<div class="project-section" style="width: 258px; ">' +
-    '<div style="color: #222222; font-size: 12px; font-family: Poppins; font-weight: 700; line-height: 20px; word-wrap: break-word;">' +
-    '<span id="displayProjectName' + experienceCount + '">Fees Management System</span>' +
-    '</div>' +
-    '<div id="displayProjectTools' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
-    'Tools used: Python, Django, MySQL, Excel' +
-    '</div>' +
-    '<div id="displayProjectLink' + experienceCount + '" style="color: #797979; font-size: 11px; font-family: Prata; font-weight: 400; line-height: 16px; word-wrap: break-word;">' +
-    'https://www.kickresume.com/dashboard/resumes/' +
-    '</div>' +
-    '<div id="displayProjectDes' + experienceCount + '" style="color: #222222; font-size: 10px; font-family: Poppins; font-weight: 400; line-height: 14px; word-wrap: break-word; overflow: hidden;">' +
-    'Developed a streamlined and efficient fees processing website. <br> User-friendly web-based Fees management System that automated entire fee processing workflow by integrating secure payment gateway. <br>Reduced administrative workload and processing time. <br> Students can crack their fees and pay accordingly through Razor pay gateway.' +
-    '</div>' +
-    '</div>';
-
-  return displayDiv;
-}
-
-
-function toggleProject(header) {
-  var content = header.nextElementSibling;
-  header.querySelector('i').classList.toggle('fa-chevron-down');
-  header.querySelector('i').classList.toggle('fa-chevron-up');
-  content.classList.toggle('hidden');
-}
-
-
-
-function updateText() {
-  // Your updateText function logic here
-}
 
 var languageCounter1 = 1; // Initial counter for column1 (odd)
     var languageCounter2 = 2; // Initial counter for column3 (even)
@@ -686,7 +778,7 @@ function retrieveStoredValue() {
   }
   if (storedProjectTools) {
     document.getElementById("projectTools").value = storedProjectTools;
-    document.getElementById("displayProjectTools").innerText = storedProjectTools;
+    document.getElementById("displayTools").innerText = storedProjectTools;
   }
   if (storedProjectLink) {
     document.getElementById("projectLink").value = storedProjectLink;
@@ -788,6 +880,7 @@ function retrieveStoredValue() {
   handlePresentCheckbox();
   loadEducation();
   loadExperience();
+  loadProject();
       }
   
 
