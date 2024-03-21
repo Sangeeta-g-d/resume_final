@@ -19,6 +19,7 @@ urlpatterns = [
     #path('upload/', views.upload_file, name='upload_file'),
     path('team', views.team, name='team'),
     path('temp1', views.temp1, name='temp1'),
+    path('temp6',views.temp6,name="temp6"),
     #path('resume/<int:id>', views.resume, name='resume'),
     path('generate_content', views.generate_content, name='generate_content'),
    

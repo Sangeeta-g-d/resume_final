@@ -1,5 +1,5 @@
 .content_wrapper{
-    margin-left: 10px;
+    margin-left: 80px;
     padding: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -25,23 +25,14 @@ body, html {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 .right-side {
-flex: 2;
+flex: 2.25;
 
 background-color: #f1f3f4;
 overflow-y: auto; /* Enable vertical scrollbar */
 /* Set a maximum height */
 }
 
-.right-side1 {
-    flex: 0.6;
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 30px;
-    margin-top: 30px;
-   
-}
+
 .user-form {
     max-width: 400px;
     margin: 0 auto;
@@ -324,13 +315,10 @@ flex-wrap: wrap; /* Allow columns to wrap to the next row if needed */
 
  
 
-<<<<<<< HEAD
-=======
   .education {
     margin-top: 20px;
   }
 
  
 
->>>>>>> 565aa7ceeea65d73b8feb834f442e5bd9876e0c6
   

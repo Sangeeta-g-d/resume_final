@@ -21,9 +21,14 @@ import os
 import openai
 import cv2
 import pytesseract
+import pdfkit
 #
 # import generativeai
 #from generativeai import GenAIConfig, GenAI
+
+
+
+
 
 import openai
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
@@ -32,6 +37,8 @@ pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tessera
 def temp1(request):
     return render(request,'temp1.html')
 
+def temp6(request):
+    return render(request,'temp6.html')
 
 """def get_and_use_gemini_api(prompt):
     
