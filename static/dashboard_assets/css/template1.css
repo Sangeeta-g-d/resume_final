@@ -17,7 +17,7 @@ body, html {
     height: 100vh;
 }
 .left-side {
-    flex: 1.27;
+    flex: 3;
     background: linear-gradient(to right, hsl(30, 100%, 100%), #f8f7f7);
     padding: 20px;
     border-radius: 5px;
@@ -43,6 +43,7 @@ border-radius: 30px;
 
 label {
 font-weight: bold;
+
 }
 .user-form label,
 .user-form input,
@@ -111,6 +112,7 @@ background-color: #010e02;
 .custom-button {
 display: flex;
 align-items: center;
+
 justify-content: space-between;
 width: 400px;
 height: 50px;

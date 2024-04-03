@@ -22,6 +22,7 @@ urlpatterns = [
     path('temp6',views.temp6,name="temp6"),
     #path('resume/<int:id>', views.resume, name='resume'),
     path('generate_content', views.generate_content, name='generate_content'),
+    path('responsive_temp2', views.responsive_temp2, name='responsive_temp2'),
    
 
 

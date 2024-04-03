@@ -40,6 +40,12 @@ def temp1(request):
 def temp6(request):
     return render(request,'temp6.html')
 
+
+
+def responsive_temp2(request):
+    return render(request,'responsive_temp2.html')
+
+
 """def get_and_use_gemini_api(prompt):
     
     Retrieves Gemini API key from environment variable, creates a GenAI client,
