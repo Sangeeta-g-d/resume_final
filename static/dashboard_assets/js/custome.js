@@ -180,7 +180,8 @@ function addNewProject() {
   var header = document.createElement('div');
   header.classList.add('project-header');
   header.onclick = function () { toggleProjects(this) };
-  header.innerHTML = '<i class="fas fa-chevron-down"></i><p><b>Projects ' + projectCount + '</b></p>'+  '<i class="fas fa-trash-alt" onclick="deleteProject(' + projectCount + ')"></i>'; ;
+  header.innerHTML = '<i class="fas fa-chevron-down"><p><b><span id="ProjectTitle' + projectCount + '">Project ' + projectCount + '</span></b></p>'+  '<i class="fas fa-trash-alt" onclick="deleteProject(' + projectCount + ')"></i>'; ;
+
 
   var content = document.createElement('div');
   content.classList.add('project-content');
@@ -261,8 +262,9 @@ function deleteProject(projectCount) {
   // Renumber the remaining education sections
   var projectHeaders = container.getElementsByClassName('project-header');
   for (var i = 0; i < projectHeaders.length; i++) {
-    projectHeaders[i].getElementsByTagName('b')[0].innerText = 'Project ' + (i + 1);
-    projectHeaders[i].querySelector('.fa-trash-alt').setAttribute('onclick', 'deleteProject(' + (i + 1) + ')');
+    projectHeaders[i].getElementsByTagName('b')[0].innerText = 'Project ' + (i + 2); // Update project index
+    projectHeaders[i].querySelector('.fa-trash-alt').setAttribute('onclick', 'deleteProject(' + (i + 2) + ')'); // Update delete function call
+    
   }
 
   saveProject();
@@ -374,6 +376,7 @@ function addNewExperience() {
     '<div class="form-group">' +
     '<label for="' + toInputId + '" style="margin-right: 10px;">To:</label>' +
     '<input type="month" id="' + toInputId + '" class="form-control" name="' + toInputId + '" style="height: 35px;" oninput="updateExperience2(' + experienceCount + ')">'+
+    '<input type="checkbox" id="present' + experienceCount + '" onchange="handlePresentCheckboxExperience(' + experienceCount + ')"> Present' +
     '</div>' +
     '<div class="form-group">' +
     '<label for="' + descriptionInputId + '">Description:</label>' +
@@ -449,48 +452,52 @@ function loadExperience() {
   }
  // localStorage.clear();
 }
-function updateExperience2(experienceCount) {
-  console.log(experienceCount)
-  var jobtitleValue2 = document.getElementById('jobtitle' + experienceCount).value;
-  document.getElementById('Display_Designation' + experienceCount).innerText = jobtitleValue2;
-  
-    var companyValue2 = document.getElementById('company' + experienceCount).value;
-    document.getElementById('Display_Cname' + experienceCount).innerText = companyValue2;
-  
-  
-    var desValue2 = document.getElementById('description' + experienceCount).value;
-    document.getElementById('Display_Description' + experienceCount).innerText = desValue2;
-  
-  
-    var fromValue2 = document.getElementById('from' + experienceCount).value;
-    console.log(fromInputValue)
-    document.getElementById('Display_From' + experienceCount).innerText = fromValue2;
-    
-    var toValue2 = document.getElementById('to' + experienceCount).value;
-    document.getElementById('Display_To' + experienceCount).innerText = toValue2;
+function handlePresentCheckboxExperience(experienceCount) {
+  console.log("gggggggggggggg")
+  var toInput = document.getElementById("to" + experienceCount);
+  var toContainer = document.getElementById("Display_To" + experienceCount);
 
-   
-}
-function handlePresentCheckbox() {
-  console.log("hhhhhhooooooooooo")
-  var toInput = document.getElementById("to1");
-  var toContainer = document.getElementById("to1Container");
-  var fieldEDDT = document.getElementById("FIELD_EDDT");
-
-  if (document.getElementById("present1").checked) {
-      toInput.disabled = true; // Disable the input field
-      toContainer.innerHTML = "Present"; // Display "Present" text
-      if (fieldEDDT) {
-          fieldEDDT.textContent = "Present"; // Update FIELD_EDDT span with "Present" text if it exists
-      }
+  if (document.getElementById("present" + experienceCount).checked) {
+    toInput.disabled = true;
+    toContainer.innerText = "Present";
   } else {
-      toInput.disabled = false; // Enable the input field when present is unchecked
-      toContainer.innerHTML = '<input type="month" id="to1" class="form-control" name="to1" style="height: 35px;" onchange="updateExperience()">'; // Restore input field
-      if (fieldEDDT) {
-          fieldEDDT.textContent = ""; // Reset FIELD_EDDT span if it exists
-      }
+    toInput.disabled = false;
+    updateExperience2(experienceCount);
   }
 }
+function updateExperience2(experienceCount) {
+  console.log(experienceCount);
+  var jobtitleValue2 = document.getElementById('jobtitle' + experienceCount).value;
+  var jobTitleDisplay = document.getElementById('Display_Designation' + experienceCount);
+  if (jobTitleDisplay) {
+    jobTitleDisplay.innerText = jobtitleValue2;
+  }
+
+  var companyValue2 = document.getElementById('company' + experienceCount).value;
+  var companyNameDisplay = document.getElementById('Display_Cname' + experienceCount);
+  if (companyNameDisplay) {
+    companyNameDisplay.innerText = companyValue2;
+  }
+
+  var desValue2 = document.getElementById('description' + experienceCount).value;
+  var descriptionDisplay = document.getElementById('Display_Description' + experienceCount);
+  if (descriptionDisplay) {
+    descriptionDisplay.innerText = desValue2;
+  }
+
+  var fromValue2 = document.getElementById('from' + experienceCount).value;
+  var fromDisplay = document.getElementById('Display_From' + experienceCount);
+  if (fromDisplay) {
+    fromDisplay.innerText = fromValue2;
+  }
+
+  var toValue2 = document.getElementById('to' + experienceCount).value;
+  var toDisplay = document.getElementById('Display_To' + experienceCount);
+  if (toDisplay) {
+    toDisplay.innerText = toValue2;
+  }
+}
+
 function toggleExperience(header) {
   var content = header.nextElementSibling;
   header.querySelector('i').classList.toggle('fa-chevron-down');
@@ -663,32 +670,48 @@ function updateProjectDes(){
   var companyNameElement = document.getElementById("Display_Cname");
   companyNameElement.innerText = companyValue;
 
- 
-
   var FromValue = document.getElementById("from1").value;
   var FromElement = document.getElementById("Display_From");
   FromElement.innerText = FromValue;
 
   var ToValue = document.getElementById("to1").value;
-  console.log(ToValue)
   var ToElement = document.getElementById("Display_To");
-  console.log(ToElement)
-  ToElement.innerText = ToValue;
 
-  var toDate = document.getElementById('to1').value;
-  if (!toDate) {
-      document.getElementById('Display_To').textContent = '';
+  // Check if "Present" checkbox is checked
+  var presentCheckbox = document.getElementById("present1");
+  if (presentCheckbox.checked) {
+    ToElement.innerText = "Present";
   } else {
-      document.getElementById('Display_To').textContent = toDate;
+    if (ToValue) {
+      ToElement.innerText = ToValue;
+    } else {
+      ToElement.innerText = "";
+    }
   }
+
   // Save the current value to localStorage
-  localStorage.setItem('toValue', toDate);
-  
+  localStorage.setItem("toValue", ToValue);
+
   // Store all values in local storage
   localStorage.setItem("jobTitle", inputValue);
   localStorage.setItem("companyName", companyValue);
-  
   localStorage.setItem("from1", FromValue);
+}
+
+
+function handlePresentCheckbox() {
+  console.log("kkkkkkkkkkkkkkk")
+  var presentCheckbox = document.getElementById("present1");
+  var toDateInput = document.getElementById("to1");
+
+  if (presentCheckbox.checked) {
+    toDateInput.disabled = true;
+  } else {
+    toDateInput.disabled = false;
+  }
+
+  // Update displayed date
+  updateExperience();
 }
 
 function updateExperienceDescription() {
