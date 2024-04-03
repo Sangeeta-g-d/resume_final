@@ -13,15 +13,12 @@ import json
 from django.urls import reverse
 import tempfile
 from django.shortcuts import get_object_or_404
-from google.cloud import language_v1
-from google.auth import credentials
-from google.cloud import language_v1
-from google.oauth2 import service_account
-import os
-import openai
-import cv2
+
+
+
+
 import pytesseract
-import pdfkit
+
 #
 # import generativeai
 #from generativeai import GenAIConfig, GenAI
@@ -30,7 +27,7 @@ import pdfkit
 
 
 
-import openai
+
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 # Create your views here.
 
@@ -39,6 +36,19 @@ def temp1(request):
 
 def temp6(request):
     return render(request,'temp6.html')
+
+
+
+def responsive_temp2(request):
+    return render(request,'responsive_temp2.html')
+
+
+def temp1(request):
+    return render(request,'temp1.html')
+
+
+def temp3(request):
+    return render(request,'temp3.html')
 
 """def get_and_use_gemini_api(prompt):
     
@@ -177,102 +187,6 @@ def get_coordinates(image_path, keyword):
         return None
 
 
-
-openai.api_key = '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'
-
-def generate_enhanced_content(form_data):
-    print('kkkkkkkkkkkkk')
-    # Format the input data for the OpenAI API request
-    input_text = f"First Name: {form_data['first_name']}\n"
-    input_text += f"Last Name: {form_data['last_name']}\n"
-    input_text += f"Email: {form_data['email']}\n"
-    input_text += f"Phone Number: {form_data['phone_number']}\n"
-    input_text += f"Experience: {form_data['experience']}\n"
-    input_text += f"Projects: {form_data['projects']}\n"
-    input_text += f"Education: {form_data['education']}\n"
-    input_text += f"Internships: {form_data['internships']}\n"
-    input_text += f"Languages: {form_data['languages']}\n"
-
-    # Call the OpenAI API to generate enhanced content
-    response = openai.Completion.create(
-    engine="gpt-3.5-turbo-instruct",  # Choose an appropriate engine
-    prompt=input_text,
-    max_tokens=150
-)
-
-    print('response',response)
-    # Extract and return the enhanced content from the API response
-    return response.choices[0].text.strip()
-
-def generate_content(request):
-    print("hiiiiiiiiiiiii")
-    if request.method == 'POST':
-        # Extract data from the submitted form
-        form_data = {
-            'first_name': request.POST.get('first_name', ''),
-            'last_name': request.POST.get('last_name', ''),
-            'email': request.POST.get('email', ''),
-            'phone_number': request.POST.get('phone_number', ''),
-            'experience': request.POST.get('experience', ''),
-            'projects': request.POST.get('projects', ''),
-            'education': request.POST.get('education', ''),
-            'internships': request.POST.get('internships', ''),
-            'languages': request.POST.get('languages', '')
-        }
-        print("hloooo")
-        # Generate enhanced content using OpenAI API
-        enhanced_content = generate_enhanced_content(form_data)
-        print("enhanced_content",enhanced_content)
-        # Render a separate template to display the enhanced content
-        #return render(request, 'enhanced_content.html', {'enhanced_content': enhanced_content})
-
-        # Generate resume content using the form data
-        resume_content = generate_resume_content(form_data)
-
-        # Save the generated content to the right-side image file (you need to implement this)
-        # For example, you can write the content to a text file and render it as an image in the template
-
-        # Update context with generated content
-        context = { 'resume_content': resume_content}
-        return HttpResponse("successfull")
-
-def generate_resume_content(data):
-    # Explicitly provide credentials
-    credentials = service_account.Credentials.from_service_account_file('/home/user/my_project/service-account-file.json')
-
-
-    # Initialize the Natural Language API client with the provided credentials
-    client = language_v1.LanguageServiceClient(credentials=credentials)
-
-    # Define the text to be analyzed (you can customize this based on your form data)
-    text = f"""
-    Name: {data['first_name']} {data['last_name']}
-    Email: {data['email']}
-    Phone Number: {data['phone_number']}
-    Experience: {data['experience']}
-    Projects: {data['projects']}
-    Education: {data['education']}
-    Internships: {data['internships']}
-    Languages: {data['languages']}
-    """
-
-    # Analyze the text using the Natural Language API
-    document = {"content": text, "type_": language_v1.Document.Type.PLAIN_TEXT}
-    response = client.analyze_entities(request={'document': document})
-    
-    # Extract entities or perform other analysis as needed
-    # For simplicity, let's assume we just want to extract entities
-    entities = [entity.name for entity in response.entities]
-
-    # Generate resume content based on the analysis (you can customize this)
-    resume_content = f"""
-    Name: {data['first_name']} {data['last_name']}
-    Email: {data['email']}
-    Phone Number: {data['phone_number']}
-    Relevant Skills: {', '.join(entities)}
-    """
-
-    return resume_content
 
 '''openai.api_key = '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'
 

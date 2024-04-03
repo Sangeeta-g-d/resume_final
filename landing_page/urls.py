@@ -18,10 +18,13 @@ urlpatterns = [
     #path('generate_content', views.generate_content, name='generate_content'),
     #path('upload/', views.upload_file, name='upload_file'),
     path('team', views.team, name='team'),
-    path('temp1', views.temp1, name='temp1'),
+   
     path('temp6',views.temp6,name="temp6"),
     #path('resume/<int:id>', views.resume, name='resume'),
-    path('generate_content', views.generate_content, name='generate_content'),
+    #path('generate_content', views.generate_content, name='generate_content'),
+    path('responsive_temp2', views.responsive_temp2, name='responsive_temp2'),
+    path('temp3', views.temp3, name='temp3'),
+    path('temp1', views.temp1, name='temp1'),
    
 
 
